@@ -1,0 +1,10 @@
+{
+    "name": "@kodama",
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "kodama",
+            "site"
+        ]
+    }
+}

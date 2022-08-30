@@ -1,0 +1,20 @@
+import { defineProps } from 'vue'
+import inputProps from './k-input.props'
+
+const Props = defineProps(inputProps)
+
+export const parseInputClass = (props: typeof Props) => {
+    const classes: string[] = ['form-control']
+
+    if (props.ghost) {
+        classes.push('form-control-flush')
+    } else if (props.solid) {
+        classes.push('form-control-solid')
+    }
+
+    if (props.size) {
+        classes.push(`form-control-${props.size}`)
+    }
+
+    return classes
+}
