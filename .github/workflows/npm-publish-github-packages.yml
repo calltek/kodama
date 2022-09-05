@@ -30,7 +30,14 @@ jobs:
         with:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
-      - run: npm ci
-      - run: npm publish
+      - name: Install packages 
+        run: npm install  
+        working-directory: ./kodama
+      - name: Build package 
+        run: npm run build  
+        working-directory: ./kodama
+      - name: Publish to npm    
+        run: npm publish     
+        working-directory: ./kodama
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
