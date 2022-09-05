@@ -32,6 +32,7 @@
     "dependencies": {
         "@popperjs/core": "^2.11.6",
         "@vee-validate/i18n": "^4.6.6",
+        "@vuepic/vue-datepicker": "^3.4.7",
         "animate.css": "^4.1.1",
         "bootstrap": "^5.2.0",
         "chance": "^1.1.8",

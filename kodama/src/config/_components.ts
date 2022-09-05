@@ -15,6 +15,7 @@ import KLoading from '../components/data-display/k-loading/k-loading.vue'
 import KLogo from '../components/data-display/k-logo/k-logo.vue'
 import KTable from '../components/data-display/k-table/k-table.vue'
 import KTitle from '../components/data-display/k-title/k-title.vue'
+import KDate from '../components/data-display/k-date/k-date.vue'
 
 // Miscelanea Components
 import KBubbles from '../components/miscelanea/k-bubbles/k-bubbles.vue'
@@ -22,7 +23,7 @@ import KBubbles from '../components/miscelanea/k-bubbles/k-bubbles.vue'
 // User Action Components
 import KButton from '../components/user-actions/k-button/k-button.vue'
 import KConfirm from '../components/user-actions/k-confirm/k-confirm.vue'
-import KDaterange from '../components/user-actions/k-daterange/k-daterange.vue'
+import KDatepicker from '../components/user-actions/k-datepicker/k-datepicker.vue'
 import KDropdownMenu from '../components/user-actions/k-dropdown/k-dropdown-menu.vue'
 import KDropdownSeparator from '../components/user-actions/k-dropdown/k-dropdown-separator.vue'
 import KDropdownSubmenu from '../components/user-actions/k-dropdown/k-dropdown-submenu.vue'
@@ -54,6 +55,7 @@ export default (
     app.component('KLogo', KLogo)
     app.component('KTable', KTable)
     app.component('KTitle', KTitle)
+    app.component('KDate', KDate)
 
     // Miscelanea Components
     app.component('KBubbles', KBubbles)
@@ -61,7 +63,7 @@ export default (
     // User Action Components
     app.component('KButton', KButton)
     app.component('KConfirm', KConfirm)
-    app.component('KDaterange', KDaterange)
+    app.component('KDatepicker', KDatepicker)
     app.component('KDropdown', KDropdown)
     app.component('KDropdownMenu', KDropdownMenu)
     app.component('KDropdownSeparator', KDropdownSeparator)

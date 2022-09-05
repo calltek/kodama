@@ -1,0 +1,56 @@
+// General
+$dp__font_family: 'Poppins', sans-serif !default; // Font size for the menu
+$dp__border_radius: 0.475rem !default; // Border radius everywhere
+$dp__cell_border_radius: $dp__border_radius !default; // Specific border radius for the calendar cell
+
+// Font sizes
+$dp__font_size: 1.1rem !default; // overall font-size
+$dp__preview_font_size: 0.8rem !default; // font size of the date preview in the action row
+$dp__time_font_size: 2rem !default; // font size in the time picker
+
+@import '@vuepic/vue-datepicker/src/VueDatePicker/style/main.scss';
+
+.k-datepicker {
+    z-index: 9000;
+
+    .dp__instance_calendar {
+        padding: 5px;
+    }
+
+    .dp__preset_range {
+        white-space: nowrap;
+        background-color: var(--bs-light);
+        margin-bottom: 5px;
+        border-radius: 0.4rem;
+        padding: 5px 10px;
+        font-weight: 500;
+    }
+
+    .dp__preset_range:hover {
+        background-color: var(--bs-primary);
+        color: var(--bs-secondary);
+    }
+
+    .dp__range_end,
+    .dp__range_start,
+    .dp__active_date {
+        background: var(--bs-primary);
+        color: var(--bs-secondary);
+    }
+
+    .dp__calendar_header_item {
+        text-transform: uppercase;
+        color: var(--bs-gray-700);
+    }
+    .dp__month_year_select {
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        color: var(--bs-gray-700);
+        font-weight: 700;
+    }
+}
+
+.dp__input_icon,
+.dp__clear_icon {
+    padding: 0px 10px;
+}

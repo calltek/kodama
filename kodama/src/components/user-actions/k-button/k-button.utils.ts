@@ -6,7 +6,7 @@ const Props = defineProps(inputProps)
 export const parseButtonClasses = (props: typeof Props, slots: any) => {
     const hasSlot = (name: string) => !!slots[name]
 
-    const classes = ['btn user-select-none d-flex align-items-center']
+    const classes = ['btn user-select-none d-inline-flex align-items-center']
     const specific_classes: string[] = []
 
     const outline = props.outline
