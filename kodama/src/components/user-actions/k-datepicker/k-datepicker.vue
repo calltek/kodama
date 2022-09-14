@@ -5,7 +5,7 @@
         @update:modelValue="onChange"
         ref="dp"
         menuClassName="k-datepicker"
-        inputClassName="form-control form-control-solid px-10"
+        :inputClassName="classes"
     >
         <template #input-icon>
             <k-icon icon="calendar" />
@@ -63,12 +63,12 @@
 </template>
 
 <script lang="ts">
-    import { moment } from '@kodama/ui'
+    import { computed, defineComponent, ref, watch } from 'vue'
+    import { moment } from '../../../plugins'
     import Datepicker from '@vuepic/vue-datepicker'
 
     import props from './k-datepicker.props'
-
-    import { computed, defineComponent, ref, watch } from 'vue'
+    import { parseInputClass } from './k-datepicker.utils'
 
     export default defineComponent({
         name: 'KDatepicker',
@@ -103,6 +103,8 @@
             const isNumericRange = computed(() => {
                 return typeof props.range === 'number'
             })
+
+            const classes = computed(() => parseInputClass(props))
 
             const args = computed(() => {
                 const opts: Record<string, any> = {
@@ -210,7 +212,7 @@
                 return opts
             })
 
-            return { dp, args, onChange, selectDate, value }
+            return { dp, args, onChange, selectDate, value, classes }
         }
     })
 </script>

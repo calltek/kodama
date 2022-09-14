@@ -21,6 +21,8 @@ import { useConfig, useBody, useAuth } from './store'
 // Typescript Utils
 import * as utils from './assets/ts/_utils'
 
+import { DrawerComponent as Drawer } from './assets/ts/components'
+
 export {
     // App
     createApp,
@@ -33,7 +35,9 @@ export {
     useBody,
     useAuth,
     // Router
-    useRouter
+    useRouter,
+    // TS Components
+    Drawer
 }
 
 // Types

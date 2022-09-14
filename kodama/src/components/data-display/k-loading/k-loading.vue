@@ -11,7 +11,7 @@
             :is-full-page="fullpage"
             :loader="type"
             :color="realColor"
-            :z-index="99"
+            :z-index="zIndex"
             :blur="`${blur}px`"
             :on-cancel="$emit('cancel')"
         />
@@ -53,6 +53,10 @@
             height: {
                 type: Number,
                 default: 0
+            },
+            zIndex: {
+                type: Number,
+                default: 99
             }
         },
         emits: ['cancel'],

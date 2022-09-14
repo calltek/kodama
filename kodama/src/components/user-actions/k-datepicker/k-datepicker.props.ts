@@ -49,6 +49,27 @@ export default {
         type: String,
         default: 'Selecciona una fecha'
     },
+
+    /////////////////
+    // INPUT STYLE
+    ////////////////
+    ghost: {
+        type: Boolean,
+        default: false,
+        description: 'Elimina el fondo y bordes del campo haciéndolo invisible'
+    },
+    solid: {
+        type: Boolean,
+        default: false,
+        description: 'Aplica un fondo sólido al campo'
+    },
+    size: {
+        type: String,
+        options: ['sm', 'md', 'lg'],
+        validator: (val: string) => ['sm', 'md', 'lg'].includes(val),
+        default: 'md',
+        description: 'Tamaño del input'
+    },
     /////////////////
     // TIME
     ////////////////

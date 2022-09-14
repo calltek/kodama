@@ -25,7 +25,7 @@
 
 <script lang="ts">
     import { defineComponent, computed, PropType } from 'vue'
-    import { moment } from '@kodama/ui'
+    import { moment } from '../../../plugins'
 
     export default defineComponent({
         name: 'KDate',

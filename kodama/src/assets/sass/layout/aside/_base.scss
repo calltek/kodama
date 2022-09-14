@@ -9,6 +9,7 @@
     box-shadow: get($aside-config, box-shadow);
     background-color: get($aside-config, bg-color);
     padding: 0;
+    user-select: none;
 
     // Aside toolbar
     .aside-toolbar {

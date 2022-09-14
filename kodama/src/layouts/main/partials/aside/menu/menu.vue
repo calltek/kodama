@@ -36,10 +36,15 @@
                 <template v-for="(menuItem, j) in item.pages" :key="j">
                     <template v-if="!menuItem.pages">
                         <div class="menu-item">
-                            <router-link
-                                class="menu-link"
+                            <!-- <router-link
+                                :class="[
+                                    'menu-link',
+                                    menuItem.disabled
+                                        ? 'opacity-40 cursor-not-allowed'
+                                        : ''
+                                ]"
                                 active-class="active"
-                                :to="menuItem.route"
+                                :to="!menuItem.disabled ? menuItem.route : {}"
                             >
                                 <span v-if="menuItem.icon" class="menu-icon">
                                     <i
@@ -50,7 +55,9 @@
                                 <span class="menu-title">{{
                                     menuItem.title
                                 }}</span>
-                            </router-link>
+                            </router-link> -->
+
+                            <menu-item :item="menuItem" :parent="true" />
                         </div>
                     </template>
                     <div
@@ -79,23 +86,6 @@
                                 v-for="(item2, k) in menuItem.pages"
                                 :key="k"
                             >
-                                <!-- <div v-if="item2.heading" class="menu-item">
-                                    <router-link
-                                        class="menu-link"
-                                        active-class="active"
-                                        :to="item2.route"
-                                    >
-                                        <span class="menu-bullet">
-                                            <span
-                                                class="bullet bullet-dot"
-                                            ></span>
-                                        </span>
-                                        <span class="menu-title">
-                                            asdasd
-                                            {{ item2.heading }}
-                                        </span>
-                                    </router-link>
-                                </div> -->
                                 <div
                                     v-if="item2.title"
                                     :class="{
@@ -105,11 +95,16 @@
                                     data-kt-menu-sub="accordion"
                                     data-kt-menu-trigger="click"
                                 >
-                                    <router-link
+                                    <!-- <router-link
                                         v-if="!item2.pages"
-                                        class="menu-link"
+                                        :class="[
+                                            'menu-link',
+                                            item2.disabled
+                                                ? 'opacity-40 cursor-not-allowed'
+                                                : ''
+                                        ]"
                                         active-class="active"
-                                        :to="item2.route"
+                                        :to="!item2.disabled ? item2.route : {}"
                                     >
                                         <span class="menu-bullet">
                                             <span
@@ -137,7 +132,9 @@
                                             v-if="item2.pages"
                                             class="menu-arrow"
                                         ></span>
-                                    </span>
+                                    </span> -->
+
+                                    <menu-item :item="item2" />
 
                                     <div
                                         :class="{
@@ -150,10 +147,19 @@
                                             :key="k"
                                         >
                                             <div class="menu-item">
-                                                <router-link
-                                                    class="menu-link"
+                                                <!-- <router-link
+                                                    :class="[
+                                                        'menu-link',
+                                                        item3.disabled
+                                                            ? 'opacity-40 cursor-not-allowed'
+                                                            : ''
+                                                    ]"
                                                     active-class="active"
-                                                    :to="item3.route"
+                                                    :to="
+                                                        !item3.disabled
+                                                            ? item3.route
+                                                            : {}
+                                                    "
                                                 >
                                                     <span class="menu-bullet">
                                                         <span
@@ -163,7 +169,9 @@
                                                     <span class="menu-title">{{
                                                         item3.title
                                                     }}</span>
-                                                </router-link>
+                                                </router-link> -->
+
+                                                <menu-item :item="item3" />
                                             </div>
                                         </template>
                                     </div>
@@ -183,12 +191,14 @@
     import { defineComponent, onMounted, ref } from 'vue'
     import { RouteLocationRaw, useRoute } from 'vue-router'
 
-    import { useAuth, useMenu } from '../../../../store'
-    import { version } from '../../../../helpers/config'
+    import { useAuth, useMenu } from '../../../../../store'
+    import { version } from '../../../../../helpers/config'
+
+    import MenuItem from './menu-item.vue'
 
     export default defineComponent({
         name: 'KdMenu',
-        components: {},
+        components: { MenuItem },
         setup() {
             const route = useRoute()
             const scrollElRef = ref<null | HTMLElement>(null)

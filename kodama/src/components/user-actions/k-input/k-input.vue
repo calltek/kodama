@@ -27,7 +27,7 @@
 
 <script lang="ts">
     import { defineComponent, computed, ref, watch } from 'vue'
-    import { uid } from '../../../helpers/utils'
+
     import props from './k-input.props'
     import { parseInputClass } from './k-input.utils'
 
@@ -38,7 +38,7 @@
         emits: ['update:modelValue', 'input', 'change'],
         setup(props, ctx) {
             const hasSlot = (name: string) => !!ctx.slots[name]
-            const id = uid()
+
             const value = ref(props.modelValue)
 
             const classes = computed(() => parseInputClass(props))
@@ -50,7 +50,7 @@
             return {
                 hasSlot,
                 classes,
-                id,
+
                 value
             }
         }

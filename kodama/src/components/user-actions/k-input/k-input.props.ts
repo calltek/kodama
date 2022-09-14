@@ -1,8 +1,15 @@
+import { uid } from '../../../helpers/utils'
+
 export default {
     modelValue: {
         type: String,
         default: '',
         description: 'Valor del campo'
+    },
+    id: {
+        type: String,
+        default: () => uid(),
+        description: 'ID de componente'
     },
     placeholder: {
         type: String,

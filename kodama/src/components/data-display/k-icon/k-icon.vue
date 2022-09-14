@@ -36,17 +36,13 @@
             spin: {
                 type: Boolean,
                 default: false
-            },
-            color: {
-                type: String,
-                default: ''
             }
         },
         setup(props) {
             const key = ref(Math.floor(Math.random() * 100))
 
             const classes = computed(() => {
-                const aclass: any[] = []
+                const aclass: any[] = ['k-icon']
                 if (Array.isArray(props.icon)) {
                     aclass.push(props.icon[0])
                     aclass.push(`fa-${props.icon[1]}`)
@@ -54,11 +50,9 @@
                     aclass.push('fad')
                     aclass.push(`fa-${props.icon}`)
                 }
+
                 if (props.spin) {
                     aclass.push('fa-spin')
-                }
-                if (props.color) {
-                    aclass.push(`text-${props.color}`)
                 }
 
                 if (props.size > 0) {
@@ -73,10 +67,6 @@
 
                 if (typeof props.size === 'string') {
                     style['font-size'] = props.size + 'px'
-                }
-
-                if (props.color) {
-                    style['color'] = props.color
                 }
 
                 return style
@@ -95,4 +85,8 @@
     })
 </script>
 
-<style scoped></style>
+<style scoped>
+    .k-icon {
+        color: inherit;
+    }
+</style>

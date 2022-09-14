@@ -17,17 +17,18 @@ const SysMenu: Menu[] = [
     // }
 ]
 
-export type MenuPage = {
+export type MenuItem = {
     title: string
+    disabled?: boolean
     route: RouteLocationRaw
     icon: [string, string]
     auth?: { strict: boolean; roles: string[] }
-    pages?: MenuPage[]
+    pages?: MenuItem[]
 }
 
 export type Menu = {
     heading?: string
-    pages?: MenuPage[]
+    pages?: MenuItem[]
     separator?: boolean
     auth?: { strict: boolean; roles: string[] }
 }

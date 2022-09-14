@@ -53,4 +53,6 @@ $dp__time_font_size: 2rem !default; // font size in the time picker
 .dp__input_icon,
 .dp__clear_icon {
     padding: 0px 10px;
+    height: 100%;
+    display: flex;
 }
