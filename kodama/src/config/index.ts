@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia, StoreDefinition } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-// import elementPlus from 'element-plus'
 import { RouteRecordRaw, NavigationGuardWithThis } from 'vue-router'
 
 import App from '../views/app.vue'
@@ -31,7 +30,6 @@ export function init(params: KodamaParams) {
 
     pinia.use(piniaPluginPersistedstate)
 
-    // app.use(elementPlus)
     app.use(pinia)
 
     router(app, params.router.routes, params.router.beforeEach)

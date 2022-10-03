@@ -32,10 +32,6 @@ import KDropdown from '../components/user-actions/k-dropdown/k-dropdown.vue'
 import KInput from '../components/user-actions/k-input/k-input.vue'
 import KSwitch from '../components/user-actions/k-switch/k-switch.vue'
 
-// Vendor
-import 'vue-loading-overlay/dist/vue-loading.css'
-import Loading from 'vue-loading-overlay'
-
 export default (
     app: App,
     frontendComponents?: Record<string, { [key: string]: any }>
@@ -73,7 +69,7 @@ export default (
     app.component('KSwitch', KSwitch)
 
     // Vendor
-    app.component('Loading', Loading)
+    // app.component('Loading', Loading)
 
     // Custom components
     if (frontendComponents) {

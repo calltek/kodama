@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import { ExtractPropTypes, PropType } from 'vue'
 
 export const modes = ['time', 'day', 'month', 'year']
 
@@ -8,10 +8,14 @@ export type PresetRanges = {
     style?: Record<string, string>
 }
 
-export default {
+const Props = {
     modelValue: {
         type: [Array, String] as PropType<string[] | string>,
-        required: true
+        required: false
+    },
+    value: {
+        type: [Array, String] as PropType<string[] | string>,
+        required: false
     },
     format: {
         type: String,
@@ -49,7 +53,10 @@ export default {
         type: String,
         default: 'Selecciona una fecha'
     },
-
+    inline: {
+        type: Boolean,
+        default: false
+    },
     /////////////////
     // INPUT STYLE
     ////////////////
@@ -116,3 +123,7 @@ export default {
         default: null
     }
 }
+
+export type KDatepickerProps = Readonly<ExtractPropTypes<typeof Props>>
+
+export default Props

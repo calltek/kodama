@@ -48,6 +48,11 @@ $dp__time_font_size: 2rem !default; // font size in the time picker
         color: var(--bs-gray-700);
         font-weight: 700;
     }
+
+    .dp__action_row {
+        background: var(--bs-gray-100);
+        border-top: 1px solid var(--dp-border-color);
+    }
 }
 
 .dp__input_icon,

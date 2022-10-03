@@ -1,9 +1,7 @@
-import { defineProps } from 'vue'
-import inputProps from './k-input.props'
+import { StyleValue } from 'vue'
+import { KInputProps } from './k-input.props'
 
-const Props = defineProps(inputProps)
-
-export const parseInputClass = (props: typeof Props) => {
+export const parseInputClass = (props: KInputProps) => {
     const classes: string[] = ['form-control']
 
     if (props.ghost) {
@@ -17,4 +15,14 @@ export const parseInputClass = (props: typeof Props) => {
     }
 
     return classes
+}
+
+export const parseInputStyle = (props: KInputProps) => {
+    const style: StyleValue = {
+        'min-width': '100px'
+    }
+
+    if (props.width) style.width = `${props.width}px`
+
+    return style
 }

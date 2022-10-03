@@ -1,30 +1,24 @@
 template
 <template>
     <button :id="id" :class="buttonClasses" @click="click">
-        <span v-if="isLoading">
-            <i
-                v-if="isLoading"
-                :class="[
-                    'far',
-                    'fa-spinner-third',
-                    'fa-spin',
-                    hasSlot('default') ? 'me-2' : ''
-                ]"
-            />
-        </span>
+        <template v-if="isLoading">
+            <i class="p-0" :class="['far', 'fa-spinner-third', 'fa-spin']" />
 
-        <span
-            v-if="icon && !isLoading"
-            class="d-inline-flex align-items-center"
-        >
-            <i :class="iconClasses" />
-        </span>
-
-        <template v-if="isLoading && typeof loading === 'string'">
-            {{ loading }}
+            <span class="ms-3" v-if="typeof loading === 'string'">
+                {{ loading }}
+            </span>
+            <span v-else-if="hasSlot('default')" class="ms-3">
+                <slot />
+            </span>
         </template>
 
-        <slot v-else />
+        <template v-else>
+            <i v-if="icon" :class="iconClasses" />
+
+            <span>
+                <slot />
+            </span>
+        </template>
     </button>
 </template>
 
@@ -56,12 +50,12 @@ template
             })
 
             const isLoading = computed(() => {
-                if (typeof props.loading === 'string') return true
+                if (typeof props.loading === 'string' && props.loading !== '')
+                    return true
                 return props.loading
             })
 
             const click = (event: any) => {
-                console.log(props.disabled)
                 if (props.disabled === false && props.loading === false) {
                     ctx.emit('click')
                 } else {

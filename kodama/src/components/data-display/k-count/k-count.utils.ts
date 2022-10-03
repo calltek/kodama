@@ -1,9 +1,9 @@
-import { defineProps } from 'vue'
-import inputProps from './k-count.props'
+import { ExtractPropTypes } from 'vue'
+import Props from './k-count.props'
 
-const Props = defineProps(inputProps)
+export type KCountProps = Readonly<ExtractPropTypes<typeof Props>>
 
-export const parseBadgeClasses = (props: typeof Props, slots: any) => {
+export const parseBadgeClasses = (props: KCountProps, slots: any) => {
     const hasSlot = (name: string) => !!slots[name]
     const classes: string[] = [`badge badge-${props.size}`]
 
@@ -31,7 +31,7 @@ export const parseBadgeClasses = (props: typeof Props, slots: any) => {
             classes.push('top-0')
         }
 
-        if (position[0] === 'left') {
+        if (position[1] === 'left') {
             classes.push('start-0')
         } else {
             classes.push('start-100')

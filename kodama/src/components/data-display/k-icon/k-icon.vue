@@ -1,6 +1,5 @@
 <template>
     <span
-        :key="key"
         :style="{
             'display': 'inline-flex',
             'align-items': 'center',
@@ -12,14 +11,7 @@
 </template>
 
 <script lang="ts">
-    import {
-        defineComponent,
-        computed,
-        ref,
-        watch,
-        PropType,
-        StyleValue
-    } from 'vue'
+    import { defineComponent, computed, PropType, StyleValue } from 'vue'
 
     export default defineComponent({
         name: 'KIcon',
@@ -39,8 +31,6 @@
             }
         },
         setup(props) {
-            const key = ref(Math.floor(Math.random() * 100))
-
             const classes = computed(() => {
                 const aclass: any[] = ['k-icon']
                 if (Array.isArray(props.icon)) {
@@ -72,15 +62,7 @@
                 return style
             })
 
-            watch(
-                () => props,
-                () => {
-                    key.value = Math.floor(Math.random() * 100)
-                },
-                { deep: true }
-            )
-
-            return { classes, style, key }
+            return { classes, style }
         }
     })
 </script>

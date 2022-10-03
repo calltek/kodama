@@ -83,8 +83,6 @@
                     s.transform = `rotate(${props.rotate}deg)`
                 }
 
-                console.log(s)
-
                 return s
             })
 

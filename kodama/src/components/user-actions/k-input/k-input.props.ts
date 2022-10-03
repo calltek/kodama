@@ -1,6 +1,7 @@
+import { ExtractPropTypes } from 'vue'
 import { uid } from '../../../helpers/utils'
 
-export default {
+const Props = {
     modelValue: {
         type: String,
         default: '',
@@ -16,9 +17,12 @@ export default {
         default: '',
         description: 'Texto de ayuda'
     },
-    maxlength: {
+    min: {
         type: Number,
-        default: 0,
+        description: 'Longitud mínima del campo'
+    },
+    max: {
+        type: Number,
         description: 'Longitud máxima del campo'
     },
     name: {
@@ -35,7 +39,7 @@ export default {
         type: String,
         default: 'text',
         validator: (val: string) =>
-            ['text', 'email', 'password', 'url'].includes(val),
+            ['text', 'email', 'password', 'url', 'number'].includes(val),
         description: 'Tipo de campo'
     },
     autofocus: {
@@ -76,5 +80,13 @@ export default {
         validator: (val: string) => ['sm', 'md', 'lg'].includes(val),
         default: 'md',
         description: 'Tamaño del input'
+    },
+    width: {
+        type: Number,
+        required: false
     }
 }
+
+export type KInputProps = Readonly<ExtractPropTypes<typeof Props>>
+
+export default Props

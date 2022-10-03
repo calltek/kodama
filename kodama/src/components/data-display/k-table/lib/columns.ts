@@ -1,10 +1,7 @@
-import { computed, defineProps } from 'vue'
-import { KTableColumn } from '../k-table.types'
-import gTableProps from '../k-table.props'
+import { computed } from 'vue'
+import { KTableColumn, KTableProps } from '../k-table.types'
 
-const Props = defineProps(gTableProps)
-
-export default function (props: typeof Props, slots: any): any {
+export default function (props: KTableProps, slots: any): any {
     // const hasSlot = (name: string) => !!slots[name]
 
     const cols = computed(() => {
@@ -34,7 +31,7 @@ export default function (props: typeof Props, slots: any): any {
                 align: column.align || 'left',
                 slot: column.slot || '',
                 makeup: column.makeup || undefined,
-                filter: column.filter || [],
+                filter: column.filter,
                 style: {}
             }
 

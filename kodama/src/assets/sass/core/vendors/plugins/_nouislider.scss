@@ -2,12 +2,11 @@
 // NoUiSlider
 //
 
-
 // Base
 .noUi-target {
     border: 0;
     background: if(isDarkMode(), $gray-200, $gray-100);
-    box-shadow:none;
+    box-shadow: none;
 
     &.noUi-horizontal {
         height: 15px;
@@ -57,11 +56,12 @@
     .noUi-handle {
         border: 1px solid $gray-200;
         box-shadow: 0 3px 6px -3px rgba(#000, 0.7);
+        cursor: pointer;
     }
 
     // Small size
     &.noUi-sm {
-       @include nouislider-size(6px, 20px, 20px, 7px);
+        @include nouislider-size(6px, 20px, 20px, 7px);
     }
 
     // Large size
@@ -69,7 +69,7 @@
         @include nouislider-size(18px, 30px, 30px, 6px);
     }
 }
-    
+
 // Theme colors
 @each $name, $value in $theme-colors {
     // NoUiSlider success color option

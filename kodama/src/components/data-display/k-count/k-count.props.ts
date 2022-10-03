@@ -1,3 +1,5 @@
+import { PropType } from 'vue'
+
 export const colors = [
     'primary',
     'secondary',
@@ -9,6 +11,8 @@ export const colors = [
     'danger',
     'info'
 ]
+
+type KCountFloat = ['top' | 'bottom', 'left' | 'right']
 
 export default {
     value: {
@@ -38,7 +42,7 @@ export default {
         default: ''
     },
     float: {
-        type: Array,
+        type: Object as PropType<KCountFloat>,
         default: () => ['top', 'right']
     },
     size: {

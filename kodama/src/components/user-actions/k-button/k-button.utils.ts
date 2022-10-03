@@ -1,12 +1,11 @@
-import { defineProps } from 'vue'
-import inputProps, { colors } from './k-button.props'
+import { colors, KButtonProps } from './k-button.props'
 
-const Props = defineProps(inputProps)
-
-export const parseButtonClasses = (props: typeof Props, slots: any) => {
+export const parseButtonClasses = (props: KButtonProps, slots: any) => {
     const hasSlot = (name: string) => !!slots[name]
 
-    const classes = ['btn user-select-none d-inline-flex align-items-center']
+    const classes = [
+        'btn user-select-none d-inline-flex align-items-center justify-content-center'
+    ]
     const specific_classes: string[] = []
 
     const outline = props.outline
@@ -53,11 +52,6 @@ export const parseButtonClasses = (props: typeof Props, slots: any) => {
         specific_classes.push('cursor-pointer')
     }
 
-    // Block
-    if (props.block) {
-        specific_classes.push('w-100')
-    }
-
     // Size
     if (props.size) {
         specific_classes.push('btn-' + props.size)
@@ -66,7 +60,7 @@ export const parseButtonClasses = (props: typeof Props, slots: any) => {
     return classes.concat(specific_classes)
 }
 
-export const parseIconClasses = (props: typeof Props, slots: any) => {
+export const parseIconClasses = (props: KButtonProps, slots: any) => {
     const hasSlot = (name: string) => !!slots[name]
     const iconClasses: string[] = []
 

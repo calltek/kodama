@@ -51,6 +51,16 @@
 
         <template #action-select>
             <k-button
+                color="danger"
+                icon="brush"
+                size="sm"
+                @click="resetDate"
+                title="Resetear"
+                class="me-2"
+            >
+            </k-button>
+
+            <k-button
                 color="success"
                 icon="check"
                 size="sm"
@@ -70,16 +80,24 @@
     import props from './k-datepicker.props'
     import { parseInputClass } from './k-datepicker.utils'
 
+    import KIcon from '../../data-display/k-icon/k-icon.vue'
+    import KButton from '../../user-actions/k-button/k-button.vue'
+    import KDate from '../../data-display/k-date/k-date.vue'
+
     export default defineComponent({
         name: 'KDatepicker',
         components: {
-            Datepicker
+            Datepicker,
+            KIcon,
+            KButton,
+            KDate
         },
         autoload: true,
         props: props,
+        emits: ['change', 'update:modelValue'],
         setup(props, ctx) {
             const dp = ref()
-            const value = ref(props.modelValue)
+            const value = ref(props.modelValue || props.value)
 
             watch(
                 () => props.modelValue,
@@ -89,11 +107,22 @@
             )
 
             const onChange = (newVal: string | string[]) => {
-                ctx.emit('update:modelValue', newVal)
+                if (props.modelValue) {
+                    ctx.emit('update:modelValue', newVal)
+                } else {
+                    value.value = newVal
+                }
+
+                ctx.emit('change', newVal)
             }
 
             const selectDate = () => {
                 dp.value.selectDate()
+            }
+
+            const resetDate = () => {
+                value.value = ''
+                onChange('')
             }
 
             const isSimpleRange = computed(() => {
@@ -123,6 +152,7 @@
                     disabled: props.disabled,
                     readonly: props.readonly,
                     required: props.required,
+                    inline: props.inline,
 
                     // RANGES
                     fixedStart: props.fixedStart,
@@ -212,7 +242,7 @@
                 return opts
             })
 
-            return { dp, args, onChange, selectDate, value, classes }
+            return { dp, args, onChange, selectDate, resetDate, value, classes }
         }
     })
 </script>

@@ -2,6 +2,7 @@ import { getCurrentInstance } from 'vue'
 import { Menu } from '../config/_menu'
 import useBody from './modules/body'
 import useConfig from './modules/config'
+import useQuery from './modules/query'
 
 const useAuth = function () {
     const ctx: any = getCurrentInstance()
@@ -15,4 +16,4 @@ const useMenu = function (): Menu[] {
     return []
 }
 
-export { useBody, useConfig, useAuth, useMenu }
+export { useBody, useConfig, useAuth, useMenu, useQuery }

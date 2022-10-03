@@ -22,12 +22,17 @@
 
 <script lang="ts">
     import { defineComponent, computed, PropType } from 'vue'
+
+    import 'vue-loading-overlay/dist/vue-loading.css'
+    import Loading from 'vue-loading-overlay'
+
     import { getCSSVariableValue } from '../../../assets/ts/_utils'
 
     type Loader = 'spinner' | 'bars' | 'dots'
 
     export default defineComponent({
         name: 'KLoading',
+        components: { Loading },
         autoload: true,
         props: {
             active: {

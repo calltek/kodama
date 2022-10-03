@@ -1,9 +1,7 @@
-import { computed, ref, Ref, defineProps } from 'vue'
-import gTableProps from '../k-table.props'
+import { computed, ref, Ref } from 'vue'
+import { KTableProps } from '../k-table.types'
 
-const Props = defineProps(gTableProps)
-
-export default function (props: typeof Props): any {
+export default function (props: KTableProps): any {
     const rowsOpen: Ref<number[]> = ref([])
 
     const isRowOpen = computed(() => {

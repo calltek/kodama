@@ -1,3 +1,5 @@
+import { PropType } from 'vue'
+import { QueryFilter } from '../../../store/modules/query'
 import { KTableColumn } from './k-table.types'
 
 export default {
@@ -6,8 +8,13 @@ export default {
         required: true,
         description: 'Clave primaria de la tabla'
     },
+    store: {
+        type: String,
+        required: false,
+        description: 'Nombre único para almacenamiento en cache'
+    },
     columns: {
-        type: Object as () => KTableColumn[],
+        type: Array as () => KTableColumn[],
         required: true,
         description: 'Array con las columnas a mostrar'
     },
@@ -19,7 +26,7 @@ export default {
     total: {
         type: Number as () => number,
         default: () => 0,
-        description: 'Total de registros'
+        description: 'Numero total de registros para la paginación'
     },
     loading: {
         type: Boolean,
@@ -36,5 +43,19 @@ export default {
         type: Number,
         default: 300,
         description: 'Altura mínima de la tabla'
+    },
+    header: {
+        type: Boolean,
+        default: true,
+        description: 'Muestra u oculta la cabecera de la tabla'
+    },
+    clean: {
+        type: Boolean,
+        default: false,
+        description: 'Elimina los estilos por defecto del componente'
+    },
+    requiredFilters: {
+        type: Object as PropType<QueryFilter>,
+        default: null
     }
 }

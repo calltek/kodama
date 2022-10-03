@@ -1,9 +1,6 @@
-import { defineProps } from 'vue'
-import inputProps from './k-datepicker.props'
+import { KDatepickerProps } from './k-datepicker.props'
 
-const Props = defineProps(inputProps)
-
-export const parseInputClass = (props: typeof Props) => {
+export const parseInputClass = (props: KDatepickerProps) => {
     const classes: string[] = ['form-control', 'px-10']
 
     if (props.ghost) {

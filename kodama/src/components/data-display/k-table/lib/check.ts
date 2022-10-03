@@ -1,9 +1,7 @@
-import { computed, defineProps } from 'vue'
-import Column from '../k-table.props'
+import { computed } from 'vue'
+import { KTableProps } from '../k-table.types'
 
-const Props = defineProps(Column)
-
-export default function (props: typeof Props): any {
+export default function (props: KTableProps): any {
     const toggleCheck = (index: number) => {
         if (props.selected) {
             const key = props.index || 'id'
