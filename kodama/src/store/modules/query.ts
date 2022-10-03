@@ -10,6 +10,8 @@ export type QueryFilterOperator =
     | '$in'
     | '$nin'
     | '$like'
+    | '$from'
+    | '$to'
 
 type QueryCondition = '$and' | '$or'
 

@@ -55,8 +55,8 @@
             const dropdown = ref('dropdown')
 
             const defaultValue = computed(() => {
-                if (props.value && props.value.$gte && props.value.$lte) {
-                    return [props.value.$gte, props.value.$lte]
+                if (props.value && props.value.$from && props.value.$to) {
+                    return [props.value.$from, props.value.$to]
                 }
 
                 return ''
@@ -64,8 +64,8 @@
 
             const filter = (value: string[]) => {
                 const data = {
-                    $gte: value[0],
-                    $lte: value[1]
+                    $from: value[0],
+                    $to: value[1]
                 }
 
                 const bs = new bootstrap.Dropdown(dropdown.value)
