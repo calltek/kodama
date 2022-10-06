@@ -1,22 +1,31 @@
 <template>
     <div class="btn-group dropup">
-        <button
-            class="btn btn-primary btn-sm"
-            type="button"
+        <k-button
+            :loading="loading"
+            :disabled="loading"
+            size="sm"
             @click="loadMore()"
         >
             Cargar más
-        </button>
+        </k-button>
 
-        <button
+        <k-button
+            size="sm"
+            class="dropdown-toggle hide-after px-4"
+            :data-bs-toggle="!loading ? 'dropdown' : ''"
+        >
+            <i class="fad fa-ellipsis" />
+        </k-button>
+
+        <!-- <button
             type="button"
             class="btn btn-sm btn-primary dropdown-toggle hide-after px-4"
             data-bs-toggle="dropdown"
         >
             <i class="fad fa-ellipsis" />
-        </button>
+        </button> -->
 
-        <a data-bs-toggle="dropdown"> </a>
+        <!-- <a data-bs-toggle="dropdown"> </a> -->
 
         <ul
             class="dropdown-menu text-center p-0 overflow-hidden"
@@ -73,13 +82,21 @@
 
 <script lang="ts">
     import { defineComponent } from 'vue'
+    import KButton from '../../../user-actions/k-button/k-button.vue'
 
     export default defineComponent({
         name: 'KTableLimit',
+        components: {
+            KButton
+        },
         props: {
             value: {
                 type: Number,
                 default: 20
+            },
+            loading: {
+                type: Boolean,
+                default: false
             }
         },
         emits: ['limit', 'nextPage'],

@@ -5,10 +5,7 @@
                 class="d-flex flex-row align-items-center py-3 px-1"
                 :class="$style.KConfirm"
             >
-                <i
-                    :class="['fad', 'fa-question-circle']"
-                    class="text-gray-500"
-                />
+                <k-icon :icon="icon" class="text-gray-300 me-4" size="45" />
 
                 <div class="d-flex flex-column">
                     <div class="mb-2 text-gray-500 fw-bold">
@@ -41,11 +38,15 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, ref } from 'vue'
+    import { defineComponent, PropType, ref } from 'vue'
     export default defineComponent({
         name: 'KConfirm',
         autoload: true,
         props: {
+            icon: {
+                type: [Array, String] as PropType<string[] | string>,
+                default: () => ['fal', 'question-circle']
+            },
             title: {
                 type: String,
                 default: '¿Estás seguro de realizar esta acción?',

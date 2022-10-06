@@ -23,10 +23,7 @@ export default {
     },
     bgColor: {
         default: BG_COLORS[0],
-        type: String,
-        validator: function (value: string) {
-            return BG_COLORS.includes(value)
-        }
+        type: String
     },
     faceColor: {
         default: FACE_COLORS[0],

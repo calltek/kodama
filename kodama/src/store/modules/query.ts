@@ -117,6 +117,19 @@ export default defineStore('query', {
                 }
             }
         },
+        strict(view: string) {
+            const self = this
+
+            return {
+                set(value: boolean) {
+                    if (self.queries[view] === undefined) {
+                        self.init(view)
+                    }
+
+                    self.queries[view].strict = value
+                }
+            }
+        },
         filter(view: string) {
             const self = this
 

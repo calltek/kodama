@@ -1,10 +1,12 @@
 import { computed, ref } from 'vue'
 import { KTableContext, KTableProps } from '../k-table.types'
-import { params } from './filter'
+import useFilter, { params } from './filter'
 
 export const enable404 = ref(false)
 
 export default function (ctx: KTableContext, props: KTableProps): any {
+    const { query } = useFilter(ctx, props)
+
     // Check if exists more data
     const isMore = computed(() => {
         return props.data.length < props.total
@@ -16,7 +18,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
             params.page += 1
             params.reset = false
 
-            ctx.emit('fetch', params)
+            ctx.emit('fetch', query.value)
         }
     }
 
@@ -35,7 +37,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
     })
 
     const refresh = () => {
-        ctx.emit('fetch', params)
+        ctx.emit('fetch', query.value)
     }
 
     return { isMore, loadMore, busy, data, refresh }

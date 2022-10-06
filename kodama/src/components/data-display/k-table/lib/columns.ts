@@ -32,7 +32,7 @@ export default function (props: KTableProps, slots: any): any {
                 slot: column.slot || '',
                 makeup: column.makeup || undefined,
                 filter: column.filter,
-                style: {}
+                style: { position: 'relative' }
             }
 
             if (data.nowrap) data.style['white-space'] = 'nowrap'

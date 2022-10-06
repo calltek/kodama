@@ -1,11 +1,11 @@
 import { computed, reactive } from 'vue'
 import { useQuery } from '../../../../store'
 import {
-    QueryFilter,
     QueryFilterField,
     QueryFilterFields
 } from '../../../../store/modules/query'
 import { KTableContext, KTableParams, KTableProps } from '../k-table.types'
+import cloneDeep from 'lodash.clonedeep'
 
 export const params: KTableParams = reactive({
     page: 1,
@@ -19,13 +19,13 @@ export const params: KTableParams = reactive({
 
 export default function (ctx: KTableContext, props: KTableProps): any {
     const order = (field: string, value: 'asc' | 'desc' | null = null) => {
-        const query = useQuery()
+        const queryStore = useQuery()
 
         if (props.store) {
             if (value) {
-                query.order(props.store).set(field, value)
+                queryStore.order(props.store).set(field, value)
             } else {
-                query.order(props.store).delete(field)
+                queryStore.order(props.store).delete(field)
             }
         }
 
@@ -41,30 +41,30 @@ export default function (ctx: KTableContext, props: KTableProps): any {
 
         params.reset = true
 
-        ctx.emit('fetch', params)
+        ctx.emit('fetch', query.value)
     }
 
     const limit = (value: number) => {
-        const query = useQuery()
+        const queryStore = useQuery()
 
         if (props.store) {
-            query.limit(props.store).set(value)
+            queryStore.limit(props.store).set(value)
         }
 
         params.limit = value
         params.reset = true
 
-        ctx.emit('fetch', params)
+        ctx.emit('fetch', query.value)
     }
 
     const filter = (field: string, filter: QueryFilterField | null) => {
-        const query = useQuery()
+        const queryStore = useQuery()
 
         if (props.store) {
             if (filter !== null) {
-                query.filter(props.store).set(field, filter)
+                queryStore.filter(props.store).set(field, filter)
             } else {
-                query.filter(props.store).delete(field)
+                queryStore.filter(props.store).delete(field)
             }
         }
 
@@ -80,14 +80,26 @@ export default function (ctx: KTableContext, props: KTableProps): any {
 
         params.reset = true
 
-        ctx.emit('fetch', params)
+        ctx.emit('fetch', query.value)
+    }
+
+    const strict = (value: boolean) => {
+        const queryStore = useQuery()
+
+        if (props.store) {
+            queryStore.strict(props.store).set(value)
+        }
+
+        params.strict = value
+
+        ctx.emit('fetch', query.value)
     }
 
     const resetFilters = () => {
-        const query = useQuery()
+        const queryStore = useQuery()
 
         if (props.store) {
-            query.filter(props.store).reset()
+            queryStore.filter(props.store).reset()
         }
 
         params.page = 1
@@ -97,18 +109,30 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         params.reset = true
         params.strict = false
 
-        ctx.emit('fetch', params)
+        ctx.emit('fetch', query.value)
     }
 
-    const filters = computed(() => {
+    const query = computed(() => {
+        let filters = null
+
         if (props.requiredFilters) {
-            return mergeFilters(
-                props.requiredFilters,
+            const requiredFilters = cloneDeep(props.requiredFilters)
+
+            filters = mergeFilters(
+                requiredFilters,
                 params.filter,
                 params.strict
             )
         } else {
-            return mergeFilters(null, params.filter, params.strict)
+            filters = mergeFilters(null, params.filter, params.strict)
+        }
+
+        return {
+            page: params.page,
+            limit: params.limit,
+            order: params.order,
+            filters: filters,
+            reset: params.reset
         }
     })
 
@@ -122,6 +146,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
                 params.order = q.order
                 params.limit = q.limit
                 params.filter = q.filter
+                params.strict = q.strict
             }
         }
     }
@@ -183,8 +208,6 @@ export default function (ctx: KTableContext, props: KTableProps): any {
                 }
             })
 
-            console.log(customFilters)
-
             if (required) {
                 if (required.$and) {
                     if (strict) {
@@ -205,5 +228,13 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         }
     }
 
-    return { order, loadStoreParams, limit, filter, filters, resetFilters }
+    return {
+        order,
+        loadStoreParams,
+        limit,
+        filter,
+        query,
+        resetFilters,
+        strict
+    }
 }

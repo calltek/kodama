@@ -8,7 +8,9 @@
             <slot name="header-left">
                 <h3 class="card-title align-items-start flex-column">
                     <span class="card-label fw-bolder fs-3 mb-1">
-                        <slot name="title">Listados de stock</slot>
+                        <slot name="title" :selected="selected" :query="query">
+                            Listados de stock
+                        </slot>
                     </span>
                     <span class="text-muted mt-1 fw-bold fs-7">
                         {{ total }} registros
@@ -17,16 +19,38 @@
             </slot>
 
             <div class="card-toolbar">
-                <slot name="header-right" :selected="selected"></slot>
+                <slot
+                    name="header-right"
+                    :selected="selected"
+                    :query="query"
+                ></slot>
 
                 <k-button
                     icon="filter-slash"
-                    color="white"
-                    light
+                    color="light"
                     title="Limpiar filtros"
                     :loading="loading"
-                    class="me-2"
+                    class="m-2"
                     @click="resetFilters"
+                />
+
+                <k-button
+                    v-if="params.strict"
+                    icon="object-intersect"
+                    color="light"
+                    title="Filtro estricto"
+                    :loading="loading"
+                    class="me-2"
+                    @click="strict(false)"
+                />
+                <k-button
+                    v-else
+                    icon="object-union"
+                    color="light"
+                    title="Filtro flexible"
+                    :loading="loading"
+                    class="me-2"
+                    @click="strict(true)"
                 />
 
                 <k-button
@@ -121,7 +145,7 @@
                                         "
                                     />
                                     <k-table-filter-range
-                                        v-else-if="col.filter.type === 'price'"
+                                        v-else-if="col.filter.type === 'range'"
                                         :min="col.filter.min"
                                         :max="col.filter.max"
                                         @filter="filter(col.index, $event)"
@@ -210,6 +234,7 @@
                                         v-bind="{
                                             row: item,
                                             value: item[col.index],
+                                            query: query,
                                             index: itemKey
                                         }"
                                     />
@@ -247,6 +272,7 @@
                                     <slot
                                         name="content"
                                         :row="item"
+                                        :query="query"
                                         :index="itemKey"
                                     />
                                 </td>
@@ -258,6 +284,7 @@
         </div>
         <div v-if="isMore" class="card-footer text-center border-0">
             <k-table-limit
+                :loading="loading"
                 :value="params.limit"
                 @limit="limit"
                 @next-page="loadMore"
@@ -334,8 +361,9 @@
                 loadStoreParams,
                 limit,
                 filter,
-                filters,
-                resetFilters
+                query,
+                resetFilters,
+                strict
             } = useFilter(ctx, props)
 
             // Create checks when data its modified
@@ -346,7 +374,7 @@
 
             onMounted(() => {
                 enable404.value = true
-                ctx.emit('fetch', params)
+                ctx.emit('fetch', query.value)
             })
 
             return {
@@ -369,8 +397,9 @@
                 order,
                 limit,
                 filter,
-                filters,
-                resetFilters
+                resetFilters,
+                strict,
+                query
             }
         }
     })

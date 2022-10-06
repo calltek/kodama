@@ -113,10 +113,7 @@
             },
             bgColor: {
                 default: BG_COLORS[0],
-                type: String,
-                validator: function (value: string) {
-                    return BG_COLORS.includes(value)
-                }
+                type: String
             }
         },
         setup(props) {

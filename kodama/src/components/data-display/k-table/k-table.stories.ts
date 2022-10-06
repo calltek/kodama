@@ -17,8 +17,7 @@ export default {
                 component: 'Some component _markdown_'
             }
         }
-    },
-    methods: { action: action('clicked') }
+    }
 } as Meta
 
 const exampleColumns: KTableColumn[] = [
@@ -171,7 +170,8 @@ const KTableStory = (args: any, customArgs?: any) => {
         store: 'table_example',
         columns: exampleColumns,
         data: exampleData,
-        total: 10
+        total: 10,
+        requiredFilters: { shop: { $in: '1,4,7,8' } }
     }
 
     const props = {
@@ -183,14 +183,16 @@ const KTableStory = (args: any, customArgs?: any) => {
     return {
         components: { KTable },
         setup() {
-            return { props }
+            const fetch = action('fetch')
+            return { props, fetch }
         },
         template: `
-        <k-table v-bind="props">
+        <k-table v-bind="props" @fetch=fetch>
             <template #client="{value}">
                 {{value}}
             </template>
-        </k-table>`
+        </k-table>`,
+        methods: { fetch: action('clicked') }
     }
 }
 
