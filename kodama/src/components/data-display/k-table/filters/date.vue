@@ -64,8 +64,8 @@
 
             const filter = (value: string[]) => {
                 const data = {
-                    $gte: value[0],
-                    $lte: value[1]
+                    $gte: `${value[0]} 00:00:00`,
+                    $lte: `${value[1]} 23:59:59`
                 }
 
                 const bs = new bootstrap.Dropdown(dropdown.value)

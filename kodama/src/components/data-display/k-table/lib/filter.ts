@@ -14,7 +14,7 @@ export const params: KTableParams = reactive({
     search: '',
     limit: 20,
     reset: true,
-    strict: false
+    strict: true
 })
 
 export default function (ctx: KTableContext, props: KTableProps): any {
@@ -107,7 +107,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         params.filter = null
         params.search = ''
         params.reset = true
-        params.strict = false
+        params.strict = true
 
         ctx.emit('fetch', query.value)
     }

@@ -72,7 +72,7 @@ export default defineStore('query', {
                 filter: params?.filter || null,
                 limit: params?.limit || 20,
                 order: params?.order || null,
-                strict: params?.strict || false
+                strict: params?.strict || true
             }
         },
         order(view: string) {

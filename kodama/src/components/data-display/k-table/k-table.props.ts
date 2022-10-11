@@ -41,7 +41,7 @@ export default {
     },
     height: {
         type: Number,
-        default: 300,
+        default: 400,
         description: 'Altura mínima de la tabla'
     },
     header: {

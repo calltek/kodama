@@ -1,6 +1,6 @@
 {
     "name": "@kodama/ui",
-    "version": "0.6.8",
+    "version": "0.6.11",
     "publishConfig": {
         "registry": "https://npm.calltek.dev"
     },
