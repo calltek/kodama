@@ -33,7 +33,7 @@ export type KTableColumn = {
         min?: number | string
         max?: number | string
     }
-    makeup?: 'date' | 'price' | 'image' | 'status'
+    makeup?: 'date' | 'price' | 'image' | 'status' | 'code'
     style?: Record<string, unknown>
 }
 

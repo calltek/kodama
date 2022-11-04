@@ -81,7 +81,7 @@
 <script lang="ts">
     import { defineComponent, ref } from 'vue'
     import { ErrorMessage, Field, Form } from 'vee-validate'
-    import { useAuth } from '../../store'
+    import { useAuth, useConfig } from '../../store'
     import { signupEnabled } from '../../helpers/config'
     import { notify } from '../../plugins'
 
@@ -98,6 +98,7 @@
         setup() {
             const auth = useAuth()
             const router = useRouter()
+            const config = useConfig()
 
             const submitButton = ref<HTMLButtonElement | null>(null)
             const loading = ref<boolean | string>(false)
@@ -113,8 +114,9 @@
 
                 auth.login(params)
                     .then(() => {
+                        const homepage = config.get('homepage')
                         notify.success('Sesión iniciada 😁')
-                        router.push({ name: 'dashboard' })
+                        router.push({ name: homepage })
                     })
                     .catch((error: any) => {
                         notify.error('Usuario o contraseña incorrectos 😣')

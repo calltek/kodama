@@ -4,7 +4,7 @@ template
         <template v-if="isLoading">
             <i class="p-0" :class="['far', 'fa-spinner-third', 'fa-spin']" />
 
-            <span class="ms-3" v-if="typeof loading === 'string'">
+            <span v-if="typeof loading === 'string'" class="ms-3">
                 {{ loading }}
             </span>
             <span v-else-if="hasSlot('default')" class="ms-3">

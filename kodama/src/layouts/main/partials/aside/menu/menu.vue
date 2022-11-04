@@ -16,169 +16,120 @@
             class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
             data-kt-menu="true"
         >
-            <template v-for="(item, i) in filteredMenu" :key="i">
-                <div v-if="item.heading" class="menu-item">
-                    <div class="menu-content pt-8 pb-2">
-                        <span
-                            class="menu-section text-muted text-uppercase fs-8 ls-1"
-                        >
-                            {{ item.heading }}
-                        </span>
-                    </div>
-                </div>
-                <div v-else-if="item.separator" class="menu-item">
-                    <div class="menu-item">
-                        <div class="menu-content">
-                            <div class="separator mx-1 mt-4 pb-0"></div>
-                        </div>
-                    </div>
-                </div>
-                <template v-for="(menuItem, j) in item.pages" :key="j">
-                    <template v-if="!menuItem.pages">
-                        <div class="menu-item">
-                            <!-- <router-link
-                                :class="[
-                                    'menu-link',
-                                    menuItem.disabled
-                                        ? 'opacity-40 cursor-not-allowed'
-                                        : ''
-                                ]"
-                                active-class="active"
-                                :to="!menuItem.disabled ? menuItem.route : {}"
-                            >
-                                <span v-if="menuItem.icon" class="menu-icon">
-                                    <i
-                                        :class="[menuItem.icon]"
-                                        class="bi fs-3"
-                                    ></i>
-                                </span>
-                                <span class="menu-title">{{
-                                    menuItem.title
-                                }}</span>
-                            </router-link> -->
-
-                            <menu-item :item="menuItem" :parent="true" />
-                        </div>
-                    </template>
+            <template v-for="(item, i) in menu" :key="i">
+                <template v-if="checkRoles(item)">
                     <div
-                        v-else
-                        :class="{ show: hasActiveChildren(menuItem.route) }"
-                        class="menu-item menu-accordion"
-                        data-kt-menu-sub="accordion"
-                        data-kt-menu-trigger="click"
+                        v-if="item.heading && hasOneAccess(item)"
+                        class="menu-item"
                     >
-                        <span class="menu-link">
-                            <span v-if="menuItem.icon" class="menu-icon">
-                                <i :class="[menuItem.icon]" class="bi fs-3"></i>
-                            </span>
-                            <span class="menu-title">{{ menuItem.title }}</span>
+                        <div class="menu-content pt-8 pb-2">
                             <span
-                                v-if="menuItem.pages"
-                                class="menu-arrow"
-                            ></span>
-                        </span>
-
-                        <div
-                            :class="{ show: hasActiveChildren(menuItem.route) }"
-                            class="menu-sub menu-sub-accordion"
-                        >
-                            <template
-                                v-for="(item2, k) in menuItem.pages"
-                                :key="k"
+                                class="menu-section text-muted text-uppercase fs-8 ls-1"
                             >
-                                <div
-                                    v-if="item2.title"
-                                    :class="{
-                                        show: hasActiveChildren(item2.route)
-                                    }"
-                                    class="menu-item menu-accordion"
-                                    data-kt-menu-sub="accordion"
-                                    data-kt-menu-trigger="click"
-                                >
-                                    <!-- <router-link
-                                        v-if="!item2.pages"
-                                        :class="[
-                                            'menu-link',
-                                            item2.disabled
-                                                ? 'opacity-40 cursor-not-allowed'
-                                                : ''
-                                        ]"
-                                        active-class="active"
-                                        :to="!item2.disabled ? item2.route : {}"
-                                    >
-                                        <span class="menu-bullet">
-                                            <span
-                                                class="bullet bullet-dot"
-                                            ></span>
-                                        </span>
-                                        <span class="menu-title">{{
-                                            item2.title
-                                        }}</span>
-                                        <span
-                                            v-if="item2.pages"
-                                            class="menu-arrow"
-                                        ></span>
-                                    </router-link>
-                                    <span v-else class="menu-link">
-                                        <span class="menu-bullet">
-                                            <span
-                                                class="bullet bullet-dot"
-                                            ></span>
-                                        </span>
-                                        <span class="menu-title">{{
-                                            item2.title
-                                        }}</span>
-                                        <span
-                                            v-if="item2.pages"
-                                            class="menu-arrow"
-                                        ></span>
-                                    </span> -->
-
-                                    <menu-item :item="item2" />
-
-                                    <div
-                                        :class="{
-                                            show: hasActiveChildren(item2.route)
-                                        }"
-                                        class="menu-sub menu-sub-accordion"
-                                    >
-                                        <template
-                                            v-for="(item3, k) in item2.pages"
-                                            :key="k"
-                                        >
-                                            <div class="menu-item">
-                                                <!-- <router-link
-                                                    :class="[
-                                                        'menu-link',
-                                                        item3.disabled
-                                                            ? 'opacity-40 cursor-not-allowed'
-                                                            : ''
-                                                    ]"
-                                                    active-class="active"
-                                                    :to="
-                                                        !item3.disabled
-                                                            ? item3.route
-                                                            : {}
-                                                    "
-                                                >
-                                                    <span class="menu-bullet">
-                                                        <span
-                                                            class="bullet bullet-dot"
-                                                        ></span>
-                                                    </span>
-                                                    <span class="menu-title">{{
-                                                        item3.title
-                                                    }}</span>
-                                                </router-link> -->
-
-                                                <menu-item :item="item3" />
-                                            </div>
-                                        </template>
-                                    </div>
+                                {{ item.heading }}
+                            </span>
+                        </div>
+                    </div>
+                    <div v-else-if="item.separator" class="menu-item">
+                        <div class="menu-item">
+                            <div class="menu-content">
+                                <div class="separator mx-1 mt-4 pb-0"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <template v-for="(menuItem, j) in item.pages" :key="j">
+                        <template v-if="checkRoles(menuItem)">
+                            <template v-if="!menuItem.pages">
+                                <div class="menu-item">
+                                    <menu-item
+                                        :item="menuItem"
+                                        :parent="true"
+                                    />
                                 </div>
                             </template>
-                        </div>
-                    </div>
+                            <div
+                                v-else-if="hasOneAccess(menuItem)"
+                                :class="{
+                                    show: hasActiveChildren(menuItem.route)
+                                }"
+                                class="menu-item menu-accordion"
+                                data-kt-menu-sub="accordion"
+                                data-kt-menu-trigger="click"
+                            >
+                                <span class="menu-link">
+                                    <span
+                                        v-if="menuItem.icon"
+                                        class="menu-icon"
+                                    >
+                                        <i
+                                            :class="[menuItem.icon]"
+                                            class="bi fs-3"
+                                        ></i>
+                                    </span>
+                                    <span class="menu-title">{{
+                                        menuItem.title
+                                    }}</span>
+                                    <span
+                                        v-if="menuItem.pages"
+                                        class="menu-arrow"
+                                    ></span>
+                                </span>
+
+                                <div
+                                    :class="{
+                                        show: hasActiveChildren(menuItem.route)
+                                    }"
+                                    class="menu-sub menu-sub-accordion"
+                                >
+                                    <template
+                                        v-for="(item2, k) in menuItem.pages"
+                                        :key="k"
+                                    >
+                                        <div
+                                            v-if="
+                                                item2.title && checkRoles(item2)
+                                            "
+                                            :class="{
+                                                show: hasActiveChildren(
+                                                    item2.route
+                                                )
+                                            }"
+                                            class="menu-item menu-accordion"
+                                            data-kt-menu-sub="accordion"
+                                            data-kt-menu-trigger="click"
+                                        >
+                                            <menu-item :item="item2" />
+
+                                            <div
+                                                :class="{
+                                                    show: hasActiveChildren(
+                                                        item2.route
+                                                    )
+                                                }"
+                                                class="menu-sub menu-sub-accordion"
+                                            >
+                                                <template
+                                                    v-for="(
+                                                        item3, k
+                                                    ) in item2.pages"
+                                                    :key="k"
+                                                >
+                                                    <div
+                                                        class="menu-item"
+                                                        v-if="checkRoles(item3)"
+                                                    >
+                                                        <menu-item
+                                                            :item="item3"
+                                                        />
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
                 </template>
             </template>
         </div>
@@ -216,49 +167,91 @@
                 return route.path.indexOf(match.toString()) !== -1
             }
 
-            const filteredMenu = menu.filter((menu) => {
+            const checkRoles = (menu: any) => {
+                if (menu.auth) {
+                    const auth = useAuth()
+                    const strict = menu.auth.strict || true
+                    const roles = menu.auth.roles || []
+
+                    return auth.checkRoles(strict, roles)
+                }
+
+                return true
+            }
+
+            const hasOneAccess = (menu: any) => {
+                if (menu.auth) {
+                    const currentAccess = checkRoles(menu)
+                    if (currentAccess) return true
+                }
+
                 if (menu.pages) {
-                    const pages = (menu.pages = menu.pages.filter((page) => {
+                    for (let i = 0; i < menu.pages.length; i++) {
+                        const page = menu.pages[i]
+
                         if (page.auth) {
-                            const strict = page.auth.strict || true
-                            const roles = page.auth.roles || []
-
-                            const hasAccess = auth.checkRoles(strict, roles)
-                            if (hasAccess) {
-                                return page
-                            }
-                        } else {
-                            return page
+                            const pageAccess = checkRoles(page)
+                            if (pageAccess) return true
                         }
-                    }))
 
-                    if (pages.length > 0) {
-                        menu.pages = pages
+                        if (page.pages) {
+                            for (let j = 0; j < page.pages.length; j++) {
+                                const subpage = page.pages[j]
 
-                        if (menu.auth) {
-                            const strict = menu.auth.strict || true
-                            const roles = menu.auth.roles || []
-
-                            const hasAccess = auth.checkRoles(strict, roles)
-
-                            if (hasAccess) {
-                                return menu
+                                const subpageAccess = checkRoles(subpage)
+                                if (subpageAccess) return true
                             }
-                        } else {
-                            return menu
                         }
                     }
-                } else {
-                    return menu
                 }
-            })
+
+                return false
+            }
+
+            // const filteredMenu = menu.filter((menu) => {
+            //     if (menu.pages) {
+            //         const pages = (menu.pages = menu.pages.filter((page) => {
+            //             if (page.auth) {
+            //                 const strict = page.auth.strict || true
+            //                 const roles = page.auth.roles || []
+
+            //                 const hasAccess = auth.checkRoles(strict, roles)
+            //                 if (hasAccess) {
+            //                     return page
+            //                 }
+            //             } else {
+            //                 return page
+            //             }
+            //         }))
+
+            //         if (pages.length > 0) {
+            //             menu.pages = pages
+
+            //             if (menu.auth) {
+            //                 const strict = menu.auth.strict || true
+            //                 const roles = menu.auth.roles || []
+
+            //                 const hasAccess = auth.checkRoles(strict, roles)
+
+            //                 if (hasAccess) {
+            //                     return menu
+            //                 }
+            //             } else {
+            //                 return menu
+            //             }
+            //         }
+            //     } else {
+            //         return menu
+            //     }
+            // })
 
             return {
                 hasActiveChildren,
+                hasOneAccess,
                 menu,
                 version,
                 scrollElRef,
-                filteredMenu
+                checkRoles
             }
         }
     })

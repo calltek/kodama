@@ -32,6 +32,9 @@ import KDropdown from '../components/user-actions/k-dropdown/k-dropdown.vue'
 import KInput from '../components/user-actions/k-input/k-input.vue'
 import KSwitch from '../components/user-actions/k-switch/k-switch.vue'
 
+// Feedback
+import KModal from '../components/feedback/k-modal/k-modal.vue'
+
 export default (
     app: App,
     frontendComponents?: Record<string, { [key: string]: any }>
@@ -67,6 +70,9 @@ export default (
     app.component('KDropdownTitle', KDropdownTitle)
     app.component('KInput', KInput)
     app.component('KSwitch', KSwitch)
+
+    // Feedback
+    app.component('KModal', KModal)
 
     // Vendor
     // app.component('Loading', Loading)

@@ -18,8 +18,12 @@
         autoload: true,
         props: {
             icon: {
-                type: [Array, String] as PropType<string[] | string>,
+                type: String as PropType<string>,
                 required: true
+            },
+            type: {
+                type: String as PropType<'fas' | 'fal' | 'fad' | 'far'>,
+                default: 'fad'
             },
             size: {
                 type: [String, Number],
@@ -33,13 +37,9 @@
         setup(props) {
             const classes = computed(() => {
                 const aclass: any[] = ['k-icon']
-                if (Array.isArray(props.icon)) {
-                    aclass.push(props.icon[0])
-                    aclass.push(`fa-${props.icon[1]}`)
-                } else {
-                    aclass.push('fad')
-                    aclass.push(`fa-${props.icon}`)
-                }
+
+                aclass.push(props.type)
+                aclass.push(`fa-${props.icon}`)
 
                 if (props.spin) {
                     aclass.push('fa-spin')

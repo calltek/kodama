@@ -6,19 +6,15 @@
     >
         <!--begin::Menu item-->
         <div class="menu-item px-3">
-            <div class="menu-content d-flex align-items-center px-3">
-                <!--begin::Avatar-->
-                <!-- <div class="symbol symbol-50px me-5">
-                    <img alt="Logo" src="/media/avatars/300-1.jpg" />
-
-                </div> -->
-
+            <div
+                class="menu-content d-flex align-items-center px-3 overflow-hidden"
+            >
                 <k-avatar :name="fullname" :size="50" class="me-5" />
-                <!--end::Avatar-->
 
-                <!--begin::Username-->
-                <div class="d-flex flex-column">
-                    <div class="fw-bolder d-flex align-items-center fs-5">
+                <div class="d-flex flex-column text-truncate flex-grow-1">
+                    <div
+                        class="fw-bolder d-flex align-items-center text-truncate fs-5"
+                    >
                         {{ fullname }}
                         <span
                             class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"
@@ -27,11 +23,10 @@
                     </div>
                     <a
                         href="#"
-                        class="fw-bold text-muted text-hover-primary fs-7"
+                        class="fw-bold text-muted text-hover-primary text-truncate fs-7"
                         >{{ email }}</a
                     >
                 </div>
-                <!--end::Username-->
             </div>
         </div>
         <!--end::Menu item-->

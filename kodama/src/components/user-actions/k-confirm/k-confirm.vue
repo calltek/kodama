@@ -44,8 +44,8 @@
         autoload: true,
         props: {
             icon: {
-                type: [Array, String] as PropType<string[] | string>,
-                default: () => ['fal', 'question-circle']
+                type: String,
+                default: 'question-circle'
             },
             title: {
                 type: String,

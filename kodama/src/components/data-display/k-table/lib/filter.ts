@@ -40,6 +40,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         }
 
         params.reset = true
+        params.page = 1
 
         ctx.emit('fetch', query.value)
     }
@@ -53,6 +54,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
 
         params.limit = value
         params.reset = true
+        params.page = 1
 
         ctx.emit('fetch', query.value)
     }
@@ -79,6 +81,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         }
 
         params.reset = true
+        params.page = 1
 
         ctx.emit('fetch', query.value)
     }

@@ -37,6 +37,9 @@ export default function (ctx: KTableContext, props: KTableProps): any {
     })
 
     const refresh = () => {
+        params.page = 1
+        params.reset = true
+
         ctx.emit('fetch', query.value)
     }
 

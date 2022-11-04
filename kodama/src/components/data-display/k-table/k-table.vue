@@ -101,6 +101,7 @@
                                 v-for="(col, key) in cols"
                                 :key="key"
                                 :style="col.style"
+                                class="text-uppercase"
                             >
                                 <k-table-order
                                     v-if="col.order && col.index"
@@ -227,6 +228,11 @@
                                         :value="item[col.index]"
                                     />
 
+                                    <k-table-code
+                                        v-else-if="col.makeup === 'code'"
+                                        :value="item[col.index]"
+                                    />
+
                                     <!-- @slot Slots personalizados -->
                                     <slot
                                         v-else-if="col.slot"
@@ -310,6 +316,7 @@
     import KTableImage from './slots/image.vue'
     import KTableStatus from './slots/status.vue'
     import KTablePrice from './slots/price.vue'
+    import KTableCode from './slots/code.vue'
 
     import KTableOrder from './filters/order.vue'
     import KTableLimit from './filters/limit.vue'
@@ -330,6 +337,7 @@
             KTableImage,
             KTableStatus,
             KTablePrice,
+            KTableCode,
             KTableOrder,
             KTableLimit,
             KTableFilterSelect,
