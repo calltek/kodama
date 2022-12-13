@@ -57,5 +57,9 @@ export default {
     requiredFilters: {
         type: Object as PropType<QueryFilter>,
         default: null
+    },
+    cards: {
+        type: [Boolean, String],
+        default: false
     }
 }

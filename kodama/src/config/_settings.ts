@@ -70,6 +70,12 @@ interface Config {
     search: boolean
 
     ///////////////
+    // Responsive
+    ///////////////
+    isMobileView: boolean
+    isTabletView: boolean
+
+    ///////////////
     // Layout
     ///////////////
     header: {
@@ -162,6 +168,12 @@ const defaultSettings: Config = {
     scrollTop: true,
     changelog: false,
     search: false,
+
+    ///////////////
+    // Responsive
+    ///////////////
+    isMobileView: false,
+    isTabletView: false,
 
     ///////////////
     // Layout

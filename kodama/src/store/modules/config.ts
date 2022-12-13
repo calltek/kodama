@@ -12,12 +12,6 @@ export default defineStore('config', {
             initial: Object.assign({}, defaultSettings)
         }
     },
-    getters: {
-        get: (state) => (path?: string, defaultValue?: any) => {
-            if (!path) return state.config
-            return objectPath.get(state.config, path, defaultValue)
-        }
-    },
     actions: {
         init() {
             const ctx: any = getCurrentInstance()
@@ -26,6 +20,10 @@ export default defineStore('config', {
             this.initial = Object.assign({}, { ...defaultSettings, ...config })
 
             this.reset()
+        },
+        get(path?: string, defaultValue?: any) {
+            if (!path) return this.config
+            return objectPath.get(this.config, path, defaultValue)
         },
         set(path: string, value: any) {
             objectPath.set(this.config, path, value)

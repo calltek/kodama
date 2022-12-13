@@ -115,8 +115,8 @@
                                                     :key="k"
                                                 >
                                                     <div
-                                                        class="menu-item"
                                                         v-if="checkRoles(item3)"
+                                                        class="menu-item"
                                                     >
                                                         <menu-item
                                                             :item="item3"
@@ -142,7 +142,7 @@
     import { defineComponent, onMounted, ref } from 'vue'
     import { RouteLocationRaw, useRoute } from 'vue-router'
 
-    import { useAuth, useMenu } from '../../../../../store'
+    import { useMenu } from '../../../../../store'
     import { version } from '../../../../../helpers/config'
 
     import MenuItem from './menu-item.vue'
@@ -154,7 +154,6 @@
             const route = useRoute()
             const scrollElRef = ref<null | HTMLElement>(null)
 
-            const auth = useAuth()
             const menu = useMenu()
 
             onMounted(() => {
@@ -168,31 +167,18 @@
             }
 
             const checkRoles = (menu: any) => {
-                if (menu.auth) {
-                    const auth = useAuth()
-                    const strict = menu.auth.strict || true
-                    const roles = menu.auth.roles || []
-
-                    return auth.checkRoles(strict, roles)
-                }
-
+                if (menu.auth) return menu.auth
                 return true
             }
 
             const hasOneAccess = (menu: any) => {
-                if (menu.auth) {
-                    const currentAccess = checkRoles(menu)
-                    if (currentAccess) return true
-                }
+                if (menu.auth) return menu.auth
 
                 if (menu.pages) {
                     for (let i = 0; i < menu.pages.length; i++) {
                         const page = menu.pages[i]
 
-                        if (page.auth) {
-                            const pageAccess = checkRoles(page)
-                            if (pageAccess) return true
-                        }
+                        if (page.auth) return page.auth
 
                         if (page.pages) {
                             for (let j = 0; j < page.pages.length; j++) {
@@ -207,43 +193,6 @@
 
                 return false
             }
-
-            // const filteredMenu = menu.filter((menu) => {
-            //     if (menu.pages) {
-            //         const pages = (menu.pages = menu.pages.filter((page) => {
-            //             if (page.auth) {
-            //                 const strict = page.auth.strict || true
-            //                 const roles = page.auth.roles || []
-
-            //                 const hasAccess = auth.checkRoles(strict, roles)
-            //                 if (hasAccess) {
-            //                     return page
-            //                 }
-            //             } else {
-            //                 return page
-            //             }
-            //         }))
-
-            //         if (pages.length > 0) {
-            //             menu.pages = pages
-
-            //             if (menu.auth) {
-            //                 const strict = menu.auth.strict || true
-            //                 const roles = menu.auth.roles || []
-
-            //                 const hasAccess = auth.checkRoles(strict, roles)
-
-            //                 if (hasAccess) {
-            //                     return menu
-            //                 }
-            //             } else {
-            //                 return menu
-            //             }
-            //         }
-            //     } else {
-            //         return menu
-            //     }
-            // })
 
             return {
                 hasActiveChildren,

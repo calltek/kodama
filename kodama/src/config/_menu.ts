@@ -1,6 +1,6 @@
 import { RouteLocationRaw } from 'vue-router'
 
-const SysMenu: Menu[] = [
+export const SysMenu: Menu[] = [
     // {
     //     separator: true
     // },
@@ -22,7 +22,7 @@ export type MenuItem = {
     disabled?: boolean
     route: RouteLocationRaw
     icon: [string, string]
-    auth?: { strict: boolean; roles: string[] }
+    auth?: boolean
     pages?: MenuItem[]
 }
 
@@ -30,12 +30,12 @@ export type Menu = {
     heading?: string
     pages?: MenuItem[]
     separator?: boolean
-    auth?: { strict: boolean; roles: string[] }
+    auth?: boolean
 }
 
-export default (FrontMenu: Menu[]) => {
-    const SeparatorMenu: Menu[] = [{ separator: true }]
-    const CustomMenu: Menu[] = [...FrontMenu, ...SeparatorMenu, ...SysMenu]
+// export default (FrontMenu: () => Menu[]) => {
+//     const SeparatorMenu: Menu[] = [{ separator: true }]
+//     const CustomMenu: Menu[] = [...FrontMenu(), ...SeparatorMenu, ...SysMenu]
 
-    return CustomMenu
-}
+//     return CustomMenu
+// }

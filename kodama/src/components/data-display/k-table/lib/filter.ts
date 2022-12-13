@@ -134,7 +134,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
             page: params.page,
             limit: params.limit,
             order: params.order,
-            filters: filters,
+            filter: filters,
             reset: params.reset
         }
     })
@@ -163,7 +163,6 @@ export default function (ctx: KTableContext, props: KTableProps): any {
             })
         } else if (typeof filter === 'object') {
             Object.keys(filter).forEach((field) => {
-                // @ts-ignore: Unreachable code error
                 const data: any = filter[field]
 
                 if (data) {
@@ -202,7 +201,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
 
             const requiredFields = getFieldFilters(required)
 
-            let customFilters: QueryFilterFields[] = []
+            const customFilters: QueryFilterFields[] = []
 
             Object.keys(custom).forEach((field) => {
                 const find = requiredFields.find((f) => f.field === field)

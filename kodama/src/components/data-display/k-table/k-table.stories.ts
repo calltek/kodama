@@ -171,7 +171,8 @@ const KTableStory = (args: any, customArgs?: any) => {
         columns: exampleColumns,
         data: exampleData,
         total: 10,
-        requiredFilters: { shop: { $in: '1,4,7,8' } }
+        requiredFilters: { shop: { $in: '1,4,7,8' } },
+        cards: false
     }
 
     const props = {
@@ -190,6 +191,12 @@ const KTableStory = (args: any, customArgs?: any) => {
         <k-table v-bind="props" @fetch=fetch>
             <template #client="{value}">
                 {{value}}
+            </template>
+
+            <template #card="{row}">
+                <div class="card mb-2">
+                    {{ row.client_name }}
+                </div>
             </template>
         </k-table>`,
         methods: { fetch: action('clicked') }

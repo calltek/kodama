@@ -64,7 +64,20 @@
             </div>
         </div>
 
+        <template v-if="cards === true || (cards === 'auto' && isMobile)">
+            <template v-for="(item, itemKey) in data" :key="itemKey">
+                <slot
+                    name="card"
+                    v-bind="{
+                        row: item,
+                        query: query,
+                        index: itemKey
+                    }"
+                ></slot>
+            </template>
+        </template>
         <div
+            v-else
             class="card-body rounded-4 position-relative"
             :class="clean ? 'p-0' : 'bg-white px-7 py-4'"
         >
@@ -125,17 +138,16 @@
                                             col.filter.options.length > 0
                                         "
                                         :options="col.filter.options"
-                                        @filter="filter(col.index, $event)"
                                         :value="
                                             params.filter &&
                                             params.filter[col.index]
                                                 ? params.filter[col.index]
                                                 : null
                                         "
+                                        @filter="filter(col.index, $event)"
                                     />
                                     <k-table-filter-date
                                         v-else-if="col.filter.type === 'date'"
-                                        @filter="filter(col.index, $event)"
                                         :min="col.filter.min"
                                         :max="col.filter.max"
                                         :value="
@@ -144,40 +156,41 @@
                                                 ? params.filter[col.index]
                                                 : null
                                         "
+                                        @filter="filter(col.index, $event)"
                                     />
                                     <k-table-filter-range
                                         v-else-if="col.filter.type === 'range'"
                                         :min="col.filter.min"
                                         :max="col.filter.max"
-                                        @filter="filter(col.index, $event)"
                                         :value="
                                             params.filter &&
                                             params.filter[col.index]
                                                 ? params.filter[col.index]
                                                 : null
                                         "
+                                        @filter="filter(col.index, $event)"
                                     />
                                     <k-table-filter-text
                                         v-else-if="col.filter.type === 'text'"
-                                        @filter="filter(col.index, $event)"
                                         :value="
                                             params.filter &&
                                             params.filter[col.index]
                                                 ? params.filter[col.index]
                                                 : null
                                         "
+                                        @filter="filter(col.index, $event)"
                                     />
                                     <k-table-filter-number
                                         v-else-if="col.filter.type === 'number'"
                                         :min="col.filter.min"
                                         :max="col.filter.max"
-                                        @filter="filter(col.index, $event)"
                                         :value="
                                             params.filter &&
                                             params.filter[col.index]
                                                 ? params.filter[col.index]
                                                 : null
                                         "
+                                        @filter="filter(col.index, $event)"
                                     />
                                 </template>
                             </th>
@@ -288,6 +301,7 @@
                 </table>
             </div>
         </div>
+
         <div v-if="isMore" class="card-footer text-center border-0">
             <k-table-limit
                 :loading="loading"
@@ -300,7 +314,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, watch, onMounted } from 'vue'
+    import { defineComponent, watch, onMounted, computed } from 'vue'
 
     import 'vue-loading-overlay/dist/vue-loading.css'
     import Loading from 'vue-loading-overlay'
@@ -327,6 +341,7 @@
     import KTableFilterNumber from './filters/number.vue'
 
     import KButton from '../../user-actions/k-button/k-button.vue'
+    import { useConfig } from '../../../store'
 
     export default defineComponent({
         name: 'KTable',
@@ -351,6 +366,8 @@
         emits: ['fetch', 'filter'],
         setup(props, ctx) {
             const hasSlot = (name: string) => !!ctx.slots[name]
+            const config = useConfig()
+
             const { isRowOpen, toggleRow } = useCollapse(props)
             const { cols, colLength } = useColumn(props, ctx.slots)
             const {
@@ -380,6 +397,14 @@
             populateChecks()
             loadStoreParams()
 
+            const isMobile = computed(() => {
+                const isMobileView = config.get('isMobileView', false)
+                const isTabletView = config.get('isTabletView', false)
+
+                if (isMobileView || isTabletView) return true
+                return false
+            })
+
             onMounted(() => {
                 enable404.value = true
                 ctx.emit('fetch', query.value)
@@ -407,7 +432,8 @@
                 filter,
                 resetFilters,
                 strict,
-                query
+                query,
+                isMobile
             }
         }
     })

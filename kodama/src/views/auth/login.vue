@@ -21,7 +21,9 @@
             </div>
 
             <div class="fv-row mb-10">
-                <label class="form-label fs-6 fw-bolder text-dark">Email</label>
+                <label class="form-label fs-6 fw-bolder text-dark">
+                    Nick/Email
+                </label>
 
                 <Field
                     class="form-control form-control-lg form-control-solid"
@@ -105,7 +107,7 @@
 
             // Create form validation object
             const loginSchema = Yup.object().shape({
-                email: Yup.string().email().required().label('Email'),
+                email: Yup.string().min(5).required().label('Email'),
                 password: Yup.string().min(4).required().label('Password')
             })
 
@@ -119,6 +121,7 @@
                         router.push({ name: homepage })
                     })
                     .catch((error: any) => {
+                        console.error(error)
                         notify.error('Usuario o contraseña incorrectos 😣')
                     })
                     .finally(() => {

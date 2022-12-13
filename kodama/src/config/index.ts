@@ -7,7 +7,7 @@ import App from '../views/app.vue'
 import components from './_components'
 import filters from './_filters'
 import router from './_router'
-import menu, { Menu } from './_menu'
+import { Menu } from './_menu'
 import { CustomConfig } from './_settings'
 import { AuthStore } from './_auth'
 
@@ -19,7 +19,7 @@ export type KodamaParams = {
         beforeEach?: NavigationGuardWithThis<undefined>
     }
     components: Record<string, { [key: string]: any }>
-    menu: Menu[]
+    menu: () => Menu[]
     settings: CustomConfig
     auth: StoreDefinition<string, any, AuthStore>
 }
@@ -41,7 +41,7 @@ export function init(params: KodamaParams) {
 
     app.config.globalProperties.useAuth = params.auth
     app.config.globalProperties.settings = params.settings
-    app.config.globalProperties.menu = menu(params.menu)
+    app.config.globalProperties.menu = params.menu
 
     return app
 }
