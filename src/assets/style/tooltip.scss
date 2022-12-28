@@ -1,0 +1,135 @@
+[tooltip] {
+    @apply relative;
+
+    // used for slot editing
+    // & > * {
+    //     @apply inline-block;
+    // }
+
+    &:before,
+    &:after {
+        @apply opacity-0 hidden absolute pointer-events-none select-none text-base;
+    }
+
+    &:before {
+        content: '';
+        border: 8px solid transparent;
+        z-index: 1001;
+    }
+
+    &:after {
+        content: attr(tooltip);
+        z-index: 1000;
+        min-width: 3em;
+        text-transform: none;
+
+        @apply text-center  overflow-hidden text-ellipsis py-2 px-4 rounded-md max-w-sm whitespace-nowrap dark:bg-gray-1000 bg-dark text-white;
+
+        box-shadow: 0 1em 2em -0.5em rgba(0, 0, 0, 0.35);
+    }
+    &:hover:before,
+    &:hover:after {
+        @apply block;
+    }
+
+    /* position: TOP */
+    &:not([position]):before,
+    &[position^='top']:before {
+        @apply bottom-full border-b-0 dark:border-t-gray-1000 border-t-dark;
+    }
+    &:not([position]):after,
+    &[position^='top']::after {
+        bottom: calc(100% + 8px);
+    }
+
+    &:not([position])::before,
+    &:not([position])::after,
+    &[position^='top']::before,
+    &[position^='top']::after {
+        transform: translate(-50%, -0.5em);
+
+        @apply left-1/2;
+    }
+
+    /* position: BOTTOM */
+    &[position^='bottom']::before {
+        top: 105%;
+
+        @apply border-t-0 dark:border-b-gray-1000 border-b-dark;
+    }
+    &[position^='bottom']::after {
+        top: calc(105% + 8px);
+    }
+    &[position^='bottom']::before,
+    &[position^='bottom']::after {
+        transform: translate(-50%, 0.5em);
+
+        @apply left-1/2;
+    }
+
+    /* position: LEFT */
+    &[position^='left']::before {
+        left: calc(0em - 5px);
+        transform: translate(-0.5em, -50%);
+
+        @apply top-1/2 border-r-0 dark:border-l-gray-1000 border-l-dark;
+    }
+    &[position^='left']::after {
+        right: calc(100% + 5px);
+        transform: translate(-0.5em, -50%);
+
+        @apply top-1/2;
+    }
+
+    /* position: RIGHT */
+    &[position^='right']::before {
+        right: calc(0em - 5px);
+        transform: translate(0.5em, -50%);
+
+        @apply top-1/2 border-l-0 dark:border-r-gray-1000 border-r-dark;
+    }
+    &[position^='right']::after {
+        left: calc(100% + 5px);
+        transform: translate(0.5em, -50%);
+
+        @apply top-1/2;
+    }
+
+    /* FX All The Things */
+    &:not([position]):hover::before,
+    &:not([position]):hover::after,
+    &[position^='top']:hover::before,
+    &[position^='top']:hover::after,
+    &[position^='bottom']:hover::before,
+    &[position^='bottom']:hover::after {
+        animation: tooltips-vert 300ms ease-out forwards;
+    }
+
+    &[position^='left']:hover::before,
+    &[position^='left']:hover::after,
+    &[position^='right']:hover::before,
+    &[position^='right']:hover::after {
+        animation: tooltips-horz 300ms ease-out forwards;
+    }
+}
+
+/* don't show empty tooltips */
+[tooltip='']::before,
+[tooltip='']::after {
+    display: none !important;
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+    to {
+        opacity: 0.9;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes tooltips-horz {
+    to {
+        opacity: 0.9;
+        transform: translate(0, -50%);
+    }
+}

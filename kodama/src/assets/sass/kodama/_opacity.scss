@@ -1,5 +1,0 @@
-@for $o from 1 through 9 {
-    .o#{$o} {
-        opacity: calc($o / 10) !important;
-    }
-}
