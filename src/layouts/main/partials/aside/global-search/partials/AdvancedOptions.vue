@@ -208,7 +208,7 @@
         <!--end::Input group-->
 
         <!--begin::Actions-->
-        <div class="d-flex justify-content-end">
+        <div class="flex justify-content-end">
             <button
                 class="btn btn-sm btn-white fw-bolder btn-active-light-primary me-2"
             >

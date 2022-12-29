@@ -96,7 +96,7 @@
         <!--end::Input group-->
 
         <!--begin::Actions-->
-        <div class="d-flex justify-content-end pt-7">
+        <div class="flex justify-content-end pt-7">
             <div
                 class="btn btn-sm btn-white fw-bolder btn-active-light-primary me-2"
             >

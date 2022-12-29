@@ -1,14 +1,14 @@
 <template>
     <KTLoader v-if="loaderEnabled" />
 
-    <div class="page d-flex flex-row flex-column-fluid">
+    <div class="page flex flex-row flex-column-fluid">
         <kd-aside
             v-if="asideEnabled"
             :light-logo="logo.light"
             :dark-logo="logo.dark"
         />
 
-        <div id="kt_wrapper" class="d-flex flex-column flex-row-fluid wrapper">
+        <div id="kt_wrapper" class="flex flex-column flex-row-fluid wrapper">
             <router-view />
         </div>
     </div>

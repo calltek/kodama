@@ -12,7 +12,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="d-flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-dark text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -20,7 +20,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column justify-content-start fw-bold">
+                <div class="flex flex-column justify-content-start fw-bold">
                     <span class="fs-6 fw-bold">Karina Clark</span>
                     <span class="fs-7 fw-bold text-muted"
                         >Marketing Manager</span
@@ -32,7 +32,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="d-flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-dark text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -40,7 +40,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column justify-content-start fw-bold">
+                <div class="flex flex-column justify-content-start fw-bold">
                     <span class="fs-6 fw-bold">Olivia Bold</span>
                     <span class="fs-7 fw-bold text-muted"
                         >Software Engineer</span
@@ -52,7 +52,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="d-flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-dark text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -60,7 +60,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column justify-content-start fw-bold">
+                <div class="flex flex-column justify-content-start fw-bold">
                     <span class="fs-6 fw-bold">Ana Clark</span>
                     <span class="fs-7 fw-bold text-muted">UI/UX Designer</span>
                 </div>
@@ -70,7 +70,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="d-flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-dark text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -78,7 +78,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column justify-content-start fw-bold">
+                <div class="flex flex-column justify-content-start fw-bold">
                     <span class="fs-6 fw-bold">Nick Pitola</span>
                     <span class="fs-7 fw-bold text-muted">Art Director</span>
                 </div>
@@ -88,7 +88,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="d-flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-dark text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -96,7 +96,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column justify-content-start fw-bold">
+                <div class="flex flex-column justify-content-start fw-bold">
                     <span class="fs-6 fw-bold">Edward Kulnic</span>
                     <span class="fs-7 fw-bold text-muted"
                         >System Administrator</span
@@ -111,7 +111,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="d-flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-dark text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -125,7 +125,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column justify-content-start fw-bold">
+                <div class="flex flex-column justify-content-start fw-bold">
                     <span class="fs-6 fw-bold">Company Rbranding</span>
                     <span class="fs-7 fw-bold text-muted">UI Design</span>
                 </div>
@@ -135,7 +135,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="d-flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-dark text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -149,7 +149,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column justify-content-start fw-bold">
+                <div class="flex flex-column justify-content-start fw-bold">
                     <span class="fs-6 fw-bold">Company Re-branding</span>
                     <span class="fs-7 fw-bold text-muted">Web Development</span>
                 </div>
@@ -159,7 +159,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="d-flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-dark text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -173,7 +173,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column justify-content-start fw-bold">
+                <div class="flex flex-column justify-content-start fw-bold">
                     <span class="fs-6 fw-bold">Business Analytics App</span>
                     <span class="fs-7 fw-bold text-muted">Administration</span>
                 </div>

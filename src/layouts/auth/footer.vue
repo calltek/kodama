@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex align-items-center fw-bold fs-6">
+    <div class="flex align-items-center fw-bold fs-6 dark:text-white">
         <a
             href="https://calltek.es/soporte"
             class="text-muted text-hover-primary px-2"

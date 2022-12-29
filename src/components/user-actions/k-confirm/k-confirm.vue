@@ -2,12 +2,12 @@
     <tippy ref="tooltip" trigger="click" theme="light" :interactive="true">
         <template #content>
             <div
-                class="d-flex flex-row align-items-center py-3 px-1"
+                class="flex flex-row align-items-center py-3 px-1"
                 :class="$style.KConfirm"
             >
                 <k-icon :icon="icon" class="text-gray-300 me-4" size="45" />
 
-                <div class="d-flex flex-column">
+                <div class="flex flex-column">
                     <div class="mb-2 text-gray-500 fw-bold">
                         {{ title }}
                     </div>

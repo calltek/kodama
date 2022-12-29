@@ -7,13 +7,13 @@
         <!--begin::Menu item-->
         <div class="menu-item px-3">
             <div
-                class="menu-content d-flex align-items-center px-3 overflow-hidden"
+                class="menu-content flex align-items-center px-3 overflow-hidden"
             >
                 <k-avatar :name="fullname" :size="50" class="me-5" />
 
-                <div class="d-flex flex-column text-truncate flex-grow-1">
+                <div class="flex flex-column text-truncate flex-grow-1">
                     <div
-                        class="fw-bolder d-flex align-items-center text-truncate fs-5"
+                        class="fw-bolder flex align-items-center text-truncate fs-5"
                     >
                         {{ fullname }}
                         <span
@@ -37,7 +37,7 @@
 
         <!--begin::Menu item-->
         <div class="menu-item px-5">
-            <a class="menu-link px-5 d-flex align-items-center"> Mi Perfil </a>
+            <a class="menu-link px-5 flex align-items-center"> Mi Perfil </a>
         </div>
         <!--end::Menu item-->
 

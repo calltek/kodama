@@ -1,16 +1,14 @@
 <template>
     <div
-        class="d-flex flex-column flex-column-fluid position-relative overflow-hidden position-x-center"
+        class="flex flex-col top-0 overflow-hidden items-center justify-center h-full w-full fixed"
         :style="bgStyle"
     >
-        <div
-            class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20"
-        >
-            <k-logo side :height="80" class="mb-12" />
+        <div class="flex flex-col p-10 pb-lg-20">
+            <k-logo side :height="80" class="mb-12" :dark="darkMode" />
             <router-view></router-view>
         </div>
 
-        <div class="d-flex flex-center flex-column-auto p-10">
+        <div class="flex flex-column p-10">
             <k-public-footer></k-public-footer>
         </div>
 
@@ -20,8 +18,8 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, onMounted, onUnmounted, computed } from 'vue'
-    import { useBody } from '../../store'
+    import { defineComponent, computed } from 'vue'
+    import { useConfig } from '../../store'
     import KPublicFooter from './footer.vue'
     import { authBackground } from '../../helpers/config'
 
@@ -29,7 +27,7 @@
         name: 'AuthPageLayout',
         components: { KPublicFooter },
         setup() {
-            const body = useBody()
+            const config = useConfig()
 
             const bgStyle = computed(() => {
                 if (authBackground) {
@@ -41,15 +39,11 @@
                 return {}
             })
 
-            onMounted(() => {
-                body.addClass('bg-body')
+            const darkMode = computed(() => {
+                return config.get('darkMode')
             })
 
-            onUnmounted(() => {
-                body.removeClass('bg-body')
-            })
-
-            return { bgStyle }
+            return { bgStyle, darkMode }
         }
     })
 </script>

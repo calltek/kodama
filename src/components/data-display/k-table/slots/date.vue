@@ -1,7 +1,7 @@
 <template>
     <tippy :content="value">
         <span class="badge badge-light-primary">
-            <div class="d-flex flex-row align-items-center">
+            <div class="flex flex-row align-items-center">
                 <i class="fad fa-clock me-2 fs-3" />
                 <div class="text-start">
                     {{ text }}

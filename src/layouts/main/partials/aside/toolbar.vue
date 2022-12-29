@@ -1,7 +1,7 @@
 <template>
     <!--begin::User-->
     <div
-        class="aside-user d-flex align-items-sm-center justify-content-center py-5"
+        class="aside-user flex align-items-sm-center justify-content-center py-5"
     >
         <!--begin::Symbol-->
         <div class="symbol symbol-50px">
@@ -12,7 +12,7 @@
         <!--begin::Wrapper-->
         <div class="aside-user-info flex-row-fluid flex-wrap ms-5">
             <!--begin::Section-->
-            <div class="d-flex">
+            <div class="flex">
                 <!--begin::Info-->
                 <div class="flex-grow-1 me-2 py-1">
                     <a class="text-white text-hover-primary fs-6 fw-bold">
@@ -22,7 +22,7 @@
                         Prestashop
                     </span>
 
-                    <div class="d-flex align-items-center text-success fs-9">
+                    <div class="flex align-items-center text-success fs-9">
                         <span class="bullet bullet-dot bg-success me-1"></span
                         >online
                     </div>
@@ -30,7 +30,7 @@
                 <!--end::Info-->
 
                 <!--begin::User menu-->
-                <div class="me-n2 d-flex flex-column justify-content-between">
+                <div class="me-n2 flex flex-column justify-content-between">
                     <a
                         href="#"
                         class="btn btn-icon btn-sm btn-active-color-primary mt-n2"

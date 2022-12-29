@@ -22,7 +22,7 @@
             <slot v-else-if="hasSlot('subtitle')" name="subtitle"></slot>
         </div>
 
-        <div class="d-flex justify-content-center">
+        <div class="flex justify-content-center">
             <slot name="action"></slot>
         </div>
     </div>

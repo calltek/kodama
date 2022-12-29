@@ -43,7 +43,7 @@
             <!--end::Input group-->
 
             <!--begin::Actions-->
-            <div class="d-flex flex-wrap justify-content-center pb-lg-0">
+            <div class="flex flex-wrap justify-content-center pb-lg-0">
                 <button
                     id="kt_password_reset_submit"
                     ref="submitButton"

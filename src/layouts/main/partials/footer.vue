@@ -1,9 +1,9 @@
 <template>
     <!--begin::Footer-->
-    <div id="kt_footer" class="footer py-4 d-flex flex-lg-column">
+    <div id="kt_footer" class="footer py-4 flex flex-lg-column">
         <!--begin::Container-->
         <div
-            class="d-flex flex-column flex-md-row align-items-center justify-content-between"
+            class="flex flex-column flex-md-row align-items-center justify-content-between"
             :class="{
                 'container-fluid': footerWidthFluid,
                 'container-xxl': !footerWidthFluid

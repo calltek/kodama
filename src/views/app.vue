@@ -12,6 +12,22 @@
         setup() {
             const config = useConfig()
 
+            const observer: MutationObserver = new MutationObserver(
+                (mutations) => {
+                    for (const m of mutations) {
+                        const newValue = m.target.getAttribute(m.attributeName)
+
+                        nextTick(() => {
+                            if (newValue === 'dark') {
+                                config.set('darkMode', true)
+                            } else {
+                                config.set('darkMode', false)
+                            }
+                        })
+                    }
+                }
+            )
+
             onMounted(() => {
                 detectViewPort(true)
                 window.addEventListener('resize', detectViewPortListener)
@@ -103,9 +119,11 @@
                 replaceFavicon()
                 addFontAwesomeKit()
 
-                // nextTick(() => {
-                //     keenthemes.initializeComponents()
-                // })
+                observer.observe(document.querySelector('html'), {
+                    attributes: true,
+                    attributeOldValue: true,
+                    attributeFilter: ['class']
+                })
             })
         }
     })

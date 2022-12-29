@@ -11,7 +11,7 @@
         </span>
 
         <div class="dropdown-menu p-0">
-            <div class="d-flex align-items-center p-4">
+            <div class="flex align-items-center p-4">
                 <k-input
                     v-model="inputText"
                     type="number"
@@ -23,7 +23,7 @@
                     @keyup.enter="filter"
                 />
 
-                <div class="ms-4 d-flex align-items-center">
+                <div class="ms-4 flex align-items-center">
                     <k-button
                         icon="xmark"
                         color="danger"

@@ -1,7 +1,7 @@
 <template>
     <div class="mb-4" data-kt-search-element="suggestion">
         <!--begin::Heading-->
-        <div class="d-flex flex-stack fw-bold mb-4">
+        <div class="flex flex-stack fw-bold mb-4">
             <!--begin::Label-->
             <span class="text-muted fs-6 me-2">Recently Searched:</span>
             <!--end::Label-->
@@ -10,7 +10,7 @@
         <!--begin::Items-->
         <div class="scroll-y mh-200px mh-lg-325px">
             <!--begin::Item-->
-            <div class="d-flex align-items-center mb-5">
+            <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
                     <span class="symbol-label bg-light">
@@ -23,7 +23,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column">
+                <div class="flex flex-column">
                     <a
                         href="#"
                         class="fs-6 text-gray-800 text-hover-primary fw-bold"
@@ -35,7 +35,7 @@
             </div>
             <!--end::Item-->
             <!--begin::Item-->
-            <div class="d-flex align-items-center mb-5">
+            <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
                     <span class="symbol-label bg-light">
@@ -48,7 +48,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column">
+                <div class="flex flex-column">
                     <a
                         href="#"
                         class="fs-6 text-gray-800 text-hover-primary fw-bold"
@@ -60,7 +60,7 @@
             </div>
             <!--end::Item-->
             <!--begin::Item-->
-            <div class="d-flex align-items-center mb-5">
+            <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
                     <span class="symbol-label bg-light">
@@ -73,7 +73,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column">
+                <div class="flex flex-column">
                     <a
                         href="#"
                         class="fs-6 text-gray-800 text-hover-primary fw-bold"
@@ -85,7 +85,7 @@
             </div>
             <!--end::Item-->
             <!--begin::Item-->
-            <div class="d-flex align-items-center mb-5">
+            <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
                     <span class="symbol-label bg-light">
@@ -98,7 +98,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column">
+                <div class="flex flex-column">
                     <a
                         href="#"
                         class="fs-6 text-gray-800 text-hover-primary fw-bold"
@@ -110,7 +110,7 @@
             </div>
             <!--end::Item-->
             <!--begin::Item-->
-            <div class="d-flex align-items-center mb-5">
+            <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
                     <span class="symbol-label bg-light">
@@ -123,7 +123,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column">
+                <div class="flex flex-column">
                     <a
                         href="#"
                         class="fs-6 text-gray-800 text-hover-primary fw-bold"
@@ -135,7 +135,7 @@
             </div>
             <!--end::Item-->
             <!--begin::Item-->
-            <div class="d-flex align-items-center mb-5">
+            <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
                     <span class="symbol-label bg-light">
@@ -148,7 +148,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column">
+                <div class="flex flex-column">
                     <a
                         href="#"
                         class="fs-6 text-gray-800 text-hover-primary fw-bold"
@@ -160,7 +160,7 @@
             </div>
             <!--end::Item-->
             <!--begin::Item-->
-            <div class="d-flex align-items-center mb-5">
+            <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
                     <span class="symbol-label bg-light">
@@ -173,7 +173,7 @@
                 </div>
                 <!--end::Symbol-->
                 <!--begin::Title-->
-                <div class="d-flex flex-column">
+                <div class="flex flex-column">
                     <a
                         href="#"
                         class="fs-6 text-gray-800 text-hover-primary fw-bold"

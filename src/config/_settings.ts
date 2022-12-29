@@ -27,6 +27,8 @@ interface Config {
     ///////////////
     // Branding
     ///////////////
+    darkMode: boolean
+
     color: {
         primary: string
         secondary: string
@@ -119,6 +121,8 @@ const defaultSettings: Config = {
     ///////////////
     // Branding
     ///////////////
+    darkMode: false,
+
     color: {
         primary: '#009EF7',
         secondary: '#6610f2',

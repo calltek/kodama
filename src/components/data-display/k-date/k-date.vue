@@ -1,6 +1,6 @@
 <template>
     <span class="badge badge-light-primary">
-        <div class="d-flex flex-row align-items-center">
+        <div class="flex flex-row align-items-center">
             <k-icon icon="clock" :size="3" class="me-2" />
             <template v-if="value">
                 <div class="text-start" v-if="isMultiple">

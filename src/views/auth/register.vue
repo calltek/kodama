@@ -119,7 +119,7 @@
                     <!--end::Input wrapper-->
                     <!--begin::Meter-->
                     <div
-                        class="d-flex align-items-center mb-3"
+                        class="flex align-items-center mb-3"
                         data-kt-password-meter-control="highlight"
                     >
                         <div

@@ -25,7 +25,7 @@
             </div>
 
             <div
-                class="d-flex align-items-center d-lg-none ms-n3 me-1"
+                class="flex align-items-center d-lg-none ms-n3 me-1"
                 title="Show aside menu"
             >
                 <div
@@ -40,7 +40,7 @@
         </div>
 
         <div
-            class="toolbar d-flex align-items-stretch"
+            class="toolbar flex align-items-stretch"
             :class="{
                 'container-fluid': headerWidthFluid,
                 'container-xxl': !headerWidthFluid
@@ -48,13 +48,13 @@
         >
             <div
                 id="kt_toolbar_container"
-                class="container-fluid py-6 px-0 py-lg-0 d-flex flex-row align-items-center justify-content-between"
+                class="container-fluid py-6 px-0 py-lg-0 flex flex-row align-items-center justify-content-between"
             >
                 <div
-                    class="page-title d-flex justify-content-center flex-column me-5"
+                    class="page-title flex justify-content-center flex-column me-5"
                 >
                     <h1
-                        class="d-flex align-items-center text-dark fw-bolder my-1 fs-3"
+                        class="flex align-items-center text-dark fw-bolder my-1 fs-3"
                     >
                         {{ pageTitle }}
                     </h1>
@@ -106,15 +106,15 @@
                     <slot name="topbar"> </slot>
                 </div>
 
-                <div class="d-flex d-lg-none">
+                <div class="flex d-lg-none">
                     <slot name="topbar-mobile"> </slot>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="kt_content" class="content d-flex flex-column flex-column-fluid">
-        <div class="post d-flex flex-column-fluid">
+    <div id="kt_content" class="content flex flex-column flex-column-fluid">
+        <div class="post flex flex-column-fluid">
             <div
                 id="kt_content_container"
                 :class="{

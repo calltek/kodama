@@ -17,11 +17,14 @@ const defaultState: Config = {
     },
 
     logo: {
-        favicon: '/media/logos/favicon.ico',
-        dark: '/media/logos/logo_dark.png',
-        light: '/media/logos/logo.png',
-        side_dark: '/media/logos/sidelogo_dark.png',
-        side_light: '/media/logos/logo.png'
+        favicon:
+            'https://kodamaui.s3.eu-west-1.amazonaws.com/logos/favicon.png',
+        dark: 'https://kodamaui.s3.eu-west-1.amazonaws.com/logos/logo-dark.png',
+        light: 'https://kodamaui.s3.eu-west-1.amazonaws.com/logos/logo.png',
+        side_dark:
+            'https://kodamaui.s3.eu-west-1.amazonaws.com/logos/sidelogo-dark.png',
+        side_light:
+            'https://kodamaui.s3.eu-west-1.amazonaws.com/logos/sidelogo.png'
     },
 
     loader: {
@@ -38,7 +41,7 @@ const defaultState: Config = {
     ///////////////
     // Router
     ///////////////
-    homepage: 'dashboardOrders',
+    homepage: 'dashboard',
 
     ///////////////
     // Vendor

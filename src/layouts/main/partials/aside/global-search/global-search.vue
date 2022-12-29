@@ -2,7 +2,7 @@
     <!--begin::Search-->
     <div
         ref="searchRef"
-        class="d-flex align-items-center w-100"
+        class="flex align-items-center w-100"
         data-kt-search="true"
         data-kt-search-keypress="true"
         data-kt-search-min-length="2"

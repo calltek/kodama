@@ -70,8 +70,7 @@ export default (
             component: () => import('../views/errors/404.vue'),
             meta: {
                 title: 'Página no encontrada',
-                public: true,
-                bodyClass: ['bg-body']
+                public: true
             }
         },
         {
@@ -81,8 +80,7 @@ export default (
             component: () => import('../views/errors/403.vue'),
             meta: {
                 title: 'Página no encontrada',
-                public: true,
-                bodyClass: ['bg-body']
+                public: true
             }
         },
         {
@@ -92,8 +90,7 @@ export default (
             component: () => import('../views/errors/500.vue'),
             meta: {
                 title: 'Error interno',
-                public: true,
-                bodyClass: ['bg-body']
+                public: true
             }
         },
         {

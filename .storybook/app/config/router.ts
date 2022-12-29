@@ -10,7 +10,8 @@ import { useAuth } from '../modules/auth'
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        redirect: '/dashboard/pedidos'
+        name: 'dashboard',
+        component: () => import('./../views/dashboard.vue')
     }
     // {
     //     path: '/dashboard/pedidos',
@@ -39,6 +40,7 @@ function beforeEach(
     const homepage = config.get('homepage')
 
     const isPublic = to.meta.public ? to.meta.public : false
+
     // const roles: any = to.meta.auth
     //     ? to.meta.auth
     //     : { strict: false, roles: [] }

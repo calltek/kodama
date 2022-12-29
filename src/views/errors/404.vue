@@ -1,9 +1,9 @@
 <template>
     <div
-        class="d-flex flex-column flex-column-fluid position-relative overflow-hidden"
+        class="flex flex-column flex-column-fluid position-relative overflow-hidden"
     >
         <div
-            class="d-flex flex-column flex-column-fluid justify-content-center text-center p-10 py-lg-15"
+            class="flex flex-column flex-column-fluid justify-content-center text-center p-10 py-lg-15"
         >
             <router-link :to="{ name: homepage }" class="mb-10 pt-lg-10">
                 <k-logo side :height="50" class="mb-5"></k-logo>
@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="d-flex flex-center flex-column-auto p-10">
+        <div class="flex flex-center flex-column-auto p-10">
             <k-public-footer />
         </div>
 
