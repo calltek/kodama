@@ -4,13 +4,17 @@
 
 <script lang="ts">
     import { defineComponent, nextTick, onMounted, onBeforeUnmount } from 'vue'
-    import { useConfig } from '../store'
+    import { useConfig, useStyle } from '../store'
     import { logo, fontAwesomeKit } from '../helpers/config'
 
     export default defineComponent({
         name: 'KodamaUI',
         setup() {
             const config = useConfig()
+            const style = useStyle()
+
+            // Store Tailwind config in store
+            style.init()
 
             const observer: MutationObserver = new MutationObserver(
                 (mutations) => {

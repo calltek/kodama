@@ -1,0 +1,100 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KBadge from './k-badge.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KBadge },
+    setup() {
+      return { args };
+    },
+    template: '<k-badge v-bind="args">Badge</k-badge>'
+});
+
+<Meta title="Data Display/Badge" component={KBadge} argTypes={renderArgs(KBadge)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media0.giphy.com/media/kBEtDVGrBI0gHER5eP/giphy.gif?cid=ecf05e47ohib96nnz2ri6frve32s584yz5cuz6gelv7asi98&rid=giphy.gif&ct=g">🎟 KBadge</SHead>
+
+# KButton
+Con el componente `k-badge` puedes formar el avatar de una persona de manera aleatoria. El avatar siempre será el mismo.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Sizes**
+Puedes definir el tamaño del badge desde `xs` hasta `xl`.
+
+<Canvas>
+  <Story name="Sizes" argTypes={renderArgs(KBadge, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KBadge },
+        template: `
+          <div class="flex flex-row gap-4 items-center">
+            <k-badge size="xs">Badge</k-badge>
+            <k-badge size="sm">Badge</k-badge>
+            <k-badge size="md">Badge</k-badge>
+            <k-badge size="lg">Badge</k-badge>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Colors**
+Define el color del badge.
+
+<Canvas>
+  <Story name="Colors" argTypes={renderArgs(KBadge, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KBadge },
+        template: `
+          <div class="flex flex-row gap-4 items-center">
+            <k-badge color="white">Badge</k-badge>
+            <k-badge color="black">Badge</k-badge>
+            <k-badge color="light">Badge</k-badge>
+            <k-badge color="dark">Badge</k-badge>
+            <k-badge color="primary">Badge</k-badge>
+            <k-badge color="secondary">Badge</k-badge>
+            <k-badge color="success">Badge</k-badge>
+            <k-badge color="warning">Badge</k-badge>
+            <k-badge color="danger">Badge</k-badge>
+            <k-badge color="info">Badge</k-badge>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Neon**
+Define el color de fondo del avatar en formato **hexadecimal**
+
+<Canvas>
+  <Story name="Neon" argTypes={renderArgs(KBadge, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KBadge },
+        template: `
+          <div class="flex flex-row gap-4 items-center">
+            <k-badge neon color="white">Badge</k-badge>
+            <k-badge neon color="black">Badge</k-badge>
+            <k-badge neon color="light">Badge</k-badge>
+            <k-badge neon color="dark">Badge</k-badge>
+            <k-badge neon color="primary">Badge</k-badge>
+            <k-badge neon color="secondary">Badge</k-badge>
+            <k-badge neon color="success">Badge</k-badge>
+            <k-badge neon color="warning">Badge</k-badge>
+            <k-badge neon color="danger">Badge</k-badge>
+            <k-badge neon color="info">Badge</k-badge>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

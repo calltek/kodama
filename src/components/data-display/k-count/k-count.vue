@@ -1,19 +1,28 @@
 <template>
-    <span v-if="hasSlot('default')" class="position-relative">
+    <span
+        v-if="hasSlot('default')"
+        class="relative -translate-y-3.5 h-7 text-xs"
+        :title="value.toString()"
+    >
         <slot />
-        <span :class="badgeClasses">
-            {{ value }}
+        <span :class="badgeClasses" :style="badgeStyles">
+            {{ text }}
         </span>
     </span>
-    <span v-else :class="badgeClasses">
-        {{ value }}
+    <span
+        v-else
+        :class="badgeClasses"
+        :style="badgeStyles"
+        :title="value.toString()"
+    >
+        {{ text }}
     </span>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
+    import { defineComponent, computed } from 'vue'
     import props from './k-count.props'
-    import { parseBadgeClasses } from './k-count.utils'
+    import { parseBadgeClasses, parseBadgeStyles } from './k-count.utils'
 
     export default defineComponent({
         name: 'KCount',
@@ -21,11 +30,29 @@
         props: props,
         setup(props, { slots }) {
             const hasSlot = (name: string) => !!slots[name]
-            const badgeClasses = parseBadgeClasses(props, slots)
+            const badgeClasses = computed(() => parseBadgeClasses(props, slots))
+            const badgeStyles = computed(() => parseBadgeStyles(props, slots))
 
-            return { hasSlot, badgeClasses }
+            const text = computed(() => {
+                if (props.value > 99) {
+                    return '+99'
+                }
+                return props.value
+            })
+
+            return { hasSlot, badgeClasses, badgeStyles, text }
         }
     })
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+    .text-xxxs {
+        font-size: 0.5rem;
+        line-height: 0.75rem;
+    }
+
+    .text-xxs {
+        font-size: 0.6rem;
+        line-height: 0.8rem;
+    }
+</style>

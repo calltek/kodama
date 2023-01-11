@@ -1,52 +1,49 @@
+import { ExtractPropTypes } from 'vue'
 import { uid } from '../../../helpers/utils'
 
 export const colors = [
+    'white',
+    'black',
+    'light',
+    'dark',
     'primary',
     'secondary',
-    'dark',
-    'white',
-    'light',
     'success',
     'warning',
     'danger',
-    'info',
-    'gray-100',
-    'gray-200',
-    'gray-300',
-    'gray-400',
-    'gray-500',
-    'gray-600',
-    'gray-700',
-    'gray-800',
-    'gray-900'
+    'info'
 ]
 
-export default {
+const Props = {
     id: {
         type: String,
-        default: () => uid()
+        default: () => uid(),
+        description: 'ID del badge'
     },
-    // States
     size: {
         type: String,
-        options: ['sm', 'md', 'lg'],
-        validator: (val: string) => ['sm', 'md', 'lg'].includes(val),
+        control: 'inline-radio',
+        options: ['xs', 'sm', 'md', 'lg'],
+        validator: (val: string) => ['xs', 'sm', 'md', 'lg'].includes(val),
         default: 'md',
         description: 'Tamaño del badge'
     },
     // Misc
     color: {
         type: String,
+        control: 'inline-radio',
         options: colors,
         validator: (val: string) => colors.includes(val),
-        default: 'light'
+        default: 'primary',
+        description: 'Color del badge'
     },
-    light: {
+    neon: {
         type: Boolean,
-        default: false
-    },
-    title: {
-        type: String,
-        default: ''
+        default: false,
+        description: 'Establece el diseño `neón` del botón'
     }
 }
+
+export type KBadgeProps = Readonly<ExtractPropTypes<typeof Props>>
+
+export default Props

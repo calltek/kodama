@@ -12,14 +12,26 @@
             <k-public-footer></k-public-footer>
         </div>
 
-        <k-bubbles :bottom="-200" :right="-200" :width="750" :rotate="45" />
-        <k-bubbles :top="-200" :left="-200" :width="750" :rotate="45" />
+        <k-bubbles
+            :bottom="-200"
+            :right="-200"
+            :width="750"
+            :rotate="45"
+            :color="bubbleColor"
+        />
+        <k-bubbles
+            :top="-200"
+            :left="-200"
+            :width="750"
+            :rotate="45"
+            :color="bubbleColor"
+        />
     </div>
 </template>
 
 <script lang="ts">
-    import { defineComponent, computed } from 'vue'
-    import { useConfig } from '../../store'
+    import { defineComponent, computed, inject } from 'vue'
+    import { useConfig, useStyle } from '../../store'
     import KPublicFooter from './footer.vue'
     import { authBackground } from '../../helpers/config'
 
@@ -28,6 +40,7 @@
         components: { KPublicFooter },
         setup() {
             const config = useConfig()
+            const style = useStyle()
 
             const bgStyle = computed(() => {
                 if (authBackground) {
@@ -43,7 +56,15 @@
                 return config.get('darkMode')
             })
 
-            return { bgStyle, darkMode }
+            const bubbleColor = computed(() => {
+                if (darkMode.value) {
+                    return style.getColor('gray.1000')
+                }
+
+                return style.getColor('gray.200')
+            })
+
+            return { bgStyle, darkMode, bubbleColor }
         }
     })
 </script>

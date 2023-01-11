@@ -59,9 +59,9 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
         } else if (color === 'black') {
             specific_classes.push('text-black')
         } else if (color === 'light') {
-            specific_classes.push('text-light dark:text-inverse-dark')
+            specific_classes.push('text-light dark:text-white')
         } else if (color === 'dark') {
-            specific_classes.push('text-dark dark:text-inverse-light')
+            specific_classes.push('text-dark dark:text-gray-700')
         } else if (color === 'primary') {
             specific_classes.push('text-primary')
         } else if (color === 'secondary') {
@@ -80,11 +80,11 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
 
         if (color === 'white') {
             specific_classes.push(
-                'border-white text-white hover:bg-white hover:text-inverse-white'
+                'border-white text-white hover:bg-white hover:text-black'
             )
         } else if (color === 'black') {
             specific_classes.push(
-                'border-black text-black hover:bg-black hover:text-inverse-black'
+                'border-black text-black hover:bg-black hover:text-white'
             )
         } else if (color === 'light') {
             specific_classes.push(
@@ -92,31 +92,31 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
             )
         } else if (color === 'dark') {
             specific_classes.push(
-                'border-dark text-dark hover:bg-dark hover:text-inverse-dark dark:border-inverse-light dark:text-inverse-light dark:hover:bg-inverse-light dark:hover:text-light'
+                'border-dark text-dark hover:bg-dark hover:text-white dark:border-gray-700 dark:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-light'
             )
         } else if (color === 'primary') {
             specific_classes.push(
-                'border-primary text-primary hover:bg-primary hover:text-inverse-primary'
+                'border-primary text-primary hover:bg-primary hover:text-white'
             )
         } else if (color === 'secondary') {
             specific_classes.push(
-                'border-secondary text-secondary hover:bg-secondary hover:text-inverse-secondary'
+                'border-secondary text-secondary hover:bg-secondary hover:text-white'
             )
         } else if (color === 'success') {
             specific_classes.push(
-                'border-success text-success hover:bg-success hover:text-inverse-success'
+                'border-success text-success hover:bg-success hover:text-white'
             )
         } else if (color === 'warning') {
             specific_classes.push(
-                'border-warning text-warning hover:bg-warning hover:text-inverse-warning'
+                'border-warning text-warning hover:bg-warning hover:text-white'
             )
         } else if (color === 'danger') {
             specific_classes.push(
-                'border-danger text-danger hover:bg-danger hover:text-inverse-danger'
+                'border-danger text-danger hover:bg-danger hover:text-white'
             )
         } else if (color === 'info') {
             specific_classes.push(
-                'border-info text-info hover:bg-info hover:text-inverse-info'
+                'border-info text-info hover:bg-info hover:text-white'
             )
         }
     } else {
@@ -133,73 +133,59 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
         if (color === 'white') {
             specific_classes.push('border-white bg-white')
             specific_classes.push(
-                neon
-                    ? 'text-white hover:text-inverse-white'
-                    : 'text-inverse-white'
+                neon ? 'text-white hover:text-black' : 'text-black'
             )
         } else if (color === 'black') {
             specific_classes.push('border-black bg-black')
             specific_classes.push(
-                neon
-                    ? 'text-black hover:text-inverse-black'
-                    : 'text-inverse-black'
+                neon ? 'text-black hover:text-white' : 'text-white'
             )
         } else if (color === 'light') {
             specific_classes.push(
-                'border-light bg-light dark:bg-inverse-dark dark:border-inverse-dark  dark:hover:text-gray-400'
+                'border-light bg-light dark:bg-white dark:border-white  dark:hover:text-gray-400'
             )
 
             specific_classes.push(
                 neon
-                    ? 'text-light hover:text-gray-400 dark:text-inverse-dark'
+                    ? 'text-light hover:text-gray-400 dark:text-white'
                     : 'text-gray-400'
             )
         } else if (color === 'dark') {
             specific_classes.push(
-                'border-dark bg-dark dark:bg-inverse-light dark:border-inverse-light dark:text-inverse-dark dark:hover:text-inverse-dark'
+                'border-dark bg-dark dark:bg-gray-700 dark:border-gray-700 dark:text-white dark:hover:text-white'
             )
             specific_classes.push(
-                neon ? 'text-dark hover:text-inverse-dark' : 'text-inverse-dark'
+                neon ? 'text-dark hover:text-white' : 'text-white'
             )
         } else if (color === 'primary') {
             specific_classes.push('border-primary bg-primary')
             specific_classes.push(
-                neon
-                    ? 'text-primary hover:text-inverse-primary'
-                    : 'text-inverse-primary'
+                neon ? 'text-primary hover:text-white' : 'text-white'
             )
         } else if (color === 'secondary') {
             specific_classes.push('border-secondary  bg-secondary')
             specific_classes.push(
-                neon
-                    ? 'text-secondary hover:text-inverse-secondary'
-                    : 'text-inverse-secondary'
+                neon ? 'text-secondary hover:text-white' : 'text-white'
             )
         } else if (color === 'success') {
             specific_classes.push('border-success  bg-success')
             specific_classes.push(
-                neon
-                    ? 'text-success hover:text-inverse-success'
-                    : 'text-inverse-success'
+                neon ? 'text-success hover:text-white' : 'text-white'
             )
         } else if (color === 'warning') {
             specific_classes.push('border-warning  bg-warning')
             specific_classes.push(
-                neon
-                    ? 'text-warning hover:text-inverse-warning'
-                    : 'text-inverse-warning'
+                neon ? 'text-warning hover:text-white' : 'text-white'
             )
         } else if (color === 'danger') {
             specific_classes.push('border-danger  bg-danger')
             specific_classes.push(
-                neon
-                    ? 'text-danger hover:text-inverse-danger'
-                    : 'text-inverse-danger'
+                neon ? 'text-danger hover:text-white' : 'text-white'
             )
         } else if (color === 'info') {
             specific_classes.push('border-info  bg-info')
             specific_classes.push(
-                neon ? 'text-info hover:text-inverse-info' : 'text-inverse-info'
+                neon ? 'text-info hover:text-white' : 'text-white'
             )
         }
     }

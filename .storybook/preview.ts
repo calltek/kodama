@@ -12,6 +12,11 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createApp } from '../src/main'
 import '../src/config/_style.ts'
 
+// TAILWIND
+import resolveConfig from 'tailwindcss/resolveConfig'
+import tailwindConfig from 'tailwind.config'
+const config = resolveConfig(tailwindConfig).theme
+
 // CUSTOM CONFIG
 import router from './app/config/router'
 import menu from './app/config/menu'
@@ -71,7 +76,7 @@ const light = {
     ...themes.normal,
 
     // UI
-    appContentBg: '#ffffff',
+    appContentBg: '#f2f4f8',
     appBorderColor: '#f4f7f9',
     appBg: '#f7f9fc',
 
@@ -82,7 +87,7 @@ const light = {
     // Toolbar default and active colors
     barTextColor: '#6b7280',
     barSelectedColor: '#0095e8',
-    barBg: '#dcdfe3',
+    barBg: '#fff',
 
     // Form colors
     inputBg: 'white',

@@ -16,6 +16,7 @@ import KLogo from '../components/data-display/k-logo/k-logo.vue'
 import KTable from '../components/data-display/k-table/k-table.vue'
 import KTitle from '../components/data-display/k-title/k-title.vue'
 import KDate from '../components/data-display/k-date/k-date.vue'
+import KTooltip from '../components/data-display/k-tooltip/k-tooltip.vue'
 
 // Miscelanea Components
 import KBubbles from '../components/miscelanea/k-bubbles/k-bubbles.vue'
@@ -30,6 +31,7 @@ import KDropdownSubmenu from '../components/user-actions/k-dropdown/k-dropdown-s
 import KDropdownTitle from '../components/user-actions/k-dropdown/k-dropdown-title.vue'
 import KDropdown from '../components/user-actions/k-dropdown/k-dropdown.vue'
 import KInput from '../components/user-actions/k-input/k-input.vue'
+import KInputText from '../components/user-actions/k-input-text/k-input-text.vue'
 import KSwitch from '../components/user-actions/k-switch/k-switch.vue'
 
 // Feedback
@@ -55,6 +57,7 @@ export default (
     app.component('KTable', KTable)
     app.component('KTitle', KTitle)
     app.component('KDate', KDate)
+    app.component('KTooltip', KTooltip)
 
     // Miscelanea Components
     app.component('KBubbles', KBubbles)
@@ -69,6 +72,7 @@ export default (
     app.component('KDropdownSubmenu', KDropdownSubmenu)
     app.component('KDropdownTitle', KDropdownTitle)
     app.component('KInput', KInput)
+    app.component('KInputText', KInputText)
     app.component('KSwitch', KSwitch)
 
     // Feedback

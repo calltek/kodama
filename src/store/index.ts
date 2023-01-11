@@ -1,8 +1,9 @@
 import { getCurrentInstance } from 'vue'
 import { Menu, SysMenu } from '../config/_menu'
-import useBody from './modules/body'
+import useBody from './modules/style'
 import useConfig from './modules/config'
 import useQuery from './modules/query'
+import useStyle from './modules/style'
 
 const useAuth = function () {
     const ctx: any = getCurrentInstance()
@@ -20,4 +21,4 @@ const useMenu = function (): Menu[] {
     return CustomMenu
 }
 
-export { useBody, useConfig, useAuth, useMenu, useQuery }
+export { useBody, useConfig, useAuth, useMenu, useQuery, useStyle }

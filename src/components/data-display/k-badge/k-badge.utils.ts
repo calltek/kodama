@@ -1,41 +1,22 @@
-import { ExtractPropTypes } from 'vue'
-import Props from './k-count.props'
+import { KBadgeProps } from './k-badge.props'
 
-export type KCountProps = Readonly<ExtractPropTypes<typeof Props>>
-
-export const parseBadgeClasses = (props: KCountProps, slots: any) => {
-    const hasSlot = (name: string) => !!slots[name]
+export const parseClasses = (props: KBadgeProps) => {
     const classes: string[] = [
-        'text-center font-medium transition-all flex items-center justify-center'
+        'text-center font-medium rounded-lg transition-all h-max'
     ]
 
     const neon = props.neon
     const color = props.color
     const size = props.size
-    const circle = props.circle
-    const square = props.square
-
-    if (circle) {
-        classes.push('rounded-full')
-    }
 
     if (size === 'xs') {
-        classes.push('h-5 w-5 text-xxxs')
-        if (square) classes.push('rounded-md')
-        if (hasSlot('default'))
-            classes.push('-translate-y-3.5 -translate-x-2.5')
+        classes.push('py-1 px-3 text-xs')
     } else if (size === 'sm') {
-        classes.push('h-6 w-6 text-xxs')
-        if (square) classes.push('rounded-md')
-        if (hasSlot('default')) classes.push('-translate-y-4 -translate-x-3')
+        classes.push('py-1 px-4 text-sm')
     } else if (size === 'md') {
-        classes.push('h-7 w-7 text-xs')
-        if (square) classes.push('rounded-lg')
-        if (hasSlot('default')) classes.push('-translate-y-5 -translate-x-3.5')
+        classes.push('py-1.5 px-4 text-sm')
     } else if (size === 'lg') {
-        classes.push('h-8 w-8 text-sm')
-        if (square) classes.push('rounded-lg')
-        if (hasSlot('default')) classes.push('-translate-y-6 -translate-x-4')
+        classes.push('py-2 px-5 text-base')
     }
 
     if (neon) {
@@ -81,29 +62,5 @@ export const parseBadgeClasses = (props: KCountProps, slots: any) => {
         classes.push(neon ? 'text-info' : 'text-white')
     }
 
-    if (hasSlot('default')) {
-        classes.push('absolute top-0 left-full')
-    }
-
     return classes
-}
-
-export const parseBadgeStyles = (props: KCountProps, slots: any) => {
-    const hasSlot = (name: string) => !!slots[name]
-    const styles: any = {}
-
-    if (hasSlot('default')) {
-        const offsetX = props.offsetX
-        const offsetY = props.offsetY
-
-        if (offsetX !== 0) {
-            styles['margin-left'] = `${offsetX}px`
-        }
-
-        if (offsetY !== 0) {
-            styles['margin-top'] = `${offsetY}px`
-        }
-    }
-
-    return styles
 }

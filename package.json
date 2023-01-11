@@ -25,13 +25,13 @@
         }
     },
     "scripts": {
-        "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
-        "preview": "vite preview",
         "storybook": "start-storybook -p 6006",
-        "build-storybook": "build-storybook"
+        "build:storybook": "build-storybook"
     },
     "dependencies": {
+        "@vuelidate/core": "^2.0.0",
+        "@vuelidate/validators": "^2.0.0",
         "@vuepic/vue-datepicker": "^3.4.7",
         "animate.css": "^4.1.1",
         "chance": "^1.1.8",

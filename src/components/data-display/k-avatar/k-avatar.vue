@@ -1,12 +1,17 @@
 <template>
-    <tippy :content="name">
+    <k-tooltip
+        :text="name"
+        :class="{
+            'rounded-3xl overflow-hidden': type === 'square',
+            'rounded-full overflow-hidden': type === 'circle'
+        }"
+    >
         <svg
             :width="size"
             :height="size"
             viewBox="0 0 380 380"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            :class="{ 'rounded-4': type === 'square' }"
         >
             <rect
                 v-if="type === 'square'"
@@ -59,7 +64,7 @@
                 </clipPath>
             </defs>
         </svg>
-    </tippy>
+    </k-tooltip>
 </template>
 
 <script lang="ts">
@@ -97,27 +102,34 @@
         props: {
             name: {
                 type: String,
-                default: ''
+                default: '???',
+                required: true,
+                description: 'Nombre del avatar'
             },
             size: {
                 type: Number,
-                default: 120
+                default: 120,
+                description: 'Tamaño del avatar'
             },
             square: {
                 type: Boolean,
-                default: true
+                default: true,
+                description: 'Define un estilo cuadrado'
             },
             circle: {
                 type: Boolean,
-                default: false
+                default: false,
+                description: 'Define un estilo circular'
             },
             bgColor: {
                 default: BG_COLORS[0],
-                type: String
+                type: String,
+                description: 'Color de fondo del avatar'
             }
         },
         setup(props) {
             const avatar = computed(() => {
+                console.log(props.name)
                 const a = new Makeup(props.name)
                 return a.makeup()
             })

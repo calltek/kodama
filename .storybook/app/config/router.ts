@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
         name: 'dashboard',
-        component: () => import('./../views/dashboard.vue')
+        component: () => import('@/views/dashboard.vue')
     }
     // {
     //     path: '/dashboard/pedidos',
@@ -38,7 +38,6 @@ function beforeEach(
     const config = useConfig()
 
     const homepage = config.get('homepage')
-
     const isPublic = to.meta.public ? to.meta.public : false
 
     // const roles: any = to.meta.auth
@@ -52,7 +51,6 @@ function beforeEach(
         next({ name: 'login' })
     } else if (auth.isLoggedIn && to.name === 'login') {
         // Redirect to homepage if user logged in and is in login page
-        const homepage = config.get('homepage')
         next({ name: homepage })
     } else if (hasAccess) {
         // Set page title

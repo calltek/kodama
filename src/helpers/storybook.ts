@@ -125,11 +125,13 @@ export function renderArgs(
     // ACtions
     const emits = component.emits
 
-    for (let i = 0; i < emits.length; i++) {
-        const emit = emits[i]
+    if (emits) {
+        for (let i = 0; i < emits.length; i++) {
+            const emit = emits[i]
 
-        if (emit === 'click') {
-            props.onClick = { action: 'clicked' }
+            if (emit === 'click') {
+                props.onClick = { action: 'clicked' }
+            }
         }
     }
 

@@ -23,7 +23,7 @@
         min-width: 3em;
         text-transform: none;
 
-        @apply text-center  overflow-hidden text-ellipsis py-2 px-4 rounded-md max-w-sm whitespace-nowrap dark:bg-gray-1000 bg-dark text-white;
+        @apply text-center  overflow-hidden text-ellipsis py-2 px-4 rounded-md max-w-sm whitespace-nowrap dark:bg-black bg-dark text-white;
 
         box-shadow: 0 1em 2em -0.5em rgba(0, 0, 0, 0.35);
     }
@@ -35,7 +35,7 @@
     /* position: TOP */
     &:not([position]):before,
     &[position^='top']:before {
-        @apply bottom-full border-b-0 dark:border-t-gray-1000 border-t-dark;
+        @apply bottom-full border-b-0 dark:border-t-black border-t-dark;
     }
     &:not([position]):after,
     &[position^='top']::after {
@@ -55,7 +55,7 @@
     &[position^='bottom']::before {
         top: 105%;
 
-        @apply border-t-0 dark:border-b-gray-1000 border-b-dark;
+        @apply border-t-0 dark:border-b-black border-b-dark;
     }
     &[position^='bottom']::after {
         top: calc(105% + 8px);
@@ -72,7 +72,7 @@
         left: calc(0em - 5px);
         transform: translate(-0.5em, -50%);
 
-        @apply top-1/2 border-r-0 dark:border-l-gray-1000 border-l-dark;
+        @apply top-1/2 border-r-0 dark:border-l-black border-l-dark;
     }
     &[position^='left']::after {
         right: calc(100% + 5px);
@@ -86,7 +86,7 @@
         right: calc(0em - 5px);
         transform: translate(0.5em, -50%);
 
-        @apply top-1/2 border-l-0 dark:border-r-gray-1000 border-r-dark;
+        @apply top-1/2 border-l-0 dark:border-r-black border-r-dark;
     }
     &[position^='right']::after {
         left: calc(100% + 5px);

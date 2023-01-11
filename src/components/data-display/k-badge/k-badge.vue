@@ -5,8 +5,9 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, computed, onMounted } from 'vue'
+    import { defineComponent, computed } from 'vue'
     import props from './k-badge.props'
+    import { parseClasses } from './k-badge.utils'
 
     export default defineComponent({
         name: 'KBadge',
@@ -14,23 +15,7 @@
         props: props,
         setup(props) {
             const badgeClasses = computed(() => {
-                const classes: string[] = ['badge']
-
-                if (props.light) {
-                    classes.push(`badge-light-${props.color}`)
-                } else {
-                    classes.push(`badge-${props.color}`)
-                }
-
-                classes.push(`badge-${props.size}`)
-
-                return classes
-            })
-
-            onMounted(() => {
-                if (props.title) {
-                    // tooltip
-                }
+                return parseClasses(props)
             })
 
             return { badgeClasses }
