@@ -1,7 +1,7 @@
 <template>
     <!--begin::Menu-->
     <div
-        class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-4 fs-6 w-275px"
+        class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-primary fw-bold py-4 fs-6 w-275px"
         data-kt-menu="true"
     >
         <!--begin::Menu item-->
@@ -17,7 +17,7 @@
                     >
                         {{ fullname }}
                         <span
-                            class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"
+                            class="badge badge-success fw-bolder fs-8 px-2 py-1 ms-2"
                             >PS</span
                         >
                     </div>

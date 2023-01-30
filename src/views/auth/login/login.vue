@@ -1,9 +1,10 @@
 <template>
     <div
-        class="max-w-lg w-full bg-gray-200 rounded-2xl shadow-sm p-10 p-lg-15 mx-auto"
+        id="k-login"
+        class="max-w-full bg-white drop-shadow-xl rounded-2xl p-10 p-lg-15 mx-auto"
     >
         <div class="text-center mb-10">
-            <h1 class="text-dark mb-3 text-3xl uppercase font-bold">
+            <h1 class="text-gray-900 mb-3 text-3xl uppercase font-bold">
                 Iniciar Sesión
             </h1>
 
@@ -18,18 +19,13 @@
             </div>
         </div>
 
-        <div class="fv-row mb-10">
-            <label class="form-label fs-6 fw-bolder text-dark">
-                Nick/Email
-            </label>
-
-            <Field
-                class="form-control form-control-lg form-control-solid"
+        <div class="fv-row mb-4">
+            <k-input-text
                 type="text"
-                name="email"
-                autocomplete="off"
-                autofocus
+                placeholder="jhon@doe.com"
+                label="Email / Usuario"
                 tabindex="1"
+                autofocus
             />
 
             <div class="fv-plugins-message-container">
@@ -40,25 +36,10 @@
         </div>
 
         <div class="fv-row mb-10">
-            <div class="flex flex-stack mb-2">
-                <label class="form-label fw-bolder text-dark fs-6 mb-0">
-                    Contraseña
-                </label>
-
-                <router-link
-                    :to="{ name: 'forgotPassword' }"
-                    class="link-primary fs-6 fw-bolder"
-                    tabindex="3"
-                >
-                    ¿Olvidaste tu contraseña?
-                </router-link>
-            </div>
-
-            <Field
-                class="form-control form-control-lg form-control-solid"
+            <k-input-text
                 type="password"
                 name="password"
-                autocomplete="off"
+                label="Contraseña"
                 tabindex="2"
             />
 
@@ -73,10 +54,18 @@
             <k-button
                 :loading="loading"
                 icon="right-from-bracket"
-                class="w-full"
+                class="w-full mb-4"
             >
                 Acceder
             </k-button>
+
+            <router-link
+                :to="{ name: 'forgotPassword' }"
+                class="text-sm"
+                tabindex="3"
+            >
+                ¿Olvidaste tu contraseña?
+            </router-link>
         </div>
     </div>
 </template>
@@ -84,8 +73,8 @@
 <script lang="ts">
     import { defineComponent, ref } from 'vue'
 
-    import { useAuth, useConfig } from '../../store'
-    import { signupEnabled } from '../../helpers/config'
+    import { useAuth, useConfig } from '@/store'
+    import { signupEnabled } from '@/helpers/config'
 
     import { useRouter } from 'vue-router'
 
@@ -99,12 +88,6 @@
 
             const submitButton = ref<HTMLButtonElement | null>(null)
             const loading = ref<boolean | string>(false)
-
-            // Create form validation object
-            // const loginSchema = Yup.object().shape({
-            //     email: Yup.string().min(5).required().label('Email'),
-            //     password: Yup.string().min(4).required().label('Password')
-            // })
 
             const onSubmitLogin = async (params: any) => {
                 loading.value = 'Iniciando Sesión...'
@@ -134,3 +117,9 @@
         }
     })
 </script>
+
+<style>
+    #k-login {
+        width: 420px;
+    }
+</style>

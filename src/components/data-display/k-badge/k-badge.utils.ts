@@ -2,7 +2,7 @@ import { KBadgeProps } from './k-badge.props'
 
 export const parseClasses = (props: KBadgeProps) => {
     const classes: string[] = [
-        'text-center font-medium rounded-lg transition-all h-max'
+        'text-center font-medium rounded-lg transition-all h-max whitespace-nowrap inline-flex'
     ]
 
     const neon = props.neon
@@ -24,24 +24,17 @@ export const parseClasses = (props: KBadgeProps) => {
             'border bg-opacity-20 border-opacity-0 dark:bg-opacity-10 dark:border-opacity-0'
         )
     } else {
-        classes.push('border bg-opacity-80 dark:bg-opacity-80')
+        classes.push('border')
     }
 
-    if (color === 'white') {
-        classes.push('border-white bg-white')
-        classes.push(neon ? 'text-white' : 'text-black')
-    } else if (color === 'black') {
-        classes.push('border-black bg-black')
-        classes.push(neon ? 'text-black' : 'text-white')
-    } else if (color === 'light') {
-        classes.push('border-light bg-light dark:bg-white dark:border-white')
-
-        classes.push(neon ? 'text-light dark:text-white' : 'text-gray-400')
-    } else if (color === 'dark') {
+    if (color === 'black' || color === 'white') {
+        classes.push('border-black bg-black dark:border-white dark:bg-white')
         classes.push(
-            'border-dark bg-dark dark:bg-gray-700 dark:border-gray-700 dark:text-white'
+            neon ? 'text-black dark:text-white' : 'text-white dark:text-black'
         )
-        classes.push(neon ? 'text-dark' : 'text-white')
+    } else if (color === 'gray') {
+        classes.push('border-gray-300 bg-gray-300')
+        classes.push(neon ? 'text-gray-300' : 'text-gray-700')
     } else if (color === 'primary') {
         classes.push('border-primary bg-primary')
         classes.push(neon ? 'text-primary' : 'text-white')

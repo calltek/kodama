@@ -1,6 +1,6 @@
 <template>
-    <div class="rounded-4" :class="$style.image" :style="style">
-        <img ref="img" :src="src" data-zoom />
+    <div class="k-thumbnail" :style="style">
+        <img ref="img" :src="src" data-zoom :style="styleImg" />
     </div>
 </template>
 
@@ -9,24 +9,23 @@
     import mediumZoom from 'medium-zoom'
 
     export default defineComponent({
-        name: 'KImage',
+        name: 'KThumbnail',
         autoload: true,
         props: {
             src: {
                 type: String,
-                default: ''
+                default: '',
+                description: 'Url de la imagen'
             },
-            height: {
+            size: {
                 type: Number,
-                default: 50
-            },
-            shadow: {
-                type: Boolean,
-                default: true
+                default: 80,
+                description: 'Tamaño en px'
             },
             zoom: {
                 type: Boolean,
-                default: true
+                default: true,
+                description: 'Zoom'
             }
         },
         setup(props) {
@@ -35,42 +34,52 @@
             const style = computed(() => {
                 const s: any = {}
 
-                s.height = `${props.height}px`
+                s.height = `${props.size}px`
+                s.width = `${props.size}px`
 
-                if (props.shadow) {
-                    s.boxShadow =
-                        'box-shadow: 0px 0px 8px 1px var(--bs-gray-300);'
-                }
+                return s
+            })
+
+            const styleImg = computed(() => {
+                const s: any = {}
+
+                s.maxHeight = `${props.size * 2}px`
+                s.maxWidth = `${props.size * 2}px`
 
                 return s
             })
 
             onMounted(() => {
-                if (props.zoom) mediumZoom(img.value)
+                if (props.zoom)
+                    mediumZoom(img.value, {
+                        background: 'rgba(0, 0, 0, 0.8)'
+                    })
             })
 
-            return { img, style }
+            return { img, style, styleImg }
         }
     })
 </script>
 
-<style module lang="scss">
-    .image {
-        background-color: white;
-        padding: 3px;
-        transition: transform 0.2s;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+<style lang="scss">
+    .k-thumbnail {
+        @apply bg-white overflow-hidden rounded-xl flex items-center justify-center transition-all aspect-square;
 
         img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+            @apply h-full object-cover;
         }
     }
 
-    .image:hover {
+    .k-thumbnail:hover {
         transform: scale(1.1);
+    }
+
+    .medium-zoom-overlay {
+        z-index: 99;
+    }
+
+    .medium-zoom-image--opened {
+        z-index: 100;
+        // width: auto !important;
     }
 </style>

@@ -22,7 +22,8 @@ module.exports = {
         'quotes': ['error', 'single'],
         'semi': ['error', 'never'],
         'vue/no-multiple-template-root': 'off',
-        'vue/multi-word-component-names': 'off'
+        'vue/multi-word-component-names': 'off',
+        'vue/no-v-for-template-key': 'off'
     },
     overrides: [
         {

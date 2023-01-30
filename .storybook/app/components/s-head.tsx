@@ -8,7 +8,7 @@ export default function Head({ image, children }) {
             backgroundPosition: 'center center',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
-            width: 'calc(100vw )',
+            width: 'calc(100vw - 17px)',
             height: '400px',
             position: 'absolute',
             left: 0,

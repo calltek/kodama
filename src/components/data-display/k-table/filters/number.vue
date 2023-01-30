@@ -1,35 +1,31 @@
 <template>
-    <div ref="dropdown" class="dropdown d-inline-flex ms-2">
-        <span
-            class="cursor-pointer"
-            data-bs-toggle="dropdown"
-            data-bs-auto-close="outside"
-            aria-expanded="false"
+    <popper arrow>
+        <k-icon
+            icon="filter"
             :class="{ 'text-primary': defaultValue }"
-        >
-            <i class="fad fa-filter" />
-        </span>
+            class="ml-2"
+        />
 
-        <div class="dropdown-menu p-0">
-            <div class="flex align-items-center p-4">
+        <template #content>
+            <div class="flex items-center p-4">
                 <k-input
                     v-model="inputText"
                     type="number"
                     size="sm"
                     :width="60"
                     :min="min"
-                    :max="max"
+                    :max="max || undefined"
                     placeholder="0"
                     @keyup.enter="filter"
                 />
 
-                <div class="ms-4 flex align-items-center">
+                <div class="ml-4 flex align-items-center">
                     <k-button
                         icon="xmark"
                         color="danger"
                         size="sm"
                         title="Resetear"
-                        class="me-2"
+                        class="mr-2"
                         @click="reset"
                     />
 
@@ -42,14 +38,13 @@
                     />
                 </div>
             </div>
-        </div>
-    </div>
+        </template>
+    </popper>
 </template>
 
 <script lang="ts">
     import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
     import { uid } from '../../../../helpers/utils'
-    // import KIcon from '../../k-icon/k-icon.vue'
     import KInput from '../../../user-actions/k-input/k-input.vue'
     import KButton from '../../../user-actions/k-button/k-button.vue'
     // import * as bootstrap from 'bootstrap'
@@ -67,7 +62,8 @@
                 default: 0
             },
             max: {
-                type: Number
+                type: Number,
+                default: 0
             }
         },
         emits: ['filter'],

@@ -6,9 +6,9 @@
 
             <span v-if="required" class="font-bold text-danger ml-1">*</span>
             <template v-if="firstError">
-                <k-tooltip :text="firstError" class="ml-2">
-                    <k-icon icon="triangle-exclamation" />
-                </k-tooltip>
+                <popper arrow hover :content="firstError">
+                    <k-icon icon="triangle-exclamation" class="ml-2" />
+                </popper>
             </template>
         </label>
 
@@ -29,9 +29,9 @@
             <span v-if="required" class="font-bold text-danger ml-1">*</span>
 
             <template v-if="firstError">
-                <k-tooltip :text="firstError" class="ml-2">
-                    <k-icon icon="triangle-exclamation" />
-                </k-tooltip>
+                <popper arrow hover :content="firstError">
+                    <k-icon icon="triangle-exclamation" class="ml-2" />
+                </popper>
             </template>
         </label>
     </div>
@@ -177,7 +177,7 @@
 <style lang="scss">
     .k-input-text {
         input {
-            @apply block w-full border border-gray-200 bg-gray-50 text-gray-500 outline-none ring-0 focus:border-gray-200 focus:ring-2 focus:ring-primary dark:border-gray-700 dark:bg-gray-800 dark:text-white;
+            @apply block w-full border border-gray-200 bg-gray-100 text-gray-500 outline-none ring-0 focus:border-gray-200 focus:ring-2 focus:ring-primary dark:border-gray-700 dark:bg-gray-800 dark:text-white;
         }
 
         label {
@@ -386,7 +386,7 @@
             @apply relative;
 
             label {
-                @apply absolute top-0  text-ellipsis whitespace-nowrap bg-white dark:bg-dark font-medium text-gray-400;
+                @apply absolute top-0  text-ellipsis whitespace-nowrap bg-white dark:bg-gray-900 font-medium text-gray-400;
             }
 
             input {

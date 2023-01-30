@@ -1,8 +1,7 @@
 export const colors = [
     'white',
     'black',
-    'light',
-    'dark',
+    'gray',
     'primary',
     'secondary',
     'success',

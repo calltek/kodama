@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, computed, inject } from 'vue'
+    import { defineComponent, computed } from 'vue'
     import { useConfig, useStyle } from '../../store'
     import KPublicFooter from './footer.vue'
     import { authBackground } from '../../helpers/config'
@@ -58,10 +58,10 @@
 
             const bubbleColor = computed(() => {
                 if (darkMode.value) {
-                    return style.getColor('gray.1000')
+                    return style.getColor('gray.900')
                 }
 
-                return style.getColor('gray.200')
+                return style.getColor('gray.300')
             })
 
             return { bgStyle, darkMode, bubbleColor }

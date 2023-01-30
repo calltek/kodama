@@ -1,8 +1,21 @@
 <template>
-    <tippy>
-        <template #default><i class="fad fa-seal-question" /></template>
-        <template #content>{{ text }}</template>
-    </tippy>
+    <popper arrow :content="text" hover>
+        <k-icon type="fad" :icon="icon" />
+
+        <template #content>
+            <div class="flex flex-col -mx-4 -my-2 text-sm">
+                <div
+                    class="border-b border-b-gray-600 px-4 py-1 text-center uppercase font-bold flex justify-center"
+                >
+                    <span>Ayuda</span>
+                </div>
+
+                <div class="px-4 py-2">
+                    {{ text }}
+                </div>
+            </div>
+        </template>
+    </popper>
 </template>
 
 <script lang="ts">
@@ -11,13 +24,17 @@
     export default defineComponent({
         name: 'KHelp',
         autoload: true,
-        setup(_props, ctx) {
-            let text = ''
-            if (ctx.slots.default) {
-                text = ctx.slots.default()[0].children?.toString() || ''
+        props: {
+            text: {
+                type: String,
+                default: '',
+                description: 'Texto de la ayuda'
+            },
+            icon: {
+                type: String,
+                default: 'seal-question',
+                description: 'Icono'
             }
-
-            return { text }
         }
     })
 </script>

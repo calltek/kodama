@@ -1,0 +1,169 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KTitle from './k-title.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KTitle },
+    setup() {
+      return { args };
+    },
+    template: '<k-title v-bind="args">Lorem ipsum</k-title>'
+});
+
+<Meta title="Data Display/Title" component={KTitle} argTypes={renderArgs(KTitle)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media3.giphy.com/media/YSeWtruZU3jS5dnRfh/giphy.gif?cid=ecf05e47rkgmosfbz7swp8fdbgcbgqdekz1vn3rpwm1oy9ln&rid=giphy.gif&ct=g">🔠 KTitle</SHead>
+
+# KTitle
+Con el componente `k-title` puedes renderizar un título. De esta manera todos los títulos de tu aplicación tendrán un estilo uniforme.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Tamaños**
+Puedes definir el tamaño del titulo con el atributo `size` desde `1` hasta `6`.
+
+<Canvas>
+  <Story name="Sizes" argTypes={renderArgs(KTitle, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KTitle },
+        template: `
+          <div class="flex flex-col gap-4">
+            <k-title :size="1">Lorem ipsum</k-title>
+            <k-title :size="2">Lorem ipsum</k-title>
+            <k-title :size="3">Lorem ipsum</k-title>
+            <k-title :size="4">Lorem ipsum</k-title>
+            <k-title :size="5">Lorem ipsum</k-title>
+            <k-title :size="6">Lorem ipsum</k-title>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Negrita**
+Para mostrar el titulo en negrita, puedes usar el atributo `bold` o `bolder`.
+
+<Canvas>
+  <Story name="Bold" argTypes={renderArgs(KTitle, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KTitle },
+        template: `
+          <div class="flex flex-row gap-10">
+            <div class="flex flex-col gap-4">
+              <k-title :size="1" bold>Lorem ipsum</k-title>
+              <k-title :size="2" bold>Lorem ipsum</k-title>
+              <k-title :size="3" bold>Lorem ipsum</k-title>
+              <k-title :size="4" bold>Lorem ipsum</k-title>
+              <k-title :size="5" bold>Lorem ipsum</k-title>
+              <k-title :size="6" bold>Lorem ipsum</k-title>
+            </div>
+            <div class="flex flex-col gap-4">
+              <k-title :size="1" bolder>Lorem ipsum</k-title>
+              <k-title :size="2" bolder>Lorem ipsum</k-title>
+              <k-title :size="3" bolder>Lorem ipsum</k-title>
+              <k-title :size="4" bolder>Lorem ipsum</k-title>
+              <k-title :size="5" bolder>Lorem ipsum</k-title>
+              <k-title :size="6" bolder>Lorem ipsum</k-title>
+            </div>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Centrado**
+Para centrar el titulo, basta con usar el atributo `center`.
+
+
+<Canvas>
+  <Story name="Center" argTypes={renderArgs(KTitle, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KTitle },
+        template: `
+          <div class="flex flex-col text-center gap-4">
+            <k-title :size="1" center>Lorem ipsum</k-title>
+            <k-title :size="2" center>Lorem ipsum</k-title>
+            <k-title :size="3" center>Lorem ipsum</k-title>
+            <k-title :size="4" center>Lorem ipsum</k-title>
+            <k-title :size="5" center>Lorem ipsum</k-title>
+            <k-title :size="6" center>Lorem ipsum</k-title>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Mayúscula**
+Para convertir el texto a mayúscula, basta con usar el atributo `uppercase`.
+
+<Canvas>
+  <Story name="Uppercase" argTypes={renderArgs(KTitle, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KTitle },
+        template: `
+          <div class="flex flex-col gap-4">
+            <k-title :size="1" uppercase>Lorem ipsum</k-title>
+            <k-title :size="2" uppercase>Lorem ipsum</k-title>
+            <k-title :size="3" uppercase>Lorem ipsum</k-title>
+            <k-title :size="4" uppercase>Lorem ipsum</k-title>
+            <k-title :size="5" uppercase>Lorem ipsum</k-title>
+            <k-title :size="6" uppercase>Lorem ipsum</k-title>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Subtítulo**
+Se puede definir un subtitulo acorde al tamaño del título directametne con el slot `subtitle`
+
+<Canvas>
+  <Story name="Subtitle" argTypes={renderArgs(KTitle, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KTitle },
+        template: `
+          <div class="flex flex-col gap-6">
+            <k-title :size="1">
+              Lorem ipsum 
+              <template #subtitle>Dolor sit amet</template>
+            </k-title>
+            <k-title :size="2" >
+              Lorem ipsum 
+              <template #subtitle>Dolor sit amet</template>
+            </k-title>
+            <k-title :size="3" >
+              Lorem ipsum 
+              <template #subtitle>Dolor sit amet</template>
+            </k-title>
+            <k-title :size="4" >
+              Lorem ipsum 
+              <template #subtitle>Dolor sit amet</template>
+            </k-title>
+            <k-title :size="5" >
+              Lorem ipsum 
+              <template #subtitle>Dolor sit amet</template>
+            </k-title>
+            <k-title :size="6" >
+              Lorem ipsum 
+              <template #subtitle>Dolor sit amet</template>
+            </k-title>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

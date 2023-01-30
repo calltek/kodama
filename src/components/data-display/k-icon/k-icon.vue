@@ -19,19 +19,25 @@
         props: {
             icon: {
                 type: String as PropType<string>,
-                required: true
+                required: true,
+                description: 'Icono'
             },
             type: {
                 type: String as PropType<'fas' | 'fal' | 'fad' | 'far'>,
-                default: 'fad'
+                default: 'fad',
+                options: ['fas', 'fal', 'fad', 'far'],
+                control: 'inline-radio',
+                description: 'Tipo de icono'
             },
             size: {
-                type: [String, Number],
-                default: 0
+                type: Number,
+                default: 0,
+                description: 'Tamaño del icono'
             },
             spin: {
                 type: Boolean,
-                default: false
+                default: false,
+                description: 'Animación de rotación'
             }
         },
         setup(props) {
@@ -45,17 +51,13 @@
                     aclass.push('fa-spin')
                 }
 
-                if (props.size > 0) {
-                    aclass.push(`fs-${props.size}`)
-                }
-
                 return aclass
             })
 
             const style = computed((): StyleValue => {
                 const style: StyleValue = {}
 
-                if (typeof props.size === 'string') {
+                if (props.size > 0) {
                     style['font-size'] = props.size + 'px'
                 }
 

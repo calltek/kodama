@@ -11,7 +11,7 @@
             <!--begin::Heading-->
             <div class="text-center mb-10">
                 <!--begin::Title-->
-                <h1 class="text-dark mb-3">¿Olvidaste tu contraseña?</h1>
+                <h1 class="text-gray-900 mb-3">¿Olvidaste tu contraseña?</h1>
                 <!--end::Title-->
 
                 <!--begin::Link-->
@@ -61,7 +61,7 @@
 
                 <router-link
                     :to="{ name: 'login' }"
-                    class="btn btn-lg btn-light-primary fw-bolder"
+                    class="btn btn-lg btn-primary fw-bolder"
                     >Cancelar</router-link
                 >
             </div>

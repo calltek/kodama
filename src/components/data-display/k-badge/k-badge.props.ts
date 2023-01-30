@@ -4,8 +4,7 @@ import { uid } from '../../../helpers/utils'
 export const colors = [
     'white',
     'black',
-    'light',
-    'dark',
+    'gray',
     'primary',
     'secondary',
     'success',
@@ -34,7 +33,7 @@ const Props = {
         control: 'inline-radio',
         options: colors,
         validator: (val: string) => colors.includes(val),
-        default: 'primary',
+        default: 'gray',
         description: 'Color del badge'
     },
     neon: {

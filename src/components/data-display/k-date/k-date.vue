@@ -1,31 +1,38 @@
 <template>
-    <span class="badge badge-light-primary">
-        <div class="flex flex-row align-items-center">
-            <k-icon icon="clock" :size="3" class="me-2" />
-            <template v-if="value">
-                <div class="text-start" v-if="isMultiple">
-                    {{ text }}
-                    <br />
-                    <span class="opacity-40">{{ from }}</span>
+    <k-badge size="xs" color="primary">
+        <popper arrow :content="tippyText" hover>
+            <div class="flex flex-row items-center">
+                <k-icon
+                    icon="clock"
+                    :class="simple ? 'text-xs mr-2' : 'text-xl mr-4'"
+                />
+
+                <template v-if="value">
+                    <div v-if="isMultiple" class="text-left flex flex-col">
+                        {{ text }}
+                        <span v-if="!simple" class="opacity-40">{{
+                            from
+                        }}</span>
+                    </div>
+                    <div v-else class="text-left flex flex-col">
+                        {{ text }}
+                        <span v-if="!simple" class="opacity-40">{{
+                            from
+                        }}</span>
+                    </div>
+                </template>
+                <div v-else class="text-left flex flex-col">
+                    Sin definir
+                    <span v-if="!simple" class="opacity-40"> ??? </span>
                 </div>
-                <div class="text-start" v-else>
-                    {{ text }}
-                    <br />
-                    <span class="opacity-40">{{ from }}</span>
-                </div>
-            </template>
-            <div class="text-start" v-else>
-                Sin definir
-                <br />
-                <span class="opacity-40"> ??? </span>
             </div>
-        </div>
-    </span>
+        </popper>
+    </k-badge>
 </template>
 
 <script lang="ts">
     import { defineComponent, computed, PropType } from 'vue'
-    import { moment } from '../../../plugins'
+    import { dayjs } from '../../../plugins'
     import KIcon from '../k-icon/k-icon.vue'
 
     export default defineComponent({
@@ -35,7 +42,13 @@
         props: {
             value: {
                 type: [Array, String] as PropType<string[] | string>,
-                default: ''
+                default: '',
+                description: 'Valor del campo'
+            },
+            simple: {
+                type: Boolean,
+                default: false,
+                description: 'Arroja menos datos'
             }
         },
         setup(props) {
@@ -45,18 +58,18 @@
             })
 
             const text = computed(() => {
-                if (isMultiple.value) return moment(props.value[0]).format('LL')
-                return moment(props.value).format('LL')
+                if (isMultiple.value) return dayjs(props.value[0]).format('LL')
+                return dayjs(props.value.toString()).format('LL')
             })
 
             const from = computed(() => {
-                if (isMultiple.value) return moment(props.value[1]).format('LL')
-                return moment(props.value).fromNow()
+                if (isMultiple.value) return dayjs(props.value[1]).format('LL')
+                return dayjs(props.value.toString()).fromNow()
             })
 
             const tippyText = computed(() => {
                 if (isMultiple.value)
-                    return props.value[0] + '-' + props.value[1]
+                    return props.value[0] + ' - ' + props.value[1]
                 return props.value
             })
 

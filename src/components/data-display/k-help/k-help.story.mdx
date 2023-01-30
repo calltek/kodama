@@ -1,0 +1,25 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KHelp from './k-help.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KHelp },
+    setup() {
+      return { args };
+    },
+    template: '<k-help v-bind="args" />'
+});
+
+<Meta title="Data Display/Help" component={KHelp} argTypes={renderArgs(KHelp)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media1.giphy.com/media/3og0IMJcSI8p6hYQXS/giphy.gif?cid=ecf05e47g15et0uaf8y7xuy046e30du8emzh7a0fzses5mo2&rid=giphy.gif&ct=g">❓ KHelp</SHead>
+
+# KHelp
+Con el componente `k-help` puedes dar indicaciones al usuario sobre como utilizar una sección de tu aplicación.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})} args={{text:'Lorem ipsum dolor sit'}}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />

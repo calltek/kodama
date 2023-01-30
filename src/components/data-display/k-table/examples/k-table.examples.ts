@@ -1,26 +1,6 @@
-import { Meta, Story } from '@storybook/vue3'
-import { action } from '@storybook/addon-actions'
+import { KTableColumn } from '../k-table.types'
 
-import KTable from './k-table.vue'
-import KTableProps from './k-table.props'
-import { renderArgs } from '../../../helpers/storybook'
-import { KTableColumn } from './k-table.types'
-
-export default {
-    title: 'Data Display/Table',
-    component: KTable,
-    argTypes: renderArgs(KTableProps),
-    parameters: {
-        layout: 'centered',
-        docs: {
-            description: {
-                component: 'Some component _markdown_'
-            }
-        }
-    }
-} as Meta
-
-const exampleColumns: KTableColumn[] = [
+export const exampleColumns: KTableColumn[] = [
     {
         title: 'ID',
         index: 'id',
@@ -116,7 +96,7 @@ const exampleColumns: KTableColumn[] = [
     }
 ]
 
-const exampleData = [
+export const exampleData = [
     {
         id: 1,
         date: '2022-05-22 05:46:42',
@@ -163,44 +143,3 @@ const exampleData = [
         price: 88.9
     }
 ]
-
-const KTableStory = (args: any, customArgs?: any) => {
-    const fixedProps = {
-        index: 'id',
-        store: 'table_example',
-        columns: exampleColumns,
-        data: exampleData,
-        total: 10,
-        requiredFilters: { shop: { $in: '1,4,7,8' } },
-        cards: false
-    }
-
-    const props = {
-        ...customArgs,
-        ...args,
-        ...fixedProps
-    }
-
-    return {
-        components: { KTable },
-        setup() {
-            const fetch = action('fetch')
-            return { props, fetch }
-        },
-        template: `
-        <k-table v-bind="props" @fetch=fetch>
-            <template #client="{value}">
-                {{value}}
-            </template>
-
-            <template #card="{row}">
-                <div class="card mb-2">
-                    {{ row.client_name }}
-                </div>
-            </template>
-        </k-table>`,
-        methods: { fetch: action('clicked') }
-    }
-}
-
-export const Default: Story = (args) => KTableStory(args)

@@ -42,46 +42,50 @@ const vm = createApp(
 
 vm.use(pinia)
 
+const brand = {
+    // Brand
+    brandTitle: 'Kodama',
+    brandUrl: 'https://calltek.es',
+    brandImage: 'https://place-hold.it/350x150',
+    brandTarget: '_self'
+}
+
 const dark = {
     ...themes.dark,
+    ...brand,
 
     // UI
-    appContentBg: '#111827',
-    appBorderColor: '#080b12',
-    appBg: '#080b12',
+    appContentBg: '#0c0c0d', // dark
+    appBorderColor: '#000', // black
+    appBg: '#04060a',
 
     // Text colors
     textColor: 'white',
     textInverseColor: 'black',
 
     // Toolbar default and active colors
-    barTextColor: '#fff',
-    barSelectedColor: '#01dc83',
-    barBg: '#182238',
+    barTextColor: '#fff', //white
+    barSelectedColor: '#01dc83', //success
+    barBg: '#18181b', //gray-900
 
     // Form colors
-    inputBg: 'white',
-    inputBorder: 'silver',
-    inputTextColor: 'black',
-    inputBorderRadius: 4,
-
-    // Brand
-    brandTitle: 'My custom storybook',
-    brandUrl: 'https://example.com',
-    brandImage: 'https://place-hold.it/350x150',
-    brandTarget: '_self'
+    inputBg: '#18181b', //gray-900
+    inputBorder: '#27272a', //gray-800
+    inputTextColor: 'black', //black
+    inputBorderRadius: 4
 }
 
 const light = {
     ...themes.normal,
+    ...brand,
 
     // UI
-    appContentBg: '#f2f4f8',
-    appBorderColor: '#f4f7f9',
-    appBg: '#f7f9fc',
+    appContentBg: '#fafafa', //gray-50
+    appBorderColor: '#e4e4e7', //gray-200
+    appBg: '#e4e4e7', //gray-200
 
     // Text colors
-    textColor: '#111827',
+    textColor: 'black',
     textInverseColor: 'white',
 
     // Toolbar default and active colors
@@ -93,13 +97,7 @@ const light = {
     inputBg: 'white',
     inputBorder: 'silver',
     inputTextColor: 'black',
-    inputBorderRadius: 4,
-
-    // Brand
-    brandTitle: 'My custom storybook',
-    brandUrl: 'https://example.com',
-    brandImage: 'https://place-hold.it/350x150',
-    brandTarget: '_self'
+    inputBorderRadius: 4
 }
 
 export const parameters = {

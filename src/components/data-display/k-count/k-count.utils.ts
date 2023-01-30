@@ -6,7 +6,7 @@ export type KCountProps = Readonly<ExtractPropTypes<typeof Props>>
 export const parseBadgeClasses = (props: KCountProps, slots: any) => {
     const hasSlot = (name: string) => !!slots[name]
     const classes: string[] = [
-        'text-center font-medium transition-all flex items-center justify-center'
+        'text-center font-medium transition-all flex items-center justify-center whitespace-nowrap'
     ]
 
     const neon = props.neon
@@ -15,26 +15,39 @@ export const parseBadgeClasses = (props: KCountProps, slots: any) => {
     const circle = props.circle
     const square = props.square
 
-    if (circle) {
-        classes.push('rounded-full')
-    }
-
     if (size === 'xs') {
         classes.push('h-5 w-5 text-xxxs')
-        if (square) classes.push('rounded-md')
+        if (circle) {
+            classes.push('rounded-full')
+        } else if (square) {
+            classes.push('rounded-md')
+        }
+
         if (hasSlot('default'))
             classes.push('-translate-y-3.5 -translate-x-2.5')
     } else if (size === 'sm') {
         classes.push('h-6 w-6 text-xxs')
-        if (square) classes.push('rounded-md')
+        if (circle) {
+            classes.push('rounded-full')
+        } else if (square) {
+            classes.push('rounded-md')
+        }
         if (hasSlot('default')) classes.push('-translate-y-4 -translate-x-3')
     } else if (size === 'md') {
         classes.push('h-7 w-7 text-xs')
-        if (square) classes.push('rounded-lg')
+        if (circle) {
+            classes.push('rounded-full')
+        } else if (square) {
+            classes.push('rounded-lg')
+        }
         if (hasSlot('default')) classes.push('-translate-y-5 -translate-x-3.5')
     } else if (size === 'lg') {
         classes.push('h-8 w-8 text-sm')
-        if (square) classes.push('rounded-lg')
+        if (circle) {
+            classes.push('rounded-full')
+        } else if (square) {
+            classes.push('rounded-lg')
+        }
         if (hasSlot('default')) classes.push('-translate-y-6 -translate-x-4')
     }
 
@@ -43,24 +56,17 @@ export const parseBadgeClasses = (props: KCountProps, slots: any) => {
             'border bg-opacity-20 border-opacity-0 dark:bg-opacity-10 dark:border-opacity-0'
         )
     } else {
-        classes.push('border bg-opacity-80 dark:bg-opacity-80')
+        classes.push('border')
     }
 
-    if (color === 'white') {
-        classes.push('border-white bg-white')
-        classes.push(neon ? 'text-white' : 'text-black')
-    } else if (color === 'black') {
-        classes.push('border-black bg-black')
-        classes.push(neon ? 'text-black' : 'text-white')
-    } else if (color === 'light') {
-        classes.push('border-light bg-light dark:bg-white dark:border-white')
-
-        classes.push(neon ? 'text-light dark:text-white' : 'text-gray-400')
-    } else if (color === 'dark') {
+    if (color === 'black' || color === 'white') {
+        classes.push('border-black bg-black dark:bg-white dark:border-white')
         classes.push(
-            'border-dark bg-dark dark:bg-gray-700 dark:border-gray-700 dark:text-white'
+            neon ? 'text-black dark:text-white' : 'text-white dark:text-black'
         )
-        classes.push(neon ? 'text-dark' : 'text-white')
+    } else if (color === 'gray') {
+        classes.push('border-gray-300 bg-gray-300')
+        classes.push(neon ? 'text-gray-300' : 'text-gray-700')
     } else if (color === 'primary') {
         classes.push('border-primary bg-primary')
         classes.push(neon ? 'text-primary' : 'text-white')

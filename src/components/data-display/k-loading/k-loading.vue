@@ -10,7 +10,7 @@
             :can-cancel="hasCancel"
             :is-full-page="fullpage"
             :loader="type"
-            :color="realColor"
+            :color="themeColor"
             :z-index="zIndex"
             :blur="`${blur}px`"
             :on-cancel="$emit('cancel')"
@@ -25,6 +25,7 @@
 
     import 'vue-loading-overlay/dist/vue-loading.css'
     import Loading from 'vue-loading-overlay'
+    import { useStyle } from '@/store'
 
     type Loader = 'spinner' | 'bars' | 'dots'
 
@@ -35,46 +36,62 @@
         props: {
             active: {
                 type: Boolean,
-                default: false
+                default: false,
+                description: 'Show or hide the loader'
             },
             type: {
                 type: String as PropType<Loader>,
-                default: 'bars'
+                default: 'bars',
+                description: 'Type of loader',
+                options: ['spinner', 'bars', 'dots'],
+                validator: (value: Loader) => {
+                    return ['spinner', 'bars', 'dots'].includes(value)
+                },
+                control: 'inline-radio'
             },
             fullpage: {
                 type: Boolean,
-                default: false
+                default: false,
+                description: 'Show the loader as full page'
             },
             color: {
                 type: String,
-                default: ''
+                default: '',
+                description: 'Color del spinner'
             },
             blur: {
                 type: Number,
-                default: 2
+                default: 2,
+                description: 'Aplica efecto desenfocado'
             },
             height: {
                 type: Number,
-                default: 0
+                default: 0,
+                description: 'Altura mínima del contenedor'
             },
             zIndex: {
                 type: Number,
-                default: 99
+                default: 99,
+                description: 'ZIndex del loader'
             }
         },
         emits: ['cancel'],
         setup(props, ctx) {
-            const realColor = computed(() => {
-                if (props.color) return props.color
-                return '#f00'
-            })
+            const style = useStyle()
 
             const hasCancel = computed(() => {
                 if (ctx?.attrs?.onCancel) return true
                 return false
             })
 
-            return { realColor, hasCancel }
+            const themeColor = computed(() => {
+                const color = style.getColor(props.color)
+
+                if (color) return color
+                return '#000'
+            })
+
+            return { hasCancel, themeColor }
         }
     })
 </script>

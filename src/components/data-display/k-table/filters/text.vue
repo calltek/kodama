@@ -1,22 +1,18 @@
 <template>
-    <div ref="dropdown" class="dropdown d-inline-flex ms-2">
-        <span
-            class="cursor-pointer"
-            data-bs-toggle="dropdown"
-            data-bs-auto-close="outside"
-            aria-expanded="false"
+    <popper arrow>
+        <k-icon
+            icon="filter"
             :class="{ 'text-primary': defaultValue }"
-        >
-            <i class="fad fa-filter" />
-        </span>
+            class="ml-2"
+        />
 
-        <div class="dropdown-menu p-0">
+        <template #content>
             <div class="flex align-items-center p-4">
-                <k-input
+                <k-input-text
                     v-model="inputText"
                     type="text"
                     size="sm"
-                    :width="180"
+                    :width="20"
                     placeholder="Lorem ipsum"
                     @keyup.enter="filter"
                 />
@@ -40,21 +36,16 @@
                     />
                 </div>
             </div>
-        </div>
-    </div>
+        </template>
+    </popper>
 </template>
 
 <script lang="ts">
     import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
     import { uid } from '../../../../helpers/utils'
-    // import KIcon from '../../k-icon/k-icon.vue'
-    import KInput from '../../../user-actions/k-input/k-input.vue'
-    import KButton from '../../../user-actions/k-button/k-button.vue'
-    // import * as bootstrap from 'bootstrap'
 
     export default defineComponent({
         name: 'KTableFilterText',
-        components: { KButton, KInput },
         props: {
             value: {
                 type: Object as PropType<Record<string, any> | null>,

@@ -1,0 +1,44 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KDate from './k-date.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KDate },
+    setup() {
+      args.value = args.value || '2023-01-01';
+      return { args };
+    },
+    template: '<k-date v-bind="args" />'
+});
+
+<Meta title="Data Display/Date" component={KDate} argTypes={renderArgs(KDate)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media3.giphy.com/media/xUNd9DLukkavmhybAs/giphy.gif?cid=ecf05e47xzzzzsltihe9wazd1im6vmw688bmhg87fooqu7pg&rid=giphy.gif&ct=g">📆 KDate</SHead>
+
+# KDate
+Con el componente `k-date` puedes humanizar una fecha o rango de fechas y mostrarlo en un formato legible.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Rangos**
+Puedes definir el tamaño del badge desde `xs` hasta `xl`.
+
+<Canvas>
+  <Story name="Ranges" argTypes={renderArgs(KDate, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDate },
+        template: `
+          <div class="flex flex-row gap-8 items-center">
+            <k-date :value="['2023-01-01', '2023-02-01']" />
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

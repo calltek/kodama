@@ -56,10 +56,13 @@ export default {
     },
     requiredFilters: {
         type: Object as PropType<QueryFilter>,
-        default: null
+        default: null,
+        description:
+            'Filtros requeridos para la consulta. No se pueden eliminar'
     },
     cards: {
         type: [Boolean, String],
-        default: false
+        default: false,
+        description: 'Muestra los datos en forma de tarjetas'
     }
 }

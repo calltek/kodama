@@ -1,16 +1,12 @@
 <template>
-    <div ref="dropdown" class="dropdown d-inline-flex ms-2">
-        <span
-            class="cursor-pointer"
-            data-bs-toggle="dropdown"
-            data-bs-auto-close="outside"
-            aria-expanded="false"
+    <popper arrow>
+        <k-icon
+            icon="filter"
             :class="{ 'text-primary': defaultValue }"
-        >
-            <i class="fad fa-filter" />
-        </span>
+            class="ml-2"
+        />
 
-        <div class="dropdown-menu p-0">
+        <template #content>
             <div class="flex align-items-center px-6 py-4">
                 <div
                     :id="`${id}`"
@@ -23,7 +19,7 @@
                         class="text-danger cursor-pointer me-2 d-inline-flex"
                         @click="reset"
                     >
-                        <k-icon icon="square-xmark" size="1" />
+                        <k-icon icon="square-xmark" :size="1" />
                     </a>
 
                     <a
@@ -31,24 +27,22 @@
                         class="text-success cursor-pointer d-inline-flex"
                         @click="filter"
                     >
-                        <k-icon icon="square-check" size="1" />
+                        <k-icon icon="square-check" :size="1" />
                     </a>
                 </div>
             </div>
-        </div>
-    </div>
+        </template>
+    </popper>
 </template>
 
 <script lang="ts">
     import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
     // import noUiSlider from 'nouislider/dist/nouislider.js'
     import { uid } from '../../../../helpers/utils'
-    import KIcon from '../../k-icon/k-icon.vue'
-    // import * as bootstrap from 'bootstrap'
 
     export default defineComponent({
         name: 'KTableFilterRange',
-        components: { KIcon },
+
         props: {
             value: {
                 type: Object as PropType<Record<string, any> | null>,
@@ -91,16 +85,14 @@
                 //     tooltips: true
                 // })
 
-                slider.noUiSlider.on('change', function (values: string[]) {
-                    const data = [parseFloat(values[0]), parseFloat(values[1])]
-                    internalValue.value = data
-                })
+                // slider.noUiSlider.on('change', function (values: string[]) {
+                //     const data = [parseFloat(values[0]), parseFloat(values[1])]
+                //     internalValue.value = data
+                // })
             }
 
             onMounted(() => {
                 initSlider()
-
-                // bs.value = new bootstrap.Dropdown(dropdown.value)
             })
 
             const defaultValue = computed(() => {

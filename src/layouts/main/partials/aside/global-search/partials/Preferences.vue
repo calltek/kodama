@@ -1,7 +1,7 @@
 <template>
     <form data-kt-search-element="preferences" class="pt-1 d-none">
         <!--begin::Heading-->
-        <h3 class="fw-bold text-dark mb-7">Search Preferences</h3>
+        <h3 class="fw-bold text-gray-900 mb-7">Search Preferences</h3>
         <!--end::Heading-->
 
         <!--begin::Input group-->
@@ -97,9 +97,7 @@
 
         <!--begin::Actions-->
         <div class="flex justify-content-end pt-7">
-            <div
-                class="btn btn-sm btn-white fw-bolder btn-active-light-primary me-2"
-            >
+            <div class="btn btn-sm btn-white fw-bolder btn-primary me-2">
                 Cancel
             </div>
             <button class="btn btn-sm fw-bolder btn-primary">

@@ -12,7 +12,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-gray-900 text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -32,7 +32,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-gray-900 text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -52,7 +52,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-gray-900 text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -70,7 +70,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-gray-900 text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -88,7 +88,7 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-gray-900 text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
@@ -111,11 +111,11 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-gray-900 text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
-                    <span class="symbol-label bg-light">
+                    <span class="symbol-label bg-gray-300">
                         <!-- <img
                             class="w-20px h-20px"
                             src="/media/svg/brand-logos/volicity-9.svg"
@@ -135,11 +135,11 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-gray-900 text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
-                    <span class="symbol-label bg-light">
+                    <span class="symbol-label bg-gray-300">
                         <!-- <img
                             class="w-20px h-20px"
                             src="/media/svg/brand-logos/tvit.svg"
@@ -159,11 +159,11 @@
             <!--begin::Item-->
             <a
                 href="#"
-                class="flex text-dark text-hover-primary align-items-center mb-5"
+                class="flex text-gray-900 text-hover-primary align-items-center mb-5"
             >
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
-                    <span class="symbol-label bg-light">
+                    <span class="symbol-label bg-gray-300">
                         <!-- <img
                             class="w-20px h-20px"
                             src="/media/svg/misc/infography.svg"

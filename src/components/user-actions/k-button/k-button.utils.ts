@@ -4,7 +4,7 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
     const hasSlot = (name: string) => !!slots[name]
 
     const classes = [
-        'text-center font-medium rounded-lg focus:outline-none transition-all'
+        'text-center font-medium rounded-lg focus:outline-none transition-all whitespace-nowrap'
     ]
 
     const outline = props.outline
@@ -54,14 +54,10 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
             'bg-transparent border-transparent text-opacity-80 hover:text-opacity-100'
         )
 
-        if (color === 'white') {
-            specific_classes.push('text-white')
-        } else if (color === 'black') {
-            specific_classes.push('text-black')
-        } else if (color === 'light') {
-            specific_classes.push('text-light dark:text-white')
-        } else if (color === 'dark') {
-            specific_classes.push('text-dark dark:text-gray-700')
+        if (color === 'white' || color === 'dark') {
+            specific_classes.push('text-gray-900 dark:text-white')
+        } else if (color === 'gray') {
+            specific_classes.push('text-gray-700')
         } else if (color === 'primary') {
             specific_classes.push('text-primary')
         } else if (color === 'secondary') {
@@ -78,21 +74,13 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
     } else if (outline) {
         specific_classes.push('border')
 
-        if (color === 'white') {
+        if (color === 'white' || color === 'black') {
             specific_classes.push(
-                'border-white text-white hover:bg-white hover:text-black'
+                'border-black text-black dark:border-white dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black'
             )
-        } else if (color === 'black') {
+        } else if (color === 'gray') {
             specific_classes.push(
-                'border-black text-black hover:bg-black hover:text-white'
-            )
-        } else if (color === 'light') {
-            specific_classes.push(
-                'border-light text-light hover:bg-light hover:text-gray-400 dark:border-light dark:text-gray-400 dark:hover:bg-light dark:hover:text-gray-400'
-            )
-        } else if (color === 'dark') {
-            specific_classes.push(
-                'border-dark text-dark hover:bg-dark hover:text-white dark:border-gray-700 dark:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-light'
+                'border-gray-300 text-gray-300 hover:bg-gray-300 hover:text-gray-700'
             )
         } else if (color === 'primary') {
             specific_classes.push(
@@ -130,32 +118,19 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
             )
         }
 
-        if (color === 'white') {
-            specific_classes.push('border-white bg-white')
+        if (color === 'white' || color === 'black') {
             specific_classes.push(
-                neon ? 'text-white hover:text-black' : 'text-black'
+                'border-black bg-black dark:border-white dark:bg-white'
             )
-        } else if (color === 'black') {
-            specific_classes.push('border-black bg-black')
-            specific_classes.push(
-                neon ? 'text-black hover:text-white' : 'text-white'
-            )
-        } else if (color === 'light') {
-            specific_classes.push(
-                'border-light bg-light dark:bg-white dark:border-white  dark:hover:text-gray-400'
-            )
-
             specific_classes.push(
                 neon
-                    ? 'text-light hover:text-gray-400 dark:text-white'
-                    : 'text-gray-400'
+                    ? 'text-black dark:text-white hover:text-white dark:hover:text-black'
+                    : 'text-white dark:text-black'
             )
-        } else if (color === 'dark') {
+        } else if (color === 'gray') {
+            specific_classes.push('border-gray-300 bg-gray-300')
             specific_classes.push(
-                'border-dark bg-dark dark:bg-gray-700 dark:border-gray-700 dark:text-white dark:hover:text-white'
-            )
-            specific_classes.push(
-                neon ? 'text-dark hover:text-white' : 'text-white'
+                neon ? 'text-gray-500 hover:text-gray-700' : 'text-gray-700'
             )
         } else if (color === 'primary') {
             specific_classes.push('border-primary bg-primary')

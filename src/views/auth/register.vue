@@ -12,7 +12,7 @@
             <!--begin::Heading-->
             <div class="mb-10 text-center">
                 <!--begin::Title-->
-                <h1 class="text-dark mb-3">Crea tu cuenta</h1>
+                <h1 class="text-gray-900 mb-3">Crea tu cuenta</h1>
                 <!--end::Title-->
 
                 <!--begin::Link-->
@@ -33,7 +33,7 @@
             <div class="row fv-row mb-7">
                 <!--begin::Col-->
                 <div class="col-xl-6">
-                    <label class="form-label fw-bolder text-dark fs-6"
+                    <label class="form-label fw-bolder text-gray-900 fs-6"
                         >First Name</label
                     >
                     <Field
@@ -53,7 +53,7 @@
 
                 <!--begin::Col-->
                 <div class="col-xl-6">
-                    <label class="form-label fw-bolder text-dark fs-6"
+                    <label class="form-label fw-bolder text-gray-900 fs-6"
                         >Last Name</label
                     >
                     <Field
@@ -75,7 +75,9 @@
 
             <!--begin::Input group-->
             <div class="fv-row mb-7">
-                <label class="form-label fw-bolder text-dark fs-6">Email</label>
+                <label class="form-label fw-bolder text-gray-900 fs-6"
+                    >Email</label
+                >
                 <Field
                     class="form-control form-control-lg form-control-solid"
                     type="email"
@@ -96,7 +98,7 @@
                 <!--begin::Wrapper-->
                 <div class="mb-1">
                     <!--begin::Label-->
-                    <label class="form-label fw-bolder text-dark fs-6">
+                    <label class="form-label fw-bolder text-gray-900 fs-6">
                         Password
                     </label>
                     <!--end::Label-->
@@ -149,7 +151,7 @@
 
             <!--begin::Input group-->
             <div class="fv-row mb-5">
-                <label class="form-label fw-bolder text-dark fs-6"
+                <label class="form-label fw-bolder text-gray-900 fs-6"
                     >Confirm Password</label
                 >
                 <Field

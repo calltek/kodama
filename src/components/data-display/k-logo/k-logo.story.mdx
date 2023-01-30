@@ -1,0 +1,72 @@
+import { ref } from 'vue'
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KLogo from './k-logo.vue';
+import { renderArgs, renderParameters } from '@/helpers/storybook'
+import SHead from '@/../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KLogo },
+    setup() {
+      return { args };
+    },
+    template: `
+      <k-logo v-bind="args" />
+    `
+});
+
+<Meta title="Branding/Logo" component={KLogo} argTypes={renderArgs(KLogo)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media4.giphy.com/media/C3RGOG8wTN9E2tihIL/giphy.gif?cid=ecf05e47pijfkr4smwo79lz15l7eg6v1frmtvb0crpfeyzay&rid=giphy.gif&ct=g">🐱‍👤 KLogo</SHead>
+
+# KLogo
+Con el componente `k-logo` puedes mostrar el logo de tu marca en distintas formas y colores.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+## **Modo Oscuro**
+Con el atributo `dark` o `light` puedes forzar el modo oscuro o claro del logo.
+
+<Canvas>
+  <Story name="Dark/Light" argTypes={renderArgs(KLogo, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KLogo },
+        template: `
+          <div class="flex flex-row gap-6">
+            <div class="bg-gray-900 p-5 rounded-lg">
+              <k-logo dark />
+            </div>
+            <div class="bg-white p-5 rounded-lg">
+              <k-logo light />
+            </div>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Side**
+Con el atributo `side` se muestra el icono en formato rectangular en vez de cuadrado.
+
+<Canvas>
+  <Story name="Side" argTypes={renderArgs(KLogo, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KLogo },
+        template: `
+          <div class="flex flex-row gap-6">
+            <div class="bg-gray-900 p-5 rounded-lg">
+              <k-logo dark side />
+            </div>
+            <div class="bg-white p-5 rounded-lg">
+              <k-logo light side />
+            </div>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

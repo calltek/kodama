@@ -42,7 +42,9 @@
             size: {
                 type: Number,
                 default: 1,
-                description: 'Define el tamaño del titulo.'
+                description: 'Define el tamaño del titulo.',
+                options: [1, 2, 3, 4, 5, 6],
+                control: 'inline-radio'
             },
             uppercase: {
                 type: Boolean,
@@ -63,11 +65,6 @@
                 type: Boolean,
                 default: false,
                 description: 'Define si el titulo debe ser centrado.'
-            },
-            color: {
-                type: String,
-                default: 'gray-800',
-                description: 'Define el color del titulo para el modo claro.'
             }
         },
         setup(props, { slots }) {
@@ -76,24 +73,29 @@
             const dinamicSubtitleClasses = computed(() => {
                 if (hasSlot('subtitle')) {
                     const classList: string[] = ['opacity-50']
-                    classList.push(`text-${props.color}`)
 
                     if (props.size === 1) {
-                        classList.push('h1')
+                        classList.push('text-3xl')
                     } else if (props.size === 2) {
-                        classList.push('h2')
+                        classList.push('text-2xl')
                     } else if (props.size === 3) {
-                        classList.push('h3')
+                        classList.push('text-xl')
                     } else if (props.size === 4) {
-                        classList.push('h4')
+                        classList.push('text-lg')
                     } else if (props.size === 5) {
-                        classList.push('h5')
+                        classList.push('text-base')
                     } else if (props.size === 6) {
-                        classList.push('h6')
+                        classList.push('text-sm')
                     }
 
                     if (props.center) {
                         classList.push('text-center')
+                    }
+
+                    if (props.bolder) {
+                        classList.push('font-bold')
+                    } else if (props.bold) {
+                        classList.push('font-semibold')
                     }
 
                     return classList
@@ -104,34 +106,34 @@
 
             const dinamicClasses = computed(() => {
                 const classList: string[] = ['title']
-                classList.push(`text-${props.color}`)
 
                 if (props.size === 1) {
-                    classList.push('h1')
+                    classList.push('text-5xl')
                 } else if (props.size === 2) {
-                    classList.push('h2')
+                    classList.push('text-4xl')
                 } else if (props.size === 3) {
-                    classList.push('h3')
+                    classList.push('text-3xl')
                 } else if (props.size === 4) {
-                    classList.push('h4')
+                    classList.push('text-2xl')
                 } else if (props.size === 5) {
-                    classList.push('h5')
+                    classList.push('text-xl')
                 } else if (props.size === 6) {
-                    classList.push('h6')
+                    classList.push('text-lg')
                 }
 
                 if (props.uppercase) {
-                    classList.push('text-uppercase')
+                    classList.push('uppercase')
                 }
                 if (props.center) {
                     classList.push('text-center')
                 }
-                if (props.bold) {
-                    classList.push('fw-bold')
-                }
+
                 if (props.bolder) {
-                    classList.push('fw-bolder')
+                    classList.push('font-bold')
+                } else if (props.bold) {
+                    classList.push('font-semibold')
                 }
+
                 return classList
             })
 

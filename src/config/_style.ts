@@ -1,2 +1,2 @@
 import '../assets/style/index.css'
-import '../assets/style/tooltip.scss'
+import '../assets/style/index.scss'

@@ -5,7 +5,7 @@
         class="pt-1 d-none"
     >
         <!--begin::Heading-->
-        <h3 class="fw-bold text-dark mb-7">Advanced Search</h3>
+        <h3 class="fw-bold text-gray-900 mb-7">Advanced Search</h3>
         <!--end::Heading-->
 
         <!--begin::Input group-->
@@ -210,7 +210,7 @@
         <!--begin::Actions-->
         <div class="flex justify-content-end">
             <button
-                class="btn btn-sm btn-white fw-bolder btn-active-light-primary me-2"
+                class="btn btn-sm btn-white fw-bolder btn-gray-300-primary me-2"
             >
                 Cancel
             </button>

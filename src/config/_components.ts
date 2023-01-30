@@ -16,7 +16,6 @@ import KLogo from '../components/data-display/k-logo/k-logo.vue'
 import KTable from '../components/data-display/k-table/k-table.vue'
 import KTitle from '../components/data-display/k-title/k-title.vue'
 import KDate from '../components/data-display/k-date/k-date.vue'
-import KTooltip from '../components/data-display/k-tooltip/k-tooltip.vue'
 
 // Miscelanea Components
 import KBubbles from '../components/miscelanea/k-bubbles/k-bubbles.vue'
@@ -36,6 +35,9 @@ import KSwitch from '../components/user-actions/k-switch/k-switch.vue'
 
 // Feedback
 import KModal from '../components/feedback/k-modal/k-modal.vue'
+
+// Vendor
+import Popper from 'vue3-popper'
 
 export default (
     app: App,
@@ -57,7 +59,6 @@ export default (
     app.component('KTable', KTable)
     app.component('KTitle', KTitle)
     app.component('KDate', KDate)
-    app.component('KTooltip', KTooltip)
 
     // Miscelanea Components
     app.component('KBubbles', KBubbles)
@@ -79,7 +80,7 @@ export default (
     app.component('KModal', KModal)
 
     // Vendor
-    // app.component('Loading', Loading)
+    app.component('Popper', Popper)
 
     // Custom components
     if (frontendComponents) {

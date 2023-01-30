@@ -54,7 +54,7 @@
                     class="page-title flex justify-content-center flex-column me-5"
                 >
                     <h1
-                        class="flex align-items-center text-dark fw-bolder my-1 fs-3"
+                        class="flex align-items-center text-gray-900 fw-bolder my-1 fs-3"
                     >
                         {{ pageTitle }}
                     </h1>
@@ -96,7 +96,7 @@
                             </li>
                         </template>
 
-                        <li class="breadcrumb-item pe-3 text-dark">
+                        <li class="breadcrumb-item pe-3 text-gray-900">
                             {{ pageTitle }}
                         </li>
                     </ul>

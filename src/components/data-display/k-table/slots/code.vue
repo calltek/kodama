@@ -1,6 +1,6 @@
 <template>
     <k-badge>
-        <k-icon icon="qrcode" class="me-2" />
+        <k-icon icon="qrcode" class="mr-2" />
         {{ value }}
     </k-badge>
 </template>

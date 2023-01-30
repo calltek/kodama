@@ -1,28 +1,25 @@
 <template>
-    <div>
-        <div class="w-100 text-center">
-            <img :src="img404" class="mw-100 mb-10 h-lg-450px" />
-        </div>
+    <div class="max-w-md overflow-hidden">
+        <img :src="img404" class="mb-4 w-full" />
 
-        <div class="mb-10 text-center">
-            <h1
+        <div class="mb-6 text-center whitespace-normal">
+            <k-title
                 v-if="!hasSlot('default')"
-                class="fw-bolder text-dark text-uppercase"
+                :size="3"
+                bolder
+                uppercase
+                class="text-gray-900"
             >
                 {{ title }}
-            </h1>
+                <template v-if="subtitle" #subtitle>
+                    {{ subtitle }}
+                </template>
+            </k-title>
             <slot v-else></slot>
-
-            <h5
-                v-if="!hasSlot('subtitle') && subtitle"
-                class="text-muted fw-bold"
-            >
-                {{ subtitle }}
-            </h5>
-            <slot v-else-if="hasSlot('subtitle')" name="subtitle"></slot>
+            <slot v-if="hasSlot('subtitle')" name="subtitle"></slot>
         </div>
 
-        <div class="flex justify-content-center">
+        <div class="flex justify-center">
             <slot name="action"></slot>
         </div>
     </div>
@@ -37,15 +34,18 @@
         props: {
             title: {
                 type: String,
-                default: 'No se encontraron resultados'
+                default: 'No se encontraron resultados',
+                description: 'Título'
             },
             subtitle: {
                 type: String,
-                default: ''
+                default: '',
+                description: 'Subtítulo'
             },
             image: {
                 type: String,
-                default: ''
+                default: '',
+                description: 'Url de la imagen'
             }
         },
         setup(props, { slots }) {

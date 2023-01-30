@@ -1,5 +1,5 @@
 <template>
-    <div class="btn-group dropup">
+    <div>
         <k-button
             :loading="loading"
             :disabled="loading"
@@ -9,74 +9,61 @@
             Cargar más
         </k-button>
 
-        <k-button
-            size="sm"
-            class="dropdown-toggle hide-after px-4"
-            :data-bs-toggle="!loading ? 'dropdown' : ''"
-        >
-            <i class="fad fa-ellipsis" />
-        </k-button>
+        <popper arrow>
+            <k-button size="sm">
+                <k-icon icon="ellipsis" />
+            </k-button>
 
-        <!-- <button
-            type="button"
-            class="btn btn-sm btn-primary dropdown-toggle hide-after px-4"
-            data-bs-toggle="dropdown"
-        >
-            <i class="fad fa-ellipsis" />
-        </button> -->
-
-        <!-- <a data-bs-toggle="dropdown"> </a> -->
-
-        <ul
-            class="dropdown-menu text-center p-0 overflow-hidden"
-            style="min-width: auto"
-        >
-            <li>
-                <a
-                    class="dropdown-item p-3 cursor-pointer"
-                    :class="{ active: value === 10 }"
-                    @click="limit(10)"
-                >
-                    10
-                </a>
-            </li>
-            <li>
-                <a
-                    class="dropdown-item p-3 cursor-pointer"
-                    :class="{ active: value === 20 }"
-                    @click="limit(20)"
-                >
-                    20
-                </a>
-            </li>
-            <li>
-                <a
-                    class="dropdown-item p-3 cursor-pointer"
-                    :class="{ active: value === 30 }"
-                    @click="limit(30)"
-                >
-                    30
-                </a>
-            </li>
-            <li>
-                <a
-                    class="dropdown-item p-3 cursor-pointer"
-                    :class="{ active: value === 50 }"
-                    @click="limit(50)"
-                >
-                    50
-                </a>
-            </li>
-            <li>
-                <a
-                    class="dropdown-item p-3 cursor-pointer"
-                    :class="{ active: value === 100 }"
-                    @click="limit(100)"
-                >
-                    100
-                </a>
-            </li>
-        </ul>
+            <template #content>
+                <ul class="text-center">
+                    <li>
+                        <a
+                            class="dropdown-item p-3 cursor-pointer"
+                            :class="{ active: value === 10 }"
+                            @click="limit(10)"
+                        >
+                            10
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            class="dropdown-item p-3 cursor-pointer"
+                            :class="{ active: value === 20 }"
+                            @click="limit(20)"
+                        >
+                            20
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            class="dropdown-item p-3 cursor-pointer"
+                            :class="{ active: value === 30 }"
+                            @click="limit(30)"
+                        >
+                            30
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            class="dropdown-item p-3 cursor-pointer"
+                            :class="{ active: value === 50 }"
+                            @click="limit(50)"
+                        >
+                            50
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            class="dropdown-item p-3 cursor-pointer"
+                            :class="{ active: value === 100 }"
+                            @click="limit(100)"
+                        >
+                            100
+                        </a>
+                    </li>
+                </ul>
+            </template>
+        </popper>
     </div>
 </template>
 

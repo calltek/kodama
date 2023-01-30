@@ -13,36 +13,51 @@
             dark: {
                 type: Boolean,
                 default: false,
-                description: 'Color del logo'
+                description: 'Define el modo oscuro'
+            },
+            light: {
+                type: Boolean,
+                default: false,
+                description: 'Define el modo claro'
             },
             side: {
                 type: Boolean,
                 default: false,
-                description: 'Tipo de logo'
+                description: 'Degine el modo alargado'
             },
             height: {
                 type: Number,
                 default: 40,
-                description: 'Altura del logo'
+                description: 'Altura especificada'
             }
         },
         setup(props) {
-            const src = computed(() => {
-                const config = useConfig()
+            const config = useConfig()
 
+            const darkMode = computed(() => {
+                return config.get('darkMode')
+            })
+
+            const src = computed(() => {
                 const logo_dark = config.get('logo.dark')
                 const logo = config.get('logo.light')
                 const sidelogo_dark = config.get('logo.side_dark')
                 const sidelogo = config.get('logo.side_light')
 
-                if (props.side && props.dark) {
-                    return sidelogo_dark
-                } else if (props.side && !props.dark) {
-                    return sidelogo
-                } else if (!props.side && props.dark) {
+                if (props.dark) {
+                    if (props.side) return sidelogo_dark
                     return logo_dark
-                } else {
+                } else if (props.light) {
+                    if (props.side) return sidelogo
                     return logo
+                } else {
+                    if (darkMode.value) {
+                        if (props.side) return sidelogo_dark
+                        return logo_dark
+                    } else {
+                        if (props.side) return sidelogo
+                        return logo
+                    }
                 }
             })
 

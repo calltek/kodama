@@ -1,24 +1,33 @@
 <template>
-    <div class="card bg-transparent">
+    <div class="k-table">
         <div
             v-if="header"
-            class="card-header rounded-4"
-            :class="clean ? 'p-0 mb-3' : 'bg-white mb-5 border-0 px-7'"
+            class="k-table-header"
+            :class="{ 'k-table-header-clean': clean }"
         >
             <slot name="header-left">
-                <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bolder fs-3 mb-1">
+                <h3 class="k-table-header-left">
+                    <k-title :size="4" bolder>
                         <slot name="title" :selected="selected" :query="query">
-                            Listados de stock
+                            Listado
                         </slot>
-                    </span>
-                    <span class="text-muted mt-1 fw-bold fs-7">
-                        {{ total }} registros
-                    </span>
+
+                        <template #subtitle>
+                            <slot
+                                name="subtitle"
+                                :selected="selected"
+                                :query="query"
+                            >
+                                <span class="whitespace-nowrap"
+                                    >{{ total }} registros</span
+                                >
+                            </slot>
+                        </template>
+                    </k-title>
                 </h3>
             </slot>
 
-            <div class="card-toolbar">
+            <div class="k-table-header-toolbar">
                 <slot
                     name="header-right"
                     :selected="selected"
@@ -27,29 +36,29 @@
 
                 <k-button
                     icon="filter-slash"
-                    color="light"
+                    color="gray"
                     title="Limpiar filtros"
                     :loading="loading"
-                    class="m-2"
+                    class="mx-2"
                     @click="resetFilters"
                 />
 
                 <k-button
                     v-if="params.strict"
                     icon="object-intersect"
-                    color="light"
+                    color="gray"
                     title="Filtro estricto"
                     :loading="loading"
-                    class="me-2"
+                    class="mr-2"
                     @click="strict(false)"
                 />
                 <k-button
                     v-else
                     icon="object-union"
-                    color="light"
+                    color="gray"
                     title="Filtro flexible"
                     :loading="loading"
-                    class="me-2"
+                    class="mr-2"
                     @click="strict(true)"
                 />
 
@@ -78,26 +87,16 @@
         </template>
         <div
             v-else
-            class="card-body rounded-4 position-relative"
-            :class="clean ? 'p-0' : 'bg-white px-7 py-4'"
+            class="k-table-body"
+            :class="{ 'k-table-body-clean': clean }"
         >
-            <div class="table-responsive">
-                <loading
-                    :active="loading"
-                    :can-cancel="false"
-                    :is-full-page="false"
-                    loader="bars"
-                    color="#000"
-                    :z-index="99"
-                />
+            <k-loading :active="loading" />
 
-                <table
-                    class="table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3 mb-0"
-                    :style="{ 'min-height': `${height}px` }"
-                >
+            <div class="relative overflow-x-auto">
+                <table :style="{ 'min-height': `${height}px` }">
                     <thead>
-                        <tr class="fw-bolder text-muted">
-                            <th v-if="selected" class="w-25px">
+                        <tr>
+                            <th v-if="selected" class="w-6">
                                 <div
                                     class="form-check form-check-sm form-check-custom form-check-solid"
                                 >
@@ -114,7 +113,7 @@
                                 v-for="(col, key) in cols"
                                 :key="key"
                                 :style="col.style"
-                                class="text-uppercase"
+                                class="k-table-body-title"
                             >
                                 <k-table-order
                                     v-if="col.order && col.index"
@@ -265,7 +264,7 @@
 
                                 <td v-if="hasSlot('content')" align="right">
                                     <a
-                                        class="btn btn-icon btn-light cursor-pointer"
+                                        class="btn btn-icon btn-gray-300 cursor-pointer"
                                         @click="toggleRow(itemKey)"
                                     >
                                         <i
@@ -316,9 +315,6 @@
 <script lang="ts">
     import { defineComponent, watch, onMounted, computed } from 'vue'
 
-    import 'vue-loading-overlay/dist/vue-loading.css'
-    import Loading from 'vue-loading-overlay'
-
     import props from './k-table.props'
     import useColumn from './lib/columns'
     import useCheck from './lib/check'
@@ -347,7 +343,6 @@
         name: 'KTable',
         autoload: true,
         components: {
-            Loading,
             KTableDate,
             KTableImage,
             KTableStatus,
@@ -439,4 +434,50 @@
     })
 </script>
 
-<style scoped></style>
+<style lang="scss">
+    .k-table {
+        .k-table-header {
+            @apply px-4 py-2 mb-5 flex flex-row rounded-2xl bg-white dark:bg-gray-800;
+
+            // CLEAN MODE
+            &.k-table-header-clean {
+                @apply p-0 mb-3;
+            }
+
+            .k-table-header-left {
+                @apply flex flex-col items-start;
+            }
+
+            .k-table-header-toolbar {
+                @apply flex flex-row items-center justify-end w-full;
+            }
+        }
+
+        .k-table-body {
+            @apply rounded-2xl bg-white dark:bg-gray-800 px-4 py-2;
+
+            // CLEAN MODE
+            &.k-table-body-clean {
+                @apply p-0;
+            }
+
+            table {
+                @apply w-full text-gray-900 border-0 dark:text-white text-left;
+
+                th {
+                    &.k-table-body-title {
+                        @apply text-gray-500 uppercase font-semibold text-sm whitespace-nowrap px-6 py-3;
+                    }
+                }
+
+                td {
+                    // VARIABLE
+                    @apply p-2;
+                }
+            }
+        }
+
+        .k-table-footer {
+        }
+    }
+</style>

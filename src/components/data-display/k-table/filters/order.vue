@@ -1,21 +1,21 @@
 <template>
-    <span class="cursor-pointer user-select-none">
+    <span class="cursor-pointer">
         <a v-if="value && value === 'asc'" @click="order(null)">
             <slot />
 
-            <i class="fad fa-sort-up ms-2"></i>
+            <k-icon icon="sort-up" class="ml-2" />
         </a>
 
         <a v-else-if="value && value === 'desc'" @click="order('asc')">
             <slot />
 
-            <i class="fad fa-sort-down ms-2"></i>
+            <k-icon icon="sort-down" class="ml-2" />
         </a>
 
         <a v-else @click="order('desc')">
             <slot />
 
-            <i class="fal fa-sort ms-2"></i>
+            <k-icon icon="sort" class="ml-2" />
         </a>
     </span>
 </template>

@@ -22,6 +22,7 @@
                         const newValue = m.target.getAttribute(m.attributeName)
 
                         nextTick(() => {
+                            console.log('modo', newValue)
                             if (newValue === 'dark') {
                                 config.set('darkMode', true)
                             } else {

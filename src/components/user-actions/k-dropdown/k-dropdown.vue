@@ -11,7 +11,7 @@
         <div
             :id="uniq"
             ref="dropdown"
-            class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold py-4 fs-6 overflow-auto noselect"
+            class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-primary fw-bold py-4 fs-6 overflow-auto noselect"
             data-kt-menu="true"
             :style="{ 'max-width': `${width}px`, 'max-height': `${height}px` }"
         >

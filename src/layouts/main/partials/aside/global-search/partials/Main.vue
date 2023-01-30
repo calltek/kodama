@@ -13,7 +13,7 @@
             <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
-                    <span class="symbol-label bg-light">
+                    <span class="symbol-label bg-gray-300">
                         <span class="svg-icon svg-icon-2 svg-icon-primary">
                             <inline-svg
                                 src="/media/icons/duotune/electronics/elc004.svg"
@@ -38,7 +38,7 @@
             <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
-                    <span class="symbol-label bg-light">
+                    <span class="symbol-label bg-gray-300">
                         <span class="svg-icon svg-icon-2 svg-icon-primary">
                             <inline-svg
                                 src="/media/icons/duotune/graphs/gra001.svg"
@@ -63,7 +63,7 @@
             <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
-                    <span class="symbol-label bg-light">
+                    <span class="symbol-label bg-gray-300">
                         <span class="svg-icon svg-icon-2 svg-icon-primary">
                             <inline-svg
                                 src="/media/icons/duotune/graphs/gra006.svg"
@@ -88,7 +88,7 @@
             <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
-                    <span class="symbol-label bg-light">
+                    <span class="symbol-label bg-gray-300">
                         <span class="svg-icon svg-icon-2 svg-icon-primary">
                             <inline-svg
                                 src="/media/icons/duotune/graphs/gra002.svg"
@@ -113,7 +113,7 @@
             <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
-                    <span class="symbol-label bg-light">
+                    <span class="symbol-label bg-gray-300">
                         <span class="svg-icon svg-icon-2 svg-icon-primary">
                             <inline-svg
                                 src="/media/icons/duotune/communication/com010.svg"
@@ -138,7 +138,7 @@
             <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
-                    <span class="symbol-label bg-light">
+                    <span class="symbol-label bg-gray-300">
                         <span class="svg-icon svg-icon-2 svg-icon-primary">
                             <inline-svg
                                 src="/media/icons/duotune/finance/fin001.svg"
@@ -163,7 +163,7 @@
             <div class="flex align-items-center mb-5">
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px symbol-circle me-4">
-                    <span class="symbol-label bg-light">
+                    <span class="symbol-label bg-gray-300">
                         <span class="svg-icon svg-icon-2 svg-icon-primary">
                             <inline-svg
                                 src="/media/icons/duotune/graphs/gra002.svg"
