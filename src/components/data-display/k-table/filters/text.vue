@@ -8,7 +8,7 @@
 
         <template #content>
             <div class="flex align-items-center p-4">
-                <k-input-text
+                <k-input
                     v-model="inputText"
                     type="text"
                     size="sm"

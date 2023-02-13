@@ -92,7 +92,7 @@
         >
             <k-loading :active="loading" />
 
-            <div class="relative overflow-x-auto">
+            <div class="overflow-x-auto">
                 <table :style="{ 'min-height': `${height}px` }">
                     <thead>
                         <tr>
@@ -301,7 +301,7 @@
             </div>
         </div>
 
-        <div v-if="isMore" class="card-footer text-center border-0">
+        <div v-if="isMore" class="card-footer text-center border-0 mt-8">
             <k-table-limit
                 :loading="loading"
                 :value="params.limit"
@@ -336,7 +336,6 @@
     import KTableFilterText from './filters/text.vue'
     import KTableFilterNumber from './filters/number.vue'
 
-    import KButton from '../../user-actions/k-button/k-button.vue'
     import { useConfig } from '../../../store'
 
     export default defineComponent({
@@ -354,8 +353,7 @@
             KTableFilterDate,
             KTableFilterRange,
             KTableFilterText,
-            KTableFilterNumber,
-            KButton
+            KTableFilterNumber
         },
         props: props,
         emits: ['fetch', 'filter'],
@@ -445,7 +443,7 @@
             }
 
             .k-table-header-left {
-                @apply flex flex-col items-start;
+                @apply flex flex-col items-start dark:text-white;
             }
 
             .k-table-header-toolbar {

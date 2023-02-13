@@ -14,13 +14,25 @@
 
         <input
             :id="uuid"
-            type="text"
+            :type="type"
             :maxlength="maxLength"
             :placeholder="placeholderText"
             :required="required"
-            :value="modelValue"
+            :value="model"
+            :min="min"
+            :max="max"
+            :style="style"
             @input="change"
         />
+
+        <div v-if="type === 'number'" class="k-input-control">
+            <div @click="sum()">
+                <k-icon icon="plus" class="k-input-icon" />
+            </div>
+            <div @click="subtract()">
+                <k-icon icon="minus" class="k-input-icon" />
+            </div>
+        </div>
 
         <label v-if="hasLabel && float" :for="uuid">
             <slot v-if="hasSlot('default')" />
@@ -43,10 +55,10 @@
     import { uid } from '@/helpers/utils'
 
     export default defineComponent({
-        name: 'KInputText',
+        name: 'KInput',
         props: {
             modelValue: {
-                type: String,
+                type: [String, Number],
                 required: false,
                 default: '',
                 description: 'Valor del input'
@@ -106,6 +118,26 @@
                 default: '',
                 options: ['warning', 'success', 'danger'],
                 description: 'Color del input'
+            },
+            type: {
+                type: String,
+                default: 'text',
+                options: ['text', 'password', 'number', 'email']
+            },
+            width: {
+                type: Number,
+                default: 0,
+                description: 'Ancho del input'
+            },
+            min: {
+                type: Number,
+                required: false,
+                description: 'Valor mínimo si el input es `number`'
+            },
+            max: {
+                type: Number,
+                required: false,
+                description: 'Valor máximo si el input es `number`'
             }
         },
         emits: ['update:modelValue'],
@@ -113,6 +145,15 @@
             const maxLength = props.maxlength > 0 ? props.maxlength : undefined
             const uuid = props.id || uid()
             const hasSlot = (name: string) => !!ctx.slots[name]
+
+            const model = computed({
+                get() {
+                    return props.modelValue
+                },
+                set(value: any) {
+                    ctx.emit('update:modelValue', value)
+                }
+            })
 
             const classes = computed(() => {
                 const classes = ['k-input-text', `k-input-text-${props.size}`]
@@ -123,6 +164,10 @@
                     classes.push('k-input-text-fieldset')
                 }
 
+                if (props.type === 'number') {
+                    classes.push('k-input-number')
+                }
+
                 if (props.errors.length > 0) {
                     classes.push('k-input-text-danger')
                 } else if (props.color) {
@@ -130,6 +175,16 @@
                 }
 
                 return classes
+            })
+
+            const style = computed(() => {
+                const style: any = {}
+
+                if (props.width > 0) {
+                    style['width'] = props.width + 'px'
+                }
+
+                return style
             })
 
             const hasLabel = computed(() => {
@@ -149,9 +204,7 @@
             })
 
             const change = (e: any) => {
-                const value = e.target.value
-
-                ctx.emit('update:modelValue', value)
+                model.value = e.target.value
             }
 
             const firstError = computed(() => {
@@ -159,6 +212,24 @@
                     props.errors.length > 0 ? props.errors[0].$message : ''
                 return error.toString()
             })
+
+            const sum = () => {
+                const value = parseInt(props.modelValue.toString()) || 0
+                const newValue = value + 1
+
+                if (!props.max || newValue <= props.max) {
+                    model.value = newValue
+                }
+            }
+
+            const subtract = () => {
+                const value = parseInt(props.modelValue.toString()) || 0
+                const newValue = value - 1
+
+                if (!props.min || newValue >= props.min) {
+                    model.value = newValue
+                }
+            }
 
             return {
                 maxLength,
@@ -168,16 +239,44 @@
                 firstError,
                 hasSlot,
                 hasLabel,
-                placeholderText
+                placeholderText,
+                sum,
+                subtract,
+                style,
+                model
             }
         }
     })
 </script>
 
 <style lang="scss">
-    .k-input-text {
+    .k-input-number {
         input {
-            @apply block w-full border border-gray-200 bg-gray-100 text-gray-500 outline-none ring-0 focus:border-gray-200 focus:ring-2 focus:ring-primary dark:border-gray-700 dark:bg-gray-800 dark:text-white;
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
+        }
+
+        .k-input-control {
+            @apply absolute overflow-hidden right-0 bottom-0 w-6 flex flex-col items-center justify-center border-gray-200 dark:border-gray-700 border border-l-0;
+
+            & > div {
+                @apply font-bold cursor-pointer flex items-center justify-center h-full w-full dark:text-white  bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-white;
+            }
+        }
+    }
+
+    .k-input-text {
+        @apply relative h-full;
+
+        input {
+            @apply block w-full border border-gray-200 bg-gray-100 text-gray-500 ring-inset outline-none ring-0 focus:border-gray-200 focus:ring-2 focus:ring-primary dark:border-gray-700 dark:bg-gray-800 dark:text-white;
+
+            min-width: 4rem;
+
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
         }
 
         label {
@@ -230,6 +329,14 @@
             input {
                 @apply h-9 rounded-md px-2 py-1.5 text-xs;
             }
+
+            .k-input-control {
+                @apply h-9 rounded-r-md;
+
+                .k-input-icon {
+                    @apply text-xs;
+                }
+            }
         }
 
         &.k-input-text-sm {
@@ -239,6 +346,14 @@
 
             input {
                 @apply h-10 rounded-md px-2.5 py-2 text-sm;
+            }
+
+            .k-input-control {
+                @apply h-10 rounded-r-md;
+
+                .k-input-icon {
+                    @apply text-xs;
+                }
             }
         }
 
@@ -250,6 +365,14 @@
             input {
                 @apply h-12 rounded-lg px-3 py-2.5 text-base;
             }
+
+            .k-input-control {
+                @apply h-12 rounded-r-lg;
+
+                .k-input-icon {
+                    @apply text-base;
+                }
+            }
         }
 
         &.k-input-text-lg {
@@ -259,6 +382,14 @@
 
             input {
                 @apply h-14 rounded-xl px-4 py-3 text-lg;
+            }
+
+            .k-input-control {
+                @apply h-14 rounded-r-xl;
+
+                .k-input-icon {
+                    @apply text-base;
+                }
             }
         }
 

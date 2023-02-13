@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="dark:text-white text-900">
         <h1 v-if="size === 1" :class="dinamicClasses">
             <slot />
         </h1>

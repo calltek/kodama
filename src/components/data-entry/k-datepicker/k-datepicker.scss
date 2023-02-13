@@ -1,10 +1,10 @@
 // General
 $dp__font_family: 'Poppins', sans-serif !default; // Font size for the menu
-$dp__border_radius: 0.475rem !default; // Border radius everywhere
+$dp__border_radius: 0.75rem !default; // Border radius everywhere
 $dp__cell_border_radius: $dp__border_radius !default; // Specific border radius for the calendar cell
 
 // Font sizes
-$dp__font_size: 1.1rem !default; // overall font-size
+$dp__font_size: 0.8rem !default; // overall font-size
 $dp__preview_font_size: 0.8rem !default; // font size of the date preview in the action row
 $dp__time_font_size: 2rem !default; // font size in the time picker
 

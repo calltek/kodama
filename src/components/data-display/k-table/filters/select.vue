@@ -33,15 +33,13 @@
 </template>
 
 <script lang="ts">
-    import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
+    import { computed, defineComponent, PropType, ref } from 'vue'
     import { QueryFilterOperator } from '../../../../store/modules/query'
     import { KTableColumnFilter } from '../k-table.types'
-    // import * as bootstrap from 'bootstrap'
-    import KIcon from '../../k-icon/k-icon.vue'
 
     export default defineComponent({
         name: 'KTableFilterSelect',
-        components: { KIcon },
+
         props: {
             options: {
                 type: Object as PropType<KTableColumnFilter[]>,

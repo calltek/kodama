@@ -33,12 +33,10 @@
 <script lang="ts">
     import { defineComponent, computed, PropType } from 'vue'
     import { dayjs } from '../../../plugins'
-    import KIcon from '../k-icon/k-icon.vue'
 
     export default defineComponent({
         name: 'KDate',
         autoload: true,
-        components: { KIcon },
         props: {
             value: {
                 type: [Array, String] as PropType<string[] | string>,

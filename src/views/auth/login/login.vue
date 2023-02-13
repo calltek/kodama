@@ -20,7 +20,7 @@
         </div>
 
         <div class="fv-row mb-4">
-            <k-input-text
+            <k-input
                 type="text"
                 placeholder="jhon@doe.com"
                 label="Email / Usuario"
@@ -36,7 +36,7 @@
         </div>
 
         <div class="fv-row mb-10">
-            <k-input-text
+            <k-input
                 type="password"
                 name="password"
                 label="Contraseña"

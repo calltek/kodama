@@ -1,11 +1,11 @@
 <template>
     <Datepicker
-        v-model="value"
         v-bind="args"
-        @update:modelValue="onChange"
         ref="dp"
-        menuClassName="k-datepicker"
-        :inputClassName="classes"
+        v-model="value"
+        menu-class-name="k-datepicker"
+        :input-class-name="classes"
+        @update:modelValue="onChange"
     >
         <template #input-icon>
             <k-icon icon="calendar" />
@@ -14,10 +14,10 @@
         <template #clear-icon="{ clear }">
             <k-icon
                 icon="times"
-                @click="clear"
                 color="danger"
                 :size="2"
                 class="mt-1"
+                @click="clear"
             />
         </template>
 
@@ -54,9 +54,9 @@
                 color="danger"
                 icon="brush"
                 size="sm"
-                @click="resetDate"
                 title="Resetear"
                 class="me-2"
+                @click="resetDate"
             >
             </k-button>
 
@@ -64,8 +64,8 @@
                 color="success"
                 icon="check"
                 size="sm"
-                @click="selectDate"
                 title="Aceptar"
+                @click="selectDate"
             >
             </k-button>
         </template>
@@ -80,17 +80,10 @@
     import props from './k-datepicker.props'
     import { parseInputClass } from './k-datepicker.utils'
 
-    import KIcon from '../../data-display/k-icon/k-icon.vue'
-    import KButton from '../../user-actions/k-button/k-button.vue'
-    import KDate from '../../data-display/k-date/k-date.vue'
-
     export default defineComponent({
         name: 'KDatepicker',
         components: {
-            Datepicker,
-            KIcon,
-            KButton,
-            KDate
+            Datepicker
         },
         autoload: true,
         props: props,

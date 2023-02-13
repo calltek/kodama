@@ -69,13 +69,10 @@
 
 <script lang="ts">
     import { defineComponent } from 'vue'
-    import KButton from '../../../user-actions/k-button/k-button.vue'
 
     export default defineComponent({
         name: 'KTableLimit',
-        components: {
-            KButton
-        },
+
         props: {
             value: {
                 type: Number,
