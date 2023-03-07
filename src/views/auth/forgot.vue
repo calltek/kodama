@@ -1,108 +1,101 @@
 <template>
-    <!--begin::Wrapper-->
-    <div class="w-lg-500px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto">
-        <!--begin::Form-->
-        <Form
-            id="kt_login_password_reset_form"
-            class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework"
-            :validation-schema="forgotPassword"
-            @submit="onSubmitForgotPassword"
-        >
-            <!--begin::Heading-->
+    <k-card id="k-forgot">
+        <div class="p-1 sm:p-5 select-none">
             <div class="text-center mb-10">
-                <!--begin::Title-->
-                <h1 class="text-gray-900 mb-3">¿Olvidaste tu contraseña?</h1>
-                <!--end::Title-->
-
-                <!--begin::Link-->
-                <div class="text-gray-400 fw-bold fs-4">
-                    Introduce tu email para resetear tu clave
-                </div>
-                <!--end::Link-->
+                <h1 class="mb-3 sm:text-2xl text-xl uppercase font-bold">
+                    ¿Olvidaste tu clave?
+                </h1>
             </div>
-            <!--begin::Heading-->
 
-            <!--begin::Input group-->
-            <div class="fv-row mb-10">
-                <label class="form-label fw-bolder text-gray-900 fs-6"
-                    >Email</label
-                >
-                <Field
-                    class="form-control form-control-solid"
+            <div class="mb-4">
+                <k-input
+                    v-model="state.email"
                     type="email"
-                    placeholder=""
-                    name="email"
-                    autocomplete="off"
+                    placeholder="jhon@doe.com"
+                    label="Email"
+                    tabindex="1"
+                    :errors="v$.email.$silentErrors"
                 />
+
                 <div class="fv-plugins-message-container">
                     <div class="fv-help-block">
                         <ErrorMessage name="email" />
                     </div>
                 </div>
             </div>
-            <!--end::Input group-->
 
-            <!--begin::Actions-->
-            <div class="flex flex-wrap justify-content-center pb-lg-0">
-                <button
-                    id="kt_password_reset_submit"
-                    ref="submitButton"
-                    type="submit"
-                    class="btn btn-lg btn-primary fw-bolder me-4"
+            <div class="text-center">
+                <k-button
+                    :loading="loading"
+                    icon="right-from-bracket"
+                    class="w-full mb-4"
+                    :disabled="!isValidForm"
+                    @click="submitForgot"
                 >
-                    <span class="indicator-label"> Enviar </span>
-                    <span class="indicator-progress">
-                        Please wait...
-                        <span
-                            class="spinner-border spinner-border-sm align-middle ms-2"
-                        ></span>
-                    </span>
-                </button>
+                    Acceder
+                </k-button>
 
                 <router-link
                     :to="{ name: 'login' }"
-                    class="btn btn-lg btn-primary fw-bolder"
-                    >Cancelar</router-link
+                    class="text-sm text-gray-400"
                 >
+                    Ya me acuerdo de mi clave
+                </router-link>
             </div>
-            <!--end::Actions-->
-        </Form>
-        <!--end::Form-->
-    </div>
-    <!--end::Wrapper-->
+        </div>
+    </k-card>
 </template>
 
 <script lang="ts">
-    import { defineComponent, ref } from 'vue'
-    import { ErrorMessage, Field, Form } from 'vee-validate'
-    import * as Yup from 'yup'
-    import Swal from 'sweetalert2'
+    import { computed, defineComponent, reactive, ref } from 'vue'
+    import { required, email } from '@vuelidate/validators'
+    import useVuelidate from '@vuelidate/core'
+    import { useAuth } from '@/store'
 
     export default defineComponent({
         name: 'ForgotPassword',
-        components: {
-            Field,
-            Form,
-            ErrorMessage
-        },
-        setup() {
-            const submitButton = ref<HTMLButtonElement | null>(null)
 
-            //Create form validation object
-            const forgotPassword = Yup.object().shape({
-                email: Yup.string().email().required().label('Email')
+        setup() {
+            const auth = useAuth()
+            const loading = ref(false)
+
+            const state = reactive({
+                email: ''
             })
 
-            //Form submit function
-            const onSubmitForgotPassword = async () => {
-                return true
+            const rules = {
+                email: { email, required }
+            }
+
+            const v$ = useVuelidate(rules, state)
+
+            const isValidForm = computed(() => {
+                return !v$.value.$invalid
+            })
+
+            const submitForgot = async () => {
+                if (isValidForm.value) {
+                    loading.value = true
+
+                    auth.forgot(state.email).finally(() => {
+                        loading.value = false
+                    })
+                }
             }
 
             return {
-                onSubmitForgotPassword,
-                forgotPassword,
-                submitButton
+                loading,
+                state,
+                v$,
+                isValidForm,
+                submitForgot
             }
         }
     })
 </script>
+
+<style>
+    #k-forgot {
+        @apply w-full sm:w-96;
+    }
+</style>

@@ -11,22 +11,11 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
         name: 'dashboard',
-        component: () => import('@/views/dashboard.vue')
+        component: () => import('./../views/dashboard.vue'),
+        meta: {
+            public: true
+        }
     }
-    // {
-    //     path: '/dashboard/pedidos',
-    //     name: 'dashboardOrders',
-    //     component: () =>
-    //         import('@/views/dashboard/orders/dashboard_orders.vue'),
-    //     meta: {
-    //         title: 'Dashboard',
-    //         auth: {
-    //             strict: true,
-    //             roles: ['AdminCalltekDashboard.view']
-    //         },
-    //         breads: false
-    //     }
-    // },
 ]
 
 function beforeEach(
@@ -40,6 +29,8 @@ function beforeEach(
     const homepage = config.get('homepage')
     const isPublic = to.meta.public ? to.meta.public : false
 
+    console.log(_from.name, to.name)
+
     // const roles: any = to.meta.auth
     //     ? to.meta.auth
     //     : { strict: false, roles: [] }
@@ -49,9 +40,6 @@ function beforeEach(
     if (!auth.isLoggedIn && !isPublic) {
         // Redirect to login if user not logged in
         next({ name: 'login' })
-    } else if (auth.isLoggedIn && to.name === 'login') {
-        // Redirect to homepage if user logged in and is in login page
-        next({ name: homepage })
     } else if (hasAccess) {
         // Set page title
         const title = typeof to.meta.title === 'string' ? to.meta.title : ''

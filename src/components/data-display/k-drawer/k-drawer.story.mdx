@@ -1,0 +1,129 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import { ref, computed } from 'vue';
+import KDrawer from './k-drawer.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KDrawer },
+    setup() {
+      const visible = ref(false)
+      const isVisible = computed(() => {
+        if(args.visible !== undefined) return args.visible
+        return visible.value
+      })
+      return { args, visible, isVisible };
+    },
+    template: `
+    <k-button @click="visible = !visible">Open</k-button>
+    <k-drawer v-bind="args" v-model="visible">
+      TEST
+    </k-drawer>`
+});
+
+<Meta title="Data Display/Drawer" component={KDrawer} argTypes={renderArgs(KDrawer)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media2.giphy.com/media/xT5LMHyyxpXGZuX36o/giphy.gif?cid=ecf05e47fw3g2thf0v4klq5s3iy1p111llojem9iolq802wo&rid=giphy.gif&ct=g">💭 KDrawer</SHead>
+
+# KDrawer
+Con el componente `k-drawer` puedes crear un contenedor flotante en el que incluir formularios o muestras de información.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})} args={{title:'Lorem ipsum dolor sit'}}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Posicion**
+Puedes especificar la posición del drawer con la propiedad `placement`
+
+<Canvas>
+  <Story name="Placement" argTypes={renderArgs(KDrawer, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDrawer },
+        setup() {
+          const visible = ref({
+            top: false,
+            left: false,
+            bottom: false,
+            right: false,
+          })
+          return { visible };
+        },
+        template: `
+          <div class="flex gap-4">
+            <k-button @click="visible.top = true">Open TOP</k-button>
+            <k-button @click="visible.left = true">Open LEFT</k-button>
+            <k-button @click="visible.bottom = true">Open BOTTOM</k-button>
+            <k-button @click="visible.right = true">Open RIGHT</k-button>
+          </div>
+          <k-drawer placement="top" v-model="visible.top">
+            DRAWER ON TOP
+          </k-drawer>
+          <k-drawer placement="left" v-model="visible.left">
+            DRAWER ON LEFT
+          </k-drawer>
+          <k-drawer placement="bottom" v-model="visible.bottom">
+            DRAWER ON BOTTOM
+          </k-drawer>
+          <k-drawer placement="right" v-model="visible.right">
+            DRAWER ON RIGHT
+          </k-drawer>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Overlay**
+Puedes eliminar el overlay definiendo la propiedad `backdrop` a false
+
+<Canvas>
+  <Story name="Backdrop" argTypes={renderArgs(KDrawer, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDrawer },
+        setup() {
+          const visible = ref(false)
+          return { visible };
+        },
+        template: `
+          <k-button @click="visible = true">Open</k-button>
+          <k-drawer v-model="visible" :backdrop="false">
+            DRAWER
+          </k-drawer>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Header/Footer**
+Puedes modificar el `header` y el `footer` del drawer con los slots correspondientes o con la propiedad `title` si quieres ser mas minimal.
+
+<Canvas>
+  <Story name="Header/Footer" argTypes={renderArgs(KDrawer, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDrawer },
+        setup() {
+          const visible = ref(false)
+          return { visible };
+        },
+        template: `
+          <k-button @click="visible = true">Open</k-button>
+          <k-drawer v-model="visible" :backdrop="false">
+            DRAWER
+            <template #header>
+              <h1 class="text-xl font-bold dark:text-white">Header</h1>
+            </template>
+            <template #footer>
+              <k-button>Save</k-button>
+            </template>
+          </k-drawer>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

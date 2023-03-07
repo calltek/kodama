@@ -67,7 +67,7 @@ export default (
             // the 404 route, when none of the above matches
             path: '/404',
             name: '404',
-            component: () => import('../views/errors/404.vue'),
+            component: () => import('../views/errors/404/404.vue'),
             meta: {
                 title: 'Página no encontrada',
                 public: true
@@ -77,7 +77,7 @@ export default (
             // the 404 route, when none of the above matches
             path: '/403',
             name: '403',
-            component: () => import('../views/errors/403.vue'),
+            component: () => import('../views/errors/403/403.vue'),
             meta: {
                 title: 'Página no encontrada',
                 public: true
@@ -87,7 +87,7 @@ export default (
             // the 404 route, when none of the above matches
             path: '/500',
             name: '500',
-            component: () => import('../views/errors/500.vue'),
+            component: () => import('../views/errors/500/500.vue'),
             meta: {
                 title: 'Error interno',
                 public: true

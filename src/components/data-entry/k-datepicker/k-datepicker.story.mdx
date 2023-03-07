@@ -1,0 +1,262 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+import { ref } from 'vue'
+import KDatepicker from './k-datepicker.vue';
+
+export const Template = (args) => ({
+    components: { KDatepicker },
+    setup() {
+      return { args };
+    },
+    template: '<k-card><k-datepicker v-bind="args"></k-datepicker></k-card>'
+});
+
+<Meta title="Data Entry/Datepicker" component={KDatepicker} argTypes={renderArgs(KDatepicker)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media2.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif?cid=ecf05e47k3mnhrb7yc36brvbtq2tz34x1c5odz3ckvei9tmc&rid=giphy.gif&ct=g">📆 KDatepicker</SHead>
+
+# KDatepicker
+Con el componente `k-datepicker` puedes seleccionar una fecha o un rango de ellas.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Hora**
+Si necesitas especificar una hora aplica el atributo `time` a true.
+
+<Canvas>
+  <Story name="Time" argTypes={renderArgs(KDatepicker, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDatepicker },
+        setup() {
+          const data = ref(0)
+          return { data };
+        },
+        template: `
+          <k-card>
+            <k-datepicker time>Time mode</k-datepicker>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Rango**
+Puedes definir un rango de fechas activando la propiedad `range`.
+
+Tambien puedes especificar un numero mínimo y máximo de días con las propiedades `minRange` y `maxRange`.
+
+<Canvas>
+  <Story name="Range" argTypes={renderArgs(KDatepicker, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDatepicker },
+        setup() {
+          const data = ref(0)
+          return { data };
+        },
+        template: `
+          <k-card class="flex flex-col gap-8">
+            <k-datepicker class="mr-4">Sin Rango</k-datepicker>
+            <k-datepicker range>Con Rango</k-datepicker>
+            <k-datepicker range min-range="3">Con Rango <sup>(Mínimo 3 dias)</sup></k-datepicker>
+            <k-datepicker range max-range="5">Con Rango <sup>(Máximo 5 dias)</sup></k-datepicker>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+
+## **Multi Calendario**
+Al establecer la propiedad `multi` a true se añaden dos calendarios. Útil para el modo rango de fechas.
+
+<Canvas>
+  <Story name="Multi" argTypes={renderArgs(KDatepicker, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDatepicker },
+        template: `
+          <k-card>
+            <k-datepicker multi>Multi mode</k-datepicker>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Fechas Fijas**
+Puedes fijar la fecha de inicio o de fin con las propiedades `fixedStart` y `fixedEnd`.
+
+<Canvas>
+  <Story name="Fixed Dates" argTypes={renderArgs(KDatepicker, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDatepicker },
+        setup() {
+          const dates = ref(['2023-02-01', '2023-02-20']);
+          {/* const startDate = new Date();
+          const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
+          date.value = [startDate, endDate]; */}
+          return { dates };
+        },
+        template: `
+          <k-card class="flex flex-col gap-8">
+            <k-datepicker v-model="dates" range fixed-start :clearable="false">Inicio fijo</k-datepicker>
+            <k-datepicker v-model="dates" range fixed-start :clearable="false">Inicio fijo</k-datepicker>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Fechas Mínimas/Máximas**
+Puedes fijar la fecha de inicio o de fin con las propiedades `fixedStart` y `fixedEnd`.
+
+<Canvas>
+  <Story name="Min/Max" argTypes={renderArgs(KDatepicker, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDatepicker },
+        setup() {
+          const dates = ref(['2023-02-01', '2023-02-20']);
+          return { dates };
+        },
+        template: `
+          <k-card class="flex flex-col gap-8">
+            <k-datepicker v-model="dates" range min-range="">Inicio fijo</k-datepicker>
+            <k-datepicker v-model="dates" range fixed-start :clearable="false">Inicio fijo</k-datepicker>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+
+## **Inline**
+Elimina el input y muestra el calendario en linea con la propiedad `inline`
+
+<Canvas>
+  <Story name="Inline" argTypes={renderArgs(KDatepicker, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDatepicker },
+        setup() {
+          const data = ref(0)
+          return { data };
+        },
+        template: `
+          <k-card>
+            <k-datepicker inline></k-datepicker>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Estado**
+Puedes modificar el color del componente con la propiedad `color`
+
+<Canvas>
+  <Story name="Status" argTypes={renderArgs(KDatepicker, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDatepicker },
+        setup() {
+          const data = ref(0)
+          return { data };
+        },
+        template: `
+          <k-card class="flex flex-col gap-8">
+            <k-datepicker status="danger" class="mr-4" fieldset>Danger</k-datepicker>
+            <k-datepicker status="warning" class="mr-4" fieldset>Warning</k-datepicker>
+            <k-datepicker status="success" class="mr-4" fieldset>Success</k-datepicker>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Errors**
+Define una lista de errores del input. Se mostrará un icono de alerta con el primer error.
+
+<Canvas>
+  <Story name="Errors" argTypes={renderArgs(KDatepicker, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDatepicker },
+        setup() {
+          return { errors : [{$message: 'Lorem ipsum dolor sit'}] };
+        },
+        template: `
+          <k-card class="flex flex-col gap-12">
+            <k-datepicker :errors="errors">Label MD</k-datepicker>
+            <k-datepicker fieldset :errors="errors">Label MD</k-datepicker>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Sizes**
+Puedes establecer distintos tamaños que van desde `xs` hasta `lg`.
+
+<Canvas>
+  <Story name="Sizes" argTypes={renderArgs(KDatepicker, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDatepicker },
+        setup() {
+          const data = ref(0)
+          return { data };
+        },
+        template: `
+          <k-card class="flex flex-col gap-8">
+            <k-datepicker size="xs" class="mr-4" >Label XS</k-datepicker>
+            <k-datepicker size="sm" class="mr-4" >Label SM</k-datepicker>
+            <k-datepicker size="md" class="mr-4" >Label MD</k-datepicker>
+            <k-datepicker size="lg">Label LG</k-textarea>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Fieldset**
+Aplica el estilo de los inputs con la propiedad `fieldset`
+
+<Canvas>
+  <Story name="Fieldset" argTypes={renderArgs(KDatepicker, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDatepicker },
+        setup() {
+          const data = ref(0)
+          return { data };
+        },
+        template: `
+          <k-card class="flex flex-col gap-8">
+            <k-datepicker size="xs" class="mr-4" fieldset >Label XS</k-datepicker>
+            <k-datepicker size="sm" class="mr-4" fieldset>Label SM</k-datepicker>
+            <k-datepicker size="md" class="mr-4" fieldset>Label MD</k-datepicker>
+            <k-datepicker size="lg" fieldset>Label LG</k-textarea>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

@@ -10,17 +10,17 @@ const DocMenuConfig = (): Menu[] => {
                 {
                     title: 'Dashboard',
                     route: '/dashboard',
-                    icon: ['fad', 'fa-tachometer-fast'],
+                    icon: 'tachometer-fast',
                     pages: [
                         {
                             title: 'Estadístidas de pedidos',
-                            route: { name: 'dashboardOrders' },
-                            icon: ['fad', 'fa-box-taped']
+                            route: { name: '' },
+                            icon: 'box-taped'
                         },
                         {
                             title: 'Estadístidas de envíos',
-                            route: { name: 'dashboardShipments' },
-                            icon: ['fad', 'fa-box-taped']
+                            route: { name: '' },
+                            icon: 'box-taped'
                         }
                     ],
                     auth: auth.checkAuth()
@@ -33,19 +33,19 @@ const DocMenuConfig = (): Menu[] => {
                 {
                     title: 'Productos',
                     route: '/productos',
-                    icon: ['fad', 'fa-box-taped'],
+                    icon: 'box-taped',
                     pages: [
                         {
                             title: 'Listado de productos',
                             route: '/productos',
                             disabled: true,
-                            icon: ['fad', 'fa-box-taped'],
+                            icon: 'box-taped',
                             auth: auth.checkAuth()
                         },
                         {
                             title: 'Listados de stock',
-                            route: { name: 'productStocks' },
-                            icon: ['fad', 'fa-box-taped'],
+                            route: { name: '' },
+                            icon: 'box-taped',
                             auth: auth.checkAuth()
                         }
                     ]
@@ -54,21 +54,21 @@ const DocMenuConfig = (): Menu[] => {
                     title: 'Categorías',
                     route: '/categorias',
                     disabled: true,
-                    icon: ['fad', 'fa-folder-open'],
+                    icon: 'folder-open',
                     auth: auth.checkAuth()
                 },
                 {
-                    title: 'Catacterísticas',
+                    title: 'Características',
                     route: '/caracteristicas',
                     disabled: true,
-                    icon: ['fad', 'fa-tags'],
+                    icon: 'tags',
                     auth: auth.checkAuth()
                 },
                 {
                     title: 'Tallas',
                     route: '/tallas',
                     disabled: true,
-                    icon: ['fad', 'fa-ruler'],
+                    icon: 'ruler',
                     auth: auth.checkAuth()
                 }
             ]
@@ -80,14 +80,14 @@ const DocMenuConfig = (): Menu[] => {
                     title: 'Pedidos',
                     route: '/pedidos',
                     disabled: false,
-                    icon: ['fad', 'fa-shopping-cart'],
+                    icon: 'shopping-cart',
                     auth: auth.checkAuth()
                 },
                 {
                     title: 'Devoluciones',
                     route: '/devoluciones',
                     disabled: false,
-                    icon: ['fad', 'fa-undo-alt'],
+                    icon: 'undo-alt',
                     auth: auth.checkAuth()
                 }
             ]
@@ -99,14 +99,14 @@ const DocMenuConfig = (): Menu[] => {
                     title: 'Cupones',
                     route: '/cupones',
                     disabled: true,
-                    icon: ['fad', 'fa-barcode-alt'],
+                    icon: 'barcode-alt',
                     auth: auth.checkAuth()
                 },
                 {
                     title: 'Promociones',
                     route: '/promociones',
                     disabled: true,
-                    icon: ['fad', 'fa-badge-percent'],
+                    icon: 'badge-percent',
                     auth: auth.checkAuth()
                 }
             ],
@@ -120,8 +120,8 @@ const DocMenuConfig = (): Menu[] => {
             pages: [
                 {
                     title: 'Agrupaciones',
-                    route: { name: 'groupingList' },
-                    icon: ['fad', 'fa-pallet-boxes']
+                    route: { name: '' },
+                    icon: 'pallet-boxes'
                 }
             ],
             auth: auth.checkAuth()

@@ -7,7 +7,7 @@
         >
             <slot name="header-left">
                 <h3 class="k-table-header-left">
-                    <k-title :size="4" bolder>
+                    <k-title :size="5" bold>
                         <slot name="title" :selected="selected" :query="query">
                             Listado
                         </slot>
@@ -18,9 +18,9 @@
                                 :selected="selected"
                                 :query="query"
                             >
-                                <span class="whitespace-nowrap"
-                                    >{{ total }} registros</span
-                                >
+                                <span class="whitespace-nowrap font-normal">
+                                    {{ total }} registros
+                                </span>
                             </slot>
                         </template>
                     </k-title>

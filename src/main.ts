@@ -14,20 +14,14 @@ import { init as createApp } from './config'
 import { Menu } from './config/_menu'
 import { CustomConfig as Config } from './config/_settings'
 
-// Plugins
-import { moment } from './plugins'
-
 // System store
-import { useConfig, useBody, useAuth } from './store'
+import { useConfig, useAuth } from './store'
 
 export {
     // App
     createApp,
-    // Plugins
-    moment,
     // Store
     useConfig,
-    useBody,
     useAuth,
     // Router
     useRouter

@@ -10,7 +10,9 @@ export const Template = (args) => ({
       return { args };
     },
     template: `
-      <k-logo v-bind="args" />
+      <k-card>
+        <k-logo v-bind="args" />
+      </k-card>
     `
 });
 
@@ -35,7 +37,7 @@ Con el atributo `dark` o `light` puedes forzar el modo oscuro o claro del logo.
         components: { KLogo },
         template: `
           <div class="flex flex-row gap-6">
-            <div class="bg-gray-900 p-5 rounded-lg">
+            <div class="bg-gray-800 p-5 rounded-lg">
               <k-logo dark />
             </div>
             <div class="bg-white p-5 rounded-lg">
@@ -58,7 +60,7 @@ Con el atributo `side` se muestra el icono en formato rectangular en vez de cuad
         components: { KLogo },
         template: `
           <div class="flex flex-row gap-6">
-            <div class="bg-gray-900 p-5 rounded-lg">
+            <div class="bg-gray-800 p-5 rounded-lg">
               <k-logo dark side />
             </div>
             <div class="bg-white p-5 rounded-lg">

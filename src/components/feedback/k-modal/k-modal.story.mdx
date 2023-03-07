@@ -1,0 +1,146 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import { ref } from 'vue';
+import KModal from './k-modal.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KModal },
+    setup() {
+      const visible = ref(false)
+      return { args, visible };
+    },
+    template: '<k-modal v-bind="args" v-model="visible"><k-skeleton></k-skeleton></k-modal><k-button @click="visible = true">Open Modal</k-button>'
+});
+
+<Meta title="Feedback/Modal" component={KModal} argTypes={renderArgs(KModal)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media0.giphy.com/media/dUJxUPSkmZBqE/giphy.gif?cid=ecf05e47bc59lioy7qbcd3hxymndanryn3rqx3dupt1obgzr&rid=giphy.gif&ct=g">💭 KModal</SHead>
+
+# KModal
+Con el componente `k-tooltip` puedes mostrar información adicional sobre un elemento al pasar por encima o clicar sobre el.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})} args={{title:'Lorem ipsum dolor sit'}}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Titulo**
+Puedes definir el titulo del modal con la propiedad `title`
+
+<Canvas>
+  <Story name="Title" argTypes={renderArgs(KModal, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KModal },
+        setup() {
+          const visible = ref(true)
+          return { visible };
+        },
+        template: `
+          <k-modal v-model="visible" title="Lorem ipsum dolor sit" :closable="false"><k-skeleton></k-modal>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Header/Footer**
+Puedes personalizar el `header` y `footer` del modal con los slots correspondientes. El slot del `header`reemplazará la propiedad title.
+
+<Canvas>
+  <Story name="Header/Footer" argTypes={renderArgs(KModal, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KModal },
+        setup() {
+          const visible = ref(true)
+          return { visible };
+        },
+        template: `
+          <k-modal v-model="visible" :closable="false">
+            <template #header>
+              <k-title :size="5" bold>Modal Title</k-title>
+            </template>
+            <k-skeleton>
+            <template #footer>
+              <div class="flex justify-end gap-4 w-full">
+                <k-button color="danger" size="sm">Cancelar</k-button>
+                <k-button size="sm">Aceptar</k-button>
+              </div>
+            </template>
+          </k-modal>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Posición**
+Puedes modificar la posición del modal con `placement` aunque rara vez habrá que hacerlo.
+
+<Canvas>
+  <Story name="Placement" argTypes={renderArgs(KModal, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KModal },
+        setup() {
+          const visible = ref(true)
+          const placement = ref('center-center')
+          return { visible, placement };
+        },
+        template: `
+          <k-modal v-model="visible" :placement="placement" :closable="false">
+            <div class="flex gap-6 flex-wrap justify-center">
+              <k-button @click="placement = 'top-center'">top-center</k-button>
+              <k-button @click="placement = 'top-left'">top-left</k-button>
+              <k-button @click="placement = 'top-right'">top-right</k-button>
+              <k-button @click="placement = 'center-center'">center-center</k-button>
+              <k-button @click="placement = 'center-left'">center-left</k-button>
+              <k-button @click="placement = 'center-right'">center-right</k-button>
+              <k-button @click="placement = 'bottom-center'">bottom-center</k-button>
+              <k-button @click="placement = 'bottom-left'">bottom-left</k-button>
+              <k-button @click="placement = 'bottom-right'">bottom-right</k-button>
+            </div>
+            <template #footer>
+              <b>Current placement:</b> {{placement}}
+            </template>
+          </k-modal>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Tamaños**
+Puedes modificar el tamaño del modal con `size`.
+
+<Canvas>
+  <Story name="Size" argTypes={renderArgs(KModal, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KModal },
+        setup() {
+          const visible = ref(true)
+          const size = ref('lg')
+          return { visible, size };
+        },
+        template: `
+          <k-modal v-model="visible" :size="size" :closable="false">
+            <div class="flex gap-6 flex-wrap justify-center">
+              <k-button @click="size = 'xs'">XS</k-button>
+              <k-button @click="size = 'sm'">SM</k-button>
+              <k-button @click="size = 'md'">MD</k-button>
+              <k-button @click="size = 'lg'">LG</k-button>
+              <k-button @click="size = 'xl'">XL</k-button>
+            </div>
+            <template #footer>
+              <b>Current size:</b> {{size}}
+            </template>
+          </k-modal>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

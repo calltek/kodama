@@ -1,7 +1,7 @@
 import { App } from 'vue'
 
 // Layouts
-import KLayout from '../layouts/main/partials/layout.vue'
+import KLayout from '../layouts/main/partials/layout/layout.vue'
 
 // General
 import KButton from '../components/general/k-button/k-button.vue'
@@ -22,6 +22,9 @@ import KImage from '../components/data-display/k-image/k-image.vue'
 import KLogo from '../components/data-display/k-logo/k-logo.vue'
 import KTable from '../components/data-display/k-table/k-table.vue'
 import KDate from '../components/data-display/k-date/k-date.vue'
+import KCard from '../components/data-display/k-card/k-card.vue'
+import KTooltip from '../components/data-display/k-tooltip/k-tooltip.vue'
+import KDrawer from '../components/data-display/k-drawer/k-drawer.vue'
 
 // Feedback
 import KModal from '../components/feedback/k-modal/k-modal.vue'
@@ -29,19 +32,19 @@ import KConfirm from '../components/feedback/k-confirm/k-confirm.vue'
 import KEmpty from '../components/feedback/k-empty/k-empty.vue'
 import KLoading from '../components/feedback/k-loading/k-loading.vue'
 import KHelp from '../components/feedback/k-help/k-help.vue'
+import KAlert from '../components/feedback/k-alert/k-alert.vue'
+import KSkeleton from '../components/feedback/k-skeleton/k-skeleton.vue'
 
 // Navigation
-import KDropdownMenu from '../components/navigation/k-dropdown/k-dropdown-menu.vue'
-import KDropdownSeparator from '../components/navigation/k-dropdown/k-dropdown-separator.vue'
-import KDropdownSubmenu from '../components/navigation/k-dropdown/k-dropdown-submenu.vue'
-import KDropdownTitle from '../components/navigation/k-dropdown/k-dropdown-title.vue'
 import KDropdown from '../components/navigation/k-dropdown/k-dropdown.vue'
+import KDropdownItem from '../components/navigation/k-dropdown/k-dropdown-item.vue'
+import KDropdownDivider from '../components/navigation/k-dropdown/k-dropdown-divider.vue'
 
 // Other
 import KBubbles from '../components/miscelanea/k-bubbles/k-bubbles.vue'
 
 // Vendor
-import Popper from 'vue3-popper'
+import 'flowbite'
 
 export default (
     app: App,
@@ -69,6 +72,9 @@ export default (
     app.component('KLogo', KLogo)
     app.component('KTable', KTable)
     app.component('KDate', KDate)
+    app.component('KCard', KCard)
+    app.component('KTooltip', KTooltip)
+    app.component('KDrawer', KDrawer)
 
     // Feedback
     app.component('KModal', KModal)
@@ -76,19 +82,16 @@ export default (
     app.component('KConfirm', KConfirm)
     app.component('KLoading', KLoading)
     app.component('KHelp', KHelp)
+    app.component('KAlert', KAlert)
+    app.component('KSkeleton', KSkeleton)
 
     // Navigation
     app.component('KDropdown', KDropdown)
-    app.component('KDropdownMenu', KDropdownMenu)
-    app.component('KDropdownSeparator', KDropdownSeparator)
-    app.component('KDropdownSubmenu', KDropdownSubmenu)
-    app.component('KDropdownTitle', KDropdownTitle)
+    app.component('KDropdownItem', KDropdownItem)
+    app.component('KDropdownDivider', KDropdownDivider)
 
     // Other
     app.component('KBubbles', KBubbles)
-
-    // Vendor
-    app.component('Popper', Popper)
 
     // Custom components
     if (frontendComponents) {

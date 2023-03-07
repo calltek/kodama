@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import _ from 'lodash'
-import { AuthParams, AuthUser } from './auth.schema'
+import { AuthUser } from './auth.schema'
 
 const defaultState = {
     id: 0,
@@ -23,25 +23,37 @@ export const useAuth = defineStore('auth', {
         profile: (state) => state
     },
     actions: {
-        login: function (params: AuthParams): Promise<AuthUser> {
+        login: function (
+            username: string,
+            password: string
+        ): Promise<AuthUser> {
             return new Promise((resolve) => {
-                const user = {
-                    id: 1,
-                    token: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-                    firstname: 'Jhon',
-                    lastname: 'Doe',
-                    email: 'jhon@doe.com',
-                    group: 'admin'
-                }
+                setTimeout(() => {
+                    const user = {
+                        id: 1,
+                        token: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+                        firstname: 'Jhon',
+                        lastname: 'Doe',
+                        email: 'jhon@doe.com',
+                        group: 'admin'
+                    }
 
-                this.id = user.id
-                this.token = user.token
-                this.firstname = user.firstname
-                this.lastname = user.lastname
-                this.email = user.email
-                this.group = user.group
+                    this.id = user.id
+                    this.token = user.token
+                    this.firstname = user.firstname
+                    this.lastname = user.lastname
+                    this.email = user.email
+                    this.group = user.group
 
-                resolve(user)
+                    resolve(user)
+                }, 2000)
+            })
+        },
+        forgot(email: string): Promise<boolean> {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(true)
+                }, 2000)
             })
         },
         logout(): boolean {

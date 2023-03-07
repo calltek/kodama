@@ -1,27 +1,30 @@
 <template>
-    <popper arrow>
+    <k-tooltip :visible="visible">
         <k-icon
             icon="calendar"
             :class="{ 'text-primary': defaultValue }"
-            class="ml-2"
+            class="ml-2 cursor-pointer"
+            @click="visible = !visible"
         />
 
         <template #content>
             <k-datepicker
                 :min-date="min"
                 :max-date="max"
+                :range="true"
                 :time="false"
+                :clearable="true"
                 :value="defaultValue"
                 inline
                 @change="filter"
             />
         </template>
-    </popper>
+    </k-tooltip>
 </template>
 
 <script lang="ts">
-    import { computed, defineComponent, PropType } from 'vue'
-    import { moment } from '@/plugins'
+    import { computed, defineComponent, PropType, ref } from 'vue'
+    import { dayjs } from '@/plugins'
 
     export default defineComponent({
         name: 'KTableFilterDate',
@@ -36,11 +39,13 @@
             },
             max: {
                 type: String,
-                default: moment().format('YYYY-MM-DD')
+                default: dayjs().format('YYYY-MM-DD')
             }
         },
         emits: ['filter'],
         setup(props, ctx) {
+            const visible = ref(false)
+
             const defaultValue = computed(() => {
                 if (props.value && props.value.$gte && props.value.$lte) {
                     return [props.value.$gte, props.value.$lte]
@@ -56,9 +61,11 @@
                 }
 
                 ctx.emit('filter', data)
+
+                visible.value = false
             }
 
-            return { filter, defaultValue }
+            return { filter, defaultValue, visible }
         }
     })
 </script>

@@ -1,29 +1,30 @@
 <template>
-    <popper arrow>
+    <k-tooltip :visible="visible">
         <k-icon
             icon="filter"
             :class="{ 'text-primary': defaultValue }"
-            class="ml-2"
+            class="ml-2 cursor-pointer"
+            @click="visible = !visible"
         />
 
         <template #content>
-            <div class="flex align-items-center p-4">
+            <div class="flex items-center">
                 <k-input
                     v-model="inputText"
                     type="text"
                     size="sm"
-                    :width="20"
+                    :width="150"
                     placeholder="Lorem ipsum"
                     @keyup.enter="filter"
                 />
 
-                <div class="ms-4 flex align-items-center">
+                <div class="ml-4 flex items-center">
                     <k-button
                         icon="xmark"
                         color="danger"
                         size="sm"
                         title="Resetear"
-                        class="me-2"
+                        class="mr-2"
                         @click="reset"
                     />
 
@@ -37,12 +38,11 @@
                 </div>
             </div>
         </template>
-    </popper>
+    </k-tooltip>
 </template>
 
 <script lang="ts">
     import { computed, defineComponent, onMounted, PropType, ref } from 'vue'
-    import { uid } from '../../../../helpers/utils'
 
     export default defineComponent({
         name: 'KTableFilterText',
@@ -62,14 +62,9 @@
         },
         emits: ['filter'],
         setup(props, ctx) {
-            const id = uid()
             const dropdown = ref('dropdown')
             const inputText = ref('')
-
-            const hideModal = () => {
-                // const bs = new bootstrap.Dropdown(dropdown.value)
-                // bs.hide()
-            }
+            const visible = ref(false)
 
             const defaultValue = computed(() => {
                 if (props.value && props.value.$like) {
@@ -89,18 +84,17 @@
                 const data = {
                     $like: inputText.value
                 }
-
-                hideModal()
                 ctx.emit('filter', data)
+                visible.value = false
             }
 
             const reset = () => {
-                hideModal()
                 inputText.value = ''
                 ctx.emit('filter', null)
+                visible.value = false
             }
 
-            return { id, dropdown, filter, defaultValue, reset, inputText }
+            return { visible, dropdown, filter, defaultValue, reset, inputText }
         }
     })
 </script>

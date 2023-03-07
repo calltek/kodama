@@ -4,22 +4,19 @@
 
 <script lang="ts">
     import { defineComponent, nextTick, onMounted, onBeforeUnmount } from 'vue'
-    import { useConfig, useStyle } from '../store'
+    import { useConfig } from '../store'
     import { logo, fontAwesomeKit } from '../helpers/config'
 
     export default defineComponent({
         name: 'KodamaUI',
         setup() {
             const config = useConfig()
-            const style = useStyle()
-
-            // Store Tailwind config in store
-            style.init()
 
             const observer: MutationObserver = new MutationObserver(
                 (mutations) => {
                     for (const m of mutations) {
-                        const newValue = m.target.getAttribute(m.attributeName)
+                        const n: any = m
+                        const newValue = n.target.getAttribute(m.attributeName)
 
                         nextTick(() => {
                             console.log('modo', newValue)
@@ -124,11 +121,14 @@
                 replaceFavicon()
                 addFontAwesomeKit()
 
-                observer.observe(document.querySelector('html'), {
-                    attributes: true,
-                    attributeOldValue: true,
-                    attributeFilter: ['class']
-                })
+                const html = document.querySelector('html')
+                if (html) {
+                    observer.observe(html, {
+                        attributes: true,
+                        attributeOldValue: true,
+                        attributeFilter: ['class']
+                    })
+                }
             })
         }
     })

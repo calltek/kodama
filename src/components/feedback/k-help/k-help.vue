@@ -1,9 +1,9 @@
 <template>
-    <popper arrow :content="text" hover>
-        <k-icon type="fad" :icon="icon" />
+    <k-tooltip :title="text" hover>
+        <k-icon type="fad" :icon="icon" class="dark:text-white text-gray-200" />
 
         <template #content>
-            <div class="flex flex-col -mx-4 -my-2 text-sm">
+            <div class="flex flex-col text-sm">
                 <div
                     class="border-b border-b-gray-600 px-4 py-1 text-center uppercase font-bold flex justify-center"
                 >
@@ -15,7 +15,7 @@
                 </div>
             </div>
         </template>
-    </popper>
+    </k-tooltip>
 </template>
 
 <script lang="ts">

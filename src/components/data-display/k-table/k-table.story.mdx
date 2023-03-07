@@ -53,25 +53,3 @@ Existe una modo `mobile` que permite diseñar la vista de cada registro de forma
   {Template.bind({})}
 </Story>
 
-## **Modo Oscuro**
-Con el atributo `dark` o `light` puedes forzar el modo oscuro o claro del logo.
-
-<Canvas>
-  <Story name="Dark/Light" argTypes={renderArgs(KTable, {}, true)} parameters={renderParameters({showPanel: false})}>
-    {() => {
-      return {
-        components: { KTable },
-        template: `
-          <div class="flex flex-row gap-6">
-            <div class="bg-gray-900 p-5 rounded-lg">
-              <k-logo dark />
-            </div>
-            <div class="bg-white p-5 rounded-lg">
-              <k-logo light />
-            </div>
-          </div>
-        `,
-      };
-    }}
-  </Story>
-</Canvas>

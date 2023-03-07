@@ -9,7 +9,7 @@ export const Template = (args) => ({
     setup() {
       return { args };
     },
-    template: '<k-input v-bind="args">🦄 Label</k-input>'
+    template: '<k-card><k-input v-bind="args">🦄 Label</k-input></k-card>'
 });
 
 <Meta title="Data Entry/Input" component={KInputText} argTypes={renderArgs(KInputText)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
@@ -35,9 +35,11 @@ Se puede cambiar el tipo de input a `text`, `password` y `number`.
       return {
         components: { KInputText },
         template: `
-          <k-input type="text" class="mr-4">Texto</k-input>
-          <k-input type="password" class="mr-4">Contraseña</k-input>
-          <k-input type="number">Numero</k-input>
+          <k-card class="flex flex-column gap-4">
+            <k-input type="text" class="mr-4">Texto</k-input>
+            <k-input type="password" class="mr-4">Contraseña</k-input>
+            <k-input type="number">Numero</k-input>
+          </k-card>
         `,
       };
     }}
@@ -57,20 +59,20 @@ Puedes establecer distintos tamaños que van desde `xs` hasta `lg`.
           return { data };
         },
         template: `
-          <div class="flex flex-col">
-            <div class="flex flex-row mb-8">
+          <k-card class="flex flex-row gap-8">
+            <div class="flex flex-col gap-12">
               <k-input size="xs" class="mr-4">Label XS</k-input>
               <k-input size="sm" class="mr-4">Label SM</k-input>
               <k-input size="md" class="mr-4">Label MD</k-input>
               <k-input size="lg">Label LG</k-input>
             </div>
-            <div class="flex flex-row">
+            <div class="flex flex-col gap-12">
               <k-input size="xs" type="number" class="mr-4" v-model="data">Label XS</k-input>
               <k-input size="sm" type="number" class="mr-4" v-model="data">Label SM</k-input>
               <k-input size="md" type="number" class="mr-4" v-model="data">Label MD</k-input>
               <k-input size="lg" type="number" v-model="data">Label LG</k-input>
             </div>
-          </div>
+          </k-card>
         `,
       };
     }}
@@ -87,10 +89,12 @@ Establece el estilo `float` al input y lo dota de una animación al placeholder 
       return {
         components: { KInputText },
         template: `
-          <k-input float label="label" size="xs" class="mr-4">Label XS</k-input>
-          <k-input float size="sm" class="mr-4">Label SM</k-input>
-          <k-input float size="md" class="mr-4">Label MD</k-input>
-          <k-input float size="lg">Label LG</k-input>
+          <k-card class="flex flex-col gap-6">
+            <k-input float label="label" size="xs" class="mr-4">Label XS</k-input>
+            <k-input float size="sm" class="mr-4">Label SM</k-input>
+            <k-input float size="md" class="mr-4">Label MD</k-input>
+            <k-input float size="lg">Label LG</k-input>
+          </k-card>
         `,
       };
     }}
@@ -107,10 +111,12 @@ Establece el estilo `fieldset` el cual coloca el label en el borde superior del 
       return {
         components: { KInputText },
         template: `
-          <k-input fieldset size="xs" class="mr-4">Label XS</k-input>
-          <k-input fieldset size="sm" class="mr-4">Label SM</k-input>
-          <k-input fieldset size="md" class="mr-4">Label MD</k-input>
-          <k-input fieldset size="lg">Label LG</k-input>
+          <k-card class="flex flex-col gap-6">
+            <k-input fieldset size="xs" class="mr-4">Label XS</k-input>
+            <k-input fieldset size="sm" class="mr-4">Label SM</k-input>
+            <k-input fieldset size="md" class="mr-4">Label MD</k-input>
+            <k-input fieldset size="lg">Label LG</k-input>
+          </k-card>
         `,
       };
     }}
@@ -130,44 +136,44 @@ Define una lista de errores del input. Se mostrará un icono de alerta con el pr
           return { errors : [{$message: 'Lorem ipsum dolor sit'}] };
         },
         template: `
-          <div class="flex flex-col gap-12">
+          <k-card class="flex flex-col gap-8">
             <k-input :errors="errors">Label MD</k-input>
             <k-input float  class="mr-4" :errors="errors">Label MD</k-input>
             <k-input fieldset :errors="errors">Label MD</k-input>
-          </div>
+          </k-card>
         `,
       };
     }}
   </Story>
 </Canvas>
 
-## **Colors**
-Define una lista de errores del input. Se mostrará un icono de alerta con el primer error.
+## **Estado**
+Cambia el color del componente indicando un estado
 
 <Canvas>
-  <Story name="Colors" argTypes={renderArgs(KInputText, {}, true)} parameters={renderParameters({showPanel: false})}>
+  <Story name="Status" argTypes={renderArgs(KInputText, {}, true)} parameters={renderParameters({showPanel: false})}>
     {() => {
       return {
         components: { KInputText },
    
         template: `
-          <div class="flex flex-row gap-12">
+          <k-card class="flex flex-row gap-8">
             <div class="flex flex-col gap-12">
-              <k-input color="success">Success</k-input>
-              <k-input color="success" float>Success</k-input>
-              <k-input color="success" fieldset>Success</k-input>
+              <k-input status="success">Success</k-input>
+              <k-input status="success" float>Success</k-input>
+              <k-input status="success" fieldset>Success</k-input>
             </div>
             <div class="flex flex-col gap-12">
-              <k-input color="warning">Warning</k-input>
-              <k-input color="warning" float>Warning</k-input>
-              <k-input color="warning" fieldset>Warning</k-input>
+              <k-input status="warning">Warning</k-input>
+              <k-input status="warning" float>Warning</k-input>
+              <k-input status="warning" fieldset>Warning</k-input>
             </div>
             <div class="flex flex-col gap-12">
-              <k-input color="danger">Danger</k-input>
-              <k-input color="danger" float>Danger</k-input>
-              <k-input color="danger" fieldset>Danger</k-input>
+              <k-input status="danger">Danger</k-input>
+              <k-input status="danger" float>Danger</k-input>
+              <k-input status="danger" fieldset>Danger</k-input>
             </div>
-          </div>
+          </k-card>
         `,
       };
     }}

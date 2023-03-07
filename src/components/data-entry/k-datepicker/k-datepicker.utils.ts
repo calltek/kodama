@@ -1,17 +1,17 @@
 import { KDatepickerProps } from './k-datepicker.props'
 
-export const parseInputClass = (props: KDatepickerProps) => {
-    const classes: string[] = ['form-control', 'px-10']
+export const parseWrapperClasses = (props: KDatepickerProps) => {
+    const classes = ['k-datepicker', `k-datepicker-${props.size}`]
 
-    if (props.ghost) {
-        classes.push('form-control-flush')
-    } else if (props.solid) {
-        classes.push('form-control-solid')
+    if (props.fieldset) {
+        classes.push('k-datepicker-fieldset')
     }
 
-    if (props.size) {
-        classes.push(`form-control-${props.size}`)
+    if (props.errors.length > 0) {
+        classes.push('k-datepicker-danger')
+    } else if (props.status) {
+        classes.push(`k-datepicker-${props.status}`)
     }
 
-    return classes.join(' ')
+    return classes
 }

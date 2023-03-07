@@ -9,7 +9,7 @@ export const Template = (args) => ({
     setup() {
       return { args };
     },
-    template: '<k-textarea v-bind="args"></k-textarea>'
+    template: '<k-card><k-textarea v-bind="args"></k-textarea></k-card>'
 });
 
 <Meta title="Data Entry/Textarea" component={KTextarea} argTypes={renderArgs(KTextarea)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
@@ -38,12 +38,12 @@ Puedes establecer distintos tamaños que van desde `xs` hasta `lg`.
           return { data };
         },
         template: `
-          <div class="flex flex-col gap-8">
+          <k-card class="flex flex-col gap-8">
             <k-textarea size="xs" class="mr-4" :width="400" :min-height="100">Label XS</k-textarea>
             <k-textarea size="sm" class="mr-4" :width="400" :min-height="100">Label SM</k-textarea>
             <k-textarea size="md" class="mr-4" :width="400" :min-height="100">Label MD</k-textarea>
             <k-textarea size="lg" :width="400" :min-height="100">Label LG</k-textarea>
-          </div>
+          </k-card>
         `,
       };
     }}
@@ -62,28 +62,30 @@ Define una lista de errores del input. Se mostrará un icono de alerta con el pr
           return { errors : [{$message: 'Lorem ipsum dolor sit'}] };
         },
         template: `
-          <k-textarea :errors="errors" :width="400" :min-height="100">Label MD</k-textarea>
+          <k-card>
+            <k-textarea :errors="errors" :width="400" :min-height="100">Label MD</k-textarea>
+          </k-card>
         `,
       };
     }}
   </Story>
 </Canvas>
 
-## **Colors**
+## **Estado**
 Define una lista de errores del input. Se mostrará un icono de alerta con el primer error.
 
 <Canvas>
-  <Story name="Colors" argTypes={renderArgs(KTextarea, {}, true)} parameters={renderParameters({showPanel: false})}>
+  <Story name="Status" argTypes={renderArgs(KTextarea, {}, true)} parameters={renderParameters({showPanel: false})}>
     {() => {
       return {
         components: { KTextarea },
    
         template: `
-          <div class="flex flex-col gap-8">
-            <k-textarea color="success" :width="400" :min-height="100">Success</k-textarea>
-            <k-textarea color="warning" :width="400" :min-height="100">Warning</k-textarea>
-            <k-textarea color="danger" :width="400" :min-height="100">Danger</k-textarea>
-          </div>
+          <k-card class="flex flex-col gap-8">
+            <k-textarea status="success" :width="400" :min-height="100">Success</k-textarea>
+            <k-textarea status="warning" :width="400" :min-height="100">Warning</k-textarea>
+            <k-textarea status="danger" :width="400" :min-height="100">Danger</k-textarea>
+          </k-card>
         `,
       };
     }}

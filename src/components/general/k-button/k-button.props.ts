@@ -1,17 +1,5 @@
 import { ExtractPropTypes, PropType } from 'vue'
-import { uid } from '../../../helpers/utils'
-
-export const colors = [
-    'white',
-    'black',
-    'gray',
-    'primary',
-    'secondary',
-    'success',
-    'warning',
-    'danger',
-    'info'
-]
+import { uid, colors } from '@/helpers/utils'
 
 const Props = {
     id: {

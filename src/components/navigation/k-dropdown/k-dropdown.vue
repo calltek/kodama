@@ -1,78 +1,159 @@
 <template>
-    <div>
+    <div
+        :id="buttonId"
+        data-dropdown-toggle="dropdown"
+        class="inline-flex flex-row items-center"
+    >
+        <slot></slot>
+        <k-icon
+            v-if="submenu"
+            icon="chevron-right"
+            type="fas"
+            class="ml-auto"
+            :size="10"
+        ></k-icon>
+    </div>
+
+    <div
+        :id="menuId"
+        class="z-10 hidden bg-white divide-y divide-gray-100 dark:divide-gray-600 rounded-lg shadow w-44 dark:bg-gray-700 overflow-hidden"
+    >
         <div
-            :data-kt-menu-trigger="!disabled ? 'click' : ''"
-            data-kt-menu-placement="bottom-end"
-            data-kt-menu-flip="top-end"
+            v-if="hasSlot('header')"
+            class="px-4 py-3 text-sm text-gray-900 dark:text-white"
         >
-            <slot></slot>
+            <slot name="header"></slot>
         </div>
 
-        <div
-            :id="uniq"
-            ref="dropdown"
-            class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-primary fw-bold py-4 fs-6 overflow-auto noselect"
-            data-kt-menu="true"
-            :style="{ 'max-width': `${width}px`, 'max-height': `${height}px` }"
+        <ul
+            class="v-dropdown-items text-sm text-gray-700 dark:text-gray-200 text-left"
+            :style="ulStyle"
         >
-            <slot name="menu"></slot>
+            <slot name="content"></slot>
+        </ul>
+
+        <div
+            v-if="hasSlot('footer')"
+            class="px-4 py-3 text-sm text-gray-900 dark:text-white"
+        >
+            <slot name="footer"></slot>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-    import { defineComponent, ref, Ref, reactive, onMounted } from 'vue'
-    // import { MenuComponent } from '../../../assets/ts/components'
+    import { uid } from '@/helpers/utils'
+    import { defineComponent, ref, Ref, onMounted, watch, computed } from 'vue'
+    import { Dropdown } from 'flowbite'
+    import type { DropdownOptions } from 'flowbite'
 
     export default defineComponent({
         name: 'KDropdown',
         autoload: true,
         props: {
-            disabled: {
+            placement: {
+                type: String as () => DropdownOptions['placement'],
+                default: 'bottom',
+                options: [
+                    'top',
+                    'bottom',
+                    'left',
+                    'left-start',
+                    'left-end',
+                    'right',
+                    'right-start',
+                    'right-end'
+                ]
+            },
+            visible: {
+                type: Boolean,
+                default: undefined
+            },
+            hover: {
                 type: Boolean,
                 default: false
             },
-            width: {
-                type: Number,
-                default: 250
+            click: {
+                type: Boolean,
+                default: true
+            },
+            submenu: {
+                type: Boolean,
+                default: false
             },
             height: {
                 type: Number,
-                default: 400
+                default: 0
             }
         },
         emits: ['click'],
-        setup(_props, ctx) {
-            const uniq = 'id' + new Date().getTime()
+        setup(props, { slots }) {
+            const menuId = uid()
+            const buttonId = uid()
 
-            const dropdown: Ref<HTMLElement | undefined> = ref()
-            let instance: any = reactive({})
+            const dropdown: Ref<Dropdown | null> = ref(null)
+            const hasSlot = (name: string) => !!slots[name]
 
-            onMounted(() => {
-                if (dropdown.value) {
-                    // instance = new MenuComponent(dropdown.value, {
-                    //     dropdown: {
-                    //         hoverTimeout: 200,
-                    //         zindex: 115
-                    //     },
-                    //     accordion: {
-                    //         slideSpeed: 250,
-                    //         expand: false
-                    //     }
-                    // })
+            const ulStyle = computed((): Record<string, any> => {
+                return {
+                    maxHeight: props.height ? `${props.height}px` : 'auto',
+                    overflowY: props.height ? 'auto' : 'visible'
                 }
             })
 
-            const click = (key: string) => {
-                if (key) ctx.emit('click', key)
+            const method =
+                props.visible !== undefined
+                    ? 'none'
+                    : props.hover
+                    ? 'hover'
+                    : props.click
+                    ? 'click'
+                    : 'none'
 
-                if (dropdown.value) {
-                    // instance = MenuComponent.getInstance(dropdown.value)
-                    // instance.hide(dropdown.value)
+            const options: DropdownOptions = {
+                placement: props.placement,
+                triggerType: method,
+                offsetSkidding: 0,
+                offsetDistance: props.submenu ? 30 : 10,
+                delay: 300,
+                onHide: () => {
+                    console.log('dropdown has been hidden')
+                },
+                onShow: () => {
+                    console.log('dropdown has been shown')
+                },
+                onToggle: () => {
+                    console.log('dropdown has been toggled')
                 }
             }
 
-            return { dropdown, click, uniq }
+            onMounted(() => {
+                const $targetEl = document.getElementById(menuId)
+                const $triggerEl = document.getElementById(buttonId)
+
+                dropdown.value = new Dropdown($targetEl, $triggerEl, options)
+            })
+
+            watch(
+                () => props.visible,
+                (value) => {
+                    if (value) {
+                        dropdown.value?.show()
+                    } else {
+                        dropdown.value?.hide()
+                    }
+                }
+            )
+
+            return { dropdown, menuId, buttonId, hasSlot, ulStyle }
         }
     })
 </script>
+
+<style lang="scss">
+    .v-dropdown-items {
+        li {
+            @apply border-b border-gray-200 dark:border-gray-600 last:border-0;
+        }
+    }
+</style>

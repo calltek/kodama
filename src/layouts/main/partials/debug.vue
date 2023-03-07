@@ -1,26 +1,27 @@
 <template>
     <div v-if="debug" :class="$style.debug">
-        <div class="d-block d-sm-none">XS</div>
+        <div class="block sm:hidden">XS</div>
 
-        <div class="d-none d-sm-block d-md-none">SM</div>
+        <div class="hidden sm:block md:hidden">SM</div>
 
-        <div class="d-none d-md-block d-lg-none">MD</div>
+        <div class="hidden md:block lg:hidden">MD</div>
 
-        <div class="d-none d-lg-block d-xl-none">LG</div>
+        <div class="hidden lg:block xl:hidden">LG</div>
 
-        <div class="d-none d-xl-block d-xxl-none">XL</div>
-
-        <div class="d-none d-xxl-block">XXL</div>
+        <div class="hidden xl:block">XL</div>
     </div>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
-    import { debug } from '../../../helpers/config'
+    import { computed, defineComponent } from 'vue'
+    import { useConfig } from '@/store'
 
     export default defineComponent({
         name: 'KDebug',
         setup() {
+            const config = useConfig()
+            const debug = computed(() => config.get('debug'))
+
             return { debug }
         }
     })

@@ -1,40 +1,46 @@
 <template>
-    <tippy ref="tooltip" trigger="click" theme="light" :interactive="true">
+    <k-tooltip :visible="showTooltip">
         <template #content>
             <div
-                class="flex flex-row align-items-center py-3 px-1"
+                class="flex flex-row items-center py-3 px-1"
                 :class="$style.KConfirm"
             >
-                <k-icon :icon="icon" class="text-gray-300 me-4" size="45" />
+                <k-icon :icon="icon" class="text-gray-300 mr-4" :size="45" />
 
-                <div class="flex flex-column">
-                    <div class="mb-2 text-gray-500 fw-bold">
+                <div class="flex flex-col">
+                    <div
+                        class="mb-2 text-gray-600 dark:text-gray-200 font-bold"
+                    >
                         {{ title }}
                     </div>
 
-                    <div class="text-start">
-                        <a
-                            class="btn btn-ok btn-success btn-outline me-2"
-                            :class="$style.btn"
+                    <div class="text-right">
+                        <k-badge
+                            color="success"
+                            size="xs"
+                            class="mr-2 cursor-pointer"
                             @click="ok"
                         >
                             {{ okText }}
-                        </a>
+                        </k-badge>
 
-                        <a
-                            class="btn btn-ko btn-danger btn-outline"
-                            :class="$style.btn"
+                        <k-badge
+                            color="danger"
+                            size="xs"
+                            class="cursor-pointer"
                             @click="ko"
                         >
                             {{ koText }}
-                        </a>
+                        </k-badge>
                     </div>
                 </div>
             </div>
         </template>
 
-        <slot></slot>
-    </tippy>
+        <span @click="showTooltip = true">
+            <slot></slot>
+        </span>
+    </k-tooltip>
 </template>
 
 <script lang="ts">
@@ -63,16 +69,17 @@
         },
         emits: ['ok', 'ko'],
         setup(props, ctx) {
-            const tooltip: any = ref(null)
+            const showTooltip = ref(false)
+
             const ok = () => {
                 ctx.emit('ok')
-                tooltip?.value?.hide()
+                showTooltip.value = false
             }
             const ko = () => {
                 ctx.emit('ko')
-                tooltip?.value?.hide()
+                showTooltip.value = false
             }
-            return { tooltip, ok, ko }
+            return { showTooltip, ok, ko }
         }
     })
 </script>

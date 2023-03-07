@@ -1,6 +1,7 @@
+import { ErrorObject } from '@vuelidate/core'
 import { ExtractPropTypes, PropType } from 'vue'
 
-export const modes = ['time', 'day', 'month', 'year']
+export const modes = ['day', 'month', 'year']
 
 export type PresetRanges = {
     label: string
@@ -11,64 +12,83 @@ export type PresetRanges = {
 const Props = {
     modelValue: {
         type: [Array, String] as PropType<string[] | string>,
-        required: false
+        required: false,
+        description: 'Valor del componente'
     },
     value: {
         type: [Array, String] as PropType<string[] | string>,
-        required: false
-    },
-    format: {
-        type: String,
-        default: 'yyyy-MM-dd'
-    },
-    mode: {
-        type: String,
-        validator: (val: string) => modes.includes(val),
-        default: 'day'
+        required: false,
+        description: 'Valor del componente'
     },
     disabled: {
         type: Boolean,
-        default: false
+        default: false,
+        description: 'Desactiva el componente'
     },
     readonly: {
         type: Boolean,
-        default: false
+        default: false,
+        description: 'Desactiva la interacción con el componente'
+    },
+    clearable: {
+        type: Boolean,
+        default: false,
+        description: 'Define si el componente es se puede resetear'
     },
     required: {
         type: Boolean,
-        default: false
+        default: false,
+        description: 'Indica si el campo es requerido'
+    },
+    errors: {
+        type: Array as PropType<ErrorObject[]>,
+        required: false,
+        default: () => [],
+        description: 'Errores de validación'
     },
     /////////////////
     // MISC
     ////////////////
-    wide: {
+    multi: {
         type: Boolean,
-        default: false
+        default: false,
+        description: 'Si se establece a `true`, aparecerán dos calendarios'
     },
     height: {
         type: Number,
-        default: 255
+        default: 255,
+        description:
+            'Si usas el modo `time`,`month` o `year`, establece la altura del componente'
+    },
+    label: {
+        type: String,
+        required: false,
+        default: '',
+        description: 'Etiqueta de definición'
     },
     placeholder: {
         type: String,
-        default: 'Selecciona una fecha'
+        default: 'Selecciona una fecha',
+        description: 'Texto de ayuda'
     },
     inline: {
         type: Boolean,
-        default: false
+        default: false,
+        description: 'Elimina el input y muestra el calendario en línea'
+    },
+    status: {
+        type: String,
+        default: '',
+        options: ['warning', 'success', 'danger'],
+        description: 'Color de estado del input'
     },
     /////////////////
     // INPUT STYLE
     ////////////////
-    ghost: {
+    fieldset: {
         type: Boolean,
         default: false,
-        description: 'Elimina el fondo y bordes del campo haciéndolo invisible'
-    },
-    solid: {
-        type: Boolean,
-        default: false,
-        description: 'Aplica un fondo sólido al campo'
+        description: 'Aplica el estilo fieldset al input'
     },
     size: {
         type: String,
@@ -82,7 +102,8 @@ const Props = {
     ////////////////
     time: {
         type: Boolean,
-        default: true
+        default: false,
+        description: 'Muestra el selector de hora'
     },
     /////////////////
     // RANGES
@@ -97,11 +118,13 @@ const Props = {
     },
     minRange: {
         type: Number,
-        default: null
+        default: null,
+        description: 'Mínimo de días que se pueden seleccionar'
     },
     maxRange: {
         type: Number,
-        default: null
+        default: null,
+        description: 'Máximo de días que se pueden seleccionar'
     },
     fixedStart: {
         type: Boolean,

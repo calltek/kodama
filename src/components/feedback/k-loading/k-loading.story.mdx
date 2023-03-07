@@ -11,7 +11,9 @@ export const Template = (args) => ({
     },
     template: `
       <k-loading v-bind="args">
-        <img class="rounded-xl" src="https://drive.google.com/uc?id=1v7kzREvqest8j0aaYjmVmMLyGkiAOnXp" />
+        <k-card>
+          <k-skeleton type="card">
+        </k-card>
       </k-loading>
     `
 });
@@ -47,7 +49,9 @@ Con el atributo `fullpage` puedes mostrar el componente superpuesto en toda la p
         },
         template: `
           <k-loading fullpage :active="active">
-            <img class="rounded-xl" src="https://drive.google.com/uc?id=1v7kzREvqest8j0aaYjmVmMLyGkiAOnXp" />
+            <k-card>
+              <k-skeleton type="card">
+            </k-card>
             <div class="flex justify-center mt-4">
               <k-button @click="activeFor5Seconds()">Activar</k-button>
             </div>
@@ -57,47 +61,3 @@ Con el atributo `fullpage` puedes mostrar el componente superpuesto en toda la p
     }}
   </Story>
 </Canvas>
-
-## **Color**
-Con el atributo `color` puedes cambiar el color del spinner.
-
-<Canvas>
-  <Story name="Color (BETA)" argTypes={renderArgs(KLoading, {}, true)} parameters={renderParameters({showPanel: false})}>
-    {() => {
-      return {
-        components: { KLoading },
-        template: `
-          <k-loading :active="true" color="warning">
-            <img class="rounded-xl" src="https://drive.google.com/uc?id=1v7kzREvqest8j0aaYjmVmMLyGkiAOnXp" />
-            <div class="flex justify-center mt-4">
-              <k-button @click="activeFor5Seconds()">Activar</k-button>
-            </div>
-          </k-loading>
-        `,
-      };
-    }}
-  </Story>
-</Canvas>
-
-## **Blur**
-Con el atributo `blur` puedes aplicar un efecto de desenfoque al contenido.
-
-<Canvas>
-  <Story name="Blur (BETA)" argTypes={renderArgs(KLoading, {}, true)} parameters={renderParameters({showPanel: false})}>
-    {() => {
-      return {
-        components: { KLoading },
-        template: `
-          <k-loading :active="true" :blur="20">
-            <img class="rounded-xl" src="https://drive.google.com/uc?id=1v7kzREvqest8j0aaYjmVmMLyGkiAOnXp" />
-            <div class="flex justify-center mt-4">
-              <k-button @click="activeFor5Seconds()">Activar</k-button>
-            </div>
-          </k-loading>
-        `,
-      };
-    }}
-  </Story>
-</Canvas>
-
-<ArgsTable story="Default" />

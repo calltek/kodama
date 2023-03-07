@@ -1,10 +1,12 @@
 const path = require('path')
 const postcss = require('../postcss.config.js')
 const { mergeConfig } = require('vite')
+const { VitePWA } = require('vite-plugin-pwa')
 
 module.exports = {
     stories: [
         '../src/components/**/*.story.@(js|jsx|ts|tsx|mdx)',
+        '../src/plugins/**/*.story.@(js|jsx|ts|tsx|mdx)',
         '../src/views/**/*.story.@(js|jsx|ts|tsx|mdx)'
     ],
     addons: [
@@ -39,6 +41,8 @@ module.exports = {
             ...config.optimizeDeps,
             include: ['tailwind.config']
         }
+
+        config.plugins.push(VitePWA({}))
 
         // config.build.commonjsOptions = {
         //     ...config.build.commonjsOptions,

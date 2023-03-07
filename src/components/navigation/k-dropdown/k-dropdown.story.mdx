@@ -1,0 +1,172 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import { ref } from 'vue';
+import KDropdown from './k-dropdown.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KDropdown },
+    setup() {
+      return { args };
+    },
+    template: `
+    <k-dropdown v-bind="args">
+      <k-button>Dropdown</k-button>
+      <template #content>
+        <k-dropdown-item>Item 1</k-dropdown-item>
+        <k-dropdown-item>Item 2</k-dropdown-item>
+        <k-dropdown-item>Item 3</k-dropdown-item>
+        <k-dropdown-item>
+          <k-dropdown hover placement="right-start" submenu>
+           <div>Item 4</div>
+            <template #content >
+              <k-dropdown-item>Item 4</k-dropdown-item>
+              <k-dropdown-item>Item 5</k-dropdown-item>
+              <k-dropdown-item>Item 6</k-dropdown-item>
+            </template>
+          </k-dropdown>
+        </k-dropdown-item>
+      </template>
+    </k-dropdown>`
+});
+
+<Meta title="Navigation/Dropdown" component={KDropdown} argTypes={renderArgs(KDropdown)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media1.giphy.com/media/3og0IMJcSI8p6hYQXS/giphy.gif?cid=ecf05e47g15et0uaf8y7xuy046e30du8emzh7a0fzses5mo2&rid=giphy.gif&ct=g">❓ KDropdown</SHead>
+
+# KDropdown
+Con el componente `k-dropdown` puedes crear menus flotantes para tus aplicaciones.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Header/Footer**
+Puedes añadir un `header` y un `footer` a tu dropdown con los slots correspondientes.
+
+<Canvas>
+  <Story name="Header/Footer" argTypes={renderArgs(KDropdown, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDropdown },
+   
+        template: `
+          <k-dropdown>
+            <k-button>Dropdown</k-button>
+            <template #header>
+              <div>Header</div>
+            </template>
+            <template #content>
+              <k-dropdown-item>Item 1</k-dropdown-item>
+              <k-dropdown-item>Item 2</k-dropdown-item>
+              <k-dropdown-item>Item 3</k-dropdown-item>
+            </template>
+            <template #footer>
+              <div>Footer</div>
+            </template>
+          </k-dropdown>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+
+## **Altura**
+Puedes definir una altura fija para el dropdown con `height`
+
+<Canvas>
+  <Story name="Height" argTypes={renderArgs(KDropdown, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDropdown },
+   
+        template: `
+          <k-dropdown height="200">
+            <k-button>Dropdown</k-button>
+            <template #header>
+              <div>Header</div>
+            </template>
+            <template #content>
+              <k-dropdown-item>Item 1</k-dropdown-item>
+              <k-dropdown-item>Item 2</k-dropdown-item>
+              <k-dropdown-item>Item 3</k-dropdown-item>
+              <k-dropdown-item>Item 4</k-dropdown-item>
+              <k-dropdown-item>Item 5</k-dropdown-item>
+              <k-dropdown-item>Item 6</k-dropdown-item>
+              <k-dropdown-item>Item 7</k-dropdown-item>
+            </template>
+            <template #footer>
+              <div>Footer</div>
+            </template>
+          </k-dropdown>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Click/Hover**
+Es posible modificar el compartamiento del dropdown para que se habra con `click`, `hover` o forzandolo con la propiedad `visible`
+
+<Canvas>
+  <Story name="Method" argTypes={renderArgs(KDropdown, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDropdown },
+        setup() {
+          const visible = ref(false);
+          return {
+            visible,
+          };
+        },
+        template: `
+          <k-dropdown hover>
+            <k-button class="mr-4">Dropdown HOVER</k-button>
+            <template #header>
+              <div>Header</div>
+            </template>
+            <template #content>
+              <k-dropdown-item>Item 1</k-dropdown-item>
+              <k-dropdown-item>Item 2</k-dropdown-item>
+              <k-dropdown-item>Item 3</k-dropdown-item>
+            </template>
+            <template #footer>
+              <div>Footer</div>
+            </template>
+          </k-dropdown>
+          <k-dropdown click>
+            <k-button class="mr-4">Dropdown CLICK</k-button>
+            <template #header>
+              <div>Header</div>
+            </template>
+            <template #content>
+              <k-dropdown-item>Item 1</k-dropdown-item>
+              <k-dropdown-item>Item 2</k-dropdown-item>
+              <k-dropdown-item>Item 3</k-dropdown-item>
+            </template>
+            <template #footer>
+              <div>Footer</div>
+            </template>
+          </k-dropdown>
+          <k-dropdown :visible="visible">
+            <k-button @click="visible = !visible">VISIBLE: {{visible}}</k-button>
+            <template #header>
+              <div>Header</div>
+            </template>
+            <template #content>
+              <k-dropdown-item>Item 1</k-dropdown-item>
+              <k-dropdown-item>Item 2</k-dropdown-item>
+              <k-dropdown-item>Item 3</k-dropdown-item>
+            </template>
+            <template #footer>
+              <div>Footer</div>
+            </template>
+          </k-dropdown>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

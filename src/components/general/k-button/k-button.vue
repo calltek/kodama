@@ -1,11 +1,5 @@
 <template>
-    <button
-        :id="id"
-        v-tooltip.tooltip="title"
-        :class="buttonClasses"
-        :type="type"
-        @click="click"
-    >
+    <button :id="id" :class="buttonClasses" :type="type" @click="click">
         <template v-if="loading">
             <i
                 class="p-0 mr-3"
@@ -59,14 +53,6 @@
                     event.preventDefault()
                 }
             }
-
-            onMounted(() => {
-                if (props.title) {
-                    // tippy('#' + props.id, {
-                    //     content: props.title
-                    // })
-                }
-            })
 
             return {
                 buttonClasses,

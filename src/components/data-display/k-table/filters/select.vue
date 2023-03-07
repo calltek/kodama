@@ -1,5 +1,5 @@
 <template>
-    <popper arrow>
+    <k-dropdown>
         <k-icon
             icon="filter"
             :class="{ 'text-primary': active !== null }"
@@ -7,7 +7,21 @@
         />
 
         <template #content>
-            <ul class="py-0 overflow-hidden">
+            <k-dropdown-item>
+                <k-icon class="mr-2" icon="list" /> Todo
+            </k-dropdown-item>
+            <k-dropdown-item
+                v-for="(o, i) in options"
+                :key="i"
+                @click="filter('$eq', o.value)"
+            >
+                <k-icon v-if="o.icon" class="mr-2" :icon="o.icon" />
+                {{ o.title }}
+            </k-dropdown-item>
+        </template>
+    </k-dropdown>
+
+    <!-- <ul class="py-0 overflow-hidden">
                 <li
                     class="dropdown-item py-2 px-4 cursor-pointer opacity-40"
                     @click="reset()"
@@ -27,9 +41,7 @@
                         {{ o.title }}
                     </b>
                 </li>
-            </ul>
-        </template>
-    </popper>
+            </ul> -->
 </template>
 
 <script lang="ts">

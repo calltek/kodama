@@ -1,5 +1,5 @@
 <template>
-    <div>DASHBOARD</div>
+    <k-layout title="Title"> Lorem ipsum </k-layout>
 </template>
 
 <script lang="ts">

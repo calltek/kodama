@@ -6,9 +6,9 @@
 
             <span v-if="required" class="font-bold text-danger ml-1">*</span>
             <template v-if="firstError">
-                <popper arrow hover :content="firstError">
+                <k-tooltip hover :title="firstError">
                     <k-icon icon="triangle-exclamation" class="ml-2" />
-                </popper>
+                </k-tooltip>
             </template>
         </label>
 
@@ -78,11 +78,11 @@
                 default: () => [],
                 description: 'Errores de validación'
             },
-            color: {
+            status: {
                 type: String,
                 default: '',
                 options: ['warning', 'success', 'danger'],
-                description: 'Color del input'
+                description: 'Color de estado del input'
             },
             disabled: {
                 type: Boolean,
@@ -123,8 +123,8 @@
 
                 if (props.errors.length > 0) {
                     classes.push('k-input-textarea-danger')
-                } else if (props.color) {
-                    classes.push(`k-input-textarea-${props.color}`)
+                } else if (props.status) {
+                    classes.push(`k-input-textarea-${props.status}`)
                 }
 
                 return classes

@@ -1,5 +1,5 @@
 <template>
-    <popper arrow>
+    <k-tooltip>
         <k-icon
             icon="filter"
             :class="{ 'text-primary': defaultValue }"
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </template>
-    </popper>
+    </k-tooltip>
 </template>
 
 <script lang="ts">

@@ -2,7 +2,6 @@
   window.global = window;
 </script>
 
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700|Material+Icons" rel="stylesheet">
 <script src="https://kit.fontawesome.com/17d2853bf1.js" crossorigin="anonymous"></script>
 
 
@@ -12,14 +11,21 @@
     }
 
     html.light .docs-story,
-    html.light .docblock-argstable,
     html.light .docblock-argstable tr td{
-        background-color: white;
+        background-color: #F3F4F6;
+    }
+
+    html.light .docblock-argstable,
+    html.dark .docblock-argstable{
+        background: transparent;
     }
 
     html.dark .docs-story,
-    html.dark .docblock-argstable,
     html.dark .docblock-argstable tr td{
-        background-color: #18181b;
+        background-color: #1F2937;
+    }
+
+    html.light .sidebar-item{
+        color: #F3F4F6;
     }
 </style>

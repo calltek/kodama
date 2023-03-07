@@ -6,9 +6,9 @@
 
             <span v-if="required" class="font-bold text-danger ml-1">*</span>
             <template v-if="firstError">
-                <popper arrow hover :content="firstError">
+                <k-tooltip hover :title="firstError">
                     <k-icon icon="triangle-exclamation" class="ml-2" />
-                </popper>
+                </k-tooltip>
             </template>
         </label>
 
@@ -27,10 +27,10 @@
 
         <div v-if="type === 'number'" class="k-input-control">
             <div @click="sum()">
-                <k-icon icon="plus" class="k-input-icon" />
+                <k-icon icon="plus" type="fas" class="k-input-icon" />
             </div>
             <div @click="subtract()">
-                <k-icon icon="minus" class="k-input-icon" />
+                <k-icon icon="minus" type="fas" class="k-input-icon" />
             </div>
         </div>
 
@@ -41,9 +41,9 @@
             <span v-if="required" class="font-bold text-danger ml-1">*</span>
 
             <template v-if="firstError">
-                <popper arrow hover :content="firstError">
+                <k-tooltip hover :title="firstError">
                     <k-icon icon="triangle-exclamation" class="ml-2" />
-                </popper>
+                </k-tooltip>
             </template>
         </label>
     </div>
@@ -61,7 +61,7 @@
                 type: [String, Number],
                 required: false,
                 default: '',
-                description: 'Valor del input'
+                description: 'Valor del componente'
             },
             id: {
                 type: String,
@@ -113,11 +113,11 @@
                 default: () => [],
                 description: 'Errores de validación'
             },
-            color: {
+            status: {
                 type: String,
                 default: '',
                 options: ['warning', 'success', 'danger'],
-                description: 'Color del input'
+                description: 'Color de estado del input'
             },
             type: {
                 type: String,
@@ -170,8 +170,8 @@
 
                 if (props.errors.length > 0) {
                     classes.push('k-input-text-danger')
-                } else if (props.color) {
-                    classes.push(`k-input-text-${props.color}`)
+                } else if (props.status) {
+                    classes.push(`k-input-text-${props.status}`)
                 }
 
                 return classes
@@ -250,321 +250,5 @@
 </script>
 
 <style lang="scss">
-    .k-input-number {
-        input {
-            &::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-            }
-        }
-
-        .k-input-control {
-            @apply absolute overflow-hidden right-0 bottom-0 w-6 flex flex-col items-center justify-center border-gray-200 dark:border-gray-700 border border-l-0;
-
-            & > div {
-                @apply font-bold cursor-pointer flex items-center justify-center h-full w-full dark:text-white  bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-white;
-            }
-        }
-    }
-
-    .k-input-text {
-        @apply relative h-full;
-
-        input {
-            @apply block w-full border border-gray-200 bg-gray-100 text-gray-500 ring-inset outline-none ring-0 focus:border-gray-200 focus:ring-2 focus:ring-primary dark:border-gray-700 dark:bg-gray-800 dark:text-white;
-
-            min-width: 4rem;
-
-            &::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-            }
-        }
-
-        label {
-            @apply mb-2 block select-none text-sm text-gray-500 dark:text-white;
-        }
-
-        /// /////////////////
-        /// ERROR
-        /// /////////////////
-
-        &.k-input-text-danger {
-            input {
-                @apply ring-2 ring-danger focus:ring-danger;
-            }
-
-            label {
-                @apply text-danger;
-            }
-        }
-
-        &.k-input-text-success {
-            input {
-                @apply ring-2 ring-success focus:ring-success;
-            }
-
-            label {
-                @apply text-success;
-            }
-        }
-
-        &.k-input-text-warning {
-            input {
-                @apply ring-2 ring-warning focus:ring-warning;
-            }
-
-            label {
-                @apply text-warning;
-            }
-        }
-
-        /// /////////////////
-        /// SIZES
-        /// /////////////////
-
-        &.k-input-text-xs {
-            label {
-                @apply text-xs;
-            }
-
-            input {
-                @apply h-9 rounded-md px-2 py-1.5 text-xs;
-            }
-
-            .k-input-control {
-                @apply h-9 rounded-r-md;
-
-                .k-input-icon {
-                    @apply text-xs;
-                }
-            }
-        }
-
-        &.k-input-text-sm {
-            label {
-                @apply text-sm;
-            }
-
-            input {
-                @apply h-10 rounded-md px-2.5 py-2 text-sm;
-            }
-
-            .k-input-control {
-                @apply h-10 rounded-r-md;
-
-                .k-input-icon {
-                    @apply text-xs;
-                }
-            }
-        }
-
-        &.k-input-text-md {
-            label {
-                @apply text-base;
-            }
-
-            input {
-                @apply h-12 rounded-lg px-3 py-2.5 text-base;
-            }
-
-            .k-input-control {
-                @apply h-12 rounded-r-lg;
-
-                .k-input-icon {
-                    @apply text-base;
-                }
-            }
-        }
-
-        &.k-input-text-lg {
-            label {
-                @apply text-lg;
-            }
-
-            input {
-                @apply h-14 rounded-xl px-4 py-3 text-lg;
-            }
-
-            .k-input-control {
-                @apply h-14 rounded-r-xl;
-
-                .k-input-icon {
-                    @apply text-base;
-                }
-            }
-        }
-
-        // /////////////////
-        /// STYLES
-        /// ////////////////
-
-        &.k-input-text-floating {
-            @apply relative;
-
-            input {
-                &:focus,
-                &:not(:placeholder-shown),
-                &:-webkit-autofill {
-                    & + label {
-                        @apply -ml-0.5 -translate-y-3 -translate-x-6 scale-75 opacity-60;
-                    }
-                }
-
-                &::placeholder {
-                    color: transparent;
-                }
-            }
-
-            label {
-                @apply pointer-events-none absolute top-0 left-0 m-0 flex h-full w-full items-center text-ellipsis whitespace-nowrap border border-gray-300 border-opacity-0 text-start text-gray-300 transition-all;
-            }
-
-            &.k-input-text-danger {
-                label {
-                    @apply text-danger;
-                }
-            }
-
-            &.k-input-text-success {
-                label {
-                    @apply text-success;
-                }
-            }
-
-            &.k-input-text-warning {
-                label {
-                    @apply text-warning;
-                }
-            }
-
-            &.k-input-text-xs {
-                input {
-                    @apply py-1.5;
-
-                    &:focus,
-                    &:not(:placeholder-shown),
-                    &:-webkit-autofill {
-                        @apply pt-5;
-
-                        & + label {
-                            @apply -translate-y-2 -translate-x-4;
-                        }
-                    }
-                }
-
-                label {
-                    @apply px-2 py-1.5;
-                }
-            }
-
-            &.k-input-text-sm {
-                input {
-                    @apply py-1.5 px-3.5;
-
-                    &:focus,
-                    &:not(:placeholder-shown),
-                    &:-webkit-autofill {
-                        @apply pt-5;
-
-                        & + label {
-                            @apply -translate-y-2 -translate-x-4;
-                        }
-                    }
-                }
-
-                label {
-                    @apply px-2.5 py-2;
-                }
-            }
-
-            &.k-input-text-md {
-                input {
-                    @apply py-3 px-3.5;
-
-                    &:focus,
-                    &:not(:placeholder-shown),
-                    &:-webkit-autofill {
-                        @apply pt-7;
-
-                        & + label {
-                            @apply -translate-y-2.5 -translate-x-5;
-                        }
-                    }
-                }
-
-                label {
-                    @apply px-3 py-3;
-                }
-            }
-
-            &.k-input-text-lg {
-                input {
-                    @apply py-4;
-
-                    &:focus,
-                    &:not(:placeholder-shown),
-                    &:-webkit-autofill {
-                        @apply pt-8;
-                    }
-                }
-
-                label {
-                    @apply p-4;
-                }
-            }
-        }
-
-        &.k-input-text-fieldset {
-            @apply relative;
-
-            label {
-                @apply absolute top-0  text-ellipsis whitespace-nowrap bg-white dark:bg-gray-900 font-medium text-gray-400;
-            }
-
-            input {
-                @apply bg-opacity-0;
-            }
-
-            &.k-input-text-danger {
-                label {
-                    @apply text-danger;
-                }
-            }
-
-            &.k-input-text-success {
-                label {
-                    @apply text-success;
-                }
-            }
-
-            &.k-input-text-warning {
-                label {
-                    @apply text-warning;
-                }
-            }
-
-            &.k-input-text-xs {
-                label {
-                    @apply ml-2.5 -mt-2 px-1;
-                }
-            }
-
-            &.k-input-text-sm {
-                label {
-                    @apply ml-3 -mt-2.5 px-1.5;
-                }
-            }
-
-            &.k-input-text-md {
-                label {
-                    @apply ml-4 -mt-3 px-2;
-                }
-            }
-
-            &.k-input-text-lg {
-                label {
-                    @apply ml-5 -mt-4 px-3;
-                }
-            }
-        }
-    }
+    @import './k-input.scss';
 </style>

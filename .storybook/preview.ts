@@ -12,11 +12,6 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createApp } from '../src/main'
 import '../src/config/_style.ts'
 
-// TAILWIND
-import resolveConfig from 'tailwindcss/resolveConfig'
-import tailwindConfig from 'tailwind.config'
-const config = resolveConfig(tailwindConfig).theme
-
 // CUSTOM CONFIG
 import router from './app/config/router'
 import menu from './app/config/menu'
@@ -55,23 +50,22 @@ const dark = {
     ...brand,
 
     // UI
-    appContentBg: '#0c0c0d', // dark
-    appBorderColor: '#000', // black
-    appBg: '#04060a',
+    appContentBg: '#111827', // gray-900
+    appBorderColor: '#1F2937', // gray-800
+    appBg: '#0b0f19',
 
     // Text colors
-    textColor: 'white',
-    textInverseColor: 'black',
+    textColor: '#9CA3AF', // gray-400
 
     // Toolbar default and active colors
-    barTextColor: '#fff', //white
-    barSelectedColor: '#01dc83', //success
-    barBg: '#18181b', //gray-900
+    barTextColor: '#9CA3AF', // gray-400
+    barSelectedColor: '#1A56DB', //primary
+    barBg: '#111827', //gray-900
 
     // Form colors
-    inputBg: '#18181b', //gray-900
-    inputBorder: '#27272a', //gray-800
-    inputTextColor: 'black', //black
+    inputBg: '#374151', //gray-700
+    inputBorder: '#4B5563', //gray-600
+    inputTextColor: '#9CA3AF', //gray-400
     inputBorderRadius: 4
 }
 
@@ -80,23 +74,22 @@ const light = {
     ...brand,
 
     // UI
-    appContentBg: '#fafafa', //gray-50
-    appBorderColor: '#e4e4e7', //gray-200
-    appBg: '#e4e4e7', //gray-200
+    appContentBg: '#F3F4F6', // gray-100
+    appBorderColor: '#D1D5DB', //gray-300
+    appBg: '#0b0f19',
 
     // Text colors
-    textColor: 'black',
-    textInverseColor: 'white',
+    textColor: '#9CA3AF',
 
     // Toolbar default and active colors
-    barTextColor: '#6b7280',
-    barSelectedColor: '#0095e8',
+    barTextColor: '#4B5563', //gray-600
+    barSelectedColor: '#1A56DB', //primary
     barBg: '#fff',
 
     // Form colors
-    inputBg: 'white',
-    inputBorder: 'silver',
-    inputTextColor: 'black',
+    inputBg: '#F9FAFB',
+    inputBorder: '#D1D5DB',
+    inputTextColor: '#111827',
     inputBorderRadius: 4
 }
 

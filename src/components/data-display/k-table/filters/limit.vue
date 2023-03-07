@@ -4,13 +4,14 @@
             :loading="loading"
             :disabled="loading"
             size="sm"
+            class="mr-2"
             @click="loadMore()"
         >
             Cargar más
         </k-button>
 
-        <popper arrow>
-            <k-button size="sm">
+        <k-tooltip :visible="visible">
+            <k-button size="sm" @click="visible = !visible">
                 <k-icon icon="ellipsis" />
             </k-button>
 
@@ -63,12 +64,12 @@
                     </li>
                 </ul>
             </template>
-        </popper>
+        </k-tooltip>
     </div>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue'
+    import { defineComponent, ref } from 'vue'
 
     export default defineComponent({
         name: 'KTableLimit',
@@ -85,6 +86,8 @@
         },
         emits: ['limit', 'nextPage'],
         setup(props, ctx) {
+            const visible = ref(false)
+
             const limit = (value: number) => {
                 ctx.emit('limit', value)
             }
@@ -93,7 +96,7 @@
                 ctx.emit('nextPage')
             }
 
-            return { limit, loadMore }
+            return { limit, loadMore, visible }
         }
     })
 </script>

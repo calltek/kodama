@@ -1,6 +1,6 @@
 <template>
     <div>
-        <popper arrow :content="name" hover>
+        <k-tooltip :title="name" :visible="visible">
             <svg
                 :width="size"
                 :height="size"
@@ -8,7 +8,7 @@
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 :class="{
-                    'rounded-3xl overflow-hidden': type === 'square',
+                    'rounded-xl overflow-hidden': type === 'square',
                     'rounded-full overflow-hidden': type === 'circle'
                 }"
             >
@@ -66,7 +66,7 @@
                     </clipPath>
                 </defs>
             </svg>
-        </popper>
+        </k-tooltip>
     </div>
 </template>
 
@@ -125,9 +125,14 @@
                 description: 'Define un estilo circular'
             },
             bgColor: {
-                default: BG_COLORS[0],
+                default: BG_COLORS[4],
                 type: String,
                 description: 'Color de fondo del avatar'
+            },
+            tooltip: {
+                type: Boolean,
+                default: true,
+                description: 'Define si se muestra el tooltip'
             }
         },
         setup(props) {
@@ -140,7 +145,11 @@
                 return props.circle ? 'circle' : 'square'
             })
 
-            return { avatar, type }
+            const visible = computed(() => {
+                return props.tooltip === false ? false : undefined
+            })
+
+            return { avatar, type, visible }
         }
     })
 </script>

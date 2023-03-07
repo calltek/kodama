@@ -1,0 +1,80 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KConfirm from './k-confirm.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KConfirm },
+    setup() {
+      return { args };
+    },
+    template: '<k-confirm v-bind="args"><k-button color="danger">Eliminar</k-button></k-confirm>'
+});
+
+<Meta title="Feedback/Confirm" component={KConfirm} argTypes={renderArgs(KConfirm)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2NiMjc1NTE5OGU4OGRhNDg3NDQyYThmM2ZjZDBjYmZkYzNhODM4NiZjdD1n/o868ySToCqUULk5BnY/giphy.gif">❓ KConfirm</SHead>
+
+# KConfirm
+Con el componente `k-confirm` puedes pedir una confirmación previa al usuario al realizar una acción importante.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Titulo**
+El estilo neón aplica un efecto de iluminación de la alerta bastante bonico.
+
+<Canvas>
+  <Story name="Title" argTypes={renderArgs(KConfirm, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KConfirm },
+   
+        template: `
+          <k-confirm title="Vas a realizar una locura tremenda ¿Vamos con ello?">
+            <k-button color="danger">Eliminar</k-button>
+          </k-confirm>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Icono**
+Modifica el icono por defecto del mensaje de confirmacón.
+
+<Canvas>
+  <Story name="Icon" argTypes={renderArgs(KConfirm, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KConfirm },
+   
+        template: `
+          <k-confirm icon="user"><k-button color="danger">Eliminar</k-button></k-confirm>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Botones**
+Puedes personalizar el texto de los botones de confirmación con `okText` y `koText`.
+
+<Canvas>
+  <Story name="Buttons" argTypes={renderArgs(KConfirm, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KConfirm },
+   
+        template: `
+          <k-confirm ok-text="OK" ko-text="KO">
+            <k-button color="danger">Eliminar</k-button>
+          </k-confirm>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

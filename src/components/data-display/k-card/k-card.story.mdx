@@ -1,0 +1,70 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KCard from './k-card.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KCard },
+    setup() {
+      return { args };
+    },
+    template: `
+    <k-card v-bind="args" class="w-full max-w-sm">
+      <k-skeleton type="card">
+    </k-card>`
+});
+
+<Meta title="Data Display/Card" component={KCard} argTypes={renderArgs(KCard)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media3.giphy.com/media/xUNd9DLukkavmhybAs/giphy.gif?cid=ecf05e47xzzzzsltihe9wazd1im6vmw688bmhg87fooqu7pg&rid=giphy.gif&ct=g">🧮 KCard</SHead>
+
+# KCard
+Con el componente `k-card` puedes crear tarjetas de contenido de forma sencilla sin especificar tu mismo las clases.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Header/Footer**
+Puedes definir el `header` de la tarjeta con sus slot correspondiente.
+
+<Canvas>
+  <Story name="Header" argTypes={renderArgs(KCard, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KCard },
+        template: `
+          <k-card>
+            <template #header>
+              Header Example
+            </template>
+            <k-skeleton type="card" />
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Footer**
+Puedes definir el `footer` de la tarjeta con sus slot correspondiente.
+
+<Canvas>
+  <Story name="Footer" argTypes={renderArgs(KCard, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KCard },
+        template: `
+          <k-card>
+            <k-skeleton type="card" />
+            <template #footer>
+              <k-button class="w-full">Footer Example</k-button>
+            </template>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

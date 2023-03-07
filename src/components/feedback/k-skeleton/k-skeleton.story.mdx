@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KSkeleton from './k-skeleton.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KSkeleton },
+    setup() {
+      return { args };
+    },
+    template: '<k-skeleton v-bind="args" />'
+});
+
+<Meta title="Feedback/Skeleton" component={KSkeleton} argTypes={renderArgs(KSkeleton)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media1.giphy.com/media/3og0IMJcSI8p6hYQXS/giphy.gif?cid=ecf05e47g15et0uaf8y7xuy046e30du8emzh7a0fzses5mo2&rid=giphy.gif&ct=g">❓ KSkeleton</SHead>
+
+# KSkeleton
+Con el componente `k-skeleton` puedes mostrar información temporal mientras se carga la información real.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Tipo**
+Puedes definir distintos tipos de contenido con la propiedad `type`
+
+<Canvas>
+  <Story name="Type" argTypes={renderArgs(KSkeleton, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KSkeleton },
+        template: `
+          <div class="flex flex-col gap-8 items-center">
+            <k-card>
+              <k-skeleton type="text" />
+            </k-card>
+            <k-card>
+              <k-skeleton type="card" />
+            </k-card>
+            <k-card>
+              <k-skeleton type="image" />
+            </k-card>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

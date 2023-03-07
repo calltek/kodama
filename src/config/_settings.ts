@@ -29,26 +29,12 @@ interface Config {
     ///////////////
     darkMode: boolean
 
-    color: {
-        primary: string
-        secondary: string
-        success: string
-        warning: string
-        danger: string
-    }
-
     logo: {
         favicon: string
         dark: string
         light: string
         side_dark: string
         side_light: string
-    }
-
-    loader: {
-        logo: string
-        display: boolean
-        type: 'default' | 'spinner-message' | 'spinner-logo'
     }
 
     copyright: {
@@ -67,7 +53,6 @@ interface Config {
     ///////////////
     // Views
     ///////////////
-    scrollTop: boolean
     changelog: boolean
     search: boolean
 
@@ -80,23 +65,8 @@ interface Config {
     ///////////////
     // Layout
     ///////////////
-    header: {
-        display: boolean
-        width: 'fixed' | 'fluid'
-        fixed: Fixed
-    }
     aside: {
-        display: boolean
-        fixed: boolean
-        minimized: boolean
-        minimize: boolean
-        hoverable: boolean
-    }
-    content: {
-        width: 'fixed' | 'fluid'
-    }
-    footer: {
-        width: 'fixed' | 'fluid'
+        collapsed: boolean
     }
 
     ///////////////
@@ -123,14 +93,6 @@ const defaultSettings: Config = {
     ///////////////
     darkMode: false,
 
-    color: {
-        primary: '#009EF7',
-        secondary: '#6610f2',
-        success: '#50CD89',
-        warning: '#FFC700',
-        danger: '#F1416C'
-    },
-
     logo: {
         favicon:
             'https://kodamaui.s3.eu-west-1.amazonaws.com/logos/favicon.png',
@@ -140,12 +102,6 @@ const defaultSettings: Config = {
             'https://kodamaui.s3.eu-west-1.amazonaws.com/logos/sidelogo-dark.png',
         side_light:
             'https://kodamaui.s3.eu-west-1.amazonaws.com/logos/sidelogo.png'
-    },
-
-    loader: {
-        logo: 'https://kodamaui.s3.eu-west-1.amazonaws.com/logos/sidelogo.png',
-        display: true,
-        type: 'default'
     },
 
     copyright: {
@@ -169,7 +125,6 @@ const defaultSettings: Config = {
     ///////////////
     // Views
     ///////////////
-    scrollTop: true,
     changelog: false,
     search: false,
 
@@ -182,26 +137,8 @@ const defaultSettings: Config = {
     ///////////////
     // Layout
     ///////////////
-    header: {
-        display: true,
-        width: 'fluid',
-        fixed: {
-            desktop: true,
-            tabletAndMobile: true
-        }
-    },
     aside: {
-        display: true,
-        fixed: true,
-        minimized: false,
-        minimize: true,
-        hoverable: true
-    },
-    content: {
-        width: 'fluid'
-    },
-    footer: {
-        width: 'fluid'
+        collapsed: true
     },
 
     ///////////////

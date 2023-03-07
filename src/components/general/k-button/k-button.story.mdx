@@ -169,20 +169,3 @@ Activa esta propiedad para que el texto del botón se muestre en **mayúsculas.*
     }}
   </Story>
 </Canvas>
-
-## **Title**
-Muestra un **tooltip** al pasar el mouse por encima del botón.
-
-<Canvas>
-  <Story name="Title" argTypes={renderArgs(KButton, {}, true)} parameters={renderParameters({showPanel: false})}>
-    {() => {
-      return {
-        components: { KButton },
-        template: `
-          <KButton title="Lorem ipsum dolor sit">Hover me!</KButton>
-        `,
-      };
-    }}
-  </Story>
-</Canvas>
-

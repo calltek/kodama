@@ -7,13 +7,12 @@
     >
         <loading
             :active="active"
-            :can-cancel="hasCancel"
             :is-full-page="fullpage"
             :loader="type"
-            :color="themeColor"
+            color="#1A56DB"
             :z-index="zIndex"
-            :blur="`${blur}px`"
             :on-cancel="$emit('cancel')"
+            :background-color="backgroundColor"
         />
 
         <slot></slot>
@@ -25,7 +24,7 @@
 
     import 'vue-loading-overlay/dist/vue-loading.css'
     import Loading from 'vue-loading-overlay'
-    import { useStyle } from '@/store'
+    import { useConfig } from '@/store'
 
     type Loader = 'spinner' | 'bars' | 'dots'
 
@@ -56,13 +55,8 @@
             },
             color: {
                 type: String,
-                default: '',
+                default: 'primary',
                 description: 'Color del spinner'
-            },
-            blur: {
-                type: Number,
-                default: 2,
-                description: 'Aplica efecto desenfocado'
             },
             height: {
                 type: Number,
@@ -77,21 +71,19 @@
         },
         emits: ['cancel'],
         setup(props, ctx) {
-            const style = useStyle()
+            const config = useConfig()
 
-            const hasCancel = computed(() => {
-                if (ctx?.attrs?.onCancel) return true
-                return false
+            const backgroundColor = computed(() => {
+                const darkMode = config.get('darkMode')
+
+                if (darkMode.value) {
+                    return '#1f2937'
+                } else {
+                    return '#F3F4F6'
+                }
             })
 
-            const themeColor = computed(() => {
-                const color = style.getColor(props.color)
-
-                if (color) return color
-                return '#000'
-            })
-
-            return { hasCancel, themeColor }
+            return { backgroundColor }
         }
     })
 </script>

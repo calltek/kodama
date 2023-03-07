@@ -4,7 +4,7 @@
 
 <script lang="ts">
     import { defineComponent, computed } from 'vue'
-    import { moment, utils } from '../../../../plugins'
+    import { dayjs, utils } from '../../../../plugins'
 
     export default defineComponent({
         name: 'KTableDate',
@@ -16,11 +16,11 @@
         },
         setup(props) {
             const text = computed(() => {
-                return moment(props.value).format('LL')
+                return dayjs(props.value).format('LL')
             })
 
             const from = computed(() => {
-                return utils.ucfirst(moment(props.value).fromNow())
+                return utils.ucfirst(dayjs(props.value).fromNow())
             })
 
             return { props, text, from }

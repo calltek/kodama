@@ -1,9 +1,10 @@
 <template>
-    <popper arrow>
+    <k-tooltip :visible="visible">
         <k-icon
             icon="filter"
             :class="{ 'text-primary': defaultValue }"
-            class="ml-2"
+            class="ml-2 cursor-pointer"
+            @click="visible = !visible"
         />
 
         <template #content>
@@ -11,7 +12,7 @@
                 <k-input
                     v-model="inputText"
                     type="number"
-                    size="xs"
+                    size="sm"
                     :width="90"
                     :min="min"
                     :max="max || undefined"
@@ -23,25 +24,23 @@
                     <k-button
                         icon="xmark"
                         color="danger"
-                        size="xs"
+                        size="sm"
                         title="Resetear"
                         class="mr-2"
-                        neon
                         @click="reset"
                     />
 
                     <k-button
                         icon="check"
                         color="success"
-                        size="xs"
+                        size="sm"
                         title="Aplicar"
-                        neon
                         @click="filter"
                     />
                 </div>
             </div>
         </template>
-    </popper>
+    </k-tooltip>
 </template>
 
 <script lang="ts">
@@ -70,11 +69,7 @@
             const id = uid()
             const dropdown = ref('dropdown')
             const inputText = ref()
-
-            const hideModal = () => {
-                // const bs = new bootstrap.Dropdown(dropdown.value)
-                // bs.hide()
-            }
+            const visible = ref(false)
 
             const defaultValue = computed(() => {
                 if (props.value && props.value.$eq) {
@@ -96,6 +91,8 @@
                 }
 
                 ctx.emit('filter', data)
+
+                visible.value = false
             }
 
             const reset = () => {
@@ -103,7 +100,15 @@
                 ctx.emit('filter', null)
             }
 
-            return { id, dropdown, filter, defaultValue, reset, inputText }
+            return {
+                id,
+                dropdown,
+                filter,
+                defaultValue,
+                reset,
+                inputText,
+                visible
+            }
         }
     })
 </script>

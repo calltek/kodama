@@ -10,7 +10,8 @@ export type AuthStore = {
         checkRoles: (state: any, strict: boolean, roles: string[]) => boolean
     }
     actions: {
-        login: (params: any) => Promise<any>
-        logout: () => boolean
+        login: (username: string, password: string) => Promise<any>
+        forgot: (email: string) => Promise<any>
+        logout: (email: string) => boolean
     }
 }

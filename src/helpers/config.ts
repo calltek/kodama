@@ -34,38 +34,28 @@ export const homepage = computed((): Config['homepage'] => {
 // BRANDING
 //////////////////////////////////////
 
-// Get custom colors
-export const color = computed((): Config['color'] => {
-    const config = useConfig()
-    return config.get('color')
-})
-
 export const logo = computed((): Config['logo'] => {
     const config = useConfig()
     return config.get('logo')
-})
-
-// Check if the page loader is enabled
-export const loaderEnabled = computed(() => {
-    const config = useConfig()
-    return config.get('loader.display') === true
-})
-
-// Page loader logo image
-export const loaderLogo = computed((): Config['loader']['logo'] => {
-    const config = useConfig()
-    return config.get('loader.logo')
-})
-
-export const loaderType = computed((): Config['loader']['type'] => {
-    const config = useConfig()
-    return config.get('loader.type')
 })
 
 // Get copyright info
 export const copyright = computed((): Config['copyright'] => {
     const config = useConfig()
     return config.get('copyright')
+})
+
+export const darkMode = computed(() => {
+    const config = useConfig()
+    return config.get('darkMode')
+})
+
+export const bubbleColor = computed(() => {
+    if (darkMode.value) {
+        return '#1F2937'
+    }
+
+    return '#F3F4F6'
 })
 
 //////////////////////////////////////
@@ -98,50 +88,14 @@ export const searchEnabled = computed(() => {
     return config.get('search') === true
 })
 
-// Check if scroll top is enabled
-export const scrollTopEnabled = computed(() => {
-    const config = useConfig()
-    return config.get('scrollTop') === true
-})
-
 //////////////////////////////////////
 // LAYOUT
 //////////////////////////////////////
 
-// Check if header container is fluid
-export const headerWidthFluid = computed(() => {
-    const config = useConfig()
-    return config.get('header.width') === 'fluid'
-})
-
 // Get the aside display
-export const asideDisplay = computed(() => {
+export const asideCollapsed = computed(() => {
     const config = useConfig()
-    return config.get('aside.display') === true
-})
-
-// Aside minimized
-export const asideMinimized = computed(() => {
-    const config = useConfig()
-    return config.get('aside.minimized') === true
-})
-
-// Check if container width is fluid
-export const contentWidthFluid = computed(() => {
-    const config = useConfig()
-    return config.get('content.width') === 'fluid'
-})
-
-// Check if the aside menu is enabled
-export const asideEnabled = computed(() => {
-    const config = useConfig()
-    return !!config.get('aside.display')
-})
-
-// Check if footer container is fluid
-export const footerWidthFluid = computed(() => {
-    const config = useConfig()
-    return config.get('footer.width') === 'fluid'
+    return config.get('aside.collapsed') === true
 })
 
 //////////////////////////////////////

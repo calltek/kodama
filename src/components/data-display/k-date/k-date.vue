@@ -1,6 +1,6 @@
 <template>
     <k-badge size="xs" color="primary">
-        <popper arrow :content="tippyText" hover>
+        <k-tooltip :title="tippyText">
             <div class="flex flex-row items-center">
                 <k-icon
                     icon="clock"
@@ -26,7 +26,7 @@
                     <span v-if="!simple" class="opacity-40"> ??? </span>
                 </div>
             </div>
-        </popper>
+        </k-tooltip>
     </k-badge>
 </template>
 

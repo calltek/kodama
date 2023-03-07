@@ -1,0 +1,91 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KAlert from './k-alert.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KAlert },
+    setup() {
+      return { args };
+    },
+    template: '<k-alert v-bind="args">Lorem ipsum dolor sit amet</k-alert>'
+});
+
+<Meta title="Feedback/Alert" component={KAlert} argTypes={renderArgs(KAlert)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media1.giphy.com/media/3og0IMJcSI8p6hYQXS/giphy.gif?cid=ecf05e47g15et0uaf8y7xuy046e30du8emzh7a0fzses5mo2&rid=giphy.gif&ct=g">❓ KAlert</SHead>
+
+# KAlert
+Con el componente `k-alert` puedes informar sobre un suceso dentro del aplicativo.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Tipos**
+Define una lista de errores del input. Se mostrará un icono de alerta con el primer error.
+
+<Canvas>
+  <Story name="Types" argTypes={renderArgs(KAlert, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KAlert },
+   
+        template: `
+          <div class="flex flex-col gap-8">
+            <k-alert type="info">Lorem ipsum dolor sit amet</k-alert>
+            <k-alert type="success">Lorem ipsum dolor sit amet</k-alert>
+            <k-alert type="warning">Lorem ipsum dolor sit amet</k-alert>
+            <k-alert type="danger">Lorem ipsum dolor sit amet</k-alert>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Outline**
+El estilo outline aplica un borde alrededor de la alerta y deja su fondo inocuo.
+
+<Canvas>
+  <Story name="Outline" argTypes={renderArgs(KAlert, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KAlert },
+   
+        template: `
+          <div class="flex flex-col gap-8">
+            <k-alert type="info" outline>Lorem ipsum dolor sit amet</k-alert>
+            <k-alert type="success" outline>Lorem ipsum dolor sit amet</k-alert>
+            <k-alert type="warning" outline>Lorem ipsum dolor sit amet</k-alert>
+            <k-alert type="danger" outline>Lorem ipsum dolor sit amet</k-alert>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Neon**
+El estilo neón aplica un efecto de iluminación de la alerta bastante bonico.
+
+<Canvas>
+  <Story name="Neon" argTypes={renderArgs(KAlert, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KAlert },
+   
+        template: `
+          <div class="flex flex-col gap-8">
+            <k-alert type="info" neon>Lorem ipsum dolor sit amet</k-alert>
+            <k-alert type="success" neon>Lorem ipsum dolor sit amet</k-alert>
+            <k-alert type="warning" neon>Lorem ipsum dolor sit amet</k-alert>
+            <k-alert type="danger" neon>Lorem ipsum dolor sit amet</k-alert>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

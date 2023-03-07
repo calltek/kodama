@@ -1,32 +1,18 @@
 <template>
-    <div class="flex align-items-center fw-bold fs-6 dark:text-white">
-        <a
-            href="https://calltek.es/soporte"
-            class="text-muted text-hover-primary px-2"
-            target="_blank"
-        >
-            <i class="fad fa-life-ring me-1" /> Ayuda y soporte
+    <div
+        class="k-public-footer flex items-center text-sm dark:text-gray-200 font-semibold gap-6"
+    >
+        <a href="https://calltek.es/soporte" target="_blank">
+            <k-icon icon="life-ring" class="mr-1" /> Soporte
         </a>
 
-        <span class="text-gray-300 px-1">|</span>
-
-        <a
-            href="https://calltek.es/blog"
-            class="text-muted text-hover-primary px-2"
-            target="_blank"
-        >
-            <i class="fad fa-blog me-1" /> Noticias
+        <a href="https://calltek.es/blog" target="_blank">
+            <k-icon icon="blog" class="mr-1" /> Noticias
         </a>
 
-        <span class="text-gray-300 px-1">|</span>
-
-        <a
-            href="mailto:soporte@calltek.es"
-            class="text-muted text-hover-primary px-2"
-            target="_blank"
-        >
-            <i class="fad fa-envelope me-1" /> Contacto</a
-        >
+        <a href="mailto:soporte@calltek.es" target="_blank">
+            <k-icon icon="envelope" class="mr-1" /> Contacto
+        </a>
     </div>
 </template>
 
@@ -41,4 +27,10 @@
     })
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+    .k-public-footer {
+        a {
+            text-align: center;
+        }
+    }
+</style>

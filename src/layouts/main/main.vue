@@ -1,56 +1,38 @@
 <template>
-    <KTLoader v-if="loaderEnabled" />
+    <div class="flex flex-row bg-white dark:bg-gray-800">
+        <k-aside />
 
-    <div class="page flex flex-row flex-column-fluid">
-        <kd-aside
-            v-if="asideEnabled"
-            :light-logo="logo.light"
-            :dark-logo="logo.dark"
-        />
+        <div
+            id="k-wrapper"
+            class="flex flex-col flex-row-fluid w-full bg-gray-100 dark:bg-gray-900 min-h-screen"
+        >
+            <k-toolbar />
 
-        <div id="kt_wrapper" class="flex flex-column flex-row-fluid wrapper">
             <router-view />
         </div>
     </div>
 
-    <KTScrollTop />
-
-    <k-drawer-manager />
     <k-debug />
 </template>
 
 <script lang="ts">
     import { defineComponent } from 'vue'
 
-    import KdAside from './partials/aside/aside.vue'
-
-    import KTScrollTop from './partials/scroll-top.vue'
-
-    import KTLoader from './partials/loader.vue'
+    import KAside from './partials/aside/aside.vue'
+    import KToolbar from './partials/topbar/topbar.vue'
     import KDebug from './partials/debug.vue'
 
-    import {
-        loaderEnabled,
-        contentWidthFluid,
-        asideEnabled,
-        logo
-    } from '../../helpers/config'
-
     export default defineComponent({
-        name: 'MasterLayout',
+        name: 'KMain',
         components: {
-            KdAside,
-            KTScrollTop,
-            KTLoader,
-            KDebug
+            KAside,
+            KDebug,
+            KToolbar
         },
         setup() {
-            return {
-                loaderEnabled,
-                contentWidthFluid,
-                asideEnabled,
-                logo
-            }
+            return {}
         }
     })
 </script>
+
+<style lang="scss"></style>
