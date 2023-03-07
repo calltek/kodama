@@ -1,0 +1,27 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KIcon from './k-icon.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KIcon },
+    setup() {
+      return { args };
+    },
+    template: '<k-icon v-bind="args" />'
+});
+
+<Meta title="General/Icon" component={KIcon} argTypes={renderArgs(KIcon)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media2.giphy.com/media/YTN64c90184auqjBnx/giphy.gif?cid=ecf05e477u4yo8p1xzbbsiibhjlmeyejh2blzyu74g3sewbr&rid=giphy.gif&ct=g">🍣 KIcon</SHead>
+
+# KIcon
+Con el componente `k-icon` puedes mostrar iconos de distintos tipos y tamaños.
+
+Puedes encontrar todos los iconos necesarios en [FontAwesome](https://fontawesome.com/search)
+
+<Story name="Default" parameters={renderParameters({showPanel: true})} args={{icon:'user'}}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />

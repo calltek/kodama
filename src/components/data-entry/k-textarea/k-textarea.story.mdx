@@ -1,0 +1,93 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KTextarea from './k-textarea.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+import { ref } from 'vue'
+
+export const Template = (args) => ({
+    components: { KTextarea },
+    setup() {
+      return { args };
+    },
+    template: '<k-card><k-textarea v-bind="args"></k-textarea></k-card>'
+});
+
+<Meta title="Data Entry/Textarea" component={KTextarea} argTypes={renderArgs(KTextarea)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media2.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif?cid=ecf05e47k3mnhrb7yc36brvbtq2tz34x1c5odz3ckvei9tmc&rid=giphy.gif&ct=g">⌨ KTextarea</SHead>
+
+# KTextarea
+Con el componente `k-textarea` puedes escribir textos extensos sin quedarte ciego.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Sizes**
+Puedes establecer distintos tamaños que van desde `xs` hasta `lg`.
+
+<Canvas>
+  <Story name="Sizes" argTypes={renderArgs(KTextarea, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KTextarea },
+        setup() {
+          const data = ref(0)
+          return { data };
+        },
+        template: `
+          <k-card class="flex flex-col gap-8">
+            <k-textarea size="xs" class="mr-4" :width="400" :min-height="100">Label XS</k-textarea>
+            <k-textarea size="sm" class="mr-4" :width="400" :min-height="100">Label SM</k-textarea>
+            <k-textarea size="md" class="mr-4" :width="400" :min-height="100">Label MD</k-textarea>
+            <k-textarea size="lg" :width="400" :min-height="100">Label LG</k-textarea>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Errors**
+Define una lista de errores del input. Se mostrará un icono de alerta con el primer error.
+
+<Canvas>
+  <Story name="Errors" argTypes={renderArgs(KTextarea, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KTextarea },
+        setup() {
+          return { errors : [{$message: 'Lorem ipsum dolor sit'}] };
+        },
+        template: `
+          <k-card>
+            <k-textarea :errors="errors" :width="400" :min-height="100">Label MD</k-textarea>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Estado**
+Define una lista de errores del input. Se mostrará un icono de alerta con el primer error.
+
+<Canvas>
+  <Story name="Status" argTypes={renderArgs(KTextarea, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KTextarea },
+   
+        template: `
+          <k-card class="flex flex-col gap-8">
+            <k-textarea status="success" :width="400" :min-height="100">Success</k-textarea>
+            <k-textarea status="warning" :width="400" :min-height="100">Warning</k-textarea>
+            <k-textarea status="danger" :width="400" :min-height="100">Danger</k-textarea>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

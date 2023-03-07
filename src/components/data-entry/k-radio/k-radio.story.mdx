@@ -1,0 +1,58 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import { ref } from 'vue';
+import KRadio from './k-radio.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KRadio },
+    setup() {
+      return { args };
+    },
+    template: '<k-card><k-radio v-bind="args">Checkbox Label</k-radio></k-card>'
+});
+
+<Meta title="Data Entry/Radio" component={KRadio} argTypes={renderArgs(KRadio)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media0.giphy.com/media/hDSy8w6rGHeTe/giphy.gif?cid=ecf05e47d1yojdu59ttft3ykom3decoar5aubq8zin0w9sov&rid=giphy.gif&ct=g">🛎 KRadio</SHead>
+
+# KRadio
+Con el componente `k-radio` puedes marcar o desmarcar una opción. Util para booleanos.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}  args={{name:'radio-name'}}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Color**
+Existen diferentes estilos de colores para los botones. Muchos de ellos se usan para definir una accion en el sistema.
+
+<Canvas>
+  <Story name="Color" argTypes={renderArgs(KRadio, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KRadio },
+        setup() {
+          const value = ref('White/Black');
+          return { value };
+        },
+        template: `
+          <k-card class="grid grid-cols-2 gap-4">
+            <k-radio v-model="value" value="White/Black" color="white" name="radio-name">White / Black</k-radio>
+            <k-radio v-model="value" value="Gray" color="gray" name="radio-name">Gray</k-radio>
+            <k-radio v-model="value" value="Primary" color="primary" name="radio-name">Primary</k-radio>
+            <k-radio v-model="value" value="Secondary" color="secondary" name="radio-name">Secondary</k-radio>
+            <k-radio v-model="value" value="Success" color="success" name="radio-name">Success</k-radio>
+            <k-radio v-model="value" value="Warning" color="warning" name="radio-name">Warning</k-radio>
+            <k-radio v-model="value" value="Danger" color="danger" name="radio-name">Danger</k-radio>
+            <k-radio v-model="value" value="Info" color="info" name="radio-name">Info</k-radio>
+          </k-card>
+          <k-card>
+            <b>Value:</b> {{ value }}
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

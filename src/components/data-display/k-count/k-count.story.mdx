@@ -1,0 +1,136 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KCount from './k-count.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KCount },
+    setup() {
+      return { args };
+    },
+    template: '<k-count v-bind="args"><k-badge>Counter </k-badge></k-count>'
+});
+
+<Meta title="Data Display/Counter" component={KCount} argTypes={renderArgs(KCount)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media3.giphy.com/media/xUNd9DLukkavmhybAs/giphy.gif?cid=ecf05e47xzzzzsltihe9wazd1im6vmw688bmhg87fooqu7pg&rid=giphy.gif&ct=g">🧮 KCount</SHead>
+
+# KCount
+Con el componente `k-count` puedes formar el avatar de una persona de manera aleatoria. El avatar siempre será el mismo.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Sizes**
+Puedes definir el tamaño del badge desde `xs` hasta `xl`.
+
+<Canvas>
+  <Story name="Sizes" argTypes={renderArgs(KCount, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KCount },
+        template: `
+          <div class="flex flex-row gap-8 items-center">
+            <k-count size="xs" :value="199"><k-badge size="xs">Counter </k-badge></k-count>
+            <k-count size="sm" :value="199"><k-badge size="sm">Counter </k-badge></k-count>
+            <k-count size="md" :value="199"><k-badge size="md">Counter </k-badge></k-count>
+            <k-count size="lg" :value="199"><k-badge size="lg">Counter </k-badge></k-count>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Circular**
+Puedes definir el diseño `circle` del contador para que se vea como un círculo completo.
+
+<Canvas>
+  <Story name="Circular" argTypes={renderArgs(KCount, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KCount },
+        template: `
+          <div class="flex flex-row gap-8 items-center">
+            <k-count circle size="xs" :value="199"><k-badge size="xs">Counter </k-badge></k-count>
+            <k-count circle size="sm" :value="199"><k-badge size="sm">Counter </k-badge></k-count>
+            <k-count circle size="md" :value="199"><k-badge size="md">Counter </k-badge></k-count>
+            <k-count circle size="lg" :value="199"><k-badge size="lg">Counter </k-badge></k-count>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Colors**
+Define el color del badge.
+
+<Canvas>
+  <Story name="Colors" argTypes={renderArgs(KCount, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KCount },
+        template: `
+          <div class="flex flex-row gap-8 items-center w-full">
+            <k-count color="white" :value="199"><k-badge>White / Black</k-badge></k-count>
+            <k-count color="gray" :value="199"><k-badge>Gray</k-badge></k-count>
+            <k-count color="primary" :value="199"><k-badge>Primary</k-badge></k-count>
+            <k-count color="secondary" :value="199"><k-badge>Secondary</k-badge></k-count>
+            <k-count color="success" :value="199"><k-badge>Success</k-badge></k-count>
+            <k-count color="warning" :value="199"><k-badge>Warning</k-badge></k-count>
+            <k-count color="danger" :value="199"><k-badge>Danger</k-badge></k-count>
+            <k-count color="info" :value="199"><k-badge>Info</k-badge></k-count>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Neon**
+Define el color de fondo del avatar en formato **hexadecimal**
+
+<Canvas>
+  <Story name="Neon" argTypes={renderArgs(KCount, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KCount },
+        template: `
+           <div class="flex flex-row gap-8 items-center w-full">
+            <k-count neon color="white" :value="199"><k-badge>White / Black</k-badge></k-count>
+            <k-count neon color="gray" :value="199"><k-badge>Gray</k-badge></k-count>
+            <k-count neon color="primary" :value="199"><k-badge>Primary</k-badge></k-count>
+            <k-count neon color="secondary" :value="199"><k-badge>Secondary</k-badge></k-count>
+            <k-count neon color="success" :value="199"><k-badge>Success</k-badge></k-count>
+            <k-count neon color="warning" :value="199"><k-badge>Warning</k-badge></k-count>
+            <k-count neon color="danger" :value="199"><k-badge>Danger</k-badge></k-count>
+            <k-count neon color="info" :value="199"><k-badge>Info</k-badge></k-count>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Offset**
+Puedes definir las propiedades `offset-x` y `offset-y` para mover el contador.
+
+<Canvas>
+  <Story name="Offset" argTypes={renderArgs(KCount, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KCount },
+        template: `
+          <div class="flex flex-row gap-8 items-center">
+            <k-count offset-x="-80"><k-badge>OffsetX</k-badge></k-count>
+            <k-count offset-y="26"><k-badge>OffsetY</k-badge></k-count>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

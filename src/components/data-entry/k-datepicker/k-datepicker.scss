@@ -1,0 +1,223 @@
+// General
+$dp__font_family: 'Poppins', sans-serif !default; // Font size for the menu
+$dp__border_radius: 0.75rem !default; // Border radius everywhere
+$dp__cell_border_radius: $dp__border_radius !default; // Specific border radius for the calendar cell
+
+// Font sizes
+$dp__font_size: 0.8rem !default; // overall font-size
+$dp__preview_font_size: 0.8rem !default; // font size of the date preview in the action row
+$dp__time_font_size: 2rem !default; // font size in the time picker
+
+@import '@vuepic/vue-datepicker/src/VueDatePicker/style/main.scss';
+
+.k-datepicker {
+    .dp__input_icon,
+    .dp__clear_icon {
+        @apply h-full px-2.5 flex;
+    }
+
+    label {
+        @apply mb-2 block select-none text-sm text-gray-500 dark:text-white;
+    }
+
+    .dp__input {
+        min-width: 4rem;
+
+        @apply block w-full border border-gray-200 bg-gray-100 text-gray-500 ring-inset outline-none ring-0 focus:border-gray-200 focus:ring-2 focus:ring-primary dark:border-gray-700 dark:bg-gray-800 dark:text-white;
+    }
+
+    /// /////////////////
+    /// ERROR
+    /// /////////////////
+
+    &.k-datepicker-danger {
+        input {
+            @apply ring-2 ring-danger focus:ring-danger;
+        }
+
+        label {
+            @apply text-danger;
+        }
+    }
+
+    &.k-datepicker-success {
+        input {
+            @apply ring-2 ring-success focus:ring-success;
+        }
+
+        label {
+            @apply text-success;
+        }
+    }
+
+    &.k-datepicker-warning {
+        input {
+            @apply ring-2 ring-warning focus:ring-warning;
+        }
+
+        label {
+            @apply text-warning;
+        }
+    }
+
+    /// /////////////////
+    /// SIZES
+    /// /////////////////
+    ///
+    &.k-datepicker-xs {
+        label {
+            @apply text-xs;
+        }
+
+        .dp__input {
+            @apply h-9 rounded-md pl-6 pr-2 py-1.5 text-xs;
+        }
+
+        .dp__input_icon {
+            @apply text-xs px-2;
+        }
+    }
+
+    &.k-datepicker-sm {
+        label {
+            @apply text-sm;
+        }
+
+        .dp__input {
+            @apply h-10 rounded-md pl-7 pr-2.5 py-2 text-sm;
+        }
+
+        .dp__input_icon {
+            @apply text-sm px-2.5;
+        }
+    }
+
+    &.k-datepicker-md {
+        label {
+            @apply text-base;
+        }
+
+        .dp__input {
+            @apply h-12 rounded-lg pl-9 pr-3 py-2.5 text-base;
+        }
+
+        .dp__input_icon {
+            @apply text-base px-3.5;
+        }
+    }
+
+    &.k-datepicker-lg {
+        label {
+            @apply text-lg;
+        }
+
+        .dp__input {
+            @apply h-14 rounded-xl pl-10 pr-4 py-3 text-lg;
+        }
+
+        .dp__input_icon {
+            @apply text-lg px-4;
+        }
+    }
+
+    /// /////////////////
+    /// FIELDSET
+    /// /////////////////
+
+    &.k-datepicker-fieldset {
+        @apply relative;
+
+        label {
+            @apply absolute z-10 top-0  text-ellipsis whitespace-nowrap bg-white dark:bg-gray-900 rounded-md font-medium text-gray-400;
+        }
+
+        .dp__input {
+            @apply bg-opacity-0;
+        }
+
+        &.k-datepicker-danger {
+            label {
+                @apply text-danger;
+            }
+        }
+
+        &.k-datepicker-success {
+            label {
+                @apply text-success;
+            }
+        }
+
+        &.k-datepicker-warning {
+            label {
+                @apply text-warning;
+            }
+        }
+
+        &.k-datepicker-xs {
+            label {
+                font-size: 0.5rem;
+                line-height: 0.75rem;
+
+                @apply ml-2.5 -mt-1.5 px-1;
+            }
+        }
+
+        &.k-datepicker-sm {
+            label {
+                @apply ml-2.5 -mt-2 px-1.5 text-xs;
+            }
+        }
+
+        &.k-datepicker-md {
+            label {
+                @apply ml-2.5 -mt-2.5 px-2 text-sm;
+            }
+        }
+
+        &.k-datepicker-lg {
+            label {
+                @apply ml-2.5 -mt-3 px-2 text-base;
+            }
+        }
+    }
+}
+
+.k-datepicker-menu {
+    @apply z-40 overflow-hidden;
+
+    .dp__instance_calendar {
+        @apply p-1;
+    }
+
+    .dp__preset_range {
+        @apply whitespace-nowrap bg-gray-50 mb-1 text-gray-800 rounded-lg py-2 px-2 font-semibold;
+    }
+
+    .dp__preset_range:hover {
+        @apply bg-primary text-white;
+    }
+
+    .dp__range_end,
+    .dp__range_start,
+    .dp__range_between,
+    .dp__active_date {
+        @apply bg-primary text-white border-0;
+    }
+
+    .dp__today {
+        @apply bg-gray-200 text-gray-700 border-0;
+    }
+
+    .dp__calendar_header_item {
+        @apply uppercase text-gray-700;
+    }
+
+    .dp__month_year_select {
+        @apply text-2xl uppercase text-gray-700 font-bold;
+    }
+
+    .dp__action_row {
+        width: auto !important;
+        @apply bg-gray-100 border-t border-t-gray-200;
+    }
+}

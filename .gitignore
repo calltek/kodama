@@ -8,8 +8,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-kodama/dist
-site/dist
 dist
 dist-ssr
 *.local

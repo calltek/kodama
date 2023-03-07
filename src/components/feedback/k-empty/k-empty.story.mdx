@@ -1,0 +1,78 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KEmpty from './k-empty.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KEmpty },
+    setup() {
+      return { args };
+    },
+    template: '<k-empty v-bind="args" />'
+});
+
+<Meta title="Feedback/Empty" component={KEmpty} argTypes={renderArgs(KEmpty)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media3.giphy.com/media/Az1CJ2MEjmsp2/giphy.gif?cid=ecf05e47d94jx1x6qd6mwuxgu3v6yt16z597smholfadvgss&rid=giphy.gif&ct=g">💁‍♂️ KEmpty</SHead>
+
+# KEmpty
+Con el componente `k-empty` puedes informar al usuario de que ahi no se le ha perdido nada, simplemente no hay nada que mostrar.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})} args={{title:'Sin resultados', subtitle: 'Prueba con otra consulta'}}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Titulo / Subtitulo**
+Puedes modificar los textos de titulo y subtitulo con las propiedades `title` y `subtitle` respectivamente.
+
+<Canvas>
+  <Story name="Title/Subtitle" argTypes={renderArgs(KEmpty, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KEmpty },
+        template: `
+          <k-empty title="Titulo personalizado" subtitle="Subtitulo personalizado" />
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Imagen**
+Puedes definir una imagen personalizada para el componente con `image`.
+
+<Canvas>
+  <Story name="Image" argTypes={renderArgs(KEmpty, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KEmpty },
+        template: `
+          <k-empty title="Sin resultados" subtitle="Prueba con otra consulta" image="https://img.freepik.com/vector-premium/anillo-destino-tiro-arco-muchas-flechas-perdidas-simbolo-falla-objetivo-comercial-concepto-estrategia-error_254622-306.jpg?w=740">
+          </k-empty>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Acción**
+Puedes definir una acción añadiendo el slot `action`.
+
+<Canvas>
+  <Story name="Action" argTypes={renderArgs(KEmpty, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KEmpty },
+        template: `
+          <k-empty title="Sin resultados" subtitle="Prueba con otra consulta">
+            <template #action>
+              <k-button color="primary">Ir al inicio</k-button>
+            </template>
+          </k-empty>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

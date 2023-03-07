@@ -1,0 +1,79 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KAvatar from './k-avatar.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KAvatar },
+    setup() {
+      return { args };
+    },
+    template: '<k-avatar v-bind="args" />'
+});
+
+<Meta title="Data Display/Avatar" component={KAvatar} argTypes={renderArgs(KAvatar)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media3.giphy.com/media/Cu87j5pPIL1hS/giphy.gif?cid=ecf05e47wwz771td1t86kiibuastopo4ywkqzs9oa71hvio8&rid=giphy.gif&ct=g">🤓 KAvatar</SHead>
+
+# KButton
+Con el componente `k-avatar` puedes formar el avatar de una persona de manera aleatoria. El avatar siempre será el mismo.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Size**
+Puedes definir el tamaño del avatar en `px`.
+
+<Canvas>
+  <Story name="Size" argTypes={renderArgs(KAvatar, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KAvatar },
+        template: `
+          <k-avatar :size="80" class="mr-4" name="Jhon" />
+          <k-avatar :size="120" class="mr-4" name="Mery" />
+          <k-avatar :size="160" class="mr-4" name="Adam" />
+          <k-avatar :size="200" name="Luca" />
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Circle**
+Define si el avatar será redondo.
+
+<Canvas>
+  <Story name="Circle" argTypes={renderArgs(KAvatar, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KAvatar },
+        template: `
+          <k-avatar circle :size="80" class="mr-4" name="Jhon" />
+          <k-avatar circle :size="120" class="mr-4" name="Mery" />
+          <k-avatar circle :size="160" class="mr-4" name="Adam" />
+          <k-avatar circle :size="200" name="Luca" />
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Background**
+Define el color de fondo del avatar en formato **hexadecimal**
+
+<Canvas>
+  <Story name="Background" argTypes={renderArgs(KAvatar, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KAvatar },
+        template: `
+          <k-avatar :size="200" bg-color="#ff00ff" name="Jhon" />
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

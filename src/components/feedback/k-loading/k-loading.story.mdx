@@ -1,0 +1,63 @@
+import { ref } from 'vue'
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KLoading from './k-loading.vue';
+import { renderArgs, renderParameters } from '@/helpers/storybook'
+import SHead from '@/../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KLoading },
+    setup() {
+      return { args };
+    },
+    template: `
+      <k-loading v-bind="args">
+        <k-card>
+          <k-skeleton type="card">
+        </k-card>
+      </k-loading>
+    `
+});
+
+<Meta title="Feedback/Loading" component={KLoading} argTypes={renderArgs(KLoading)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://i.giphy.com/u2wg2uXJbHzkXkPphr.gif">⌚ KLoading</SHead>
+
+# KLoading
+Con el componente `k-loading` puedes indicar un estado de espera mientras se carga un contenido e impedir otras interacciones con el usuario.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})} args={{active: true, color: 'secondary'}}>
+  {Template.bind({})}
+</Story>
+
+## **Fullpage**
+Con el atributo `fullpage` puedes mostrar el componente superpuesto en toda la pantalla.
+
+<Canvas>
+  <Story name="Fullpage" argTypes={renderArgs(KLoading, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KLoading },
+        setup() {
+          const active = ref(false);
+          const activeFor5Seconds = () => {
+            active.value = true;
+            setTimeout(() => {
+              active.value = false;
+            }, 3000);
+          };
+          return { active, activeFor5Seconds };
+        },
+        template: `
+          <k-loading fullpage :active="active">
+            <k-card>
+              <k-skeleton type="card">
+            </k-card>
+            <div class="flex justify-center mt-4">
+              <k-button @click="activeFor5Seconds()">Activar</k-button>
+            </div>
+          </k-loading>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

@@ -1,0 +1,55 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KTable from './k-table.vue';
+import { renderArgs, renderParameters } from '@/helpers/storybook'
+import SHead from '@/../.storybook/app/components/s-head.tsx'
+import {exampleColumns, exampleData} from './examples/k-table.examples.ts'
+
+export const Template = (args) => ({
+    components: { KTable },
+    setup() {
+        const fixedProps = {
+            index: 'id',
+            store: 'table_example',
+            columns: exampleColumns,
+            data: exampleData,
+            total: 10,
+            requiredFilters: { shop: { $in: '1,4,7,8' } },
+            cards: false
+        }
+        const props = {
+            ...args,
+            ...fixedProps
+        }
+        return { props };
+    },
+    template: `
+        <div class="w-full">
+            <k-table v-bind="props">
+                <template #client="{value}">
+                    {{value}}
+                </template>
+                <template #card="{row}">
+                    <div class="card mb-2">
+                        {{ row.client_name }}
+                    </div>
+                </template>
+            </k-table>
+        </div>
+    `
+});
+
+<Meta title="Data Display/Table 🌟" component={KTable} argTypes={renderArgs(KTable)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media0.giphy.com/media/sRFEa8lbeC7zbcIZZR/giphy.gif?cid=ecf05e47jh6eiz069xt4uoftz1vd8b3a7o84onzel84em9hf&rid=giphy.gif&ct=g">📋 KTable</SHead>
+
+# KTable
+Con el componente `k-table` puedes renderizar una tabla completa con paginación, ordenamiento, búsqueda y filtros predefinidos para los datos.
+
+Las columnas pueden ser inteligentes o personalizadas, y se pueden modificar tantos sus datos como su estilo.
+
+Existe una modo `mobile` que permite diseñar la vista de cada registro de forma manual para mas comodidad.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+

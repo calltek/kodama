@@ -1,0 +1,27 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KImage from './k-image.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KImage },
+    setup() {
+      return { args };
+    },
+    template: '<k-image v-bind="args" />'
+});
+
+<Meta title="Data Display/Image" component={KImage} argTypes={renderArgs(KImage)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media1.giphy.com/media/11PaxnGo8fWVoI/giphy.gif?cid=ecf05e47k99peeliqztdwzieqszxz0zkctn6aogjjevyu0cm&rid=giphy.gif&ct=g">🎞 KImage</SHead>
+
+# KImage
+Con el componente `k-icon` puedes mostrar iconos de distintos tipos y tamaños.
+
+Puedes encontrar todos los iconos necesarios en [FontAwesome](https://fontawesome.com/search)
+
+<Story name="Default" parameters={renderParameters({showPanel: true})} args={{src:'https://img.freepik.com/psd-gratis/maqueta-vista-frontal-modelo-camiseta-negra_125540-1059.jpg?w=740&t=st=1673875510~exp=1673876110~hmac=d84f925f122f504c164229bbd81c2a2e8d54f72c2df3caead6e0a45c1df66f92'}}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />

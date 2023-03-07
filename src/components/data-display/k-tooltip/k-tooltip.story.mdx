@@ -1,0 +1,133 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import { ref } from 'vue';
+import KTooltip from './k-tooltip.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.tsx'
+
+export const Template = (args) => ({
+    components: { KTooltip },
+    setup() {
+      return { args };
+    },
+    template: '<k-tooltip v-bind="args"><k-button color="primary">Tooltip</k-button></k-tooltip>'
+});
+
+<Meta title="Feedback/Tooltip" component={KTooltip} argTypes={renderArgs(KTooltip)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media0.giphy.com/media/dUJxUPSkmZBqE/giphy.gif?cid=ecf05e47bc59lioy7qbcd3hxymndanryn3rqx3dupt1obgzr&rid=giphy.gif&ct=g">💭 KTooltip</SHead>
+
+# KTooltip
+Con el componente `k-tooltip` puedes mostrar información adicional sobre un elemento al pasar por encima o clicar sobre el.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})} args={{title:'Lorem ipsum dolor sit'}}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+## **Titulo**
+El titulo es el contenido del tooltip y puede especificarse con la propiedad `title` o el slot `title`.
+
+<Canvas>
+  <Story name="Title" argTypes={renderArgs(KTooltip, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KTooltip },
+   
+        template: `
+          <k-tooltip title="Lorem ipsum dolor sit">
+            <k-button class="mr-4">Propiedad</k-button>
+          </k-tooltip>
+          <k-tooltip>
+            <k-button>Slot</k-button>
+            <template #content>
+              Lorem ipsum dolor sit
+            </template>
+          </k-tooltip>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Posicion**
+Puedes forzar la posición del tooltip con la propiedad `placement`
+
+<Canvas>
+  <Story name="Placement" argTypes={renderArgs(KTooltip, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KTooltip },
+   
+        template: `
+          <k-tooltip placement="top" title="Tooltip on top">
+            <k-button class="mr-2">TOP</k-button>
+          </k-tooltip>
+          <k-tooltip placement="left" title="Tooltip on left">
+            <k-button class="mr-2">LEFT</k-button>
+          </k-tooltip>
+          <k-tooltip placement="bottom" title="Tooltip on bottom">
+            <k-button class="mr-2">BOTTOM</k-button>
+          </k-tooltip>
+          <k-tooltip placement="right" title="Tooltip on right">
+            <k-button>RIGHT</k-button>
+          </k-tooltip>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Click/Hover**
+Es posible modificar el compartamiento del tooltip para que se habra con `click`, `hover` o forzandolo con la propiedad `visible`
+
+<Canvas>
+  <Story name="Method" argTypes={renderArgs(KTooltip, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KTooltip },
+        setup() {
+          const visible = ref(false);
+          return {
+            visible,
+          };
+        },
+        template: `
+          <k-tooltip hover title="Tooltip on hover">
+            <k-button class="mr-2">HOVER</k-button>
+          </k-tooltip>
+          <k-tooltip click title="Tooltip on click">
+            <k-button class="mr-2">CLICK</k-button>
+          </k-tooltip>
+          <k-tooltip :visible="visible" title="Tooltip manual">
+            <k-button @click="visible = !visible">VISIBLE: {{visible}}</k-button>
+          </k-tooltip>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Flecha**
+Puedes esconder la flecha del tooltip especificando la propiedad `arrow` a `false`
+
+<Canvas>
+  <Story name="Arrow" argTypes={renderArgs(KTooltip, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KTooltip },
+        setup() {
+          const visible = ref(false);
+          return {
+            visible,
+          };
+        },
+        template: `
+          <k-tooltip :arrow="false" title="Tooltip witouth arrow">
+            <k-button>ARROW HIDE</k-button>
+          </k-tooltip>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

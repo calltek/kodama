@@ -1,0 +1,19 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import { useRouter } from 'vue-router';
+import App from '@/views/app.vue'
+
+export const Template = (args) => ({
+    components: {App  },
+    setup() {
+      const router = useRouter();
+      router.replace({name: '403'})
+      return { args };
+    },
+    template: '<app />'
+});
+
+<Meta title="Layouts/403" decorators={[() => ({ template: '<div id="app" class="fixed h-screen w-screen top-0 left-0"><story /></div>' })]} />
+
+<Story name="Default">
+  {Template.bind({})}
+</Story>
