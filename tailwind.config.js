@@ -12,7 +12,7 @@ module.exports = {
             sidebar: '#0b0f19',
             toolbar: '#0d121f',
 
-            // Mono Colors
+            // Mono Color
             white: 'white',
             black: 'black',
             gray: {

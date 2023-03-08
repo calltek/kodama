@@ -38,7 +38,7 @@
     "scripts": {
         "build": "npm run build:project && npm run build:storybook",
         "storybook": "start-storybook -p 6006",
-        "build:storybook": "build-storybook -o docs-build",
+        "build:storybook": "export NODE_OPTIONS=--openssl-legacy-provider && build-storybook -o docs-build",
         "build:project": "vue-tsc --noEmit && vite build",
         "deploy:storybook": "gh-pages -d storybook-static"
     },
