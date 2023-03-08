@@ -82,31 +82,34 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, computed } from 'vue'
+    import { defineComponent, computed, inject } from 'vue'
 
     // import UserMenu from './aside/user-menu.vue'
     // import GlobalSearch from './global-search/global-search.vue'
     // import KUpdater from './aside/updater.vue'
 
     import { searchEnabled } from '@/helpers/config'
-    import { useAuth, useConfig } from '@/store'
+    import { useConfig } from '@/store'
+    import { KodamaParams } from '@/config'
 
     export default defineComponent({
         name: 'KTopbar',
 
         setup() {
-            const auth = useAuth()
+            const auth = inject('$auth') as KodamaParams['auth']
 
             const logout = () => {
                 auth.logout()
             }
 
             const firstname = computed(() => {
-                return auth.firstname || 'Jhon'
+                return auth.getLastName() || 'Jhon'
             })
 
             const fullname = computed(() => {
-                return auth.name || 'Jhon Doe'
+                const name = auth.getName() || 'Jhon'
+                const lastname = auth.getLastName() || 'Doe'
+                return `${name} ${lastname}`
             })
 
             const collapsed = computed({

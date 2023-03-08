@@ -115,11 +115,21 @@
                 }
             }
 
+            const addGoogleFonts = () => {
+                const link = document.createElement('link')
+                link.rel = 'stylesheet'
+                link.href =
+                    'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Rubik:wght@400;500;600;700&display=swap'
+
+                document.body.appendChild(link)
+            }
+
             onMounted(() => {
                 config.init()
 
                 replaceFavicon()
                 addFontAwesomeKit()
+                addGoogleFonts()
 
                 const html = document.querySelector('html')
                 if (html) {

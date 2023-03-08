@@ -15,16 +15,19 @@ import { Menu } from './config/_menu'
 import { CustomConfig as Config } from './config/_settings'
 
 // System store
-import { useConfig, useAuth } from './store'
+import { useConfig } from './store'
+import { toast, dayjs } from './plugins'
 
 export {
     // App
     createApp,
     // Store
     useConfig,
-    useAuth,
     // Router
-    useRouter
+    useRouter,
+    // Plugins
+    toast,
+    dayjs
 }
 
 // Types

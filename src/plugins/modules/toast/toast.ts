@@ -1,4 +1,5 @@
-import cogoToast from 'cogo-toast'
+import { toast, ToastOptions } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 type KodamaToastPosition =
     | 'top-right'
@@ -14,34 +15,19 @@ type KodamaToastOptions = {
 }
 
 export default {
-    info(message: string, options?: KodamaToastOptions) {
-        return cogoToast.info(message, {
-            heading: options?.title,
-            position: options?.position
-        })
+    info(message: string, options?: ToastOptions) {
+        return toast.info(message, options)
     },
     success(message: string, options?: KodamaToastOptions) {
-        return cogoToast.success(message, {
-            heading: options?.title,
-            position: options?.position
-        })
+        return toast.success(message, options)
     },
-    danger(message: string, options?: KodamaToastOptions) {
-        return cogoToast.error(message, {
-            heading: options?.title,
-            position: options?.position
-        })
+    error(message: string, options?: KodamaToastOptions) {
+        return toast.error(message, options)
     },
     warning(message: string, options?: KodamaToastOptions) {
-        return cogoToast.warn(message, {
-            heading: options?.title,
-            position: options?.position
-        })
+        return toast.warn(message, options)
     },
     loading(message: string, options?: KodamaToastOptions) {
-        return cogoToast.loading(message, {
-            heading: options?.title,
-            position: options?.position
-        })
+        return toast.loading(message, options)
     }
 }

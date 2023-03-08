@@ -51,7 +51,7 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
 
     if (link) {
         specific_classes.push(
-            'bg-transparent border-transparent text-opacity-80 hover:text-opacity-100'
+            'bg-transparent border-transparent text-opacity-80 hover:text-opacity-100 outline-none'
         )
 
         if (color === 'white' || color === 'dark') {

@@ -3,12 +3,6 @@ import { Menu, SysMenu } from '../config/_menu'
 import useConfig from './modules/config'
 import useQuery from './modules/query'
 
-const useAuth = function () {
-    const ctx: any = getCurrentInstance()
-    if (ctx) return ctx.proxy.useAuth()
-    return null
-}
-
 const useMenu = function (): Menu[] {
     const ctx: any = getCurrentInstance()
 
@@ -19,4 +13,4 @@ const useMenu = function (): Menu[] {
     return CustomMenu
 }
 
-export { useConfig, useAuth, useMenu, useQuery }
+export { useConfig, useMenu, useQuery }

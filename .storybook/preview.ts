@@ -30,7 +30,32 @@ const vm = createApp(
         components: { ...components, ...layouts },
         menu: menu,
         settings: settings,
-        auth: useAuth
+        auth: {
+            getName: () => {
+                const auth = useAuth()
+                return auth.name
+            },
+            getLastName: () => {
+                const auth = useAuth()
+                return auth.lastname
+            },
+            isLoggedIn: () => {
+                const auth = useAuth()
+                return auth.isLoggedIn
+            },
+            login: (username: string, password: string) => {
+                const auth = useAuth()
+                return auth.login(username, password)
+            },
+            forgot: (email: string) => {
+                const auth = useAuth()
+                return auth.forgot(email)
+            },
+            logout: () => {
+                const auth = useAuth()
+                return auth.logout()
+            }
+        }
     },
     app
 )

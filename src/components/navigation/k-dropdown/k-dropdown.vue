@@ -115,16 +115,7 @@
                 triggerType: method,
                 offsetSkidding: 0,
                 offsetDistance: props.submenu ? 30 : 10,
-                delay: 300,
-                onHide: () => {
-                    console.log('dropdown has been hidden')
-                },
-                onShow: () => {
-                    console.log('dropdown has been shown')
-                },
-                onToggle: () => {
-                    console.log('dropdown has been toggled')
-                }
+                delay: 300
             }
 
             onMounted(() => {

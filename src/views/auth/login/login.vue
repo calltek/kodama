@@ -63,19 +63,21 @@
 </template>
 
 <script lang="ts">
-    import { computed, defineComponent, reactive, ref } from 'vue'
+    import { computed, defineComponent, inject, reactive, ref } from 'vue'
     import { required } from '@vuelidate/validators'
 
-    import { useAuth, useConfig } from '@/store'
+    import { useConfig } from '@/store'
 
     import { useRouter } from 'vue-router'
     import useVuelidate from '@vuelidate/core'
+    import { KodamaParams } from '@/config'
 
     export default defineComponent({
         name: 'Login',
 
         setup() {
-            const auth = useAuth()
+            const auth = inject('$auth') as KodamaParams['auth']
+
             const router = useRouter()
             const config = useConfig()
 
@@ -102,7 +104,7 @@
                 if (isValidForm.value) {
                     loading.value = true
 
-                    auth.login(state)
+                    auth.login(state.username, state.password)
                         .then(() => {
                             const homepage = config.get('homepage')
                             router.push({ name: homepage })

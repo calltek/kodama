@@ -137,7 +137,6 @@
                 const $targetEl = document.getElementById(modalId)
                 const options = renderOptions()
 
-                console.log('init', options)
                 modal.value = new Modal($targetEl, options)
 
                 if (props.modelValue) {

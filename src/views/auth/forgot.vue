@@ -47,16 +47,16 @@
 </template>
 
 <script lang="ts">
-    import { computed, defineComponent, reactive, ref } from 'vue'
+    import { computed, defineComponent, inject, reactive, ref } from 'vue'
     import { required, email } from '@vuelidate/validators'
     import useVuelidate from '@vuelidate/core'
-    import { useAuth } from '@/store'
+    import { KodamaParams } from '@/config'
 
     export default defineComponent({
         name: 'ForgotPassword',
 
         setup() {
-            const auth = useAuth()
+            const auth = inject('$auth') as KodamaParams['auth']
             const loading = ref(false)
 
             const state = reactive({

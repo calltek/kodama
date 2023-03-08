@@ -1,5 +1,5 @@
-import { createApp, App } from 'vue'
-import { createPinia, StoreDefinition } from 'pinia'
+import { createApp, App, computed } from 'vue'
+import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { RouteRecordRaw, NavigationGuardWithThis } from 'vue-router'
 
@@ -9,7 +9,6 @@ import filters from './_filters'
 import router from './_router'
 import { Menu } from './_menu'
 import { CustomConfig } from './_settings'
-import { AuthStore } from './_auth'
 
 import { dayjs, toast } from '@/plugins'
 
@@ -23,7 +22,14 @@ export type KodamaParams = {
     components: Record<string, { [key: string]: any }>
     menu: () => Menu[]
     settings: CustomConfig
-    auth: StoreDefinition<string, any, AuthStore>
+    auth: {
+        getName: () => string
+        getLastName: () => string
+        isLoggedIn: () => boolean
+        login: (username: string, password: string) => Promise<any>
+        forgot: (email: string) => Promise<any>
+        logout: () => boolean
+    }
 }
 
 export function init(params: KodamaParams, app?: App<Element>) {
@@ -41,18 +47,16 @@ export function init(params: KodamaParams, app?: App<Element>) {
     components(app, params.components)
 
     // App Globals
-    app.config.globalProperties.useAuth = params.auth
     app.config.globalProperties.settings = params.settings
     app.config.globalProperties.menu = params.menu
     app.config.globalProperties.$filters = filters
 
     // App Provide/Inject
-    app.provide('kodamaAuth', params.auth)
-    app.provide('kodamaSettings', params.settings)
-    app.provide('kodamaMenu', params.menu)
-    app.provide('kodamaFilters', filters)
     app.provide('toast', toast)
     app.provide('dayjs', dayjs)
+    app.provide('$auth', params.auth)
+    app.provide('$settings', params.settings)
+    app.provide('$filters', filters)
 
     return app
 }

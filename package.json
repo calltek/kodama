@@ -32,17 +32,17 @@
         "@vuepic/vue-datepicker": "^3.4.7",
         "animate.css": "^4.1.1",
         "chance": "^1.1.8",
-        "cogo-toast": "^4.2.3",
         "dayjs": "^1.11.7",
         "flowbite": "^1.6.3",
         "lodash.clonedeep": "^4.5.0",
         "medium-zoom": "^1.0.6",
         "object-path": "^0.11.8",
-        "pinia": "^2.0.20",
+        "pinia": "^2.0.33",
         "pinia-plugin-persistedstate": "^2.1.1",
         "vue": "^3.2.37",
         "vue-loading-overlay": "^5.0.3",
-        "vue-router": "^4.1.4"
+        "vue-router": "^4.1.4",
+        "vue3-toastify": "^0.1.2"
     },
     "devDependencies": {
         "@babel/core": "^7.19.1",
@@ -57,6 +57,7 @@
         "@types/chance": "^1.1.3",
         "@types/lodash.clonedeep": "^4.5.7",
         "@types/object-path": "^0.11.1",
+        "@types/react": "file:stub/types__react",
         "@typescript-eslint/eslint-plugin": "^5.12.1",
         "@typescript-eslint/parser": "^5.12.1",
         "@vitejs/plugin-vue": "^3.0.3",

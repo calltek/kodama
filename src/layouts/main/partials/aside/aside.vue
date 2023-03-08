@@ -18,7 +18,7 @@
                 v-if="!collapsed"
                 icon="chevrons-left"
                 link
-                color="white"
+                color="primary"
                 class="-mr-2"
                 @click="collapsed = true"
             ></k-button>
@@ -27,7 +27,7 @@
                 v-else
                 icon="chevrons-right"
                 link
-                color="white"
+                color="primary"
                 class="absolute top-0 right-0 -m-3 mt-5"
                 @click="collapsed = false"
             ></k-button>
@@ -43,7 +43,12 @@
 
 <script lang="ts">
     import { useConfig } from '@/store'
-    import { computed, defineComponent } from 'vue'
+    import {
+        computed,
+        defineComponent,
+        inject,
+        resolveDynamicComponent
+    } from 'vue'
     import KMenu from './menu.vue'
 
     export default defineComponent({
@@ -52,6 +57,11 @@
             KMenu
         },
         setup() {
+            const ghostComponents: any = inject('$ghostComponents')
+
+            const isComponent = (name: string) =>
+                typeof resolveDynamicComponent(name) !== 'string'
+
             const collapsed = computed({
                 get() {
                     const config = useConfig()
@@ -63,7 +73,7 @@
                 }
             })
 
-            return { collapsed }
+            return { collapsed, isComponent, ghostComponents }
         }
     })
 </script>

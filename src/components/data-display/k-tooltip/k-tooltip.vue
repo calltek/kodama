@@ -78,15 +78,6 @@
             const options: TooltipOptions = {
                 placement: props.placement,
                 triggerType: method
-                // onHide: () => {
-                //     console.log('tooltip is hidden')
-                // },
-                // onShow: () => {
-                //     console.log('tooltip is show')
-                // },
-                // onToggle: () => {
-                //     console.log('tooltip is toggled')
-                // }
             }
 
             onMounted(() => {
@@ -100,10 +91,8 @@
                 () => props.visible,
                 (value) => {
                     if (value) {
-                        console.log('show')
                         tooltip.value?.show()
                     } else {
-                        console.log('hide')
                         tooltip.value?.hide()
                     }
                 }
