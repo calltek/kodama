@@ -3,6 +3,17 @@ const path = require('path')
 // const { mergeConfig } = require('vite')
 const { VitePWA } = require('vite-plugin-pwa')
 
+const INVALID_CHAR_REGEX = /[\u0000-\u001F"#$&*+,:;<=>?[\]^`{|}\u007F_]/g
+const DRIVE_LETTER_REGEX = /^[a-z]:/i
+function sanitizeFileName(name) {
+    const match = DRIVE_LETTER_REGEX.exec(name)
+    const driveLetter = match ? match[0] : ''
+    return (
+        driveLetter +
+        name.slice(driveLetter.length).replace(INVALID_CHAR_REGEX, '+')
+    )
+}
+
 module.exports = {
     stories: [
         '../src/components/**/*.story.@(js|jsx|ts|tsx|mdx)',
@@ -45,6 +56,15 @@ module.exports = {
             ...config.resolve.alias,
             '@': path.resolve(__dirname, '../src'),
             'tailwind.config': path.resolve(__dirname, '../tailwind.config.js')
+        }
+
+        config.build = {
+            ...config.build,
+            ...{
+                rollupOptions: {
+                    output: { sanitizeFileName: sanitizeFileName }
+                }
+            }
         }
 
         config.optimizeDeps = {
