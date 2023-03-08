@@ -11,10 +11,6 @@ module.exports = {
             transparent: 'transparent',
             sidebar: '#0b0f19',
             toolbar: '#0d121f',
-            foreground: {
-                light: '#1F2937',
-                dark: '#E5E7EB'
-            },
 
             // Mono Colors
             white: 'white',
