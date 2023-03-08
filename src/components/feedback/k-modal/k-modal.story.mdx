@@ -2,7 +2,7 @@ import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
 import { ref } from 'vue';
 import KModal from './k-modal.vue';
 import { renderArgs, renderParameters } from '../../../helpers/storybook'
-import SHead from '../../../../.storybook/app/components/s-head.tsx'
+import SHead from '../../../../.storybook/app/components/s-head.jsx'
 
 export const Template = (args) => ({
     components: { KModal },
@@ -10,7 +10,7 @@ export const Template = (args) => ({
       const visible = ref(false)
       return { args, visible };
     },
-    template: '<k-modal v-bind="args" v-model="visible"><k-skeleton></k-skeleton></k-modal><k-button @click="visible = true">Open Modal</k-button>'
+    template: '<k-modal v-bind="args" v-model="visible"><k-skeleton /></k-skeleton></k-modal><k-button @click="visible = true">Open Modal</k-button>'
 });
 
 <Meta title="Feedback/Modal" component={KModal} argTypes={renderArgs(KModal)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
@@ -39,7 +39,7 @@ Puedes definir el titulo del modal con la propiedad `title`
           return { visible };
         },
         template: `
-          <k-modal v-model="visible" title="Lorem ipsum dolor sit" :closable="false"><k-skeleton></k-modal>
+          <k-modal v-model="visible" title="Lorem ipsum dolor sit" :closable="false"><k-skeleton /></k-modal>
         `,
       };
     }}
@@ -63,7 +63,7 @@ Puedes personalizar el `header` y `footer` del modal con los slots correspondien
             <template #header>
               <k-title :size="5" bold>Modal Title</k-title>
             </template>
-            <k-skeleton>
+            <k-skeleton />
             <template #footer>
               <div class="flex justify-end gap-4 w-full">
                 <k-button color="danger" size="sm">Cancelar</k-button>

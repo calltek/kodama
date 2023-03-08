@@ -1,7 +1,7 @@
 import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
 import KAvatar from './k-avatar.vue';
 import { renderArgs, renderParameters } from '../../../helpers/storybook'
-import SHead from '../../../../.storybook/app/components/s-head.tsx'
+import SHead from '../../../../.storybook/app/components/s-head.jsx'
 
 export const Template = (args) => ({
     components: { KAvatar },
@@ -18,7 +18,7 @@ export const Template = (args) => ({
 # KButton
 Con el componente `k-avatar` puedes formar el avatar de una persona de manera aleatoria. El avatar siempre será el mismo.
 
-<Story name="Default" parameters={renderParameters({showPanel: true})}>
+<Story name="Default" parameters={renderParameters({showPanel: true})} args={{name:"Jon Doe"}}>
   {Template.bind({})}
 </Story>
 

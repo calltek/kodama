@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
 import KLoading from './k-loading.vue';
 import { renderArgs, renderParameters } from '@/helpers/storybook'
-import SHead from '@/../.storybook/app/components/s-head.tsx'
+import SHead from '@/../.storybook/app/components/s-head.jsx'
 
 export const Template = (args) => ({
     components: { KLoading },
@@ -12,7 +12,7 @@ export const Template = (args) => ({
     template: `
       <k-loading v-bind="args">
         <k-card>
-          <k-skeleton type="card">
+          <k-skeleton type="card" />
         </k-card>
       </k-loading>
     `
@@ -50,7 +50,7 @@ Con el atributo `fullpage` puedes mostrar el componente superpuesto en toda la p
         template: `
           <k-loading fullpage :active="active">
             <k-card>
-              <k-skeleton type="card">
+              <k-skeleton type="card" />
             </k-card>
             <div class="flex justify-center mt-4">
               <k-button @click="activeFor5Seconds()">Activar</k-button>

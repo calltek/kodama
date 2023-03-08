@@ -1,7 +1,7 @@
 import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
 import KCard from './k-card.vue';
 import { renderArgs, renderParameters } from '../../../helpers/storybook'
-import SHead from '../../../../.storybook/app/components/s-head.tsx'
+import SHead from '../../../../.storybook/app/components/s-head.jsx'
 
 export const Template = (args) => ({
     components: { KCard },
@@ -10,7 +10,7 @@ export const Template = (args) => ({
     },
     template: `
     <k-card v-bind="args" class="w-full max-w-sm">
-      <k-skeleton type="card">
+      <k-skeleton type="card" />
     </k-card>`
 });
 
