@@ -38,7 +38,7 @@
     "scripts": {
         "build": "npm run build:project && npm run build:storybook",
         "storybook": "start-storybook -p 6006",
-        "build:storybook": "build-storybook -o docs-build",
+        "build:storybook": "build-storybook",
         "build:project": "vue-tsc --noEmit && vite build"
     },
     "dependencies": {
