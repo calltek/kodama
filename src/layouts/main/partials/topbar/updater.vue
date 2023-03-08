@@ -1,20 +1,16 @@
 <template>
-    <tippy
+    <k-tooltip
         v-if="updateAvailable"
-        content="🍾 Actualización disponible"
-        placement="right"
+        title="🍾 Actualización disponible"
+        placement="left"
     >
-        <a
-            href="#"
-            class="btn btn-icon btn-sm pulse pulse-success mb-n2"
+        <k-button
+            neon
+            color="success"
+            icon="cloud-arrow-down"
             @click="update"
-        >
-            <div class="pulse-ring"></div>
-            <i
-                class="fad fa-cloud-arrow-down text-success text-hover-primary fs-4"
-            />
-        </a>
-    </tippy>
+        />
+    </k-tooltip>
 </template>
 
 <script type="module" lang="ts">

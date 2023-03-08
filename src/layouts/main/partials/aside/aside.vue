@@ -43,12 +43,7 @@
 
 <script lang="ts">
     import { useConfig } from '@/store'
-    import {
-        computed,
-        defineComponent,
-        inject,
-        resolveDynamicComponent
-    } from 'vue'
+    import { computed, defineComponent, resolveDynamicComponent } from 'vue'
     import KMenu from './menu.vue'
 
     export default defineComponent({
@@ -57,8 +52,6 @@
             KMenu
         },
         setup() {
-            const ghostComponents: any = inject('$ghostComponents')
-
             const isComponent = (name: string) =>
                 typeof resolveDynamicComponent(name) !== 'string'
 
@@ -73,7 +66,7 @@
                 }
             })
 
-            return { collapsed, isComponent, ghostComponents }
+            return { collapsed, isComponent }
         }
     })
 </script>

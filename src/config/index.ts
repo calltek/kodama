@@ -1,4 +1,4 @@
-import { createApp, App, computed } from 'vue'
+import { createApp, App } from 'vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { RouteRecordRaw, NavigationGuardWithThis } from 'vue-router'

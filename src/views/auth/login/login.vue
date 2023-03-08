@@ -17,47 +17,49 @@
                 </div>
             </div>
 
-            <div class="mb-4">
-                <k-input
-                    v-model="state.username"
-                    type="text"
-                    placeholder=""
-                    label="Email / Usuario"
-                    tabindex="1"
-                    :errors="v$.username.$silentErrors"
-                />
-            </div>
+            <form @submit.prevent="submitLogin">
+                <div class="mb-4">
+                    <k-input
+                        v-model="state.username"
+                        type="text"
+                        placeholder=""
+                        label="Email / Usuario"
+                        tabindex="1"
+                        :errors="v$.username.$errors"
+                    />
+                </div>
 
-            <div class="mb-10">
-                <k-input
-                    v-model="state.password"
-                    type="password"
-                    name="password"
-                    label="Contraseña"
-                    tabindex="2"
-                    :errors="v$.password.$silentErrors"
-                />
-            </div>
+                <div class="mb-10">
+                    <k-input
+                        v-model="state.password"
+                        type="password"
+                        name="password"
+                        label="Contraseña"
+                        tabindex="2"
+                        :errors="v$.password.$errors"
+                    />
+                </div>
 
-            <div class="text-center">
-                <k-button
-                    :loading="loading"
-                    icon="right-from-bracket"
-                    class="w-full mb-4"
-                    :disabled="!isValidForm"
-                    @click="submitLogin"
-                >
-                    Acceder
-                </k-button>
+                <div class="text-center">
+                    <k-button
+                        :loading="loading"
+                        icon="right-from-bracket"
+                        class="w-full mb-4"
+                        :disabled="!isValidForm"
+                        type="submit"
+                    >
+                        Acceder
+                    </k-button>
 
-                <router-link
-                    :to="{ name: 'forgotPassword' }"
-                    class="text-sm"
-                    tabindex="3"
-                >
-                    ¿Olvidaste tu contraseña?
-                </router-link>
-            </div>
+                    <router-link
+                        :to="{ name: 'forgotPassword' }"
+                        class="text-sm"
+                        tabindex="3"
+                    >
+                        ¿Olvidaste tu contraseña?
+                    </router-link>
+                </div>
+            </form>
         </div>
     </k-card>
 </template>

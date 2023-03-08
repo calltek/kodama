@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, computed, onMounted } from 'vue'
+    import { defineComponent, computed } from 'vue'
 
     import props from './k-button.props'
     import { parseButtonClasses, parseIconClasses } from './k-button.utils'

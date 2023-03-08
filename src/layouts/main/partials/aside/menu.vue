@@ -259,10 +259,6 @@
 
 <style lang="scss" scoped>
     .k-menu {
-        li {
-            @apply space-y-2;
-        }
-
         // COLLAPSED
         &.k-menu-collapsed {
             li:not(.k-menu-sub) {

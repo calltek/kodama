@@ -7,41 +7,43 @@
                 </h1>
             </div>
 
-            <div class="mb-4">
-                <k-input
-                    v-model="state.email"
-                    type="email"
-                    placeholder="jhon@doe.com"
-                    label="Email"
-                    tabindex="1"
-                    :errors="v$.email.$silentErrors"
-                />
+            <form @submit.prevent="submitForgot">
+                <div class="mb-4">
+                    <k-input
+                        v-model="state.email"
+                        type="email"
+                        placeholder="jhon@doe.com"
+                        label="Email"
+                        tabindex="1"
+                        :errors="v$.email.$silentErrors"
+                    />
 
-                <div class="fv-plugins-message-container">
-                    <div class="fv-help-block">
-                        <ErrorMessage name="email" />
+                    <div class="fv-plugins-message-container">
+                        <div class="fv-help-block">
+                            <ErrorMessage name="email" />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="text-center">
-                <k-button
-                    :loading="loading"
-                    icon="right-from-bracket"
-                    class="w-full mb-4"
-                    :disabled="!isValidForm"
-                    @click="submitForgot"
-                >
-                    Acceder
-                </k-button>
+                <div class="text-center">
+                    <k-button
+                        :loading="loading"
+                        icon="right-from-bracket"
+                        class="w-full mb-4"
+                        :disabled="!isValidForm"
+                        type="submit"
+                    >
+                        Acceder
+                    </k-button>
 
-                <router-link
-                    :to="{ name: 'login' }"
-                    class="text-sm text-gray-400"
-                >
-                    Ya me acuerdo de mi clave
-                </router-link>
-            </div>
+                    <router-link
+                        :to="{ name: 'login' }"
+                        class="text-sm text-gray-400"
+                    >
+                        Ya me acuerdo de mi clave
+                    </router-link>
+                </div>
+            </form>
         </div>
     </k-card>
 </template>

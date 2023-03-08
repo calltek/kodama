@@ -3,7 +3,7 @@
         <k-icon
             icon="filter"
             :class="{ 'text-primary': active !== null }"
-            class="ml-2"
+            class="ml-2 cursor-pointer"
         />
 
         <template #content>

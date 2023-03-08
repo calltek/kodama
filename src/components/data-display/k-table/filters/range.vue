@@ -7,7 +7,7 @@
         />
 
         <template #content>
-            <div class="flex align-items-center px-6 py-4">
+            <div class="flex items-center px-6 py-4">
                 <div
                     :id="`${id}`"
                     class="noUi-target noUi-target-primary w-150px w-xxl-200px noUi-sm"
@@ -15,7 +15,6 @@
 
                 <div class="ms-10 flex align-items-center">
                     <a
-                        v-tippy="'Resetear'"
                         class="text-danger cursor-pointer me-2 d-inline-flex"
                         @click="reset"
                     >
@@ -23,7 +22,6 @@
                     </a>
 
                     <a
-                        v-tippy="'Aceptar'"
                         class="text-success cursor-pointer d-inline-flex"
                         @click="filter"
                     >

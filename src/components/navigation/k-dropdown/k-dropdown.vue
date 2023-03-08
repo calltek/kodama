@@ -1,9 +1,5 @@
 <template>
-    <div
-        :id="buttonId"
-        data-dropdown-toggle="dropdown"
-        class="inline-flex flex-row items-center"
-    >
+    <div :id="buttonId" class="inline-flex flex-row items-center">
         <slot></slot>
         <k-icon
             v-if="submenu"
@@ -14,10 +10,7 @@
         ></k-icon>
     </div>
 
-    <div
-        :id="menuId"
-        class="z-10 hidden bg-white divide-y divide-gray-100 dark:divide-gray-600 rounded-lg shadow w-44 dark:bg-gray-700 overflow-hidden"
-    >
+    <div :id="menuId" class="k-dropdown">
         <div
             v-if="hasSlot('header')"
             class="px-4 py-3 text-sm text-gray-900 dark:text-white"
@@ -26,7 +19,7 @@
         </div>
 
         <ul
-            class="v-dropdown-items text-sm text-gray-700 dark:text-gray-200 text-left"
+            class="k-dropdown-items text-sm text-gray-700 dark:text-gray-200 text-left"
             :style="ulStyle"
         >
             <slot name="content"></slot>
@@ -142,9 +135,16 @@
 </script>
 
 <style lang="scss">
-    .v-dropdown-items {
-        li {
-            @apply border-b border-gray-200 dark:border-gray-600 last:border-0;
+    .k-dropdown {
+        min-width: 11rem;
+        max-width: 20rem;
+
+        @apply z-10 hidden bg-white divide-y divide-gray-100 dark:divide-gray-600  rounded-lg shadow dark:bg-gray-700 overflow-hidden;
+
+        .k-dropdown-items {
+            li {
+                @apply border-b border-gray-200 dark:border-gray-600 last:border-0;
+            }
         }
     }
 </style>

@@ -8,14 +8,10 @@ export const Template = (args) => ({
     components: { KDrawer },
     setup() {
       const visible = ref(false)
-      const isVisible = computed(() => {
-        if(args.visible !== undefined) return args.visible
-        return visible.value
-      })
-      return { args, visible, isVisible };
+      return { args, visible };
     },
     template: `
-    <k-button @click="visible = !visible">Open</k-button>
+    <k-button @click="visible = true">Open</k-button>
     <k-drawer v-bind="args" v-model="visible">
       TEST
     </k-drawer>`

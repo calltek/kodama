@@ -1,7 +1,7 @@
 <template>
     <header>
         <nav class="px-4 lg:px-6 py-2.5 bg-sidebar text-gray-100">
-            <div class="flex flex-wrap justify-between items-center">
+            <div class="flex flex-wrap items-center">
                 <div class="flex sm:hidden">
                     <k-button
                         icon="chevrons-right"
@@ -15,66 +15,74 @@
                     <k-toolbar-search />
                 </div>
 
-                <div class="flex items-center lg:order-2">
-                    <k-dropdown click>
-                        <k-avatar
-                            :name="fullname"
-                            :size="45"
-                            :tooltip="false"
-                            square
-                            class="cursor-pointer"
-                        />
+                <div class="ml-auto"></div>
 
-                        <template #header>
-                            <div class="flex gap-4 items-center">
-                                <k-avatar
-                                    :name="fullname"
-                                    :size="40"
-                                    :tooltip="false"
-                                />
-                                <div>
-                                    Bienvenido <br />
-                                    <strong>{{ firstname }}</strong>
+                <div class="flex flex-row gap-4">
+                    <k-updater />
+
+                    <k-theme />
+
+                    <div class="flex items-center lg:order-2">
+                        <k-dropdown click>
+                            <k-avatar
+                                :name="fullname"
+                                :size="42"
+                                :tooltip="false"
+                                square
+                                class="cursor-pointer"
+                            />
+
+                            <template #header>
+                                <div class="flex gap-4 items-center">
+                                    <k-avatar
+                                        :name="fullname"
+                                        :size="40"
+                                        :tooltip="false"
+                                    />
+                                    <div>
+                                        Bienvenido <br />
+                                        <strong>{{ firstname }}</strong>
+                                    </div>
                                 </div>
-                            </div>
-                        </template>
+                            </template>
 
-                        <template #content>
-                            <k-dropdown-item>
-                                <router-link to="/pages/profile/overview">
+                            <template #content>
+                                <k-dropdown-item>
+                                    <router-link to="/pages/profile/overview">
+                                        <k-icon
+                                            icon="address-card"
+                                            type="fal"
+                                            class="mr-2"
+                                        />
+                                        Mi Perfil
+                                    </router-link>
+                                </k-dropdown-item>
+                                <k-dropdown-item>
+                                    <router-link to="/pages/profile/overview">
+                                        <k-icon
+                                            icon="gear"
+                                            type="fal"
+                                            class="mr-2"
+                                        />
+                                        Configuración
+                                    </router-link>
+                                </k-dropdown-item>
+                            </template>
+
+                            <template #footer>
+                                <a
+                                    class="text-danger cursor-pointer block"
+                                    @click="logout()"
+                                >
                                     <k-icon
-                                        icon="address-card"
-                                        type="fal"
+                                        icon="right-from-bracket"
                                         class="mr-2"
                                     />
-                                    Mi Perfil
-                                </router-link>
-                            </k-dropdown-item>
-                            <k-dropdown-item>
-                                <router-link to="/pages/profile/overview">
-                                    <k-icon
-                                        icon="gear"
-                                        type="fal"
-                                        class="mr-2"
-                                    />
-                                    Configuración
-                                </router-link>
-                            </k-dropdown-item>
-                        </template>
-
-                        <template #footer>
-                            <a
-                                class="text-danger cursor-pointer block"
-                                @click="logout()"
-                            >
-                                <k-icon
-                                    icon="right-from-bracket"
-                                    class="mr-2"
-                                />
-                                Cerrar sesión
-                            </a>
-                        </template>
-                    </k-dropdown>
+                                    Cerrar sesión
+                                </a>
+                            </template>
+                        </k-dropdown>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -84,9 +92,9 @@
 <script lang="ts">
     import { defineComponent, computed, inject } from 'vue'
 
-    // import UserMenu from './aside/user-menu.vue'
     // import GlobalSearch from './global-search/global-search.vue'
-    // import KUpdater from './aside/updater.vue'
+    import KUpdater from './updater.vue'
+    import KTheme from './theme.vue'
 
     import { searchEnabled } from '@/helpers/config'
     import { useConfig } from '@/store'
@@ -94,7 +102,10 @@
 
     export default defineComponent({
         name: 'KTopbar',
-
+        components: {
+            KUpdater,
+            KTheme
+        },
         setup() {
             const auth = inject('$auth') as KodamaParams['auth']
 
