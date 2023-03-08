@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import _ from 'lodash'
-import { AuthUser } from './auth.schema'
 
 const defaultState = {
     id: 0,
@@ -13,7 +12,7 @@ const defaultState = {
 
 export const useAuth = defineStore('auth', {
     persist: true,
-    state: () => _.cloneDeep(defaultState) as AuthUser,
+    state: () => _.cloneDeep(defaultState),
     getters: {
         // Check if user is logged in
         isLoggedIn: (state) => !!state.token,
@@ -23,10 +22,7 @@ export const useAuth = defineStore('auth', {
         profile: (state) => state
     },
     actions: {
-        login: function (
-            username: string,
-            password: string
-        ): Promise<AuthUser> {
+        login: function (username, password) {
             return new Promise((resolve) => {
                 setTimeout(() => {
                     const user = {
@@ -49,14 +45,14 @@ export const useAuth = defineStore('auth', {
                 }, 2000)
             })
         },
-        forgot(email: string): Promise<boolean> {
+        forgot(email) {
             return new Promise((resolve) => {
                 setTimeout(() => {
                     resolve(true)
                 }, 2000)
             })
         },
-        logout(): boolean {
+        logout() {
             try {
                 this.id = defaultState.id
                 this.token = defaultState.token
@@ -73,7 +69,7 @@ export const useAuth = defineStore('auth', {
                 return false
             }
         },
-        checkAuth(strict = true): boolean {
+        checkAuth(strict = true) {
             return true
         }
     }

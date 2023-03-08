@@ -1,6 +1,6 @@
 const path = require('path')
-const postcss = require('../postcss.config.js')
-const { mergeConfig } = require('vite')
+// const postcss = require('../postcss.config.js')
+// const { mergeConfig } = require('vite')
 const { VitePWA } = require('vite-plugin-pwa')
 
 module.exports = {
@@ -29,6 +29,16 @@ module.exports = {
     },
     features: {
         storyStoreV7: true
+    },
+    typescript: {
+        check: false,
+        checkOptions: {},
+        reactDocgen: 'react-docgen-typescript',
+        reactDocgenTypescriptOptions: {
+            shouldExtractLiteralValuesFromEnum: true,
+            propFilter: (prop) =>
+                prop.parent ? !/node_modules/.test(prop.parent.fileName) : true
+        }
     },
     async viteFinal(config, { configType }) {
         config.resolve.alias = {

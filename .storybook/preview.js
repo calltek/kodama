@@ -43,11 +43,11 @@ const vm = createApp(
                 const auth = useAuth()
                 return auth.isLoggedIn
             },
-            login: (username: string, password: string) => {
+            login: (username, password) => {
                 const auth = useAuth()
                 return auth.login(username, password)
             },
-            forgot: (email: string) => {
+            forgot: (email) => {
                 const auth = useAuth()
                 return auth.forgot(email)
             },

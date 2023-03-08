@@ -1,7 +1,6 @@
-import { Menu } from '../../../src/main'
 import { useAuth } from '../modules/auth'
 
-const DocMenuConfig = (): Menu[] => {
+const DocMenuConfig = () => {
     const auth = useAuth()
 
     return [

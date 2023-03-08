@@ -1,6 +1,4 @@
-import { Config } from '../../../src/main'
-
-const defaultState: Config = {
+const defaultState = {
     // General
     name: 'Kodama',
     version: '0.2.0',
@@ -8,13 +6,6 @@ const defaultState: Config = {
     ///////////////
     // Branding
     ///////////////
-    color: {
-        primary: '#009EF7',
-        secondary: '#6610f2',
-        success: '#50CD89',
-        warning: '#FFC700',
-        danger: '#F1416C'
-    },
 
     logo: {
         favicon:
@@ -25,12 +16,6 @@ const defaultState: Config = {
             'https://kodamaui.s3.eu-west-1.amazonaws.com/logos/sidelogo-dark.png',
         side_light:
             'https://kodamaui.s3.eu-west-1.amazonaws.com/logos/sidelogo.png'
-    },
-
-    loader: {
-        logo: '/media/logos/logo.png',
-        display: true,
-        type: 'default'
     },
 
     copyright: {

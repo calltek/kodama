@@ -1,13 +1,8 @@
-import {
-    RouteRecordRaw,
-    RouteLocationNormalized,
-    NavigationGuardNext,
-    useConfig
-} from '../../../src/main'
+import { useConfig } from '../../../src/main'
 
 import { useAuth } from '../modules/auth'
 
-const routes: Array<RouteRecordRaw> = [
+const routes = [
     {
         path: '/',
         name: 'dashboard',
@@ -18,11 +13,7 @@ const routes: Array<RouteRecordRaw> = [
     }
 ]
 
-function beforeEach(
-    to: RouteLocationNormalized,
-    _from: RouteLocationNormalized,
-    next: NavigationGuardNext
-) {
+function beforeEach(to, _from, next) {
     const auth = useAuth()
     const config = useConfig()
 
