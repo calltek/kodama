@@ -39,8 +39,7 @@
         "build": "npm run build:project && npm run build:storybook",
         "storybook": "start-storybook -p 6006",
         "build:storybook": "build-storybook -o docs-build",
-        "build:project": "vue-tsc --noEmit && vite build",
-        "deploy:storybook": "gh-pages -d storybook-static"
+        "build:project": "vue-tsc --noEmit && vite build"
     },
     "dependencies": {
         "@vuelidate/core": "^2.0.0",
@@ -84,7 +83,6 @@
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-storybook": "^0.6.4",
         "eslint-plugin-vue": "^8.5.0",
-        "gh-pages": "^5.0.0",
         "postcss": "^8.4.20",
         "prettier": "2.6.2",
         "react": "^18.2.0",
