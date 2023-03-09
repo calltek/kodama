@@ -18,31 +18,47 @@
                                 :arrow="false"
                                 :disabled="!collapsed"
                             >
-                                <button class="k-menu-item">
-                                    <span
-                                        v-if="menuItem.icon"
-                                        class="k-menu-icon"
+                                <router-link
+                                    v-if="!menuItem.disabled && !menuItem.pages"
+                                    v-slot="{ href, navigate, isActive }"
+                                    active-class="active"
+                                    :to="
+                                        !menuItem.disabled ? menuItem.route : {}
+                                    "
+                                >
+                                    <button
+                                        class="k-menu-item"
+                                        :data-href="href"
+                                        :class="{
+                                            'k-menu-item-active': isActive
+                                        }"
+                                        @click="navigate"
                                     >
+                                        <span
+                                            v-if="menuItem.icon"
+                                            class="k-menu-icon"
+                                        >
+                                            <k-icon
+                                                :icon="menuItem.icon"
+                                                type="fal"
+                                            />
+                                        </span>
+
+                                        <span
+                                            v-if="!collapsed"
+                                            class="k-menu-title"
+                                        >
+                                            {{ menuItem.title }}
+                                        </span>
+
                                         <k-icon
-                                            :icon="menuItem.icon"
+                                            v-if="menuItem.pages && !collapsed"
+                                            icon="chevron-down"
                                             type="fal"
+                                            class="k-menu-chevron"
                                         />
-                                    </span>
-
-                                    <span
-                                        v-if="!collapsed"
-                                        class="k-menu-title"
-                                    >
-                                        {{ menuItem.title }}
-                                    </span>
-
-                                    <k-icon
-                                        v-if="menuItem.pages && !collapsed"
-                                        icon="chevron-down"
-                                        type="fal"
-                                        class="k-menu-chevron"
-                                    />
-                                </button>
+                                    </button>
+                                </router-link>
                             </k-tooltip>
                         </li>
 
@@ -102,31 +118,57 @@
                                             :arrow="false"
                                             :disabled="!collapsed"
                                         >
-                                            <button class="k-menu-item">
-                                                <span
-                                                    v-if="item2.icon"
-                                                    class="k-menu-icon"
-                                                    type="fal"
+                                            <router-link
+                                                v-if="
+                                                    !item2.disabled &&
+                                                    !item2.pages
+                                                "
+                                                v-slot="{
+                                                    href,
+                                                    navigate,
+                                                    isActive
+                                                }"
+                                                active-class="active"
+                                                :to="
+                                                    !item2.disabled
+                                                        ? item2.route
+                                                        : {}
+                                                "
+                                            >
+                                                <button
+                                                    class="k-menu-item"
+                                                    :class="{
+                                                        'k-menu-item-active':
+                                                            isActive
+                                                    }"
+                                                    :data-href="href"
+                                                    @click="navigate"
                                                 >
-                                                    <k-icon
-                                                        :icon="item2.icon"
+                                                    <span
+                                                        v-if="item2.icon"
+                                                        class="k-menu-icon"
                                                         type="fal"
-                                                    />
-                                                </span>
+                                                    >
+                                                        <k-icon
+                                                            :icon="item2.icon"
+                                                            type="fal"
+                                                        />
+                                                    </span>
 
-                                                <span
-                                                    v-if="!collapsed"
-                                                    class="k-menu-title"
-                                                >
-                                                    {{ item2.title }}
-                                                </span>
+                                                    <span
+                                                        v-if="!collapsed"
+                                                        class="k-menu-title"
+                                                    >
+                                                        {{ item2.title }}
+                                                    </span>
 
-                                                <!-- <k-icon
+                                                    <!-- <k-icon
                                                 v-if="item2.pages"
                                                 icon="chevron-down"
                                                 class="k-menu-chevron"
                                             /> -->
-                                            </button>
+                                                </button>
+                                            </router-link>
                                         </k-tooltip>
 
                                         <!-- <div
