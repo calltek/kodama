@@ -96,8 +96,8 @@
                 <table :style="{ 'min-height': `${height}px` }">
                     <thead>
                         <tr>
-                            <th v-if="selected" class="w-6">
-                                <div
+                            <th v-if="selected" class="w-6 k-table-body-title">
+                                <!-- <div
                                     class="form-check form-check-sm form-check-custom form-check-solid"
                                 >
                                     <input
@@ -106,7 +106,14 @@
                                         :checked="isCheckedAll"
                                         @change="toggleGlobalCheck"
                                     />
-                                </div>
+                                </div> -->
+
+                                <input
+                                    type="checkbox"
+                                    class="k-checkbox w-4 h-4 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 text-primary focus:ring-primary dark:focus:ring-primary"
+                                    :checked="isCheckedAll"
+                                    @change="toggleGlobalCheck"
+                                />
                             </th>
 
                             <th
@@ -203,13 +210,17 @@
                         >
                             <tr>
                                 <td v-if="selected">
-                                    <div
-                                        class="form-check form-check-sm form-check-custom form-check-solid"
-                                    >
-                                        <input
+                                    <!-- <input
                                             :checked="isRowChecked[itemKey]"
                                             class="form-check-input widget-13-check"
                                             type="checkbox"
+                                            @change="toggleCheck(itemKey)"
+                                        /> -->
+                                    <div>
+                                        <input
+                                            type="checkbox"
+                                            class="k-checkbox w-4 h-4 -mt-1 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 text-primary focus:ring-primary dark:focus:ring-primary"
+                                            :checked="isRowChecked[itemKey]"
                                             @change="toggleCheck(itemKey)"
                                         />
                                     </div>

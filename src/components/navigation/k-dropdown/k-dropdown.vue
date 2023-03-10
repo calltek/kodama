@@ -1,14 +1,15 @@
 <template>
-    <div :id="buttonId" class="inline-flex flex-row items-center">
+    <component :is="tag" :id="buttonId" class="relative">
         <slot></slot>
+
         <k-icon
             v-if="submenu"
             icon="chevron-right"
             type="fas"
-            class="ml-auto"
-            :size="10"
+            class="absolute -right-2 top-0 mt-1"
+            :size="12"
         ></k-icon>
-    </div>
+    </component>
 
     <div :id="menuId" class="k-dropdown">
         <div
@@ -81,6 +82,10 @@
             disabled: {
                 type: Boolean,
                 default: false
+            },
+            tag: {
+                type: String,
+                default: 'div'
             }
         },
         emits: ['click'],
@@ -146,13 +151,13 @@
 <style lang="scss">
     .k-dropdown {
         min-width: 11rem;
-        max-width: 20rem;
+        max-width: 24rem;
 
-        @apply z-10 hidden bg-white divide-y divide-gray-100 dark:divide-gray-600  rounded-lg shadow dark:bg-gray-700 overflow-hidden;
+        @apply z-10 hidden divide-y divide-gray-100 dark:divide-gray-600 select-none;
 
         .k-dropdown-items {
             li {
-                @apply border-b border-gray-200 dark:border-gray-600 last:border-0;
+                @apply border-b border-gray-200 dark:border-gray-600 last:border-0 first:rounded-t-lg last:rounded-b-lg dark:bg-gray-700 bg-white block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer font-semibold shadow;
             }
         }
     }

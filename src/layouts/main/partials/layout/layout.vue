@@ -25,11 +25,16 @@
         </div>
     </div>
 
-    <div id="k-content" class="flex flex-1 p-5 overflow-x-auto">
-        <slot></slot>
-    </div>
+    <div id="k-content" class="flex flex-1 flex-col p-5 overflow-x-auto">
+        <div class="flex flex-1">
+            <slot></slot>
+        </div>
 
-    <k-footer />
+        <div class="mt-4 -mb-5 -mx-5">
+            <slot v-if="hasSlot('footer')" name="footer"></slot>
+            <k-footer v-else />
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
@@ -58,7 +63,9 @@
                 default: false
             }
         },
-        setup(props) {
+        setup(props, ctx) {
+            const hasSlot = (name: string) => !!ctx.slots[name]
+
             const route = useRoute()
 
             const pageTitle = computed(() => {
@@ -75,7 +82,8 @@
 
             return {
                 pageTitle,
-                parsedBreads
+                parsedBreads,
+                hasSlot
             }
         }
     })

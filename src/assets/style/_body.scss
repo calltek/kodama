@@ -1,5 +1,5 @@
 body,
 body::before,
 body::after {
-    @apply dark:text-gray-200 text-gray-800;
+    @apply dark:text-gray-200 text-gray-800 font-medium;
 }
