@@ -79,46 +79,48 @@ export function renderArgs(
 ) {
     const props: Record<string, any> = {}
 
-    // Controls
-    for (let i = 0; i < Object.keys(component.props).length; i++) {
-        const name = Object.keys(component.props)[i]
-        const prop = component.props[name]
+    if (component.props !== undefined) {
+        // Controls
+        for (let i = 0; i < Object.keys(component.props).length; i++) {
+            const name = Object.keys(component.props)[i]
+            const prop = component.props[name]
 
-        const nprop: any = {
-            description: prop.description,
-            type: { name: '', required: prop.required || false },
-            control: { type: 'text' },
-            table: {
-                defaultValue:
-                    prop.default !== undefined
-                        ? { summary: prop.default }
-                        : undefined,
-                type: { summary: '', required: prop.required || false },
-                disable: disabled
+            const nprop: any = {
+                description: prop.description,
+                type: { name: '', required: prop.required || false },
+                control: { type: 'text' },
+                table: {
+                    defaultValue:
+                        prop.default !== undefined
+                            ? { summary: prop.default }
+                            : undefined,
+                    type: { summary: '', required: prop.required || false },
+                    disable: disabled
+                }
             }
-        }
 
-        nprop.control = parseControl(prop, disabled)
-        nprop.type.name = parseControl(prop, disabled, true).toString()
+            nprop.control = parseControl(prop, disabled)
+            nprop.type.name = parseControl(prop, disabled, true).toString()
 
-        // Table types
-        if (Array.isArray(prop.type)) {
-            const type = prop.type
-                .map((t: any) => {
-                    return getReturnType(t)
-                })
-                .join(' | ')
+            // Table types
+            if (Array.isArray(prop.type)) {
+                const type = prop.type
+                    .map((t: any) => {
+                        return getReturnType(t)
+                    })
+                    .join(' | ')
 
-            nprop.table.type.summary = type
-            // nprop.control.type = 'array'
-        } else {
-            nprop.table.type.summary = getReturnType(prop.type)
-        }
+                nprop.table.type.summary = type
+                // nprop.control.type = 'array'
+            } else {
+                nprop.table.type.summary = getReturnType(prop.type)
+            }
 
-        if (argTypes[name]) {
-            props[name] = { ...argTypes[name], ...nprop }
-        } else {
-            props[name] = nprop
+            if (argTypes[name]) {
+                props[name] = { ...argTypes[name], ...nprop }
+            } else {
+                props[name] = nprop
+            }
         }
     }
 

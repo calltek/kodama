@@ -4,7 +4,7 @@
 
         <div
             id="k-wrapper"
-            class="flex flex-col flex-row-fluid w-full bg-gray-100 dark:bg-gray-900 min-h-screen"
+            class="flex flex-col flex-row-fluid w-full bg-gray-100 dark:bg-gray-900 h-screen overflow-y-auto overflow-x-hidden"
         >
             <k-toolbar />
 
@@ -35,4 +35,14 @@
     })
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+    *::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: theme('colors.primary');
+        border-radius: 10px;
+    }
+</style>

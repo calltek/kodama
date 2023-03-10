@@ -1,7 +1,7 @@
 <template>
-    <span :id="buttonId">
+    <component :is="tag" :id="buttonId" v-bind="$attrs">
         <slot></slot>
-    </span>
+    </component>
 
     <div
         :id="tooltipId"
@@ -56,6 +56,10 @@
             disabled: {
                 type: Boolean,
                 default: false
+            },
+            tag: {
+                type: String,
+                default: 'span'
             }
         },
         setup(props, { slots }) {

@@ -1,5 +1,5 @@
 <template>
-    <div class="font-title">
+    <div class="k-title">
         <h1 v-if="size === 1" :class="dinamicClasses">
             <slot />
         </h1>
@@ -141,3 +141,9 @@
         }
     })
 </script>
+
+<style lang="scss" scoped>
+    .k-title {
+        @apply font-title text-gray-800 dark:text-gray-200;
+    }
+</style>

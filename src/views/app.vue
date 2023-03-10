@@ -131,7 +131,12 @@
                 addGoogleFonts()
 
                 const html = document.querySelector('html')
-                if (html) {
+                const sb =
+                    html?.getAttribute('data-storybook') === 'true'
+                        ? true
+                        : false
+
+                if (html && sb) {
                     observer.observe(html, {
                         attributes: true,
                         attributeOldValue: true,

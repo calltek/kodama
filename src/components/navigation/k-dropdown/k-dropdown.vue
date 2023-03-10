@@ -77,6 +77,10 @@
             height: {
                 type: Number,
                 default: 0
+            },
+            disabled: {
+                type: Boolean,
+                default: false
             }
         },
         emits: ['click'],
@@ -108,7 +112,12 @@
                 triggerType: method,
                 offsetSkidding: 0,
                 offsetDistance: props.submenu ? 30 : 10,
-                delay: 300
+                delay: 300,
+                onShow: () => {
+                    if (props.disabled) {
+                        dropdown.value?.hide()
+                    }
+                }
             }
 
             onMounted(() => {
@@ -122,7 +131,7 @@
                 () => props.visible,
                 (value) => {
                     if (value) {
-                        dropdown.value?.show()
+                        if (!props.disabled) dropdown.value?.show()
                     } else {
                         dropdown.value?.hide()
                     }

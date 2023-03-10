@@ -169,3 +169,35 @@ Activa esta propiedad para que el texto del botón se muestre en **mayúsculas.*
     }}
   </Story>
 </Canvas>
+
+
+## **Tamaño**
+Puedes modificar el tamaño del botón con la propiedad `size`
+
+<Canvas>
+  <Story name="Size" argTypes={renderArgs(KButton, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KButton },
+        template: `
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-row gap-4 items-center">
+              <k-button size="xs">Button XS</k-button>
+              <k-button size="sm">Button SM</k-button>
+              <k-button size="md">Button MD</k-button>
+              <k-button size="lg">Button LG</k-button>
+              <k-button size="xl">Button XL</k-button>
+            </div>
+            <div class="flex flex-row gap-4 items-center">
+              <k-button size="xs" icon="user" />
+              <k-button size="sm" icon="user" />
+              <k-button size="md" icon="user" />
+              <k-button size="lg" icon="user" />
+              <k-button size="xl" icon="user" />
+            </div>
+          </div>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

@@ -464,7 +464,7 @@
 
                 th {
                     &.k-table-body-title {
-                        @apply text-gray-500 uppercase font-semibold text-sm whitespace-nowrap px-6 py-3;
+                        @apply text-gray-500 uppercase font-semibold text-sm whitespace-nowrap px-2 py-3;
                     }
                 }
 

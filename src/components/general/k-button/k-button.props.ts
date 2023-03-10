@@ -72,10 +72,14 @@ const Props = {
         description:
             'Renderiza un icono de <a href="https://fontawesome.com/search?q=" target="_blank" title="Ir a FontAwesome"><b>Fontawesome</b></a>.<br /> Ejemplo: <small>["fas","home"]</small> o <small>home</small>'
     },
-    title: {
+    iconType: {
         type: String,
-        default: '',
-        description: 'Visualiza el título del botón al pasar por encima'
+        control: 'inline-radio',
+        options: ['fas', 'far', 'fal', 'fad', 'fab'],
+        validator: (val: string) =>
+            ['fas', 'far', 'fal', 'fad', 'fab'].includes(val),
+        default: 'fad',
+        description: 'Tipo de icono'
     }
 }
 

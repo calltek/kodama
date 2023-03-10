@@ -2,7 +2,8 @@
     <k-button
         outline
         color="gray"
-        :icon="['fal', darkMode ? 'moon' : 'sun']"
+        :icon="darkMode ? 'moon' : 'sun'"
+        icon-type="fal"
         @click="toggleTheme"
     />
 </template>

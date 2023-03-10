@@ -36,7 +36,7 @@
             <k-menu :collapsed="collapsed" />
         </div>
         <div class="justify-center p-4 space-x-4">
-            <k-aside-footer />
+            <k-aside-footer :collapsed="collapsed" />
         </div>
     </aside>
 </template>

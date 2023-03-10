@@ -55,5 +55,9 @@ export default {
         type: Boolean,
         default: false,
         description: 'Establece el diseño `neón` del botón'
+    },
+    tag: {
+        type: String,
+        default: 'span'
     }
 }

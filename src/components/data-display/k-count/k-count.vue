@@ -1,5 +1,6 @@
 <template>
-    <span
+    <component
+        :is="tag"
         v-if="hasSlot('default')"
         class="relative -translate-y-3.5 h-7 text-xs"
         :title="value.toString()"
@@ -8,15 +9,16 @@
         <span :class="badgeClasses" :style="badgeStyles">
             {{ text }}
         </span>
-    </span>
-    <span
+    </component>
+    <component
+        :is="tag"
         v-else
         :class="badgeClasses"
         :style="badgeStyles"
         :title="value.toString()"
     >
         {{ text }}
-    </span>
+    </component>
 </template>
 
 <script lang="ts">

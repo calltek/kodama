@@ -3,9 +3,7 @@ import { KButtonProps } from './k-button.props'
 export const parseButtonClasses = (props: KButtonProps, slots: any) => {
     const hasSlot = (name: string) => !!slots[name]
 
-    const classes = [
-        'text-center font-medium rounded-lg focus:outline-none transition-all whitespace-nowrap'
-    ]
+    const classes = ['k-button']
 
     const outline = props.outline
     const color = props.color
@@ -21,31 +19,31 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
     let specific_classes: string[] = []
 
     // Sizes
-    if (type === 'text') {
-        if (size === 'xs') {
-            specific_classes.push('py-2 px-3 text-xs')
-        } else if (size === 'sm') {
-            specific_classes.push('py-2 px-3 text-sm')
-        } else if (size === 'md') {
-            specific_classes.push('py-2.5 px-5 text-sm')
-        } else if (size === 'lg') {
-            specific_classes.push('py-3 px-5 text-base')
-        } else if (size === 'xl') {
-            specific_classes.push('py-3.5 px-6 text-base')
-        }
-    } else {
+    if (size === 'xs') {
+        specific_classes.push('k-button-xs')
+    } else if (size === 'sm') {
+        specific_classes.push('k-button-sm')
+    } else if (size === 'md') {
+        specific_classes.push('k-button-md')
+    } else if (size === 'lg') {
+        specific_classes.push('k-button-lg')
+    } else if (size === 'xl') {
+        specific_classes.push('k-button-xl')
+    }
+
+    if (type === 'icon') {
         specific_classes.push('k-button-icon')
 
         if (size === 'xs') {
-            specific_classes.push('p-2.5 text-xs k-button-icon-xs')
+            specific_classes.push('k-button-icon-xs')
         } else if (size === 'sm') {
-            specific_classes.push('p-2.5 text-sm k-button-icon-sm')
+            specific_classes.push('k-button-icon-sm')
         } else if (size === 'md') {
-            specific_classes.push('p-2.5 text-base k-button-icon-md')
+            specific_classes.push('k-button-icon-md')
         } else if (size === 'lg') {
-            specific_classes.push('p-3 text-lg k-button-icon-lg')
+            specific_classes.push('k-button-icon-lg')
         } else if (size === 'xl') {
-            specific_classes.push('p-3.5 text-xl k-button-icon-xl')
+            specific_classes.push('k-button-icon-xl')
         }
     }
 
@@ -130,7 +128,7 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
         } else if (color === 'gray') {
             specific_classes.push('border-gray-300 bg-gray-300')
             specific_classes.push(
-                neon ? 'text-gray-500 hover:text-gray-700' : 'text-gray-700'
+                neon ? 'text-gray-400 hover:text-gray-500' : 'text-gray-500'
             )
         } else if (color === 'primary') {
             specific_classes.push('border-primary bg-primary')
@@ -209,16 +207,7 @@ export const parseIconClasses = (props: KButtonProps, slots: any) => {
 
     if (typeof props.icon === 'string') {
         iconClasses.push('fad', `fa-${props.icon}`)
-
-        if (hasSlot('default')) {
-            iconClasses.push('mr-2')
-        }
     } else if (Array.isArray(props.icon)) {
-        const iconType = props.icon[1].includes('fa-')
-            ? props.icon[1]
-            : 'fa-' + props.icon[1]
-        iconClasses.push(props.icon[0], iconType)
-
         if (hasSlot('default')) {
             iconClasses.push('mr-2')
         }

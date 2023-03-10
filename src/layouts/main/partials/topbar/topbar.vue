@@ -1,12 +1,12 @@
 <template>
     <header>
-        <nav class="px-4 lg:px-6 py-2.5 bg-sidebar text-gray-100">
+        <nav class="px-4 lg:px-6 py-2.5 bg-sidebar text-gray-200 select-none">
             <div class="flex flex-wrap items-center">
                 <div class="flex sm:hidden">
                     <k-button
                         icon="chevrons-right"
                         link
-                        color="white"
+                        color="primary"
                         @click="collapsed = false"
                     ></k-button>
                 </div>

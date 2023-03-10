@@ -7,7 +7,7 @@
         />
 
         <template #content>
-            <k-dropdown-item>
+            <k-dropdown-item @click="reset()">
                 <k-icon class="mr-2" icon="list" /> Todo
             </k-dropdown-item>
             <k-dropdown-item
@@ -20,28 +20,6 @@
             </k-dropdown-item>
         </template>
     </k-dropdown>
-
-    <!-- <ul class="py-0 overflow-hidden">
-                <li
-                    class="dropdown-item py-2 px-4 cursor-pointer opacity-40"
-                    @click="reset()"
-                >
-                    <b><k-icon class="me-2" icon="list" /> Todo</b>
-                </li>
-                <li><hr class="dropdown-divider m-0" /></li>
-                <li
-                    v-for="(o, i) in options"
-                    :key="i"
-                    class="dropdown-item py-2 px-4 cursor-pointer"
-                    :class="{ active: active === o.value }"
-                    @click="filter('$eq', o.value)"
-                >
-                    <b>
-                        <k-icon v-if="o.icon" class="me-2" :icon="o.icon" />
-                        {{ o.title }}
-                    </b>
-                </li>
-            </ul> -->
 </template>
 
 <script lang="ts">

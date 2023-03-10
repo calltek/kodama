@@ -12,20 +12,20 @@
             </div>
 
             <div
-                class="hidden lg:flex border-l border-gray-100 dark:border-gray-700 ml-5 pl-5 font-semibold"
+                class="hidden lg:flex border-l flex-1 border-gray-100 dark:border-gray-700 ml-5 pl-5 font-semibold"
             >
                 <slot name="topbar"> </slot>
             </div>
 
             <div
-                class="flex lg:hidden border-l border-gray-100 dark:border-gray-700 ml-5 pl-5 font-semibold"
+                class="flex lg:hidden border-l flex-1 border-gray-100 dark:border-gray-700 ml-5 pl-5 font-semibold"
             >
                 <slot name="topbar-mobile"> </slot>
             </div>
         </div>
     </div>
 
-    <div id="k-content" class="flex flex-1 p-5">
+    <div id="k-content" class="flex flex-1 p-5 overflow-x-auto">
         <slot></slot>
     </div>
 

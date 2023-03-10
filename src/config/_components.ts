@@ -25,6 +25,8 @@ import KDate from '../components/data-display/k-date/k-date.vue'
 import KCard from '../components/data-display/k-card/k-card.vue'
 import KTooltip from '../components/data-display/k-tooltip/k-tooltip.vue'
 import KDrawer from '../components/data-display/k-drawer/k-drawer.vue'
+import KAccordion from '../components/data-display/k-accordion/k-accordion.vue'
+import KAccordionItem from '../components/data-display/k-accordion/k-accordion-item.vue'
 
 // Feedback
 import KModal from '../components/feedback/k-modal/k-modal.vue'
@@ -75,6 +77,8 @@ export default (
     app.component('KCard', KCard)
     app.component('KTooltip', KTooltip)
     app.component('KDrawer', KDrawer)
+    app.component('KAccordion', KAccordion)
+    app.component('KAccordionItem', KAccordionItem)
 
     // Feedback
     app.component('KModal', KModal)
