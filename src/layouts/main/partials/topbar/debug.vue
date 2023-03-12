@@ -29,19 +29,6 @@
 
 <style module lang="scss">
     .debug {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        width: 100px;
-        margin-left: -50px;
-        z-index: 9999;
-        background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 5px 10px;
-        font-size: 20px;
-        color: white;
-        border-radius: 10px;
+        @apply flex items-center justify-center border border-white text-white uppercase font-bold font-title rounded-md p-2;
     }
 </style>

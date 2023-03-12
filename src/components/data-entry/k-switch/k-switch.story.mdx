@@ -52,15 +52,17 @@ Existen diferentes estilos de colores para los switches.
       return {
         components: { KSwitch },
         template: `
-          <k-card class="grid grid-cols-2 gap-4">
-            <k-switch class="mr-2" color="white" checked>White / Black</k-switch>
-            <k-switch class="mr-2" color="gray" checked>Gray</k-switch>
-            <k-switch class="mr-2" color="primary" checked>Primary</k-switch>
-            <k-switch class="mr-2" color="secondary" checked>Secondary</k-switch>
-            <k-switch class="mr-2" color="success" checked>Success</k-switch>
-            <k-switch class="mr-2" color="warning" checked>Warning</k-switch>
-            <k-switch class="mr-2" color="danger" checked>Danger</k-switch>
-            <k-switch color="info" checked>Info</k-switch>
+          <k-card>
+            <div class="grid grid-cols-2 gap-4">
+              <k-switch class="mr-2" color="white" checked>White / Black</k-switch>
+              <k-switch class="mr-2" color="gray" checked>Gray</k-switch>
+              <k-switch class="mr-2" color="primary" checked>Primary</k-switch>
+              <k-switch class="mr-2" color="secondary" checked>Secondary</k-switch>
+              <k-switch class="mr-2" color="success" checked>Success</k-switch>
+              <k-switch class="mr-2" color="warning" checked>Warning</k-switch>
+              <k-switch class="mr-2" color="danger" checked>Danger</k-switch>
+              <k-switch color="info" checked>Info</k-switch>
+            </div>
           </k-card>
         `,
       };
@@ -77,12 +79,14 @@ Modifica el tamaño del componente con la propiedad `size`
       return {
         components: { KSwitch },
         template: `
-          <k-card class="grid grid-cols-1 gap-4">
-            <k-switch class="mr-2" size="xs" checked>XS</k-switch>
-            <k-switch class="mr-2" size="sm" checked>SM</k-switch>
-            <k-switch class="mr-2" size="md" checked>MD</k-switch>
-            <k-switch class="mr-2" size="lg" checked>LG</k-switch>
-            <k-switch size="xl" checked>XL</k-switch>
+          <k-card>
+            <div class="grid grid-cols-1 gap-4">
+              <k-switch class="mr-2" size="xs" checked>XS</k-switch>
+              <k-switch class="mr-2" size="sm" checked>SM</k-switch>
+              <k-switch class="mr-2" size="md" checked>MD</k-switch>
+              <k-switch class="mr-2" size="lg" checked>LG</k-switch>
+              <k-switch size="xl" checked>XL</k-switch>
+            </div>
           </k-card>
         `,
       };

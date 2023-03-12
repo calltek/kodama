@@ -20,6 +20,8 @@
                 <div class="flex flex-row gap-4">
                     <k-updater />
 
+                    <k-debug />
+
                     <k-theme />
 
                     <div class="flex items-center lg:order-2">
@@ -95,7 +97,7 @@
     // import GlobalSearch from './global-search/global-search.vue'
     import KUpdater from './updater.vue'
     import KTheme from './theme.vue'
-
+    import KDebug from './debug.vue'
     import { searchEnabled } from '@/helpers/config'
     import { useConfig } from '@/store'
     import { KodamaParams } from '@/config'
@@ -104,7 +106,8 @@
         name: 'KTopbar',
         components: {
             KUpdater,
-            KTheme
+            KTheme,
+            KDebug
         },
         setup() {
             const auth = inject('$auth') as KodamaParams['auth']

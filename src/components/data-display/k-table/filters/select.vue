@@ -1,5 +1,5 @@
 <template>
-    <k-dropdown>
+    <k-dropdown tag="span">
         <k-icon
             icon="filter"
             :class="{ 'text-primary': active !== null }"

@@ -19,7 +19,7 @@
                                 :disabled="!collapsed"
                             >
                                 <router-link
-                                    v-if="!menuItem.disabled && !menuItem.pages"
+                                    v-if="!menuItem.pages"
                                     v-slot="{ href, navigate, isActive }"
                                     active-class="active"
                                     :to="
@@ -30,7 +30,9 @@
                                         class="k-menu-item"
                                         :data-href="href"
                                         :class="{
-                                            'k-menu-item-active': isActive
+                                            'k-menu-item-active': isActive,
+                                            'k-menu-item-disabled':
+                                                menuItem.disabled
                                         }"
                                         @click="navigate"
                                     >
@@ -119,10 +121,7 @@
                                             :disabled="!collapsed"
                                         >
                                             <router-link
-                                                v-if="
-                                                    !item2.disabled &&
-                                                    !item2.pages
-                                                "
+                                                v-if="!item2.pages"
                                                 v-slot="{
                                                     href,
                                                     navigate,
@@ -139,7 +138,9 @@
                                                     class="k-menu-item"
                                                     :class="{
                                                         'k-menu-item-active':
-                                                            isActive
+                                                            isActive,
+                                                        'k-menu-item-disabled':
+                                                            item2.disabled
                                                     }"
                                                     :data-href="href"
                                                     @click="navigate"
@@ -163,10 +164,10 @@
                                                     </span>
 
                                                     <!-- <k-icon
-                                                v-if="item2.pages"
-                                                icon="chevron-down"
-                                                class="k-menu-chevron"
-                                            /> -->
+                                                        v-if="item2.pages"
+                                                        icon="chevron-down"
+                                                        class="k-menu-chevron"
+                                                    /> -->
                                                 </button>
                                             </router-link>
                                         </k-tooltip>
@@ -333,7 +334,7 @@
         }
 
         .k-menu-item {
-            @apply flex items-center w-full rounded-md px-2 py-3 hover:bg-gray-800 text-left text-gray-400 hover:text-gray-200;
+            @apply flex items-center w-full rounded-md px-2 py-2 mb-1 hover:bg-gray-800 text-left text-gray-400 hover:text-gray-200;
 
             .k-menu-title {
                 @apply text-sm font-semibold;
@@ -341,6 +342,18 @@
 
             .k-menu-chevron {
                 @apply ml-auto;
+            }
+
+            &.k-menu-item-active {
+                @apply bg-primary text-white;
+            }
+
+            &.k-menu-item-disabled {
+                @apply hover:bg-transparent hover:text-gray-700 text-gray-700 bg-transparent cursor-not-allowed;
+            }
+
+            &[aria-expanded='true'] {
+                @apply mb-0;
             }
         }
 
@@ -351,10 +364,10 @@
         .k-menu-sub {
             margin-top: 0 !important;
 
-            @apply bg-gray-800 rounded-br-md rounded-bl-md pt-1 transition-all;
+            @apply bg-gray-800 rounded-br-md rounded-bl-md pt-1 transition-all mb-1;
 
             .k-menu-item {
-                @apply py-3;
+                @apply mb-0;
             }
         }
     }

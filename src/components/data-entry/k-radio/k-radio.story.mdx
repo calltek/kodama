@@ -38,15 +38,17 @@ Existen diferentes estilos de colores para los botones. Muchos de ellos se usan 
           return { value };
         },
         template: `
-          <k-card class="grid grid-cols-2 gap-4">
-            <k-radio v-model="value" value="White/Black" color="white" name="radio-name">White / Black</k-radio>
-            <k-radio v-model="value" value="Gray" color="gray" name="radio-name">Gray</k-radio>
-            <k-radio v-model="value" value="Primary" color="primary" name="radio-name">Primary</k-radio>
-            <k-radio v-model="value" value="Secondary" color="secondary" name="radio-name">Secondary</k-radio>
-            <k-radio v-model="value" value="Success" color="success" name="radio-name">Success</k-radio>
-            <k-radio v-model="value" value="Warning" color="warning" name="radio-name">Warning</k-radio>
-            <k-radio v-model="value" value="Danger" color="danger" name="radio-name">Danger</k-radio>
-            <k-radio v-model="value" value="Info" color="info" name="radio-name">Info</k-radio>
+          <k-card>
+            <div class="grid grid-cols-2 gap-4">
+              <k-radio v-model="value" value="White/Black" color="white" name="radio-name">White / Black</k-radio>
+              <k-radio v-model="value" value="Gray" color="gray" name="radio-name">Gray</k-radio>
+              <k-radio v-model="value" value="Primary" color="primary" name="radio-name">Primary</k-radio>
+              <k-radio v-model="value" value="Secondary" color="secondary" name="radio-name">Secondary</k-radio>
+              <k-radio v-model="value" value="Success" color="success" name="radio-name">Success</k-radio>
+              <k-radio v-model="value" value="Warning" color="warning" name="radio-name">Warning</k-radio>
+              <k-radio v-model="value" value="Danger" color="danger" name="radio-name">Danger</k-radio>
+              <k-radio v-model="value" value="Info" color="info" name="radio-name">Info</k-radio>
+            </div>
           </k-card>
           <k-card>
             <b>Value:</b> {{ value }}

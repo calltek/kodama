@@ -62,11 +62,13 @@ Tambien puedes especificar un numero mínimo y máximo de días con las propieda
           return { data };
         },
         template: `
-          <k-card class="flex flex-col gap-8">
-            <k-datepicker class="mr-4">Sin Rango</k-datepicker>
-            <k-datepicker range>Con Rango</k-datepicker>
-            <k-datepicker range min-range="3">Con Rango <sup>(Mínimo 3 dias)</sup></k-datepicker>
-            <k-datepicker range max-range="5">Con Rango <sup>(Máximo 5 dias)</sup></k-datepicker>
+          <k-card>
+            <div class="flex flex-col gap-8">
+              <k-datepicker class="mr-4">Sin Rango</k-datepicker>
+              <k-datepicker range>Con Rango</k-datepicker>
+              <k-datepicker range min-range="3">Con Rango <sup>(Mínimo 3 dias)</sup></k-datepicker>
+              <k-datepicker range max-range="5">Con Rango <sup>(Máximo 5 dias)</sup></k-datepicker>
+            </div>
           </k-card>
         `,
       };
@@ -109,9 +111,11 @@ Puedes fijar la fecha de inicio o de fin con las propiedades `fixedStart` y `fix
           return { dates };
         },
         template: `
-          <k-card class="flex flex-col gap-8">
-            <k-datepicker v-model="dates" range fixed-start :clearable="false">Inicio fijo</k-datepicker>
-            <k-datepicker v-model="dates" range fixed-start :clearable="false">Inicio fijo</k-datepicker>
+          <k-card>
+            <div class="flex flex-col gap-8">
+              <k-datepicker v-model="dates" range fixed-start :clearable="false">Inicio fijo</k-datepicker>
+              <k-datepicker v-model="dates" range fixed-start :clearable="false">Inicio fijo</k-datepicker>
+            </div>
           </k-card>
         `,
       };
@@ -132,9 +136,11 @@ Puedes fijar la fecha de inicio o de fin con las propiedades `fixedStart` y `fix
           return { dates };
         },
         template: `
-          <k-card class="flex flex-col gap-8">
-            <k-datepicker v-model="dates" range min-range="">Inicio fijo</k-datepicker>
-            <k-datepicker v-model="dates" range fixed-start :clearable="false">Inicio fijo</k-datepicker>
+          <k-card>
+            <div class="flex flex-col gap-8">
+              <k-datepicker v-model="dates" range min-range="">Inicio fijo</k-datepicker>
+              <k-datepicker v-model="dates" range fixed-start :clearable="false">Inicio fijo</k-datepicker>
+            </div>
           </k-card>
         `,
       };
@@ -178,10 +184,12 @@ Puedes modificar el color del componente con la propiedad `color`
           return { data };
         },
         template: `
-          <k-card class="flex flex-col gap-8">
-            <k-datepicker status="danger" class="mr-4" fieldset>Danger</k-datepicker>
-            <k-datepicker status="warning" class="mr-4" fieldset>Warning</k-datepicker>
-            <k-datepicker status="success" class="mr-4" fieldset>Success</k-datepicker>
+          <k-card>
+            <div class="flex flex-col gap-8">
+              <k-datepicker status="danger" class="mr-4" fieldset>Danger</k-datepicker>
+              <k-datepicker status="warning" class="mr-4" fieldset>Warning</k-datepicker>
+              <k-datepicker status="success" class="mr-4" fieldset>Success</k-datepicker>
+            </div>
           </k-card>
         `,
       };
@@ -201,9 +209,11 @@ Define una lista de errores del input. Se mostrará un icono de alerta con el pr
           return { errors : [{$message: 'Lorem ipsum dolor sit'}] };
         },
         template: `
-          <k-card class="flex flex-col gap-12">
-            <k-datepicker :errors="errors">Label MD</k-datepicker>
-            <k-datepicker fieldset :errors="errors">Label MD</k-datepicker>
+          <k-card>
+            <div class="flex flex-col gap-12">
+              <k-datepicker :errors="errors">Label MD</k-datepicker>
+              <k-datepicker fieldset :errors="errors">Label MD</k-datepicker>
+            </div>
           </k-card>
         `,
       };
@@ -224,11 +234,13 @@ Puedes establecer distintos tamaños que van desde `xs` hasta `lg`.
           return { data };
         },
         template: `
-          <k-card class="flex flex-col gap-8">
-            <k-datepicker size="xs" class="mr-4" >Label XS</k-datepicker>
-            <k-datepicker size="sm" class="mr-4" >Label SM</k-datepicker>
-            <k-datepicker size="md" class="mr-4" >Label MD</k-datepicker>
-            <k-datepicker size="lg">Label LG</k-textarea>
+          <k-card>
+            <div class="flex flex-col gap-8">
+              <k-datepicker size="xs" class="mr-4" >Label XS</k-datepicker>
+              <k-datepicker size="sm" class="mr-4" >Label SM</k-datepicker>
+              <k-datepicker size="md" class="mr-4" >Label MD</k-datepicker>
+              <k-datepicker size="lg">Label LG</k-textarea>
+            </div>
           </k-card>
         `,
       };
@@ -249,11 +261,13 @@ Aplica el estilo de los inputs con la propiedad `fieldset`
           return { data };
         },
         template: `
-          <k-card class="flex flex-col gap-8">
-            <k-datepicker size="xs" class="mr-4" fieldset >Label XS</k-datepicker>
-            <k-datepicker size="sm" class="mr-4" fieldset>Label SM</k-datepicker>
-            <k-datepicker size="md" class="mr-4" fieldset>Label MD</k-datepicker>
-            <k-datepicker size="lg" fieldset>Label LG</k-textarea>
+          <k-card>
+            <div class="flex flex-col gap-8">
+              <k-datepicker size="xs" class="mr-4" fieldset >Label XS</k-datepicker>
+              <k-datepicker size="sm" class="mr-4" fieldset>Label SM</k-datepicker>
+              <k-datepicker size="md" class="mr-4" fieldset>Label MD</k-datepicker>
+              <k-datepicker size="lg" fieldset>Label LG</k-textarea>
+            </div>
           </k-card>
         `,
       };

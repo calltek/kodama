@@ -40,7 +40,7 @@ const defaultState = {
     ///////////////
     // Developer
     ///////////////
-    debug: false
+    debug: true
 }
 
 export default defaultState

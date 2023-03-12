@@ -38,11 +38,13 @@ Puedes establecer distintos tamaños que van desde `xs` hasta `lg`.
           return { data };
         },
         template: `
-          <k-card class="flex flex-col gap-8">
-            <k-textarea size="xs" class="mr-4" :width="400" :min-height="100">Label XS</k-textarea>
-            <k-textarea size="sm" class="mr-4" :width="400" :min-height="100">Label SM</k-textarea>
-            <k-textarea size="md" class="mr-4" :width="400" :min-height="100">Label MD</k-textarea>
-            <k-textarea size="lg" :width="400" :min-height="100">Label LG</k-textarea>
+          <k-card>
+            <div class="flex flex-col gap-8">
+              <k-textarea size="xs" class="mr-4" :width="400" :min-height="100">Label XS</k-textarea>
+              <k-textarea size="sm" class="mr-4" :width="400" :min-height="100">Label SM</k-textarea>
+              <k-textarea size="md" class="mr-4" :width="400" :min-height="100">Label MD</k-textarea>
+              <k-textarea size="lg" :width="400" :min-height="100">Label LG</k-textarea>
+            </div>
           </k-card>
         `,
       };
@@ -81,10 +83,12 @@ Define una lista de errores del input. Se mostrará un icono de alerta con el pr
         components: { KTextarea },
    
         template: `
-          <k-card class="flex flex-col gap-8">
-            <k-textarea status="success" :width="400" :min-height="100">Success</k-textarea>
-            <k-textarea status="warning" :width="400" :min-height="100">Warning</k-textarea>
-            <k-textarea status="danger" :width="400" :min-height="100">Danger</k-textarea>
+          <k-card>
+            <div class="flex flex-col gap-8">
+              <k-textarea status="success" :width="400" :min-height="100">Success</k-textarea>
+              <k-textarea status="warning" :width="400" :min-height="100">Warning</k-textarea>
+              <k-textarea status="danger" :width="400" :min-height="100">Danger</k-textarea>
+            </div>
           </k-card>
         `,
       };
