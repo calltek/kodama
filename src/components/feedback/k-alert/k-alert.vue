@@ -1,17 +1,31 @@
 <template>
-    <div class="" :class="classes">
-        <k-icon :icon="icon" :type="iconType" class="mr-2" />
+    <div v-show="!closed" :class="classes">
+        <k-icon :icon="icon" :type="iconType" :size="iconSize" class="mr-2" />
 
         <div>
             <div v-if="title" class="font-bold">{{ title }}</div>
             <slot></slot>
         </div>
+
+        <slot v-if="hasSlot('close')" name="close"></slot>
+        <div
+            v-else-if="closable"
+            class="ml-auto cursor-pointer self-start"
+            @click="$emit('close')"
+        >
+            <button
+                type="button"
+                class="ml-4 -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex h-8 w-8 hover:bg-gray-200 hover:bg-opacity-20 justify-center items-center"
+                @click="close"
+            >
+                <k-icon icon="times" type="fas"></k-icon>
+            </button>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
-    import { computed } from '@vue/reactivity'
-    import { defineComponent } from 'vue'
+    import { defineComponent, computed, ref } from 'vue'
 
     export default defineComponent({
         name: 'KAlert',
@@ -32,10 +46,15 @@
                 default: 'fad',
                 description: 'Icono'
             },
+            iconSize: {
+                type: Number,
+                default: 0,
+                description: 'Tamaño del icono'
+            },
             type: {
                 type: String,
-                default: 'info',
-                options: ['info', 'success', 'warning', 'danger'],
+                default: 'primary',
+                options: ['primary', 'success', 'warning', 'danger'],
                 description: 'Tipo de alerta'
             },
             outline: {
@@ -47,9 +66,17 @@
                 type: Boolean,
                 default: false,
                 description: 'Aplica el estilo `neon`'
+            },
+            closable: {
+                type: Boolean,
+                default: false,
+                description: 'Permite cerrar la alerta'
             }
         },
-        setup(props) {
+        setup(props, ctx) {
+            const closed = ref(false)
+            const hasSlot = (name: string) => !!ctx.slots[name]
+
             const classes = computed(() => {
                 const className: string[] = ['k-alert']
 
@@ -66,8 +93,16 @@
                 return className
             })
 
+            const close = () => {
+                closed.value = true
+                ctx.emit('close')
+            }
+
             return {
-                classes
+                closed,
+                classes,
+                close,
+                hasSlot
             }
         }
     })
@@ -75,9 +110,9 @@
 
 <style lang="scss">
     .k-alert {
-        @apply flex w-full p-4 mb-4 text-sm border rounded-lg text-white;
+        @apply flex w-full p-4 mb-4 text-sm border rounded-lg text-white items-center;
 
-        &-info {
+        &-primary {
             @apply border-primary bg-primary;
         }
 
@@ -98,7 +133,7 @@
             @apply bg-transparent;
         }
 
-        &-info.k-alert-outline {
+        &-primary.k-alert-outline {
             @apply text-primary border-primary;
         }
 
@@ -119,7 +154,7 @@
             @apply bg-opacity-20 dark:bg-opacity-10 border-opacity-0;
         }
 
-        &-info.k-alert-neon {
+        &-primary.k-alert-neon {
             @apply text-primary;
         }
 

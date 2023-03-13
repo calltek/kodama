@@ -1,0 +1,27 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.jsx'
+import { ref } from 'vue'
+import KDropzone from './k-dropzone.vue';
+
+export const Template = (args) => ({
+    components: { KDropzone },
+    setup() {
+      const image = ref(null)
+      return { args, image };
+    },
+    template: '<k-card><k-dropzone v-bind="args" v-model="image" :accepts="[\'png\', \'jpg\', \'pdf\']"></k-dropzone></k-card>'
+});
+
+<Meta title="Data Entry/Dropzone" component={KDropzone} argTypes={renderArgs(KDropzone)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media2.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif?cid=ecf05e47k3mnhrb7yc36brvbtq2tz34x1c5odz3ckvei9tmc&rid=giphy.gif&ct=g">🗂️ KDropzone</SHead>
+
+# KDropzone
+Con el componente `k-dropzone` puedes tratar la subida de un fichero.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />

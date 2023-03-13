@@ -51,7 +51,7 @@
                     accordionTriggers.forEach((trigger) => {
                         const triggerId = trigger.getAttribute('id')
                         const targetId = trigger.getAttribute(
-                            'data-accordion-target'
+                            'data-accordion-scope'
                         )
 
                         if (triggerId && targetId) {

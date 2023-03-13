@@ -201,12 +201,12 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, onMounted } from 'vue'
+    import { defineComponent, inject, onMounted } from 'vue'
     import { RouteLocationRaw, useRoute } from 'vue-router'
     import { Accordion } from 'flowbite'
 
-    import { useMenu } from '@/store'
     import { version } from '@/helpers/config'
+    import { Menu, SysMenu } from '@/config/_menu'
 
     export default defineComponent({
         name: 'KMenu',
@@ -218,7 +218,13 @@
         },
         setup() {
             const route = useRoute()
-            const menu = useMenu()
+            const $menu: () => Menu[] = inject('$menu') || (() => [])
+
+            const SeparatorMenu: Menu[] = [{ separator: true }]
+            const FrontMenu: Menu[] = $menu()
+            const menu: Menu[] = [...FrontMenu, ...SeparatorMenu, ...SysMenu]
+
+            console.log(FrontMenu)
 
             const hasActiveChildren = (match: RouteLocationRaw) => {
                 return route.path.indexOf(match.toString()) !== -1
@@ -260,16 +266,22 @@
                     if (item.pages) {
                         item.pages.forEach((page) => {
                             if (page.pages) {
-                                accordionItems.push({
-                                    id: `k-menu-dropdown-${page.title}`,
-                                    triggerEl: document.getElementById(
-                                        `k-menu-dropdown-${page.title}`
-                                    ),
-                                    targetEl: document.getElementById(
-                                        `k-menu-dropdown-${page.title}-body`
-                                    ),
-                                    active: false
-                                })
+                                const triggerEl = document.getElementById(
+                                    `k-menu-dropdown-${page.title}`
+                                )
+
+                                const targetEl = document.getElementById(
+                                    `k-menu-dropdown-${page.title}-body`
+                                )
+
+                                if (triggerEl && targetEl) {
+                                    accordionItems.push({
+                                        id: `k-menu-dropdown-${page.title}`,
+                                        triggerEl: triggerEl,
+                                        targetEl: targetEl,
+                                        active: false
+                                    })
+                                }
                             }
                         })
                     }

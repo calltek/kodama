@@ -1,5 +1,5 @@
 <template>
-    <div class="k-thumbnail" :style="style">
+    <div class="k-image" :style="style" :class="{ 'k-image-zoom': zoom }">
         <img ref="img" :src="src" data-zoom :style="styleImg" />
     </div>
 </template>
@@ -9,7 +9,7 @@
     import mediumZoom from 'medium-zoom'
 
     export default defineComponent({
-        name: 'KThumbnail',
+        name: 'KImage',
         autoload: true,
         props: {
             src: {
@@ -62,16 +62,16 @@
 </script>
 
 <style lang="scss">
-    .k-thumbnail {
-        @apply bg-white overflow-hidden rounded-xl flex items-center justify-center transition-all aspect-square;
+    .k-image {
+        @apply overflow-hidden rounded-xl flex items-center justify-center transition-all aspect-square max-w-full;
 
         img {
             @apply h-full object-cover;
         }
-    }
 
-    .k-thumbnail:hover {
-        transform: scale(1.1);
+        &.k-image-zoom:hover {
+            transform: scale(1.1);
+        }
     }
 
     .medium-zoom-overlay {

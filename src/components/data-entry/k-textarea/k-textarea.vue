@@ -13,8 +13,8 @@
         </label>
 
         <textarea
+            v-model="model"
             :disabled="disabled"
-            :value="model"
             :maxlength="maxLength"
             :placeholder="placeholder"
             :required="required"
@@ -176,7 +176,7 @@
 <style lang="scss">
     .k-input-textarea {
         label {
-            @apply mb-2 block select-none text-sm text-gray-500 dark:text-white;
+            @apply mb-2 block select-none text-sm text-gray-500 dark:text-white font-semibold;
         }
 
         textarea {

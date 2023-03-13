@@ -144,6 +144,6 @@
 
 <style lang="scss" scoped>
     .k-title {
-        @apply font-title text-gray-800 dark:text-gray-200;
+        @apply font-title;
     }
 </style>

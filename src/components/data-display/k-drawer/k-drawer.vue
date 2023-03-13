@@ -1,7 +1,7 @@
 <template>
     <div
         :id="drawerId"
-        class="fixed z-40 p-4 transition-transform bg-white dark:bg-gray-800"
+        class="fixed z-40 max-w-full p-4 transition-transform bg-white dark:bg-gray-800"
         tabindex="-1"
         :class="classes"
         :style="styles"
@@ -15,7 +15,7 @@
                 </template>
                 <h5
                     v-else
-                    class="text-base font-semibold text-gray-500 dark:text-gray-400"
+                    class="text-base font-semibold text-gray-500 dark:text-gray-400 overflow-hidden"
                 >
                     {{ title }}
                 </h5>
@@ -29,13 +29,13 @@
                 />
             </div>
 
-            <div>
+            <div class="flex flex-1">
                 <slot></slot>
             </div>
 
             <div
                 v-if="hasSlot('footer')"
-                class="flex flex-row items-center border-t dark:border-gray-600 justify-between px-4 pt-4 -mx-4 mt-auto"
+                class="flex flex-row items-center border-t dark:border-gray-600 justify-between p-4 -mx-4 mt-auto"
             >
                 <slot name="footer"></slot>
             </div>

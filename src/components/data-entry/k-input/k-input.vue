@@ -22,6 +22,7 @@
             :min="min"
             :max="max"
             :style="style"
+            :autofocus="autofocus"
             @input="change"
         />
 
@@ -138,6 +139,11 @@
                 type: Number,
                 required: false,
                 description: 'Valor máximo si el input es `number`'
+            },
+            autofocus: {
+                type: Boolean,
+                default: false,
+                description: 'Indica si el input se enfoca automáticamente'
             }
         },
         emits: ['update:modelValue'],

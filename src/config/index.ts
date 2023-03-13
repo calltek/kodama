@@ -48,12 +48,12 @@ export function init(params: KodamaParams, app?: App<Element>) {
 
     // App Globals
     app.config.globalProperties.settings = params.settings
-    app.config.globalProperties.menu = params.menu
     app.config.globalProperties.$filters = filters
 
     // App Provide/Inject
     app.provide('toast', toast)
     app.provide('dayjs', dayjs)
+    app.provide('$menu', params.menu)
     app.provide('$auth', params.auth)
     app.provide('$settings', params.settings)
     app.provide('$filters', filters)

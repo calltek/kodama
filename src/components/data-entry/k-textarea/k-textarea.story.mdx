@@ -34,16 +34,16 @@ Puedes establecer distintos tamaños que van desde `xs` hasta `lg`.
       return {
         components: { KTextarea },
         setup() {
-          const data = ref(0)
-          return { data };
+          const text = ref('')
+          return { text };
         },
         template: `
           <k-card>
             <div class="flex flex-col gap-8">
-              <k-textarea size="xs" class="mr-4" :width="400" :min-height="100">Label XS</k-textarea>
-              <k-textarea size="sm" class="mr-4" :width="400" :min-height="100">Label SM</k-textarea>
-              <k-textarea size="md" class="mr-4" :width="400" :min-height="100">Label MD</k-textarea>
-              <k-textarea size="lg" :width="400" :min-height="100">Label LG</k-textarea>
+              <k-textarea size="xs" :width="400" :min-height="100" v-model="text">Label XS</k-textarea>
+              <k-textarea size="sm" :width="400" :min-height="100" v-model="text">Label SM</k-textarea>
+              <k-textarea size="md" :width="400" :min-height="100" v-model="text">Label MD</k-textarea>
+              <k-textarea size="lg" :width="400" :min-height="100" v-model="text">Label LG</k-textarea>
             </div>
           </k-card>
         `,

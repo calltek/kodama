@@ -1,7 +1,7 @@
 <template>
     <div
         :id="accordionTrigger"
-        :data-accordion-target="accordionTarget"
+        :data-accordion-scope="accordionTarget"
         data-accordion-trigger
         :data-accordion-open="open"
         :class="parentClasses"
