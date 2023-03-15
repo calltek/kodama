@@ -224,8 +224,6 @@
             const FrontMenu: Menu[] = $menu()
             const menu: Menu[] = [...FrontMenu, ...SeparatorMenu, ...SysMenu]
 
-            console.log(FrontMenu)
-
             const hasActiveChildren = (match: RouteLocationRaw) => {
                 return route.path.indexOf(match.toString()) !== -1
             }

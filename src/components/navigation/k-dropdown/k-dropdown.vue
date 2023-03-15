@@ -12,26 +12,26 @@
     </component>
 
     <div :id="menuId" class="k-dropdown">
-        <div
-            v-if="hasSlot('header')"
-            class="px-4 py-3 text-sm text-gray-900 dark:text-white"
-        >
-            <slot name="header"></slot>
-        </div>
-
         <ul
             class="k-dropdown-items text-sm text-gray-700 dark:text-gray-200 text-left"
             :style="ulStyle"
         >
-            <slot name="content"></slot>
-        </ul>
+            <k-dropdown-item
+                v-if="hasSlot('header')"
+                class="px-4 py-3 text-sm text-gray-900 dark:text-white"
+            >
+                <slot name="header"></slot>
+            </k-dropdown-item>
 
-        <div
-            v-if="hasSlot('footer')"
-            class="px-4 py-3 text-sm text-gray-900 dark:text-white"
-        >
-            <slot name="footer"></slot>
-        </div>
+            <slot name="content"></slot>
+
+            <k-dropdown-item
+                v-if="hasSlot('footer')"
+                class="px-4 py-3 text-sm text-gray-900 dark:text-white"
+            >
+                <slot name="footer"></slot>
+            </k-dropdown-item>
+        </ul>
     </div>
 </template>
 
