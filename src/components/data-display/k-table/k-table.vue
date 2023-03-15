@@ -93,7 +93,7 @@
             <k-loading :active="loading" />
 
             <div class="overflow-x-auto">
-                <table :style="{ 'min-height': `${height}px` }">
+                <table>
                     <thead>
                         <tr>
                             <th v-if="selected" class="w-6 k-table-body-title">

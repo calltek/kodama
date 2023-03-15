@@ -1,5 +1,6 @@
 import {
     useRouter,
+    useRoute,
     RouteRecordRaw,
     RouteLocationNormalized,
     NavigationGuardNext
@@ -30,6 +31,7 @@ export {
     useConfig,
     // Router
     useRouter,
+    useRoute,
     // Plugins
     toast,
     dayjs,

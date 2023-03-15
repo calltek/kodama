@@ -39,11 +39,6 @@ export default {
         description:
             'Indica si se muestra la columna de checkbox y que items estan seleccionados'
     },
-    height: {
-        type: Number,
-        default: 500,
-        description: 'Altura mínima de la tabla'
-    },
     header: {
         type: Boolean,
         default: true,
