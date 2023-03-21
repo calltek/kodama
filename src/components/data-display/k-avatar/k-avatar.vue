@@ -1,73 +1,68 @@
 <template>
-    <div>
-        <k-tooltip :title="name" :visible="visible">
-            <svg
-                :width="size"
-                :height="size"
-                viewBox="0 0 380 380"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                :class="{
-                    'rounded-xl overflow-hidden': type === 'square',
-                    'rounded-full overflow-hidden': type === 'circle'
-                }"
+    <k-tooltip :title="name" :visible="visible" :tag="tag">
+        <svg
+            :width="size"
+            :height="size"
+            viewBox="0 0 380 380"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            :class="{
+                'rounded-xl overflow-hidden': type === 'square',
+                'rounded-full overflow-hidden': type === 'circle'
+            }"
+        >
+            <rect
+                v-if="type === 'square'"
+                height="380"
+                width="380"
+                :fill="bgColor"
+            />
+            <circle v-else cx="190" cy="190" r="190" :fill="bgColor" />
+            <mask
+                id="mask0"
+                mask-type="alpha"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="380"
+                height="380"
             >
                 <rect
                     v-if="type === 'square'"
                     height="380"
                     width="380"
-                    :fill="bgColor"
+                    fill="#FFEDEF"
                 />
-                <circle v-else cx="190" cy="190" r="190" :fill="bgColor" />
-                <mask
-                    id="mask0"
-                    mask-type="alpha"
-                    maskUnits="userSpaceOnUse"
-                    x="0"
-                    y="0"
-                    width="380"
-                    height="380"
-                >
+                <circle v-else cx="190" cy="190" r="190" fill="#FFEDEF" />
+            </mask>
+            <g mask="url(#mask0)">
+                <Face
+                    :face-color="avatar.faceColor"
+                    :beard="avatar.beard"
+                    :beard-color="avatar.beardColor"
+                />
+                <Mouth :mouth="avatar.mouth" />
+                <EyeBrows :eye-brow="avatar.eyeBrow" />
+                <Hair :hair="avatar.hair" :hair-color="avatar.hairColor" />
+                <Eyes :eye="avatar.eye" />
+                <Glasses :glasses="avatar.glasses" />
+                <Nose :nose="avatar.nose" />
+                <Ear :ear="avatar.ear" :face-color="avatar.faceColor" />
+                <Earring :ear="avatar.ear" :earring="avatar.earRing" />
+                <Shirt :shirt="avatar.shirt" :shirt-color="avatar.shirtColor" />
+            </g>
+            <defs>
+                <clipPath id="clip0">
                     <rect
-                        v-if="type === 'square'"
-                        height="380"
-                        width="380"
-                        fill="#FFEDEF"
+                        width="200"
+                        height="320"
+                        fill="white"
+                        transform="translate(90 43)"
                     />
-                    <circle v-else cx="190" cy="190" r="190" fill="#FFEDEF" />
-                </mask>
-                <g mask="url(#mask0)">
-                    <Face
-                        :face-color="avatar.faceColor"
-                        :beard="avatar.beard"
-                        :beard-color="avatar.beardColor"
-                    />
-                    <Mouth :mouth="avatar.mouth" />
-                    <EyeBrows :eye-brow="avatar.eyeBrow" />
-                    <Hair :hair="avatar.hair" :hair-color="avatar.hairColor" />
-                    <Eyes :eye="avatar.eye" />
-                    <Glasses :glasses="avatar.glasses" />
-                    <Nose :nose="avatar.nose" />
-                    <Ear :ear="avatar.ear" :face-color="avatar.faceColor" />
-                    <Earring :ear="avatar.ear" :earring="avatar.earRing" />
-                    <Shirt
-                        :shirt="avatar.shirt"
-                        :shirt-color="avatar.shirtColor"
-                    />
-                </g>
-                <defs>
-                    <clipPath id="clip0">
-                        <rect
-                            width="200"
-                            height="320"
-                            fill="white"
-                            transform="translate(90 43)"
-                        />
-                    </clipPath>
-                </defs>
-            </svg>
-        </k-tooltip>
-    </div>
+                </clipPath>
+            </defs>
+        </svg>
+    </k-tooltip>
 </template>
 
 <script lang="ts">
@@ -133,6 +128,11 @@
                 type: Boolean,
                 default: true,
                 description: 'Define si se muestra el tooltip'
+            },
+            tag: {
+                type: String,
+                default: 'span',
+                description: 'Define el tag del componente'
             }
         },
         setup(props) {

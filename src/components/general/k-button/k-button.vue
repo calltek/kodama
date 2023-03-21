@@ -136,7 +136,7 @@
         }
 
         &.k-button-icon {
-            & > span {
+            & {
                 display: flex !important;
 
                 i {

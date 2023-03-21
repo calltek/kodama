@@ -31,13 +31,5 @@
 </script>
 
 <style lang="scss">
-    *::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-    }
-
-    *::-webkit-scrollbar-thumb {
-        background-color: theme('colors.primary');
-        border-radius: 10px;
-    }
+    @import '../../assets/style/index.scss';
 </style>

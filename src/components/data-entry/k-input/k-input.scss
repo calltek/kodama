@@ -9,7 +9,7 @@
         @apply absolute overflow-hidden right-0 bottom-0 w-6 flex flex-col items-center justify-center border-gray-200 dark:border-gray-700 border border-l-0;
 
         & > div {
-            @apply font-bold cursor-pointer flex items-center justify-center h-full w-full text-white bg-primary bg-opacity-80 hover:bg-opacity-100;
+            @apply font-bold cursor-pointer flex items-center justify-center h-full w-full text-white bg-gray-300 dark:bg-gray-700 bg-opacity-80 hover:bg-opacity-100;
         }
     }
 

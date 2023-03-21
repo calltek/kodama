@@ -13,12 +13,13 @@
                 <template v-if="hasSlot('header')">
                     <slot name="header"></slot>
                 </template>
-                <h5
+                <k-title
                     v-else
-                    class="text-base font-semibold text-gray-500 dark:text-gray-400 overflow-hidden"
+                    :size="5"
+                    class="font-semibold text-gray-800 dark:text-gray-400 overflow-hidden"
                 >
-                    {{ title }}
-                </h5>
+                    {{ title }}&nbsp;
+                </k-title>
 
                 <k-button
                     icon="times"
@@ -29,13 +30,11 @@
                 />
             </div>
 
-            <div class="flex flex-1">
-                <slot></slot>
-            </div>
+            <slot></slot>
 
             <div
                 v-if="hasSlot('footer')"
-                class="flex flex-row items-center border-t dark:border-gray-600 justify-between p-4 -mx-4 mt-auto"
+                class="flex flex-row items-center border-t dark:border-gray-600 justify-between px-4 pt-4 pb-0 -mx-4 mt-auto"
             >
                 <slot name="footer"></slot>
             </div>

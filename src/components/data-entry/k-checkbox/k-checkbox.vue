@@ -33,12 +33,16 @@
         name: 'KCheckbox',
         props: {
             modelValue: {
-                type: Boolean,
+                type: [String, Number, Boolean, Object, Array, Symbol],
                 default: false
             },
             value: {
                 type: [String, Number, Boolean, Object, Array, Symbol],
-                default: ''
+                default: true
+            },
+            unckeckedValue: {
+                type: [String, Number, Boolean, Object, Array, Symbol],
+                default: false
             },
             label: {
                 type: String,
@@ -99,7 +103,9 @@
             })
 
             const change = (e: any) => {
-                model.value = e.target.value
+                model.value = e.target.checked
+                    ? props.value
+                    : props.unckeckedValue
             }
 
             const model = computed({

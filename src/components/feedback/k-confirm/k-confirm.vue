@@ -1,5 +1,5 @@
 <template>
-    <k-tooltip :visible="showTooltip">
+    <k-tooltip :visible="showTooltip && !disabled">
         <template #content>
             <div
                 class="flex flex-row items-center py-3 px-1"
@@ -65,6 +65,10 @@
             koText: {
                 type: String,
                 default: 'Cancelar'
+            },
+            disabled: {
+                type: Boolean,
+                default: false
             }
         },
         emits: ['ok', 'ko'],

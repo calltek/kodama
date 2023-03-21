@@ -4,7 +4,8 @@
             :for="id"
             :class="{
                 'k-dropzone--loading': loading,
-                'k-dropzone--error': errors.length > 0
+                'k-dropzone--error': errors.length > 0,
+                'k-dropzone--disabled': disabled
             }"
             :style="{
                 'background': isModelValueImage
@@ -111,6 +112,7 @@
                 type="file"
                 class="hidden"
                 :accept="validExtensions"
+                :disabled="disabled"
                 @change="onFileChange($event)"
             />
         </label>
@@ -141,6 +143,10 @@
                 default: true
             },
             loading: {
+                type: Boolean,
+                default: false
+            },
+            disabled: {
                 type: Boolean,
                 default: false
             }
@@ -318,6 +324,10 @@
 
         > label.k-dropzone--error {
             @apply border-red-500 dark:border-red-500;
+        }
+
+        > label.k-dropzone--disabled {
+            @apply opacity-40 cursor-not-allowed;
         }
     }
 </style>

@@ -23,15 +23,28 @@
             :max="max"
             :style="style"
             :autofocus="autofocus"
+            :disabled="disabled"
             @input="change"
+            @change="change"
+            @blur="validate"
         />
 
         <div v-if="type === 'number'" class="k-input-control">
             <div @click="sum()">
-                <k-icon icon="plus" type="fas" class="k-input-icon" />
+                <k-icon
+                    icon="plus"
+                    type="fas"
+                    class="k-input-icon"
+                    :size="12"
+                />
             </div>
             <div @click="subtract()">
-                <k-icon icon="minus" type="fas" class="k-input-icon" />
+                <k-icon
+                    icon="minus"
+                    type="fas"
+                    class="k-input-icon"
+                    :size="12"
+                />
             </div>
         </div>
 
@@ -144,6 +157,11 @@
                 type: Boolean,
                 default: false,
                 description: 'Indica si el input se enfoca automáticamente'
+            },
+            disabled: {
+                type: Boolean,
+                default: false,
+                description: 'Indica si el input está deshabilitado'
             }
         },
         emits: ['update:modelValue'],
@@ -213,6 +231,24 @@
                 model.value = e.target.value
             }
 
+            const validate = () => {
+                let value = model.value
+
+                if (props.type === 'number') {
+                    value = Number(value)
+
+                    if (props.min !== undefined && value < props.min) {
+                        value = props.min
+                    }
+
+                    if (props.max !== undefined && value > props.max) {
+                        value = props.max
+                    }
+                }
+
+                model.value = value
+            }
+
             const firstError = computed(() => {
                 const error =
                     props.errors.length > 0 ? props.errors[0].$message : ''
@@ -223,7 +259,11 @@
                 const value = parseInt(props.modelValue.toString()) || 0
                 const newValue = value + 1
 
-                if (!props.max || newValue <= props.max) {
+                if (props.max !== undefined && newValue <= props.max) {
+                    model.value = newValue
+                } else if (props.max !== undefined && newValue > props.max) {
+                    model.value = props.max
+                } else {
                     model.value = newValue
                 }
             }
@@ -232,7 +272,11 @@
                 const value = parseInt(props.modelValue.toString()) || 0
                 const newValue = value - 1
 
-                if (!props.min || newValue >= props.min) {
+                if (props.min !== undefined && newValue >= props.min) {
+                    model.value = newValue
+                } else if (props.min !== undefined && newValue < props.min) {
+                    model.value = props.min
+                } else {
                     model.value = newValue
                 }
             }
@@ -249,7 +293,8 @@
                 sum,
                 subtract,
                 style,
-                model
+                model,
+                validate
             }
         }
     })

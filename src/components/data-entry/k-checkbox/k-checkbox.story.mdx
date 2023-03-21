@@ -9,7 +9,7 @@ export const Template = (args) => ({
     setup() {
       return { args };
     },
-    template: '<k-card><k-checkbox v-bind="args">Checkbox Label</k-checkbox></k-card>'
+    template: '<k-card><k-checkbox v-bind="args">Checkbox Label</k-checkbox> </k-card>'
 });
 
 <Meta title="Data Entry/Checkbox" component={KCheckbox} argTypes={renderArgs(KCheckbox)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />

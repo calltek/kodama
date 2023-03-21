@@ -1,3 +1,7 @@
+body {
+    @apply overflow-hidden;
+}
+
 body,
 body::before,
 body::after {
@@ -6,4 +10,8 @@ body::after {
 
 hr {
     @apply border-gray-200 dark:border-gray-700 my-2;
+}
+
+input {
+    @apply font-medium;
 }

@@ -1,13 +1,5 @@
 <template>
-    <span
-        :style="{
-            'display': 'inline-flex',
-            'align-items': 'center',
-            'justify-content': 'center'
-        }"
-    >
-        <i :class="classes" :style="style"></i>
-    </span>
+    <i :class="classes" :style="style"></i>
 </template>
 
 <script lang="ts">
@@ -68,9 +60,3 @@
         }
     })
 </script>
-
-<style scoped>
-    .k-icon {
-        color: inherit;
-    }
-</style>

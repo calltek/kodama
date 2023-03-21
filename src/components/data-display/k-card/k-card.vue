@@ -60,7 +60,7 @@
         }
 
         .k-card-body {
-            @apply p-5 w-full;
+            @apply p-5 w-full flex-1;
         }
 
         .k-card-footer {

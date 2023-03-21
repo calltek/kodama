@@ -25,3 +25,23 @@ Con el componente `k-dropzone` puedes tratar la subida de un fichero.
 </Story>
 
 <ArgsTable story="Default" />
+
+## **Deshabilitado**
+Puedes deshabilitar el componente con la propiedad `disabled`.
+
+<Canvas>
+  <Story name="Disabled" argTypes={renderArgs(KDropzone, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDropzone },
+        setup() {
+          const image = ref();
+          return { image };
+        },
+        template: `
+          <k-card><k-dropzone v-bind="args" v-model="image" :accepts="[\'png\', \'jpg\', \'pdf\']" :disabled="true"></k-dropzone></k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

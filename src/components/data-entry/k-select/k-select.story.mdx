@@ -1,0 +1,73 @@
+import { Meta, Story, Canvas, Stories, ArgsTable } from '@storybook/addon-docs';
+import KSelect from './k-select.vue';
+import { renderArgs, renderParameters } from '../../../helpers/storybook'
+import SHead from '../../../../.storybook/app/components/s-head.jsx'
+import { ref } from 'vue'
+
+export const Template = (args) => ({
+    components: { KSelect },
+    setup() {
+      const model = ref(2);
+      return { args, model };
+    },
+    template: `
+      <k-select v-model="model">
+        <k-select-option :value="1">Opción 1</k-select-option>
+        <k-select-option :value="2">Opción 2</k-select-option>
+        <k-select-option :value="3">Opción 3</k-select-option>
+      </k-select>
+    `
+});
+
+<Meta title="Data Entry/Select" component={KSelect} argTypes={renderArgs(KSelect)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+
+<SHead image="https://media2.giphy.com/media/SwImQhtiNA7io/giphy.gif?cid=ecf05e47z82yq5bzlbtacqrphv0r4tr1wtbmnhzeakchqa9a&rid=giphy.gif&ct=g">🐳 KSelect</SHead>
+
+# KInput
+Con el componente `k-select` dispondrás de un selector de toda la vida pero vitaminado.
+
+<Story name="Default" parameters={renderParameters({showPanel: true})} args={{placeholder:'Placeholder'}}>
+  {Template.bind({})}
+</Story>
+
+<ArgsTable story="Default" />
+
+
+## **Tamaños**
+Puedes cambiar el tamaño del selector con la propiedad `size`
+
+<Canvas>
+  <Story name="Sizes" argTypes={renderArgs(KSelect, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KSelect },
+        template: `
+          <k-card>
+            <div class="flex flex-row gap-6">
+              <k-select size="xs">
+                <k-select-option value="1">Opción 1</k-select-option>
+                <k-select-option value="2">Opción 2</k-select-option>
+                <k-select-option value="3">Opción 3</k-select-option>
+              </k-select>
+              <k-select size="sm">
+                <k-select-option value="1">Opción 1</k-select-option>
+                <k-select-option value="2">Opción 2</k-select-option>
+                <k-select-option value="3">Opción 3</k-select-option>
+              </k-select>
+               <k-select size="md">
+                <k-select-option value="1">Opción 1</k-select-option>
+                <k-select-option value="2">Opción 2</k-select-option>
+                <k-select-option value="3">Opción 3</k-select-option>
+              </k-select>
+               <k-select size="lg">
+                <k-select-option value="1">Opción 1</k-select-option>
+                <k-select-option value="2">Opción 2</k-select-option>
+                <k-select-option value="3">Opción 3</k-select-option>
+              </k-select>
+            </div>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>

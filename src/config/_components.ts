@@ -15,6 +15,8 @@ import KSwitch from '../components/data-entry/k-switch/k-switch.vue'
 import KTextarea from '../components/data-entry/k-textarea/k-textarea.vue'
 import KCheckbox from '../components/data-entry/k-checkbox/k-checkbox.vue'
 import KDropzone from '../components/data-entry/k-dropzone/k-dropzone.vue'
+import KSelect from '../components/data-entry/k-select/k-select.vue'
+import KSelectOption from '../components/data-entry/k-select/k-select-option.vue'
 
 // Data Display Components
 import KAvatar from '../components/data-display/k-avatar/k-avatar.vue'
@@ -69,6 +71,8 @@ export default (
     app.component('KTextarea', KTextarea)
     app.component('KCheckbox', KCheckbox)
     app.component('KDropzone', KDropzone)
+    app.component('KSelect', KSelect)
+    app.component('KSelectOption', KSelectOption)
 
     // Data Display Components
     app.component('KAvatar', KAvatar)
