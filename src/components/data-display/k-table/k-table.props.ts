@@ -55,9 +55,17 @@ export default {
         description:
             'Filtros requeridos para la consulta. No se pueden eliminar'
     },
-    cards: {
+    card: {
         type: [Boolean, String],
         default: false,
         description: 'Muestra los datos en forma de tarjetas'
+    },
+    cardTag: {
+        type: String,
+        default: 'div'
+    },
+    cardClasses: {
+        type: [String, Array],
+        default: () => []
     }
 }

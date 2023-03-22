@@ -1,5 +1,5 @@
 <template>
-    <k-dropdown tag="span">
+    <k-dropdown v-if="!modal" tag="span">
         <k-icon
             icon="filter"
             :class="{ 'text-primary': active !== null }"
@@ -20,6 +20,17 @@
             </k-dropdown-item>
         </template>
     </k-dropdown>
+    <k-select v-else size="sm">
+        <k-select-option
+            v-for="(o, i) in options"
+            :key="i"
+            :value="o.value"
+            click="filter('$eq', o.value)"
+        >
+            <k-icon v-if="o.icon" class="mr-2" :icon="o.icon" />
+            {{ o.title }}
+        </k-select-option>
+    </k-select>
 </template>
 
 <script lang="ts">
@@ -38,6 +49,10 @@
             value: {
                 type: Object as PropType<Record<string, any> | null>,
                 default: null
+            },
+            modal: {
+                type: Boolean,
+                default: false
             }
         },
         emits: ['filter'],

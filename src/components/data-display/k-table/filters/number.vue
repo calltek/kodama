@@ -1,5 +1,5 @@
 <template>
-    <k-tooltip :visible="visible">
+    <k-tooltip v-if="!modal" :visible="visible">
         <k-icon
             icon="filter"
             :class="{ 'text-primary': defaultValue }"
@@ -41,6 +41,37 @@
             </div>
         </template>
     </k-tooltip>
+    <div v-else class="flex items-center">
+        <k-input
+            v-model="inputText"
+            type="number"
+            size="sm"
+            :width="90"
+            :min="min"
+            :max="max || undefined"
+            placeholder="0"
+            @keyup.enter="filter"
+        />
+
+        <div class="ml-4 flex align-items-center">
+            <k-button
+                icon="xmark"
+                color="danger"
+                size="sm"
+                title="Resetear"
+                class="mr-2"
+                @click="reset"
+            />
+
+            <k-button
+                icon="check"
+                color="success"
+                size="sm"
+                title="Aplicar"
+                @click="filter"
+            />
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
@@ -62,6 +93,10 @@
             max: {
                 type: Number,
                 default: 0
+            },
+            modal: {
+                type: Boolean,
+                default: false
             }
         },
         emits: ['filter'],

@@ -135,14 +135,25 @@
 
             const init = () => {
                 const $targetEl = document.getElementById(modalId)
-                const options = renderOptions()
+                if ($targetEl) {
+                    const $parentEl = $targetEl.parentNode
 
-                modal.value = new Modal($targetEl, options)
+                    if ($parentEl) {
+                        $parentEl.removeChild($targetEl)
+                        document
+                            .getElementsByTagName('body')[0]
+                            .appendChild($targetEl)
 
-                if (props.modelValue) {
-                    modal.value.show()
-                } else {
-                    modal.value.hide()
+                        const options = renderOptions()
+
+                        modal.value = new Modal($targetEl, options)
+
+                        if (props.modelValue) {
+                            modal.value.show()
+                        } else {
+                            modal.value.hide()
+                        }
+                    }
                 }
             }
 

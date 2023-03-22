@@ -78,6 +78,15 @@ interface Config {
     }
 
     ///////////////
+    // Locale
+    ///////////////
+    locale: {
+        current: string
+        fallback: string
+        available: string[]
+    }
+
+    ///////////////
     // Developer
     ///////////////
     debug: boolean
@@ -147,6 +156,15 @@ const defaultSettings: Config = {
     vendor: {
         fontAwesomeKit: '',
         sentryDSN: ''
+    },
+
+    ///////////////
+    // Locale
+    ///////////////
+    locale: {
+        current: 'es',
+        fallback: 'es',
+        available: ['es']
     },
 
     ///////////////

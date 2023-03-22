@@ -34,12 +34,25 @@
                     :query="query"
                 ></slot>
 
+                <div class="mx-2" />
+
                 <k-button
+                    v-if="cardMode"
+                    icon="filter"
+                    :color="query.filter ? 'primary' : 'gray'"
+                    title="Filtrar"
+                    :loading="loading"
+                    class="mr-2"
+                    @click="modalOpened = true"
+                />
+
+                <k-button
+                    v-else
                     icon="filter-slash"
                     color="gray"
                     title="Limpiar filtros"
                     :loading="loading"
-                    class="mx-2"
+                    class="mr-2"
                     @click="resetFilters"
                 />
 
@@ -73,17 +86,19 @@
             </div>
         </div>
 
-        <template v-if="cards === true || (cards === 'auto' && isMobile)">
-            <template v-for="(item, itemKey) in data" :key="itemKey">
-                <slot
-                    name="card"
-                    v-bind="{
-                        row: item,
-                        query: query,
-                        index: itemKey
-                    }"
-                ></slot>
-            </template>
+        <template v-if="cardMode">
+            <component :is="cardTag" :class="cardClasses">
+                <template v-for="(item, itemKey) in data" :key="itemKey">
+                    <slot
+                        name="card"
+                        v-bind="{
+                            row: item,
+                            query: query,
+                            index: itemKey
+                        }"
+                    ></slot>
+                </template>
+            </component>
         </template>
         <div
             v-else
@@ -320,11 +335,119 @@
                 @next-page="loadMore"
             />
         </div>
+
+        <k-drawer v-model="modalOpened" title="Filtros" :width="400">
+            <template #footer>
+                <div class="ml-auto"></div>
+                <k-button
+                    icon="filter-slash"
+                    color="danger"
+                    class="mr-2"
+                    @click="resetAndClose"
+                >
+                    Resetear
+                </k-button>
+                <k-button
+                    icon="filter"
+                    color="primary"
+                    @click="modalOpened = false"
+                >
+                    Guardar
+                </k-button>
+            </template>
+
+            <div class="flex flex-col -m-5">
+                <template v-for="(col, key) in cols" :key="key">
+                    <div
+                        v-if="col.order || col.filter"
+                        class="text-base border-b border-b-gray-100 dark:border-b-gray-700 last:border-0 uppercase font-bold p-5 flex flex-row justify-between items-center"
+                    >
+                        <k-table-order
+                            v-if="col.order && col.index"
+                            :value="
+                                params.order
+                                    ? params.order[col.index] || null
+                                    : null
+                            "
+                            @order="order(col.index, $event)"
+                        >
+                            {{ col.title }}
+                        </k-table-order>
+                        <template v-else>
+                            {{ col.title }}
+                        </template>
+
+                        <template v-if="col.filter && col.index">
+                            <k-table-filter-select
+                                v-if="
+                                    col.filter.type === 'select' &&
+                                    col.filter.options.length > 0
+                                "
+                                :options="col.filter.options"
+                                :value="
+                                    params.filter && params.filter[col.index]
+                                        ? params.filter[col.index]
+                                        : null
+                                "
+                                modal
+                                @filter="filter(col.index, $event)"
+                            />
+                            <k-table-filter-date
+                                v-else-if="col.filter.type === 'date'"
+                                :min="col.filter.min"
+                                :max="col.filter.max"
+                                :value="
+                                    params.filter && params.filter[col.index]
+                                        ? params.filter[col.index]
+                                        : null
+                                "
+                                modal
+                                @filter="filter(col.index, $event)"
+                            />
+                            <k-table-filter-range
+                                v-else-if="col.filter.type === 'range'"
+                                :min="col.filter.min"
+                                :max="col.filter.max"
+                                :value="
+                                    params.filter && params.filter[col.index]
+                                        ? params.filter[col.index]
+                                        : null
+                                "
+                                modal
+                                @filter="filter(col.index, $event)"
+                            />
+                            <k-table-filter-text
+                                v-else-if="col.filter.type === 'text'"
+                                :value="
+                                    params.filter && params.filter[col.index]
+                                        ? params.filter[col.index]
+                                        : null
+                                "
+                                modal
+                                @filter="filter(col.index, $event)"
+                            />
+                            <k-table-filter-number
+                                v-else-if="col.filter.type === 'number'"
+                                :min="col.filter.min"
+                                :max="col.filter.max"
+                                :value="
+                                    params.filter && params.filter[col.index]
+                                        ? params.filter[col.index]
+                                        : null
+                                "
+                                modal
+                                @filter="filter(col.index, $event)"
+                            />
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </k-drawer>
     </div>
 </template>
 
 <script lang="ts">
-    import { defineComponent, watch, onMounted, computed } from 'vue'
+    import { defineComponent, watch, onMounted, computed, ref } from 'vue'
 
     import props from './k-table.props'
     import useColumn from './lib/columns'
@@ -372,6 +495,7 @@
             const hasSlot = (name: string) => !!ctx.slots[name]
             const config = useConfig()
 
+            const modalOpened = ref(false)
             const { isRowOpen, toggleRow } = useCollapse(props)
             const { cols, colLength } = useColumn(props, ctx.slots)
             const {
@@ -409,6 +533,18 @@
                 return false
             })
 
+            const cardMode = computed(() => {
+                return (
+                    props.card === true ||
+                    (props.card === 'auto' && isMobile.value)
+                )
+            })
+
+            const resetAndClose = () => {
+                resetFilters()
+                modalOpened.value = false
+            }
+
             onMounted(() => {
                 enable404.value = true
                 ctx.emit('fetch', query.value)
@@ -437,7 +573,10 @@
                 resetFilters,
                 strict,
                 query,
-                isMobile
+                isMobile,
+                modalOpened,
+                cardMode,
+                resetAndClose
             }
         }
     })

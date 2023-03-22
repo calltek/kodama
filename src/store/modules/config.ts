@@ -8,28 +8,32 @@ export default defineStore('config', {
     persist: true,
     state: () => {
         return {
-            config: Object.assign({}, defaultSettings),
-            initial: Object.assign({}, defaultSettings)
+            initialized: false,
+            data: structuredClone(defaultSettings) as typeof defaultSettings
         }
     },
     actions: {
         init() {
+            if (!this.initialized) {
+                this.reset()
+                this.initialized = true
+            }
+        },
+        get(path?: string, defaultValue?: any) {
+            if (!path) return this.data
+            return objectPath.get(this.data, path, defaultValue)
+        },
+        set(path: string, value: any) {
+            objectPath.set(this.data, path, value)
+        },
+        reset() {
             const ctx: any = getCurrentInstance()
             const config = ctx.proxy.settings || {}
 
-            this.initial = Object.assign({}, { ...defaultSettings, ...config })
-
-            this.reset()
-        },
-        get(path?: string, defaultValue?: any) {
-            if (!path) return this.config
-            return objectPath.get(this.config, path, defaultValue)
-        },
-        set(path: string, value: any) {
-            objectPath.set(this.config, path, value)
-        },
-        reset() {
-            objectPath.set(this, 'config', Object.assign({}, this.initial))
+            objectPath.set(this, 'data', {
+                ...structuredClone(defaultSettings),
+                ...structuredClone(config)
+            })
         }
     }
 })

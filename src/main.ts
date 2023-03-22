@@ -22,6 +22,7 @@ import { toast, dayjs } from './plugins'
 
 // EventBus
 import mitt from 'mitt'
+import { Filters } from './config/_filters'
 const emitter = mitt()
 
 export {
@@ -46,5 +47,6 @@ export type {
     KTableColumn,
     RouteRecordRaw,
     RouteLocationNormalized,
-    NavigationGuardNext
+    NavigationGuardNext,
+    Filters
 }

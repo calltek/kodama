@@ -11,14 +11,14 @@
         ></k-icon>
     </component>
 
-    <div :id="menuId" class="k-dropdown">
+    <div :id="menuId" class="k-dropdown" :style="widthStyle">
         <ul
-            class="k-dropdown-items text-sm text-gray-700 dark:text-gray-200 text-left"
+            class="k-dropdown-items text-base text-gray-700 dark:text-gray-200 text-left"
             :style="ulStyle"
         >
             <k-dropdown-item
                 v-if="hasSlot('header')"
-                class="px-4 py-3 text-sm text-gray-900 dark:text-white"
+                class="px-4 py-3 text-gray-900 dark:text-white"
             >
                 <slot name="header"></slot>
             </k-dropdown-item>
@@ -27,7 +27,7 @@
 
             <k-dropdown-item
                 v-if="hasSlot('footer')"
-                class="px-4 py-3 text-sm text-gray-900 dark:text-white"
+                class="px-4 py-3 text-gray-900 dark:text-white"
             >
                 <slot name="footer"></slot>
             </k-dropdown-item>
@@ -86,6 +86,14 @@
             tag: {
                 type: String,
                 default: 'div'
+            },
+            minWidth: {
+                type: Number,
+                default: 0
+            },
+            maxWidth: {
+                type: Number,
+                default: 0
             }
         },
         emits: ['click'],
@@ -95,6 +103,13 @@
 
             const dropdown: Ref<Dropdown | null> = ref(null)
             const hasSlot = (name: string) => !!slots[name]
+
+            const widthStyle = computed((): Record<string, any> => {
+                return {
+                    minWidth: props.minWidth ? `${props.minWidth}px` : '11rem',
+                    maxWidth: props.maxWidth ? `${props.maxWidth}px` : '24rem'
+                }
+            })
 
             const ulStyle = computed((): Record<string, any> => {
                 return {
@@ -143,21 +158,18 @@
                 }
             )
 
-            return { dropdown, menuId, buttonId, hasSlot, ulStyle }
+            return { dropdown, menuId, buttonId, hasSlot, ulStyle, widthStyle }
         }
     })
 </script>
 
 <style lang="scss">
     .k-dropdown {
-        min-width: 11rem;
-        max-width: 24rem;
-
         @apply z-10 hidden divide-y divide-gray-100 dark:divide-gray-600 select-none;
 
         .k-dropdown-items {
             li {
-                @apply border-b border-gray-200 dark:border-gray-600 last:border-0 first:rounded-t-lg last:rounded-b-lg dark:bg-gray-700 bg-white block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer font-semibold shadow;
+                @apply border-b border-gray-200 dark:border-gray-600 last:border-0 first:rounded-t-lg last:rounded-b-lg dark:bg-gray-700 bg-white block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer font-medium shadow;
             }
         }
     }

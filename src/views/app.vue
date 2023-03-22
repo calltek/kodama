@@ -12,23 +12,6 @@
         setup() {
             const config = useConfig()
 
-            const observer: MutationObserver = new MutationObserver(
-                (mutations) => {
-                    for (const m of mutations) {
-                        const n: any = m
-                        const newValue = n.target.getAttribute(m.attributeName)
-
-                        nextTick(() => {
-                            if (newValue === 'dark') {
-                                config.set('darkMode', true)
-                            } else {
-                                config.set('darkMode', false)
-                            }
-                        })
-                    }
-                }
-            )
-
             onMounted(() => {
                 detectViewPort(true)
                 window.addEventListener('resize', detectViewPortListener)
@@ -123,6 +106,11 @@
                 document.head.prepend(link)
             }
 
+            const darkMode = config.get('darkMode')
+            if (darkMode) {
+                document.querySelector('html')?.classList.add('dark')
+            }
+
             onMounted(() => {
                 config.init()
 
@@ -137,6 +125,25 @@
                         : false
 
                 if (html && sb) {
+                    const observer: MutationObserver = new MutationObserver(
+                        (mutations) => {
+                            for (const m of mutations) {
+                                const n: any = m
+                                const newValue = n.target.getAttribute(
+                                    m.attributeName
+                                )
+
+                                nextTick(() => {
+                                    if (newValue === 'dark') {
+                                        config.set('darkMode', true)
+                                    } else {
+                                        config.set('darkMode', false)
+                                    }
+                                })
+                            }
+                        }
+                    )
+
                     observer.observe(html, {
                         attributes: true,
                         attributeOldValue: true,

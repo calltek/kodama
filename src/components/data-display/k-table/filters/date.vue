@@ -1,5 +1,5 @@
 <template>
-    <k-tooltip :visible="visible">
+    <k-tooltip v-if="!modal" :visible="visible">
         <k-icon
             icon="calendar"
             :class="{ 'text-primary': defaultValue }"
@@ -20,6 +20,17 @@
             />
         </template>
     </k-tooltip>
+    <k-datepicker
+        v-else
+        :min-date="min"
+        :max-date="max"
+        :range="true"
+        :time="false"
+        :clearable="true"
+        :value="defaultValue"
+        size="sm"
+        @change="filter"
+    />
 </template>
 
 <script lang="ts">
@@ -40,6 +51,10 @@
             max: {
                 type: String,
                 default: dayjs().format('YYYY-MM-DD')
+            },
+            modal: {
+                type: Boolean,
+                default: false
             }
         },
         emits: ['filter'],
