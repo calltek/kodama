@@ -108,7 +108,6 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         params.page = 1
         params.order = null
         params.filter = null
-        params.search = ''
         params.reset = true
         params.strict = true
 

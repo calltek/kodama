@@ -105,7 +105,23 @@
             class="k-table-body"
             :class="{ 'k-table-body-clean': clean }"
         >
-            <k-loading :active="loading" />
+            <transition
+                name="animated_fade"
+                enter-active-class="animate__animated animate__faster animate__fadeIn"
+                leave-active-class="animate__animated animate__faster animate__fadeOut"
+            >
+                <div
+                    v-if="loading"
+                    class="flex z-50 absolute top-0 left-0 w-full h-full items-center justify-center bg-white bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-80 cursor-progress"
+                >
+                    <k-icon
+                        icon="spinner-third"
+                        spin
+                        class="text-primary"
+                        :size="40"
+                    />
+                </div>
+            </transition>
 
             <div class="overflow-x-auto">
                 <table>
@@ -602,7 +618,7 @@
         }
 
         .k-table-body {
-            @apply rounded-2xl bg-white dark:bg-gray-800 px-4 py-2;
+            @apply rounded-2xl bg-white dark:bg-gray-800 px-4 py-2 relative;
 
             // CLEAN MODE
             &.k-table-body-clean {

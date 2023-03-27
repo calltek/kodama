@@ -107,4 +107,6 @@ export default (
     if (beforeEach) router.beforeEach(beforeEach)
 
     app.use(router)
+
+    return router
 }

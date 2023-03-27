@@ -5,7 +5,6 @@ export const exampleColumns: KTableColumn[] = [
         title: 'ID',
         index: 'id',
         order: true,
-        search: true,
         align: 'left',
         width: '100px',
         filter: {
@@ -16,7 +15,6 @@ export const exampleColumns: KTableColumn[] = [
         title: 'Fecha',
         index: 'date',
         order: true,
-        search: false,
         align: 'left',
         filter: {
             type: 'date',
@@ -29,7 +27,6 @@ export const exampleColumns: KTableColumn[] = [
         title: 'Cliente',
         index: 'client_name',
         order: false,
-        search: true,
         align: 'left',
         slot: 'client',
         filter: {
@@ -40,14 +37,12 @@ export const exampleColumns: KTableColumn[] = [
         title: 'Teléfono',
         index: 'client_phone',
         order: false,
-        search: true,
         align: 'left'
     },
     {
         title: 'Transportista',
         index: 'carrier',
         order: true,
-        search: false,
         align: 'left',
         filter: {
             type: 'select',
@@ -69,7 +64,6 @@ export const exampleColumns: KTableColumn[] = [
         title: 'Estado',
         index: 'status',
         order: true,
-        search: false,
         align: 'center',
         filter: {
             type: 'select',
@@ -89,7 +83,6 @@ export const exampleColumns: KTableColumn[] = [
         title: 'Importe',
         index: 'price',
         order: true,
-        search: false,
         align: 'right',
         filter: { type: 'range', min: 0, max: 40 },
         makeup: 'price'

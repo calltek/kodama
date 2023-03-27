@@ -1,17 +1,17 @@
 <template>
     <div
-        class="flex flex-col items-center justify-between sm:justify-center h-screen w-full overflow-y-auto"
+        class="flex flex-col items-center justify-between sm:justify-center h-screen w-full overflow-y-auto bg-white dark:bg-gray-900"
         :style="bgStyle"
     >
-        <div class="px-5 py-8 sm:p-10 sm:mb-12">
+        <div class="px-5 py-8 sm:p-10 sm:mb-12 z-10">
             <k-logo side :height="80" :dark="darkMode" />
         </div>
 
-        <div class="flex flex-col p-3 sm:p-10">
+        <div class="flex flex-col p-3 sm:p-10 z-10">
             <router-view></router-view>
         </div>
 
-        <div class="flex flex-col p-10 sm:mt-10">
+        <div class="flex flex-col p-10 sm:mt-10 z-10">
             <k-public-footer></k-public-footer>
         </div>
 

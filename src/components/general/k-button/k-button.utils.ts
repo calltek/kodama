@@ -14,9 +14,12 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
     const neon = props.neon
     const size = props.size
     const uppercase = props.uppercase
+    const loading = props.loading
     const type = icon && !hasSlot('default') ? 'icon' : 'text'
 
     let specific_classes: string[] = []
+
+    if (loading) specific_classes.push('cursor-progress')
 
     // Sizes
     if (size === 'xs') {
@@ -52,10 +55,8 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
             'bg-transparent border-transparent text-opacity-80 hover:text-opacity-100 outline-none'
         )
 
-        if (color === 'white' || color === 'dark') {
-            specific_classes.push('text-gray-900 dark:text-white')
-        } else if (color === 'gray') {
-            specific_classes.push('text-gray-700')
+        if (color === 'gray') {
+            specific_classes.push('text-gray-400 dark:text-gray-600')
         } else if (color === 'primary') {
             specific_classes.push('text-primary')
         } else if (color === 'secondary') {
@@ -72,13 +73,9 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
     } else if (outline) {
         specific_classes.push('border')
 
-        if (color === 'white' || color === 'black') {
+        if (color === 'gray') {
             specific_classes.push(
-                'border-black text-black dark:border-white dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black'
-            )
-        } else if (color === 'gray') {
-            specific_classes.push(
-                'border-gray-300 text-gray-300 hover:bg-gray-300 hover:text-gray-700'
+                'border-gray-400 text-gray-400 hover:bg-gray-400 hover:text-white dark:border-gray-600 dark:text-gray-600 dark:hover:bg-gray-600 dark:hover:text-white'
             )
         } else if (color === 'primary') {
             specific_classes.push(
@@ -116,19 +113,14 @@ export const parseButtonClasses = (props: KButtonProps, slots: any) => {
             )
         }
 
-        if (color === 'white' || color === 'black') {
+        if (color === 'gray') {
             specific_classes.push(
-                'border-black bg-black dark:border-white dark:bg-white'
+                'border-gray-400 bg-gray-400 dark:border-gray-600 dark:bg-gray-600'
             )
             specific_classes.push(
                 neon
-                    ? 'text-black dark:text-white hover:text-white dark:hover:text-black'
-                    : 'text-white dark:text-black'
-            )
-        } else if (color === 'gray') {
-            specific_classes.push('border-gray-300 bg-gray-300')
-            specific_classes.push(
-                neon ? 'text-gray-400 hover:text-gray-500' : 'text-gray-500'
+                    ? 'text-gray-300 hover:text-white dark:text-gray-600 dark:hover:text-white'
+                    : 'text-white'
             )
         } else if (color === 'primary') {
             specific_classes.push('border-primary bg-primary')

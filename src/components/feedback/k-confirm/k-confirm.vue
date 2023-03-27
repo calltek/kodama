@@ -1,50 +1,47 @@
 <template>
-    <k-tooltip :visible="showTooltip && !disabled">
-        <template #content>
+    <k-modal v-model="model" size="xs">
+        <div class="flex flex-col items-center" :class="$style.KConfirm">
+            <k-icon
+                :icon="icon"
+                type="far"
+                class="text-gray-300 mb-6"
+                :size="60"
+            />
+
             <div
-                class="flex flex-row items-center py-3 px-1"
-                :class="$style.KConfirm"
+                class="mb-4 text-gray-700 dark:text-gray-200 font-semibold text-xl text-center"
             >
-                <k-icon :icon="icon" class="text-gray-300 mr-4" :size="45" />
-
-                <div class="flex flex-col">
-                    <div
-                        class="mb-2 text-gray-600 dark:text-gray-200 font-bold"
-                    >
-                        {{ title }}
-                    </div>
-
-                    <div class="text-right">
-                        <k-badge
-                            color="success"
-                            size="xs"
-                            class="mr-2 cursor-pointer"
-                            @click="ok"
-                        >
-                            {{ okText }}
-                        </k-badge>
-
-                        <k-badge
-                            color="danger"
-                            size="xs"
-                            class="cursor-pointer"
-                            @click="ko"
-                        >
-                            {{ koText }}
-                        </k-badge>
-                    </div>
-                </div>
+                {{ title }}
             </div>
-        </template>
 
-        <span @click="showTooltip = true">
-            <slot></slot>
-        </span>
-    </k-tooltip>
+            <div>
+                <k-button
+                    color="success"
+                    class="mr-2 cursor-pointer"
+                    @click="ok"
+                >
+                    {{ okText }}
+                </k-button>
+
+                <k-button
+                    color="danger"
+                    class="cursor-pointer"
+                    outline
+                    @click="ko"
+                >
+                    {{ koText }}
+                </k-button>
+            </div>
+        </div>
+    </k-modal>
+
+    <span @click="open()">
+        <slot></slot>
+    </span>
 </template>
 
 <script lang="ts">
-    import { defineComponent, ref } from 'vue'
+    import { computed, defineComponent, ref } from 'vue'
     export default defineComponent({
         name: 'KConfirm',
         autoload: true,
@@ -73,17 +70,34 @@
         },
         emits: ['ok', 'ko'],
         setup(props, ctx) {
-            const showTooltip = ref(false)
+            const showModal = ref(false)
+
+            const model = computed({
+                get() {
+                    const visible = showModal.value === true && !props.disabled
+                    return visible
+                },
+                set(value) {
+                    showModal.value = value
+                }
+            })
 
             const ok = () => {
                 ctx.emit('ok')
-                showTooltip.value = false
+                showModal.value = false
             }
+
             const ko = () => {
                 ctx.emit('ko')
-                showTooltip.value = false
+                showModal.value = false
             }
-            return { showTooltip, ok, ko }
+
+            const open = () => {
+                if (props.disabled) return
+                showModal.value = true
+            }
+
+            return { showModal, ok, ko, open, model }
         }
     })
 </script>

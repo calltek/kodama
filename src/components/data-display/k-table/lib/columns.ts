@@ -25,7 +25,6 @@ export default function (props: KTableProps, slots: any): any {
                 title: column.title,
                 index: column.index || '',
                 order: column.order || false,
-                search: column.search || false,
                 nowrap: column.nowrap || true,
                 width: width,
                 align: column.align || 'left',

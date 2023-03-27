@@ -1,19 +1,26 @@
 <template>
-    <div
-        :style="{
-            'position': 'relative',
-            'min-height': `${height}px`
-        }"
-    >
-        <loading
-            :active="active"
-            :is-full-page="fullpage"
-            :loader="type"
-            color="#1A56DB"
-            :z-index="zIndex"
-            :on-cancel="$emit('cancel')"
-            :background-color="backgroundColor"
-        />
+    <div class="relative">
+        <transition
+            name="animated_fade"
+            enter-active-class="animate__animated animate__faster animate__fadeIn"
+            leave-active-class="animate__animated animate__faster animate__fadeOut"
+        >
+            <div
+                v-if="active"
+                class="flex z-50 top-0 left-0 w-full h-full items-center justify-center bg-white bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-80 cursor-progress"
+                :class="{
+                    fixed: fullpage,
+                    absolute: !fullpage
+                }"
+            >
+                <k-icon
+                    icon="spinner-third"
+                    spin
+                    class="text-primary"
+                    :size="40"
+                />
+            </div>
+        </transition>
 
         <slot></slot>
     </div>
@@ -22,15 +29,13 @@
 <script lang="ts">
     import { defineComponent, computed, PropType } from 'vue'
 
-    import 'vue-loading-overlay/dist/vue-loading.css'
-    import Loading from 'vue-loading-overlay'
     import { useConfig } from '@/store'
 
     type Loader = 'spinner' | 'bars' | 'dots'
 
     export default defineComponent({
         name: 'KLoading',
-        components: { Loading },
+        // components: { Loading },
         autoload: true,
         props: {
             active: {
@@ -52,25 +57,9 @@
                 type: Boolean,
                 default: false,
                 description: 'Show the loader as full page'
-            },
-            color: {
-                type: String,
-                default: 'primary',
-                description: 'Color del spinner'
-            },
-            height: {
-                type: Number,
-                default: 0,
-                description: 'Altura mínima del contenedor'
-            },
-            zIndex: {
-                type: Number,
-                default: 99,
-                description: 'ZIndex del loader'
             }
         },
-        emits: ['cancel'],
-        setup(props, ctx) {
+        setup() {
             const config = useConfig()
 
             const backgroundColor = computed(() => {

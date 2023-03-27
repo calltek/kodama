@@ -6,7 +6,6 @@ export type KTableParams = {
     page: number
     order: QueryParams['order']
     filter: QueryFilterFields | null
-    search: string
     limit: QueryParams['limit']
     reset: boolean
     strict: QueryParams['strict']
@@ -22,7 +21,6 @@ export type KTableColumn = {
     title: string
     index?: string
     order?: boolean
-    search?: boolean
     align?: 'center' | 'left' | 'right'
     nowrap?: boolean
     width?: string

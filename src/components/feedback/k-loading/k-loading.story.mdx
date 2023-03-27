@@ -10,11 +10,11 @@ export const Template = (args) => ({
       return { args };
     },
     template: `
-      <k-loading v-bind="args">
         <k-card>
+         <k-loading v-bind="args">
           <k-skeleton type="card" />
+          </k-loading>
         </k-card>
-      </k-loading>
     `
 });
 

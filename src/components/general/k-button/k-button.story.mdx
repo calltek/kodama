@@ -33,14 +33,15 @@ Existen diferentes estilos de colores para los botones. Muchos de ellos se usan 
       return {
         components: { KButton },
         template: `
-          <KButton class="mr-2" color="white">White / Black</KButton>
-          <KButton class="mr-2" color="gray">Gray</KButton>
-          <KButton class="mr-2" color="primary">Primary</KButton>
-          <KButton class="mr-2" color="secondary">Secondary</KButton>
-          <KButton class="mr-2" color="success">Success</KButton>
-          <KButton class="mr-2" color="warning">Warning</KButton>
-          <KButton class="mr-2" color="danger">Danger</KButton>
-          <KButton class="mr-2" color="info">Info</KButton>
+          <k-card>
+            <KButton class="mr-2" color="gray">Gray</KButton>
+            <KButton class="mr-2" color="primary">Primary</KButton>
+            <KButton class="mr-2" color="secondary">Secondary</KButton>
+            <KButton class="mr-2" color="success">Success</KButton>
+            <KButton class="mr-2" color="warning">Warning</KButton>
+            <KButton class="mr-2" color="danger">Danger</KButton>
+            <KButton class="mr-2" color="info">Info</KButton>
+          </k-card>
         `,
       };
     }}
@@ -56,14 +57,15 @@ Este diseño aclara el color de fondo del botón y da un efecto de luz.
       return {
         components: { KButton },
         template: `
-          <KButton class="mr-2" color="white" neon>White / Black</KButton>
-          <KButton class="mr-2" color="gray" neon>Gray</KButton>
-          <KButton class="mr-2" color="primary" neon>Primary</KButton>
-          <KButton class="mr-2" color="secondary" neon>Secondary</KButton>
-          <KButton class="mr-2" color="success" neon>Success</KButton>
-          <KButton class="mr-2" color="warning" neon>Warning</KButton>
-          <KButton class="mr-2" color="danger" neon>Danger</KButton>
-          <KButton class="mr-2" color="info" neon>Info</KButton>
+          <k-card>
+            <KButton class="mr-2" color="gray" neon>Gray</KButton>
+            <KButton class="mr-2" color="primary" neon>Primary</KButton>
+            <KButton class="mr-2" color="secondary" neon>Secondary</KButton>
+            <KButton class="mr-2" color="success" neon>Success</KButton>
+            <KButton class="mr-2" color="warning" neon>Warning</KButton>
+            <KButton class="mr-2" color="danger" neon>Danger</KButton>
+            <KButton class="mr-2" color="info" neon>Info</KButton>
+          </k-card>
         `,
       };
     }}
@@ -79,14 +81,15 @@ Este diseño establece un borde alrededor del botón, pero no cambia el color de
       return {
         components: { KButton },
         template: `
-          <KButton class="mr-2" color="white" outline>White / Black</KButton>
-          <KButton class="mr-2" color="gray" outline>Gray</KButton>
-          <KButton class="mr-2" color="primary" outline>Primary</KButton>
-          <KButton class="mr-2" color="secondary" outline>Secondary</KButton>
-          <KButton class="mr-2" color="success" outline>Success</KButton>
-          <KButton class="mr-2" color="warning" outline>Warning</KButton>
-          <KButton class="mr-2" color="danger" outline>Danger</KButton>
-          <KButton class="mr-2" color="info" outline>Info</KButton>
+          <k-card>
+            <KButton class="mr-2" color="gray" outline>Gray</KButton>
+            <KButton class="mr-2" color="primary" outline>Primary</KButton>
+            <KButton class="mr-2" color="secondary" outline>Secondary</KButton>
+            <KButton class="mr-2" color="success" outline>Success</KButton>
+            <KButton class="mr-2" color="warning" outline>Warning</KButton>
+            <KButton class="mr-2" color="danger" outline>Danger</KButton>
+            <KButton class="mr-2" color="info" outline>Info</KButton>
+          </k-card>
         `,
       };
     }}
@@ -102,14 +105,15 @@ Este diseño elimina bordes y fondos, dejando solo el texto. Utilizar este compo
       return {
         components: { KButton },
         template: `
-          <KButton class="mr-2" color="white" link>White / Black</KButton>
-          <KButton class="mr-2" color="gray" link>Gray</KButton>
-          <KButton class="mr-2" color="primary" link>Primary</KButton>
-          <KButton class="mr-2" color="secondary" link>Secondary</KButton>
-          <KButton class="mr-2" color="success" link>Success</KButton>
-          <KButton class="mr-2" color="warning" link>Warning</KButton>
-          <KButton class="mr-2" color="danger" link>Danger</KButton>
-          <KButton class="mr-2" color="info" link>Info</KButton>
+          <k-card>
+            <KButton class="mr-2" color="gray" link>Gray</KButton>
+            <KButton class="mr-2" color="primary" link>Primary</KButton>
+            <KButton class="mr-2" color="secondary" link>Secondary</KButton>
+            <KButton class="mr-2" color="success" link>Success</KButton>
+            <KButton class="mr-2" color="warning" link>Warning</KButton>
+            <KButton class="mr-2" color="danger" link>Danger</KButton>
+            <KButton class="mr-2" color="info" link>Info</KButton>
+          </k-card>
         `,
       };
     }}
@@ -126,7 +130,9 @@ Activa esta propiedad para dar un efecto **zoom** al pasar el mouse por encima d
       return {
         components: { KButton },
         template: `
-          <KButton zoom>Zoom Button</KButton>
+          <k-card>
+            <KButton zoom>Zoom Button</KButton>
+          </k-card>
         `,
       };
     }}
@@ -145,9 +151,11 @@ Puedes encontrar todos los iconos disponibles en [FontAwesome](https://fontaweso
       return {
         components: { KButton },
         template: `
-          <KButton class="mr-2" color="primary" icon="user">Con texto</KButton>
-          <KButton class="mr-2" color="primary" icon="user" />
-          <KButton color="primary" icon="user" loading>Con texto</KButton>
+          <k-card>
+            <KButton class="mr-2" color="primary" icon="user">Con texto</KButton>
+            <KButton class="mr-2" color="primary" icon="user" />
+            <KButton color="primary" icon="user" loading>Con texto</KButton>
+          </k-card>
         `,
       };
     }}
@@ -163,7 +171,9 @@ Activa esta propiedad para que el texto del botón se muestre en **mayúsculas.*
       return {
         components: { KButton },
         template: `
-          <KButton uppercase>Uppercase</KButton>
+          <k-card>
+            <KButton uppercase>Uppercase</KButton>
+          </k-card>
         `,
       };
     }}
@@ -180,22 +190,24 @@ Puedes modificar el tamaño del botón con la propiedad `size`
       return {
         components: { KButton },
         template: `
-          <div class="flex flex-col gap-4">
-            <div class="flex flex-row gap-4 items-center">
-              <k-button size="xs">Button XS</k-button>
-              <k-button size="sm">Button SM</k-button>
-              <k-button size="md">Button MD</k-button>
-              <k-button size="lg">Button LG</k-button>
-              <k-button size="xl">Button XL</k-button>
+          <k-card>
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-row gap-4 items-center">
+                <k-button size="xs">Button XS</k-button>
+                <k-button size="sm">Button SM</k-button>
+                <k-button size="md">Button MD</k-button>
+                <k-button size="lg">Button LG</k-button>
+                <k-button size="xl">Button XL</k-button>
+              </div>
+              <div class="flex flex-row gap-4 items-center">
+                <k-button size="xs" icon="user" />
+                <k-button size="sm" icon="user" />
+                <k-button size="md" icon="user" />
+                <k-button size="lg" icon="user" />
+                <k-button size="xl" icon="user" />
+              </div>
             </div>
-            <div class="flex flex-row gap-4 items-center">
-              <k-button size="xs" icon="user" />
-              <k-button size="sm" icon="user" />
-              <k-button size="md" icon="user" />
-              <k-button size="lg" icon="user" />
-              <k-button size="xl" icon="user" />
-            </div>
-          </div>
+          </k-card>
         `,
       };
     }}

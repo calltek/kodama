@@ -59,7 +59,12 @@ export default defineStore('query', {
             if (state.queries[view]) {
                 return state.queries[view]
             } else {
-                return undefined
+                return {
+                    filter: null,
+                    limit: 20,
+                    order: null,
+                    strict: true
+                }
             }
         }
     },

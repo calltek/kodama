@@ -1,6 +1,4 @@
 import {
-    useRouter,
-    useRoute,
     RouteRecordRaw,
     RouteLocationNormalized,
     NavigationGuardNext
@@ -17,8 +15,8 @@ import { Menu } from './config/_menu'
 import { CustomConfig as Config } from './config/_settings'
 
 // System store
-import { useConfig } from './store'
-import { toast, dayjs } from './plugins'
+import { useConfig, useQuery } from './store'
+import { toast, dayjs, useRoute, useRouter } from './plugins'
 
 // EventBus
 import mitt from 'mitt'
@@ -30,6 +28,7 @@ export {
     createApp,
     // Store
     useConfig,
+    useQuery,
     // Router
     useRouter,
     useRoute,

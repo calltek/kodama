@@ -32,7 +32,7 @@
             },
             zIndex: {
                 type: Number,
-                default: -1
+                default: 0
             },
             top: {
                 type: [Number, String],

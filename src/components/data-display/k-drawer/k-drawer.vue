@@ -23,14 +23,36 @@
 
                 <k-button
                     icon="times"
-                    color="black"
+                    color="gray"
                     neon
                     size="md"
                     @click="hide"
                 />
             </div>
 
-            <slot></slot>
+            <div class="flex-1 -m-4 relative">
+                <transition
+                    name="animated_fade"
+                    enter-active-class="animate__animated animate__faster animate__fadeIn"
+                    leave-active-class="animate__animated animate__faster animate__fadeOut"
+                >
+                    <div
+                        v-if="loading"
+                        class="flex z-50 absolute top-0 left-0 w-full h-full items-center justify-center bg-white bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-80 cursor-progress"
+                    >
+                        <k-icon
+                            icon="spinner-third"
+                            spin
+                            class="text-primary"
+                            :size="40"
+                        />
+                    </div>
+                </transition>
+
+                <div class="p-4">
+                    <slot></slot>
+                </div>
+            </div>
 
             <div
                 v-if="hasSlot('footer')"
@@ -72,6 +94,10 @@
                 type: Number,
                 default: 360,
                 description: 'Ancho del drawer en `px`'
+            },
+            loading: {
+                type: Boolean,
+                default: false
             }
         },
         emits: ['update:modelValue'],

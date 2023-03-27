@@ -114,6 +114,10 @@
                     classes.push(`k-select-${props.size}`)
                 }
 
+                if (props.disabled) {
+                    classes.push('k-select-disabled')
+                }
+
                 return classes
             })
 
@@ -169,6 +173,12 @@
 
             select {
                 @apply h-14 rounded-xl pl-4 pr-9  py-3 text-lg;
+            }
+        }
+
+        &.k-select-disabled {
+            select {
+                @apply cursor-not-allowed;
             }
         }
     }

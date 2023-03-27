@@ -2,7 +2,7 @@ import { KBadgeProps } from './k-badge.props'
 
 export const parseClasses = (props: KBadgeProps) => {
     const classes: string[] = [
-        'text-center font-semibold rounded-lg transition-all h-max whitespace-nowrap inline-flex'
+        'text-center font-semibold rounded-lg transition-all h-max whitespace-nowrap inline-flex items-center'
     ]
 
     const neon = props.neon

@@ -7,8 +7,6 @@ export const randomNumber = (min: number, max: number) => {
 }
 
 export const colors = [
-    'white',
-    'black',
     'gray',
     'primary',
     'secondary',
