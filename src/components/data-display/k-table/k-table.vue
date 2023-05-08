@@ -1,5 +1,5 @@
 <template>
-    <div class="k-table">
+    <div :id="id" class="k-table">
         <div
             v-if="header"
             class="k-table-header"
@@ -112,7 +112,7 @@
             >
                 <div
                     v-if="loading"
-                    class="flex z-50 absolute top-0 left-0 w-full h-full items-center justify-center bg-white bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-80 cursor-progress"
+                    class="flex z-40 absolute top-0 left-0 w-full h-full items-center justify-center bg-white bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-80 cursor-progress"
                 >
                     <k-icon
                         icon="spinner-third"
@@ -123,223 +123,218 @@
                 </div>
             </transition>
 
-            <div class="overflow-x-auto">
-                <table>
-                    <thead>
-                        <tr>
-                            <th v-if="selected" class="w-6 k-table-body-title">
-                                <!-- <div
-                                    class="form-check form-check-sm form-check-custom form-check-solid"
-                                >
-                                    <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        :checked="isCheckedAll"
-                                        @change="toggleGlobalCheck"
-                                    />
-                                </div> -->
+            <div class="k-table-content">
+                <div class="k-table-tr k-table-head">
+                    <div v-if="selected" class="k-table-td">
+                        <input
+                            type="checkbox"
+                            class="k-checkbox w-4 h-4 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 text-primary focus:ring-primary dark:focus:ring-primary"
+                            :checked="isCheckedAll"
+                            @change="toggleGlobalCheck"
+                        />
+                    </div>
 
-                                <input
-                                    type="checkbox"
-                                    class="k-checkbox w-4 h-4 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 text-primary focus:ring-primary dark:focus:ring-primary"
-                                    :checked="isCheckedAll"
-                                    @change="toggleGlobalCheck"
-                                />
-                            </th>
-
-                            <th
-                                v-for="(col, key) in cols"
-                                :key="key"
-                                :style="col.style"
-                                class="k-table-body-title"
-                            >
-                                <k-table-order
-                                    v-if="col.order && col.index"
-                                    :value="
-                                        params.order
-                                            ? params.order[col.index] || null
-                                            : null
-                                    "
-                                    @order="order(col.index, $event)"
-                                >
-                                    {{ col.title }}
-                                </k-table-order>
-                                <template v-else>
-                                    {{ col.title }}
-                                </template>
-
-                                <template v-if="col.filter && col.index">
-                                    <k-table-filter-select
-                                        v-if="
-                                            col.filter.type === 'select' &&
-                                            col.filter.options.length > 0
-                                        "
-                                        :options="col.filter.options"
-                                        :value="
-                                            params.filter &&
-                                            params.filter[col.index]
-                                                ? params.filter[col.index]
-                                                : null
-                                        "
-                                        @filter="filter(col.index, $event)"
-                                    />
-                                    <k-table-filter-date
-                                        v-else-if="col.filter.type === 'date'"
-                                        :min="col.filter.min"
-                                        :max="col.filter.max"
-                                        :value="
-                                            params.filter &&
-                                            params.filter[col.index]
-                                                ? params.filter[col.index]
-                                                : null
-                                        "
-                                        @filter="filter(col.index, $event)"
-                                    />
-                                    <k-table-filter-range
-                                        v-else-if="col.filter.type === 'range'"
-                                        :min="col.filter.min"
-                                        :max="col.filter.max"
-                                        :value="
-                                            params.filter &&
-                                            params.filter[col.index]
-                                                ? params.filter[col.index]
-                                                : null
-                                        "
-                                        @filter="filter(col.index, $event)"
-                                    />
-                                    <k-table-filter-text
-                                        v-else-if="col.filter.type === 'text'"
-                                        :value="
-                                            params.filter &&
-                                            params.filter[col.index]
-                                                ? params.filter[col.index]
-                                                : null
-                                        "
-                                        @filter="filter(col.index, $event)"
-                                    />
-                                    <k-table-filter-number
-                                        v-else-if="col.filter.type === 'number'"
-                                        :min="col.filter.min"
-                                        :max="col.filter.max"
-                                        :value="
-                                            params.filter &&
-                                            params.filter[col.index]
-                                                ? params.filter[col.index]
-                                                : null
-                                        "
-                                        @filter="filter(col.index, $event)"
-                                    />
-                                </template>
-                            </th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <template
-                            v-for="(item, itemKey) in data"
-                            :key="itemKey"
+                    <div
+                        v-for="(col, key) in cols"
+                        :key="key"
+                        :style="col.style"
+                        class="k-table-td"
+                    >
+                        <k-table-order
+                            v-if="col.order && col.index"
+                            :value="
+                                params.order
+                                    ? params.order[col.index] || null
+                                    : null
+                            "
+                            class="-mr-3"
+                            @order="order(col.index, $event)"
                         >
-                            <tr>
-                                <td v-if="selected">
-                                    <!-- <input
+                            {{ col.title }}
+                        </k-table-order>
+                        <template v-else>
+                            {{ col.title }}
+                        </template>
+
+                        <template v-if="col.filter && col.index">
+                            <k-table-filter-select
+                                v-if="
+                                    col.filter.type === 'select' &&
+                                    col.filter.options.length > 0
+                                "
+                                :options="col.filter.options"
+                                :value="
+                                    params.filter && params.filter[col.index]
+                                        ? params.filter[col.index]
+                                        : null
+                                "
+                                @filter="filter(col.index, $event)"
+                            />
+                            <k-table-filter-date
+                                v-else-if="col.filter.type === 'date'"
+                                :min="col.filter.min"
+                                :max="col.filter.max"
+                                :value="
+                                    params.filter && params.filter[col.index]
+                                        ? params.filter[col.index]
+                                        : null
+                                "
+                                @filter="filter(col.index, $event)"
+                            />
+                            <k-table-filter-range
+                                v-else-if="col.filter.type === 'range'"
+                                :min="col.filter.min"
+                                :max="col.filter.max"
+                                :value="
+                                    params.filter && params.filter[col.index]
+                                        ? params.filter[col.index]
+                                        : null
+                                "
+                                @filter="filter(col.index, $event)"
+                            />
+                            <k-table-filter-text
+                                v-else-if="col.filter.type === 'text'"
+                                :value="
+                                    params.filter && params.filter[col.index]
+                                        ? params.filter[col.index]
+                                        : null
+                                "
+                                @filter="filter(col.index, $event)"
+                            />
+                            <k-table-filter-number
+                                v-else-if="col.filter.type === 'number'"
+                                :min="col.filter.min"
+                                :max="col.filter.max"
+                                :value="
+                                    params.filter && params.filter[col.index]
+                                        ? params.filter[col.index]
+                                        : null
+                                "
+                                @filter="filter(col.index, $event)"
+                            />
+                        </template>
+                    </div>
+                </div>
+
+                <template v-for="(item, itemKey) in data" :key="itemKey">
+                    <div class="k-table-tr">
+                        <div v-if="selected" class="k-table-td w-6">
+                            <!-- <input
                                             :checked="isRowChecked[itemKey]"
                                             class="form-check-input widget-13-check"
                                             type="checkbox"
                                             @change="toggleCheck(itemKey)"
                                         /> -->
-                                    <div>
-                                        <input
-                                            type="checkbox"
-                                            class="k-checkbox w-4 h-4 -mt-1 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 text-primary focus:ring-primary dark:focus:ring-primary"
-                                            :checked="isRowChecked[itemKey]"
-                                            @change="toggleCheck(itemKey)"
-                                        />
-                                    </div>
-                                </td>
+                            <div>
+                                <input
+                                    type="checkbox"
+                                    class="k-checkbox w-4 h-4 -mt-1 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 text-primary focus:ring-primary dark:focus:ring-primary"
+                                    :checked="isRowChecked[itemKey]"
+                                    @change="toggleCheck(itemKey)"
+                                />
+                            </div>
+                        </div>
 
-                                <td
-                                    v-for="(col, colKey) in cols"
-                                    :key="colKey"
-                                    :style="col.style"
+                        <div
+                            v-for="(col, colKey) in cols"
+                            :key="colKey"
+                            :style="col.style"
+                            class="k-table-td"
+                        >
+                            <k-table-date
+                                v-if="col.makeup === 'date'"
+                                :value="item[col.index]"
+                                :class="{ 'cursor-pointer': col.url }"
+                                @click="goToUrl(col, item)"
+                            />
+
+                            <k-table-image
+                                v-else-if="col.makeup === 'image'"
+                                :value="item[col.index]"
+                            />
+
+                            <k-table-status
+                                v-else-if="col.makeup === 'status'"
+                                :value="item[col.index]"
+                                :class="{ 'cursor-pointer': col.url }"
+                                @click="goToUrl(col, item)"
+                            />
+
+                            <k-table-price
+                                v-else-if="col.makeup === 'price'"
+                                :value="item[col.index]"
+                                :class="{ 'cursor-pointer': col.url }"
+                                @click="goToUrl(col, item)"
+                            />
+
+                            <k-table-code
+                                v-else-if="col.makeup === 'code'"
+                                :value="item[col.index]"
+                                :class="{ 'cursor-pointer': col.url }"
+                                @click="goToUrl(col, item)"
+                            />
+
+                            <!-- @slot Slots personalizados -->
+                            <slot
+                                v-else-if="col.slot"
+                                :name="col.slot"
+                                v-bind="{
+                                    row: item,
+                                    value: item[col.index],
+                                    query: query,
+                                    index: itemKey
+                                }"
+                            />
+
+                            <div v-else>
+                                <span
+                                    :class="{ 'cursor-pointer': col.url }"
+                                    @click="goToUrl(col, item)"
                                 >
-                                    <k-table-date
-                                        v-if="col.makeup === 'date'"
-                                        :value="item[col.index]"
-                                    />
+                                    {{ item[col.index] }}
+                                </span>
+                            </div>
+                        </div>
 
-                                    <k-table-image
-                                        v-else-if="col.makeup === 'image'"
-                                        :value="item[col.index]"
-                                    />
-
-                                    <k-table-status
-                                        v-else-if="col.makeup === 'status'"
-                                        :value="item[col.index]"
-                                    />
-
-                                    <k-table-price
-                                        v-else-if="col.makeup === 'price'"
-                                        :value="item[col.index]"
-                                    />
-
-                                    <k-table-code
-                                        v-else-if="col.makeup === 'code'"
-                                        :value="item[col.index]"
-                                    />
-
-                                    <!-- @slot Slots personalizados -->
-                                    <slot
-                                        v-else-if="col.slot"
-                                        :name="col.slot"
-                                        v-bind="{
-                                            row: item,
-                                            value: item[col.index],
-                                            query: query,
-                                            index: itemKey
-                                        }"
-                                    />
-
-                                    <div v-else>
-                                        {{ item[col.index] }}
-                                    </div>
-                                </td>
-
-                                <td v-if="hasSlot('content')" align="right">
-                                    <a
-                                        class="btn btn-icon btn-gray-300 cursor-pointer"
-                                        @click="toggleRow(itemKey)"
-                                    >
-                                        <i
-                                            :class="[
-                                                isRowOpen[itemKey]
-                                                    ? 'fa-chevron-up'
-                                                    : 'fa-chevron-down',
-                                                'fas'
-                                            ]"
-                                        ></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr
-                                v-if="hasSlot('content')"
-                                v-show="isRowOpen[itemKey]"
+                        <div
+                            v-if="hasSlot('content')"
+                            class="k-table-td"
+                            align="right"
+                        >
+                            <a
+                                class="btn btn-icon btn-gray-300 cursor-pointer"
+                                @click="toggleRow(itemKey)"
                             >
-                                <td :colspan="colLength">
-                                    <!--
-                                        @slot Contenido adicional de la fila
-                                        @mock Click me
-                                    -->
-                                    <slot
-                                        name="content"
-                                        :row="item"
-                                        :query="query"
-                                        :index="itemKey"
-                                    />
-                                </td>
-                            </tr>
-                        </template>
-                    </tbody>
-                </table>
+                                <i
+                                    :class="[
+                                        isRowOpen[itemKey]
+                                            ? 'fa-chevron-up'
+                                            : 'fa-chevron-down',
+                                        'fas'
+                                    ]"
+                                ></i>
+                            </a>
+                        </div>
+                    </div>
+                    <tr
+                        v-if="hasSlot('content')"
+                        v-show="isRowOpen[itemKey]"
+                        class="k-table-tr"
+                    >
+                        <td :colspan="colLength">
+                            <!--
+                                @slot Contenido adicional de la fila
+                                @mock Click me
+                            -->
+                            <slot
+                                name="content"
+                                :row="item"
+                                :query="query"
+                                :index="itemKey"
+                            />
+                        </td>
+                    </tr>
+                </template>
             </div>
         </div>
 
@@ -487,6 +482,8 @@
     import KTableFilterNumber from './filters/number.vue'
 
     import { useConfig } from '../../../store'
+    import { uid } from '@/helpers/utils'
+    import { useRouter } from 'vue-router'
 
     export default defineComponent({
         name: 'KTable',
@@ -509,7 +506,9 @@
         emits: ['fetch', 'filter'],
         setup(props, ctx) {
             const hasSlot = (name: string) => !!ctx.slots[name]
+            const id = uid()
             const config = useConfig()
+            const router = useRouter()
 
             const modalOpened = ref(false)
             const { isRowOpen, toggleRow } = useCollapse(props)
@@ -561,14 +560,59 @@
                 modalOpened.value = false
             }
 
+            const goToUrl = (col: any, item: any) => {
+                if (col.url) {
+                    router.push({
+                        name: col.url.name,
+                        params: { id: item[col.url.id] }
+                    })
+                }
+            }
+
+            // const setSize = () => {
+            //     var i = 0
+            //     var tb2 = document.querySelector(`#${id} table.k-table-content`)
+            //     var tb1 = document.querySelector(`#${id} table.k-table-head`)
+
+            //     if (tb2 && tb1) {
+            //         var tds =
+            //             tb2.querySelectorAll<HTMLElement>('tr:first-child td')
+            //         var ths =
+            //             tb1.querySelectorAll<HTMLElement>('tr:first-child th')
+
+            //         tds.forEach(function (td) {
+            //             const thWidth = ths[i].offsetWidth
+            //             const tdWidth = td.offsetWidth
+
+            //             if (thWidth > tdWidth) {
+            //                 console.log('pasa', thWidth, tdWidth)
+            //                 td.style.minWidth = thWidth + 'px'
+            //             } else {
+            //                 ths[i].style.minWidth = tdWidth + 'px'
+            //             }
+
+            //             // ths[i].style.width = td.offsetWidth + 'px'
+            //             i++
+            //         })
+            //     }
+            // }
+
             onMounted(() => {
                 enable404.value = true
                 ctx.emit('fetch', query.value)
+
+                // Sync th width with td
+                // window.addEventListener('resize', setSize)
+
+                // setTimeout(() => {
+                //     setSize()
+                // }, 1000)
             })
 
             return {
                 hasSlot,
                 cols,
+                id,
                 refresh,
                 colLength,
                 toggleCheck,
@@ -592,16 +636,19 @@
                 isMobile,
                 modalOpened,
                 cardMode,
-                resetAndClose
+                resetAndClose,
+                goToUrl
             }
         }
     })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .k-table {
+        @apply w-full h-full flex flex-col;
+
         .k-table-header {
-            @apply px-4 py-2 mb-5 flex flex-row rounded-2xl bg-white dark:bg-gray-800;
+            @apply px-4 py-2 mb-5 flex flex-row rounded-xl bg-white dark:bg-gray-800 select-none;
 
             // CLEAN MODE
             &.k-table-header-clean {
@@ -618,30 +665,44 @@
         }
 
         .k-table-body {
-            @apply rounded-2xl bg-white dark:bg-gray-800 px-4 py-2 relative;
+            @apply rounded-xl bg-white dark:bg-gray-800 px-4 pb-2 pt-0 relative overflow-auto flex-auto h-0 min-h-0;
 
             // CLEAN MODE
             &.k-table-body-clean {
-                @apply p-0;
+                @apply p-0 h-auto min-h-max;
             }
 
-            table {
-                @apply w-full text-gray-900 border-0 dark:text-white text-left;
+            .k-table-content {
+                @apply text-gray-900 border-0 dark:text-white text-left table box-border w-full;
 
-                th {
-                    &.k-table-body-title {
-                        @apply text-gray-500 uppercase font-semibold text-sm whitespace-nowrap px-2 py-3;
+                .k-table-tr {
+                    @apply table-row;
+
+                    .k-table-td {
+                        @apply p-2 table-cell align-middle;
                     }
                 }
 
-                td {
-                    // VARIABLE
-                    @apply p-2;
+                .k-table-tr.k-table-head {
+                    @apply sticky top-0 left-0 bg-white dark:bg-gray-800 z-10 select-none;
+
+                    .k-table-td {
+                        @apply text-gray-500 uppercase font-semibold text-sm whitespace-nowrap px-2 py-3;
+                    }
                 }
             }
-        }
 
-        .k-table-footer {
+            &::-webkit-scrollbar {
+                @apply w-2 h-2;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                @apply rounded-lg;
+            }
+
+            &::-webkit-scrollbar-corner {
+                background: rgba(0, 0, 0, 0);
+            }
         }
     }
 </style>

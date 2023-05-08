@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
 import path from 'path'
 import { VitePWA } from 'vite-plugin-pwa'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,6 +12,14 @@ export default defineConfig({
         VitePWA({}),
         dts({
             insertTypesEntry: true
+        }),
+        viteStaticCopy({
+            targets: [
+                {
+                    src: './plugin.js',
+                    dest: './'
+                }
+            ]
         })
     ],
     build: {

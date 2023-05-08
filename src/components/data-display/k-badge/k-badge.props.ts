@@ -2,8 +2,6 @@ import { ExtractPropTypes } from 'vue'
 import { uid } from '../../../helpers/utils'
 
 export const colors = [
-    'white',
-    'black',
     'gray',
     'primary',
     'secondary',

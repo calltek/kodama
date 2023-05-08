@@ -20,6 +20,7 @@
                 :class="classes"
             ></div>
             <span
+                v-if="hasSlot('default')"
                 class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300 whitespace-nowrap"
                 :class="{ 'opacity-60': disabled }"
             >

@@ -17,6 +17,8 @@ import KCheckbox from '../components/data-entry/k-checkbox/k-checkbox.vue'
 import KDropzone from '../components/data-entry/k-dropzone/k-dropzone.vue'
 import KSelect from '../components/data-entry/k-select/k-select.vue'
 import KSelectOption from '../components/data-entry/k-select/k-select-option.vue'
+import KInlineEditor from '../components/data-entry/k-inline-editor/k-inline-editor.vue'
+import KEditor from '../components/data-entry/k-editor/k-editor.vue'
 
 // Data Display Components
 import KAvatar from '../components/data-display/k-avatar/k-avatar.vue'
@@ -27,10 +29,14 @@ import KLogo from '../components/data-display/k-logo/k-logo.vue'
 import KTable from '../components/data-display/k-table/k-table.vue'
 import KDate from '../components/data-display/k-date/k-date.vue'
 import KCard from '../components/data-display/k-card/k-card.vue'
-import KTooltip from '../components/data-display/k-tooltip/k-tooltip.vue'
+// import KTooltip from '../components/data-display/k-tooltip/k-tooltip.vue'
 import KDrawer from '../components/data-display/k-drawer/k-drawer.vue'
 import KAccordion from '../components/data-display/k-accordion/k-accordion.vue'
 import KAccordionItem from '../components/data-display/k-accordion/k-accordion-item.vue'
+import KPrice from '../components/data-display/k-price/k-price.vue'
+import KSimpleTable from '../components/data-display/k-simple-table/k-simple-table.vue'
+import KTabs from '../components/data-display/k-tabs/k-tabs.vue'
+import KTab from '../components/data-display/k-tabs/k-tab.vue'
 
 // Feedback
 import KModal from '../components/feedback/k-modal/k-modal.vue'
@@ -43,7 +49,8 @@ import KSkeleton from '../components/feedback/k-skeleton/k-skeleton.vue'
 
 // Navigation
 import KDropdown from '../components/navigation/k-dropdown/k-dropdown.vue'
-import KDropdownItem from '../components/navigation/k-dropdown/k-dropdown-item.vue'
+import KDropdownMenu from '../components/navigation/k-dropdown/k-dropdown-menu.vue'
+import KDropdownSubmenu from '../components/navigation/k-dropdown/k-dropdown-submenu.vue'
 import KDropdownDivider from '../components/navigation/k-dropdown/k-dropdown-divider.vue'
 
 // Other
@@ -73,6 +80,8 @@ export default (
     app.component('KDropzone', KDropzone)
     app.component('KSelect', KSelect)
     app.component('KSelectOption', KSelectOption)
+    app.component('KInlineEditor', KInlineEditor)
+    app.component('KEditor', KEditor)
 
     // Data Display Components
     app.component('KAvatar', KAvatar)
@@ -83,10 +92,14 @@ export default (
     app.component('KTable', KTable)
     app.component('KDate', KDate)
     app.component('KCard', KCard)
-    app.component('KTooltip', KTooltip)
+    // app.component('KTooltip', KTooltip)
     app.component('KDrawer', KDrawer)
     app.component('KAccordion', KAccordion)
     app.component('KAccordionItem', KAccordionItem)
+    app.component('KPrice', KPrice)
+    app.component('KSimpleTable', KSimpleTable)
+    app.component('KTabs', KTabs)
+    app.component('KTab', KTab)
 
     // Feedback
     app.component('KModal', KModal)
@@ -99,7 +112,8 @@ export default (
 
     // Navigation
     app.component('KDropdown', KDropdown)
-    app.component('KDropdownItem', KDropdownItem)
+    app.component('KDropdownMenu', KDropdownMenu)
+    app.component('KDropdownSubmenu', KDropdownSubmenu)
     app.component('KDropdownDivider', KDropdownDivider)
 
     // Other

@@ -1,23 +1,33 @@
 <template>
-    <k-dropdown v-if="!modal" tag="span">
-        <k-icon
-            icon="filter"
-            :class="{ 'text-primary': active !== null }"
-            class="ml-2 cursor-pointer"
-        />
+    <k-dropdown
+        v-if="!modal"
+        ref="tooltip"
+        placement="bottom"
+        :max-height="200"
+        tag="span"
+        hide-on-click
+    >
+        <div class="inline-block">
+            <k-button
+                size="sm"
+                icon="filter"
+                link
+                :color="active !== null ? 'primary' : 'gray'"
+            />
+        </div>
 
         <template #content>
-            <k-dropdown-item @click="reset()">
+            <k-dropdown-menu @click="reset()">
                 <k-icon class="mr-2" icon="list" /> Todo
-            </k-dropdown-item>
-            <k-dropdown-item
+            </k-dropdown-menu>
+            <k-dropdown-menu
                 v-for="(o, i) in options"
                 :key="i"
                 @click="filter('$eq', o.value)"
             >
                 <k-icon v-if="o.icon" class="mr-2" :icon="o.icon" />
                 {{ o.title }}
-            </k-dropdown-item>
+            </k-dropdown-menu>
         </template>
     </k-dropdown>
     <k-select v-else size="sm">
@@ -57,24 +67,19 @@
         },
         emits: ['filter'],
         setup(props, ctx) {
-            const dropdown = ref('dropdown')
-
-            const hideModal = () => {
-                // const bs = new bootstrap.Dropdown(dropdown.value)
-                // bs.hide()
-            }
+            const tooltip = ref()
 
             const filter = (
                 operator: QueryFilterOperator,
                 value: KTableColumnFilter['value']
             ) => {
-                hideModal()
                 ctx.emit('filter', { [operator]: value })
+                tooltip.value?.hide()
             }
 
             const reset = () => {
-                hideModal()
                 ctx.emit('filter', null)
+                tooltip.value?.hide()
             }
 
             const active = computed(() => {
@@ -85,7 +90,7 @@
                 return null
             })
 
-            return { dropdown, filter, reset, active }
+            return { tooltip, filter, reset, active }
         }
     })
 </script>

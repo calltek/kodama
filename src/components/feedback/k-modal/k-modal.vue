@@ -101,6 +101,11 @@
                 default: 'lg',
                 options: ['sm', 'md', 'lg', 'xl'],
                 description: 'Tamaño del modal'
+            },
+            zIndex: {
+                type: Number,
+                default: 40,
+                description: 'Indica el z-index del modal'
             }
         },
         emits: ['update:modelValue', 'show', 'hide', 'toggle'],
@@ -114,8 +119,7 @@
                 const options: ModalOptions = {
                     placement: props.placement,
                     backdrop: props.backdropClose ? 'dynamic' : 'static',
-                    backdropClasses:
-                        'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
+                    backdropClasses: defaultBackdropClasses.value,
                     closable: props.closable,
                     onHide: () => {
                         ctx.emit('update:modelValue', false)
@@ -178,15 +182,56 @@
                 (value) => {
                     const $targetEl = document.getElementById(modalId)
                     if ($targetEl) {
-                        $targetEl.className = defaultModalClasses
+                        $targetEl.className = defaultModalClasses.value
                     }
 
                     init()
                 }
             )
 
-            const defaultModalClasses =
-                'fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full'
+            const defaultModalClasses = computed(() => {
+                const classes = [
+                    'fixed top-0 left-0 right-0 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full'
+                ]
+
+                if (props.zIndex === 50) {
+                    classes.push('z-50')
+                } else if (props.zIndex === 40) {
+                    classes.push('z-40')
+                } else if (props.zIndex === 30) {
+                    classes.push('z-30')
+                } else if (props.zIndex === 20) {
+                    classes.push('z-20')
+                } else if (props.zIndex === 10) {
+                    classes.push('z-10')
+                } else {
+                    classes.push('z-50')
+                }
+
+                return classes.join(' ')
+            })
+
+            const defaultBackdropClasses = computed(() => {
+                const classes = [
+                    'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0'
+                ]
+
+                if (props.zIndex === 50) {
+                    classes.push('z-40')
+                } else if (props.zIndex === 40) {
+                    classes.push('z-30')
+                } else if (props.zIndex === 30) {
+                    classes.push('z-20')
+                } else if (props.zIndex === 20) {
+                    classes.push('z-10')
+                } else if (props.zIndex === 10) {
+                    classes.push('z-0')
+                } else {
+                    classes.push('z-40')
+                }
+
+                return classes.join(' ')
+            })
 
             const contentClasses = computed(() => {
                 const classes = []

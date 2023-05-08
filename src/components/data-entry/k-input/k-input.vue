@@ -1,12 +1,12 @@
 <template>
-    <div :class="classes">
+    <div :class="[classes]">
         <label v-if="hasLabel && !float" :for="uuid">
             <slot v-if="hasSlot('default')" />
             <template v-else>{{ label }}</template>
 
             <span v-if="required" class="font-bold text-danger ml-1">*</span>
             <template v-if="firstError">
-                <k-tooltip hover :title="firstError">
+                <k-tooltip :content="firstError">
                     <k-icon icon="triangle-exclamation" class="ml-2" />
                 </k-tooltip>
             </template>
@@ -25,7 +25,6 @@
             :autofocus="autofocus"
             :disabled="disabled"
             @input="change"
-            @change="change"
             @blur="validate"
         />
 
@@ -55,7 +54,7 @@
             <span v-if="required" class="font-bold text-danger ml-1">*</span>
 
             <template v-if="firstError">
-                <k-tooltip hover :title="firstError">
+                <k-tooltip hover :content="firstError">
                     <k-icon icon="triangle-exclamation" class="ml-2" />
                 </k-tooltip>
             </template>
@@ -244,9 +243,9 @@
                     if (props.max !== undefined && value > props.max) {
                         value = props.max
                     }
-                }
 
-                model.value = value
+                    model.value = value
+                }
             }
 
             const firstError = computed(() => {

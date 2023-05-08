@@ -6,7 +6,7 @@
 
             <span v-if="required" class="font-bold text-danger ml-1">*</span>
             <template v-if="firstError">
-                <k-tooltip hover :title="firstError">
+                <k-tooltip hover :content="firstError">
                     <k-icon icon="triangle-exclamation" class="ml-2" />
                 </k-tooltip>
             </template>

@@ -213,7 +213,7 @@ $dp__time_font_size: 2rem !default; // font size in the time picker
     }
 
     .dp__month_year_select {
-        @apply text-2xl uppercase text-gray-700 font-bold;
+        @apply text-xl uppercase text-gray-700 font-bold;
     }
 
     .dp__action_row {

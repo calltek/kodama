@@ -11,3 +11,8 @@ declare module 'tailwind-config' {
     const config: Config
     export default config
 }
+
+declare module 'sanitize-html' {
+    const sanitizeHtml: any
+    export default sanitizeHtml
+}

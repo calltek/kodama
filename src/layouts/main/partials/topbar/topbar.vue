@@ -25,14 +25,16 @@
                     <k-theme />
 
                     <div class="flex items-center lg:order-2">
-                        <k-dropdown click>
-                            <k-avatar
-                                :name="fullname"
-                                :size="42"
-                                :tooltip="false"
-                                square
-                                class="cursor-pointer"
-                            />
+                        <k-dropdown>
+                            <div>
+                                <k-avatar
+                                    :name="fullname"
+                                    :size="42"
+                                    :tooltip="false"
+                                    square
+                                    class="cursor-pointer"
+                                />
+                            </div>
 
                             <template #header>
                                 <div class="flex gap-4 items-center">
@@ -49,7 +51,7 @@
                             </template>
 
                             <template #content>
-                                <k-dropdown-item>
+                                <k-dropdown-menu>
                                     <router-link to="/pages/profile/overview">
                                         <k-icon
                                             icon="address-card"
@@ -58,8 +60,8 @@
                                         />
                                         Mi Perfil
                                     </router-link>
-                                </k-dropdown-item>
-                                <k-dropdown-item>
+                                </k-dropdown-menu>
+                                <k-dropdown-menu>
                                     <router-link to="/pages/profile/overview">
                                         <k-icon
                                             icon="gear"
@@ -68,7 +70,7 @@
                                         />
                                         Configuración
                                     </router-link>
-                                </k-dropdown-item>
+                                </k-dropdown-menu>
                             </template>
 
                             <template #footer>

@@ -13,7 +13,7 @@
                     <template v-if="checkRoles(menuItem)">
                         <li v-if="!menuItem.pages">
                             <k-tooltip
-                                :title="menuItem.title"
+                                :hover="menuItem.title"
                                 placement="right"
                                 :arrow="false"
                                 :disabled="!collapsed"
@@ -71,7 +71,7 @@
                             }"
                         >
                             <k-tooltip
-                                :title="menuItem.title"
+                                :content="menuItem.title"
                                 placement="right"
                                 :arrow="false"
                                 :disabled="!collapsed"
@@ -115,7 +115,7 @@
                                 >
                                     <li v-if="item2.title && checkRoles(item2)">
                                         <k-tooltip
-                                            :title="item2.title"
+                                            :content="item2.title"
                                             placement="right"
                                             :arrow="false"
                                             :disabled="!collapsed"

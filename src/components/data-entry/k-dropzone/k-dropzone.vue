@@ -323,7 +323,7 @@
         }
 
         > label.k-dropzone--error {
-            @apply border-red-500 dark:border-red-500;
+            @apply border-danger dark:border-danger;
         }
 
         > label.k-dropzone--disabled {

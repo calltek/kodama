@@ -75,7 +75,7 @@
 
 <style scoped lang="scss">
     .k-card {
-        @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-2xl flex flex-col p-0 relative;
+        @apply bg-white dark:bg-gray-800 text-gray-700 dark:text-white rounded-xl flex flex-col p-0 relative;
 
         .k-card-header {
             @apply border-b border-b-gray-200 dark:border-b-gray-700 px-5 py-4 font-semibold;

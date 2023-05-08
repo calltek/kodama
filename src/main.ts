@@ -12,7 +12,7 @@ import {
 // Config
 import { init as createApp } from './config'
 import { Menu } from './config/_menu'
-import { CustomConfig as Config } from './config/_settings'
+import { AvatarType, CustomConfig as Config } from './config/_settings'
 
 // System store
 import { useConfig, useQuery } from './store'
@@ -21,6 +21,7 @@ import { toast, dayjs, useRoute, useRouter } from './plugins'
 // EventBus
 import mitt from 'mitt'
 import { Filters } from './config/_filters'
+import { KSimpleTableColumn } from './components/data-display/k-simple-table/k-simple-table.types'
 const emitter = mitt()
 
 export {
@@ -35,7 +36,9 @@ export {
     // Plugins
     toast,
     dayjs,
-    emitter
+    emitter,
+    // Enums
+    AvatarType
 }
 
 // Types
@@ -44,6 +47,7 @@ export type {
     Config,
     KTableParams,
     KTableColumn,
+    KSimpleTableColumn,
     RouteRecordRaw,
     RouteLocationNormalized,
     NavigationGuardNext,

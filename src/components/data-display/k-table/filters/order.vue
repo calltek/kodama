@@ -1,22 +1,33 @@
 <template>
-    <span class="cursor-pointer">
-        <a v-if="value && value === 'asc'" @click="order(null)">
-            <slot />
+    <span
+        v-if="value && value === 'asc'"
+        class="cursor-pointer"
+        @click="order(null)"
+    >
+        <slot />
 
-            <k-icon icon="sort-up" class="ml-2" />
-        </a>
+        <div class="inline-block">
+            <k-button size="sm" icon="sort-up" link color="primary" />
+        </div>
+    </span>
 
-        <a v-else-if="value && value === 'desc'" @click="order('asc')">
-            <slot />
+    <span
+        v-else-if="value && value === 'desc'"
+        class="cursor-pointer"
+        @click="order('asc')"
+    >
+        <slot />
 
-            <k-icon icon="sort-down" class="ml-2" />
-        </a>
+        <div class="inline-block">
+            <k-button size="sm" icon="sort-down" link color="primary" />
+        </div>
+    </span>
 
-        <a v-else @click="order('desc')">
-            <slot />
-
-            <k-icon icon="sort" class="ml-2" />
-        </a>
+    <span v-else class="cursor-pointer" @click="order('desc')">
+        <slot />
+        <div class="inline-block">
+            <k-button size="sm" icon="sort" link color="gray" />
+        </div>
     </span>
 </template>
 

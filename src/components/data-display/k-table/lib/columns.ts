@@ -9,7 +9,7 @@ export default function (props: KTableProps, slots: any): any {
         const col: KTableColumn[] = []
 
         columns?.forEach((column) => {
-            let width = column.width || 'auto'
+            let width = column.width || undefined
             if (column.slot === '_image') {
                 width = '5rem'
             }
@@ -31,7 +31,8 @@ export default function (props: KTableProps, slots: any): any {
                 slot: column.slot || '',
                 makeup: column.makeup || undefined,
                 filter: column.filter,
-                style: { position: 'relative' }
+                style: { position: 'relative' },
+                url: column.url || undefined
             }
 
             if (data.nowrap) data.style['white-space'] = 'nowrap'

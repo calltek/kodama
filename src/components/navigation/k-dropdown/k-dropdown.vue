@@ -1,91 +1,104 @@
 <template>
-    <component :is="tag" :id="buttonId" class="relative">
-        <slot></slot>
+    <k-tooltip
+        ref="tooltip"
+        arrow
+        interactive
+        :hide-on-click="false"
+        :trigger="trigger"
+        :placement="placement"
+        theme="dropdown"
+        :tag="tag"
+        class="select-none"
+    >
+        <template #default>
+            <slot></slot>
+        </template>
 
-        <k-icon
-            v-if="submenu"
-            icon="chevron-right"
-            type="fas"
-            class="absolute -right-2 top-0 mt-1"
-            :size="12"
-        ></k-icon>
-    </component>
-
-    <div :id="menuId" class="k-dropdown" :style="widthStyle">
-        <ul
-            class="k-dropdown-items text-base text-gray-700 dark:text-gray-200 text-left"
-            :style="ulStyle"
-        >
-            <k-dropdown-item
-                v-if="hasSlot('header')"
-                class="px-4 py-3 text-gray-900 dark:text-white"
+        <template #content="{ hide }">
+            <ul
+                class="k-dropdown-items text-base text-gray-700 dark:text-gray-200 text-left"
+                :style="ulStyle"
+                @click="hide"
             >
-                <slot name="header"></slot>
-            </k-dropdown-item>
+                <k-dropdown-menu
+                    v-if="hasSlot('header')"
+                    class="px-4 py-3 text-gray-900 dark:text-white"
+                >
+                    <slot name="header"></slot>
+                </k-dropdown-menu>
 
-            <slot name="content"></slot>
+                <slot name="content"></slot>
 
-            <k-dropdown-item
-                v-if="hasSlot('footer')"
-                class="px-4 py-3 text-gray-900 dark:text-white"
-            >
-                <slot name="footer"></slot>
-            </k-dropdown-item>
-        </ul>
-    </div>
+                <k-dropdown-menu
+                    v-if="hasSlot('footer')"
+                    class="px-4 py-3 text-gray-900 dark:text-white"
+                >
+                    <slot name="footer"></slot>
+                </k-dropdown-menu>
+            </ul>
+        </template>
+    </k-tooltip>
 </template>
 
 <script lang="ts">
-    import { uid } from '@/helpers/utils'
-    import { defineComponent, ref, Ref, onMounted, watch, computed } from 'vue'
-    import { Dropdown } from 'flowbite'
-    import type { DropdownOptions } from 'flowbite'
+    import { computed, defineComponent, ref } from 'vue'
+
+    export type KTooltipPlacement =
+        | 'top'
+        | 'top-start'
+        | 'top-end'
+        | 'right'
+        | 'right-start'
+        | 'right-end'
+        | 'bottom'
+        | 'bottom-start'
+        | 'bottom-end'
+        | 'left'
+        | 'left-start'
+        | 'left-end'
+        | 'auto'
+        | 'auto-start'
+        | 'auto-end'
+
+    export const KTooltipPlacementOptions = [
+        'top',
+        'top-start',
+        'top-end',
+        'right',
+        'right-start',
+        'right-end',
+        'bottom',
+        'bottom-start',
+        'bottom-end',
+        'left',
+        'left-start',
+        'left-end',
+        'auto',
+        'auto-start',
+        'auto-end'
+    ]
 
     export default defineComponent({
         name: 'KDropdown',
         autoload: true,
         props: {
             placement: {
-                type: String as () => DropdownOptions['placement'],
-                default: 'bottom',
-                options: [
-                    'top',
-                    'bottom',
-                    'left',
-                    'left-start',
-                    'left-end',
-                    'right',
-                    'right-start',
-                    'right-end'
-                ]
+                type: String as () => KTooltipPlacement,
+                default: 'bottom-end',
+                options: KTooltipPlacementOptions
             },
-            visible: {
-                type: Boolean,
-                default: undefined
-            },
-            hover: {
-                type: Boolean,
-                default: false
-            },
-            click: {
-                type: Boolean,
-                default: true
-            },
-            submenu: {
-                type: Boolean,
-                default: false
-            },
-            height: {
-                type: Number,
-                default: 0
-            },
-            disabled: {
-                type: Boolean,
-                default: false
+            trigger: {
+                type: String,
+                default: 'focusin',
+                options: ['click', 'mouseenter', 'focus', 'manual', 'focusin']
             },
             tag: {
                 type: String,
-                default: 'div'
+                default: 'button'
+            },
+            maxHeight: {
+                type: Number,
+                default: 0
             },
             minWidth: {
                 type: Number,
@@ -96,81 +109,34 @@
                 default: 0
             }
         },
-        emits: ['click'],
         setup(props, { slots }) {
-            const menuId = uid()
-            const buttonId = uid()
-
-            const dropdown: Ref<Dropdown | null> = ref(null)
+            const tooltip = ref()
             const hasSlot = (name: string) => !!slots[name]
 
-            const widthStyle = computed((): Record<string, any> => {
-                return {
-                    minWidth: props.minWidth ? `${props.minWidth}px` : '11rem',
-                    maxWidth: props.maxWidth ? `${props.maxWidth}px` : '24rem'
-                }
-            })
-
-            const ulStyle = computed((): Record<string, any> => {
-                return {
-                    maxHeight: props.height ? `${props.height}px` : 'auto',
-                    overflowY: props.height ? 'auto' : 'visible'
-                }
-            })
-
-            const method =
-                props.visible !== undefined
-                    ? 'none'
-                    : props.hover
-                    ? 'hover'
-                    : props.click
-                    ? 'click'
-                    : 'none'
-
-            const options: DropdownOptions = {
-                placement: props.placement,
-                triggerType: method,
-                offsetSkidding: 0,
-                offsetDistance: props.submenu ? 30 : 10,
-                delay: 300,
-                onShow: () => {
-                    if (props.disabled) {
-                        dropdown.value?.hide()
-                    }
+            const hide = () => {
+                if (tooltip.value) {
+                    tooltip.value.hide()
                 }
             }
 
-            onMounted(() => {
-                const $targetEl = document.getElementById(menuId)
-                const $triggerEl = document.getElementById(buttonId)
+            const show = () => {
+                if (tooltip.value) {
+                    tooltip.value.show()
+                }
+            }
 
-                dropdown.value = new Dropdown($targetEl, $triggerEl, options)
+            const ulStyle = computed((): Record<string, any> => {
+                return {
+                    maxHeight: props.maxHeight
+                        ? `${props.maxHeight}px`
+                        : 'auto',
+                    overflowY: 'auto'
+                }
             })
 
-            watch(
-                () => props.visible,
-                (value) => {
-                    if (value) {
-                        if (!props.disabled) dropdown.value?.show()
-                    } else {
-                        dropdown.value?.hide()
-                    }
-                }
-            )
-
-            return { dropdown, menuId, buttonId, hasSlot, ulStyle, widthStyle }
+            return { hasSlot, ulStyle, tooltip, hide, show }
         }
     })
 </script>
 
-<style lang="scss">
-    .k-dropdown {
-        @apply z-10 hidden divide-y divide-gray-100 dark:divide-gray-600 select-none;
-
-        .k-dropdown-items {
-            li {
-                @apply border-b border-gray-200 dark:border-gray-600 last:border-0 first:rounded-t-lg last:rounded-b-lg dark:bg-gray-700 bg-white block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer font-medium shadow;
-            }
-        }
-    }
-</style>
+<style lang="scss"></style>

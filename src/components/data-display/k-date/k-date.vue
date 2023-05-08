@@ -1,6 +1,6 @@
 <template>
     <k-badge size="xs" color="primary">
-        <k-tooltip :title="tippyText">
+        <k-tooltip :content="tippyText">
             <div class="flex flex-row items-center">
                 <k-icon
                     icon="clock"
@@ -66,9 +66,15 @@
             })
 
             const tippyText = computed(() => {
-                if (isMultiple.value)
-                    return props.value[0] + ' - ' + props.value[1]
-                return props.value
+                if (Array.isArray(props.value)) {
+                    return (
+                        dayjs(props.value[0]).format('YYYY-MM-DD HH:mm:ss') +
+                        ' - ' +
+                        dayjs(props.value[1]).format('YYYY-MM-DD HH:mm:ss')
+                    )
+                } else {
+                    return dayjs(props.value).format('YYYY-MM-DD HH:mm:ss')
+                }
             })
 
             return { props, text, from, isMultiple, tippyText }

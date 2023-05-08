@@ -1,5 +1,5 @@
 <template>
-    <k-tooltip :title="text" hover>
+    <k-tooltip :content="text">
         <k-icon type="fad" :icon="icon" class="dark:text-white text-gray-200" />
 
         <template #content>

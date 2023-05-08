@@ -1,11 +1,23 @@
 <template>
-    <k-tooltip v-if="!modal" :visible="visible">
-        <k-icon
-            icon="calendar"
-            :class="{ 'text-primary': defaultValue }"
-            class="ml-2 cursor-pointer"
-            @click="visible = !visible"
-        />
+    <k-tooltip
+        v-if="!modal"
+        ref="tooltip"
+        interactive
+        trigger="click"
+        theme="transparent"
+        :arrow="false"
+        hide-on-click
+        placement="bottom"
+        :max-width="400"
+    >
+        <div class="inline-block">
+            <k-button
+                size="sm"
+                icon="calendar"
+                link
+                :color="defaultValue ? 'primary' : 'gray'"
+            />
+        </div>
 
         <template #content>
             <k-datepicker
@@ -59,7 +71,7 @@
         },
         emits: ['filter'],
         setup(props, ctx) {
-            const visible = ref(false)
+            const tooltip = ref()
 
             const defaultValue = computed(() => {
                 if (props.value && props.value.$gte && props.value.$lte) {
@@ -76,11 +88,10 @@
                 }
 
                 ctx.emit('filter', data)
-
-                visible.value = false
+                tooltip.value?.hide()
             }
 
-            return { filter, defaultValue, visible }
+            return { filter, defaultValue, tooltip }
         }
     })
 </script>

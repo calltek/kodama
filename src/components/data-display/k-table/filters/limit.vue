@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="flex flex-row justify-center">
         <k-button
             :loading="loading"
             :disabled="loading"
@@ -10,61 +10,59 @@
             Cargar más
         </k-button>
 
-        <k-tooltip :visible="visible">
-            <k-button size="sm" @click="visible = !visible">
+        <k-dropdown placement="top">
+            <k-button size="sm">
                 <k-icon icon="ellipsis" />
             </k-button>
 
             <template #content>
-                <ul class="text-center">
-                    <li>
-                        <a
-                            class="dropdown-item p-3 cursor-pointer"
-                            :class="{ active: value === 10 }"
-                            @click="limit(10)"
-                        >
-                            10
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            class="dropdown-item p-3 cursor-pointer"
-                            :class="{ active: value === 20 }"
-                            @click="limit(20)"
-                        >
-                            20
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            class="dropdown-item p-3 cursor-pointer"
-                            :class="{ active: value === 30 }"
-                            @click="limit(30)"
-                        >
-                            30
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            class="dropdown-item p-3 cursor-pointer"
-                            :class="{ active: value === 50 }"
-                            @click="limit(50)"
-                        >
-                            50
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            class="dropdown-item p-3 cursor-pointer"
-                            :class="{ active: value === 100 }"
-                            @click="limit(100)"
-                        >
-                            100
-                        </a>
-                    </li>
-                </ul>
+                <k-dropdown-menu>
+                    <a
+                        class="dropdown-item p-3 cursor-pointer"
+                        :class="{ active: value === 10 }"
+                        @click="limit(10)"
+                    >
+                        10
+                    </a>
+                </k-dropdown-menu>
+                <k-dropdown-menu>
+                    <a
+                        class="dropdown-item p-3 cursor-pointer"
+                        :class="{ active: value === 20 }"
+                        @click="limit(20)"
+                    >
+                        20
+                    </a>
+                </k-dropdown-menu>
+                <k-dropdown-menu>
+                    <a
+                        class="dropdown-item p-3 cursor-pointer"
+                        :class="{ active: value === 30 }"
+                        @click="limit(30)"
+                    >
+                        30
+                    </a>
+                </k-dropdown-menu>
+                <k-dropdown-menu>
+                    <a
+                        class="dropdown-item p-3 cursor-pointer"
+                        :class="{ active: value === 50 }"
+                        @click="limit(50)"
+                    >
+                        50
+                    </a>
+                </k-dropdown-menu>
+                <k-dropdown-menu>
+                    <a
+                        class="dropdown-item p-3 cursor-pointer"
+                        :class="{ active: value === 100 }"
+                        @click="limit(100)"
+                    >
+                        100
+                    </a>
+                </k-dropdown-menu>
             </template>
-        </k-tooltip>
+        </k-dropdown>
     </div>
 </template>
 

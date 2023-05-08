@@ -3,6 +3,7 @@
 </template>
 
 <script lang="ts">
+    import tippy from 'tippy.js'
     import { defineComponent, nextTick, onMounted, onBeforeUnmount } from 'vue'
     import { useConfig } from '../store'
     import { logo, fontAwesomeKit } from '../helpers/config'
@@ -117,6 +118,8 @@
                 replaceFavicon()
                 addFontAwesomeKit()
                 addGoogleFonts()
+
+                tippy('[tooltip]')
 
                 const html = document.querySelector('html')
                 const sb =

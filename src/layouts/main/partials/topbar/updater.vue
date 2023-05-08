@@ -1,7 +1,7 @@
 <template>
     <k-tooltip
         v-if="updateAvailable"
-        title="🍾 Actualización disponible"
+        content="🍾 Actualización disponible"
         placement="left"
     >
         <k-button

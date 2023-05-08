@@ -1,5 +1,5 @@
 <template>
-    <k-modal v-model="model" size="xs">
+    <k-modal v-model="model" size="xs" :z-index="50">
         <div class="flex flex-col items-center" :class="$style.KConfirm">
             <k-icon
                 :icon="icon"

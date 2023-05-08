@@ -14,6 +14,25 @@ export interface CustomConfig extends Partial<Config> {
     homepage: string
 }
 
+export enum AvatarType {
+    'AdventurerNeutral' = 'adventurer-neutral',
+    'AvataaarsNeutral' = 'avataaars-neutral',
+    'BigEarsNeutral' = 'big-ears-neutral',
+    'BigSmile' = 'big-smile',
+    'BotttsNeutral' = 'bottts-neutral',
+    'Croodles' = 'croodles',
+    'CroodlesNeutral' = 'croodles-neutral',
+    'Initials' = 'initials',
+    'Lorelei' = 'lorelei',
+    'LoreleiNeutral' = 'lorelei-neutral',
+    'Micah' = 'micah',
+    'Miniavs' = 'miniavs',
+    'Notionists' = 'notionists',
+    'NotionistsNeutral' = 'notionists-neutral',
+    'OpenPeeps' = 'open-peeps',
+    'Thumbs' = 'thumbs'
+}
+
 interface Config {
     // General
     name: string
@@ -41,6 +60,8 @@ interface Config {
         text: string
         link: string
     }
+
+    avatarType: AvatarType
 
     ///////////////
     // Auth
@@ -117,6 +138,8 @@ const defaultSettings: Config = {
         text: 'Kodama UI',
         link: 'https://calltek.es'
     },
+
+    avatarType: AvatarType.NotionistsNeutral,
 
     ///////////////
     // Router

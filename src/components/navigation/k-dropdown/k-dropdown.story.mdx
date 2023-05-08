@@ -13,19 +13,17 @@ export const Template = (args) => ({
     <k-dropdown v-bind="args">
       <k-button>Dropdown</k-button>
       <template #content>
-        <k-dropdown-item>Item 1</k-dropdown-item>
-        <k-dropdown-item>Item 2</k-dropdown-item>
-        <k-dropdown-item>Item 3</k-dropdown-item>
-        <k-dropdown-item>
-          <k-dropdown hover placement="right-start" submenu>
+        <k-dropdown-menu>Item 1</k-dropdown-menu>
+        <k-dropdown-menu>Item 2</k-dropdown-menu>
+        <k-dropdown-menu @click="click">Item 3</k-dropdown-menu>
+        <k-dropdown-submenu>
             <span>Item 4</span>
-            <template #content >
-              <k-dropdown-item>Item 4</k-dropdown-item>
-              <k-dropdown-item>Item 5</k-dropdown-item>
-              <k-dropdown-item>Item 6</k-dropdown-item>
+            <template #content>
+              <k-dropdown-menu>Item 5</k-dropdown-menu>
+              <k-dropdown-menu>Item 6</k-dropdown-menu>
+              <k-dropdown-menu>Item 7</k-dropdown-menu>
             </template>
-          </k-dropdown>
-        </k-dropdown-item>
+        </k-dropdown-submenu>
       </template>
     </k-dropdown>`
 });
@@ -59,9 +57,9 @@ Puedes añadir un `header` y un `footer` a tu dropdown con los slots correspondi
               <div>Header</div>
             </template>
             <template #content>
-              <k-dropdown-item>Item 1</k-dropdown-item>
-              <k-dropdown-item>Item 2</k-dropdown-item>
-              <k-dropdown-item>Item 3</k-dropdown-item>
+              <k-dropdown-menu>Item 1</k-dropdown-menu>
+              <k-dropdown-menu>Item 2</k-dropdown-menu>
+              <k-dropdown-menu>Item 3</k-dropdown-menu>
             </template>
             <template #footer>
               <div>Footer</div>
@@ -84,19 +82,19 @@ Puedes definir una altura fija para el dropdown con `height`
         components: { KDropdown },
    
         template: `
-          <k-dropdown height="200">
+          <k-dropdown :maxHeight="200">
             <k-button>Dropdown</k-button>
             <template #header>
               <div>Header</div>
             </template>
             <template #content>
-              <k-dropdown-item>Item 1</k-dropdown-item>
-              <k-dropdown-item>Item 2</k-dropdown-item>
-              <k-dropdown-item>Item 3</k-dropdown-item>
-              <k-dropdown-item>Item 4</k-dropdown-item>
-              <k-dropdown-item>Item 5</k-dropdown-item>
-              <k-dropdown-item>Item 6</k-dropdown-item>
-              <k-dropdown-item>Item 7</k-dropdown-item>
+              <k-dropdown-menu>Item 1</k-dropdown-menu>
+              <k-dropdown-menu>Item 2</k-dropdown-menu>
+              <k-dropdown-menu>Item 3</k-dropdown-menu>
+              <k-dropdown-menu>Item 4</k-dropdown-menu>
+              <k-dropdown-menu>Item 5</k-dropdown-menu>
+              <k-dropdown-menu>Item 6</k-dropdown-menu>
+              <k-dropdown-menu>Item 7</k-dropdown-menu>
             </template>
             <template #footer>
               <div>Footer</div>
@@ -123,43 +121,29 @@ Es posible modificar el compartamiento del dropdown para que se habra con `click
           };
         },
         template: `
-          <k-dropdown hover>
+          <k-dropdown trigger="mouseenter">
             <k-button class="mr-4">Dropdown HOVER</k-button>
             <template #header>
               <div>Header</div>
             </template>
             <template #content>
-              <k-dropdown-item>Item 1</k-dropdown-item>
-              <k-dropdown-item>Item 2</k-dropdown-item>
-              <k-dropdown-item>Item 3</k-dropdown-item>
+              <k-dropdown-menu>Item 1</k-dropdown-menu>
+              <k-dropdown-menu>Item 2</k-dropdown-menu>
+              <k-dropdown-menu>Item 3</k-dropdown-menu>
             </template>
             <template #footer>
               <div>Footer</div>
             </template>
           </k-dropdown>
-          <k-dropdown click>
+          <k-dropdown trigger="click">
             <k-button class="mr-4">Dropdown CLICK</k-button>
             <template #header>
               <div>Header</div>
             </template>
             <template #content>
-              <k-dropdown-item>Item 1</k-dropdown-item>
-              <k-dropdown-item>Item 2</k-dropdown-item>
-              <k-dropdown-item>Item 3</k-dropdown-item>
-            </template>
-            <template #footer>
-              <div>Footer</div>
-            </template>
-          </k-dropdown>
-          <k-dropdown :visible="visible">
-            <k-button @click="visible = !visible">VISIBLE: {{visible}}</k-button>
-            <template #header>
-              <div>Header</div>
-            </template>
-            <template #content>
-              <k-dropdown-item>Item 1</k-dropdown-item>
-              <k-dropdown-item>Item 2</k-dropdown-item>
-              <k-dropdown-item>Item 3</k-dropdown-item>
+              <k-dropdown-menu>Item 1</k-dropdown-menu>
+              <k-dropdown-menu>Item 2</k-dropdown-menu>
+              <k-dropdown-menu>Item 3</k-dropdown-menu>
             </template>
             <template #footer>
               <div>Footer</div>

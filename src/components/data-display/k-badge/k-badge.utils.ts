@@ -27,14 +27,9 @@ export const parseClasses = (props: KBadgeProps) => {
         classes.push('border')
     }
 
-    if (color === 'black' || color === 'white') {
-        classes.push('border-black bg-black dark:border-white dark:bg-white')
-        classes.push(
-            neon ? 'text-black dark:text-white' : 'text-white dark:text-black'
-        )
-    } else if (color === 'gray') {
+    if (color === 'gray') {
         classes.push('border-gray-300 bg-gray-300')
-        classes.push(neon ? 'text-gray-300' : 'text-gray-700')
+        classes.push(neon ? 'text-gray-300 dark:text-white' : 'text-gray-700')
     } else if (color === 'primary') {
         classes.push('border-primary bg-primary')
         classes.push(neon ? 'text-primary' : 'text-white')

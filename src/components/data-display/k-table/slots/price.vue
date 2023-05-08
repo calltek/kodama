@@ -1,9 +1,9 @@
 <template>
-    <span class="price">{{ price }} €</span>
+    <k-price :value="value" />
 </template>
 
 <script lang="ts">
-    import { computed, defineComponent } from 'vue'
+    import { defineComponent } from 'vue'
 
     export default defineComponent({
         name: 'KTablePrice',
@@ -13,15 +13,8 @@
                 default: ''
             }
         },
-        setup(props) {
-            const price = computed(() => {
-                let price = props.value
-                if (typeof price === 'string') price = parseFloat(price)
-
-                return price.toFixed(2).replace('.', ',')
-            })
-
-            return { price }
+        setup() {
+            return {}
         }
     })
 </script>

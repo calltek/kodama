@@ -1,6 +1,12 @@
 <template>
     <div class="k-image" :style="style" :class="{ 'k-image-zoom': zoom }">
-        <img ref="img" :src="src" data-zoom :style="styleImg" />
+        <img
+            ref="img"
+            :src="thumb"
+            data-zoom
+            :data-zoom-src="src"
+            :style="styleImg"
+        />
     </div>
 </template>
 
@@ -12,6 +18,11 @@
         name: 'KImage',
         autoload: true,
         props: {
+            thumbnail: {
+                type: String,
+                default: '',
+                description: 'Thumbnail de la imagen'
+            },
             src: {
                 type: String,
                 default: '',
@@ -30,6 +41,11 @@
         },
         setup(props) {
             const img = ref()
+
+            const thumb = computed(() => {
+                if (props.thumbnail) return props.thumbnail
+                return props.src
+            })
 
             const style = computed(() => {
                 const s: any = {}
@@ -56,7 +72,7 @@
                     })
             })
 
-            return { img, style, styleImg }
+            return { img, style, styleImg, thumb }
         }
     })
 </script>

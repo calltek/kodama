@@ -1,11 +1,23 @@
 <template>
-    <k-tooltip v-if="!modal" :visible="visible">
-        <k-icon
-            icon="filter"
-            :class="{ 'text-primary': defaultValue }"
-            class="ml-2 cursor-pointer"
-            @click="visible = !visible"
-        />
+    <k-tooltip
+        v-if="!modal"
+        ref="tooltip"
+        interactive
+        trigger="click"
+        theme="filter"
+        :arrow="false"
+        hide-on-click
+        placement="bottom"
+        :max-width="400"
+    >
+        <div class="inline-block">
+            <k-button
+                size="sm"
+                icon="filter"
+                link
+                :color="defaultValue ? 'primary' : 'gray'"
+            />
+        </div>
 
         <template #content>
             <div class="flex items-center">
@@ -95,7 +107,7 @@
         },
         emits: ['filter'],
         setup(props, ctx) {
-            const dropdown = ref('dropdown')
+            const tooltip = ref()
             const inputText = ref('')
             const visible = ref(false)
 
@@ -118,16 +130,16 @@
                     $like: inputText.value
                 }
                 ctx.emit('filter', data)
-                visible.value = false
+                tooltip.value?.hide()
             }
 
             const reset = () => {
                 inputText.value = ''
                 ctx.emit('filter', null)
-                visible.value = false
+                tooltip.value?.hide()
             }
 
-            return { visible, dropdown, filter, defaultValue, reset, inputText }
+            return { visible, tooltip, filter, defaultValue, reset, inputText }
         }
     })
 </script>

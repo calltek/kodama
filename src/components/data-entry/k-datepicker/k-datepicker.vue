@@ -6,7 +6,7 @@
 
             <span v-if="required" class="font-bold text-danger ml-1">*</span>
             <template v-if="firstError">
-                <k-tooltip hover :title="firstError">
+                <k-tooltip :content="firstError">
                     <k-icon icon="triangle-exclamation" class="ml-2" />
                 </k-tooltip>
             </template>
@@ -63,26 +63,28 @@
             </template>
 
             <template #action-select>
-                <k-button
-                    v-if="clearable"
-                    color="danger"
-                    icon="brush"
-                    size="sm"
-                    title="Resetear"
-                    class="ml-2"
-                    @click="resetDate"
-                >
-                </k-button>
+                <div class="flex flex-row justify-end">
+                    <k-button
+                        v-if="clearable"
+                        color="danger"
+                        icon="brush"
+                        size="sm"
+                        title="Resetear"
+                        class="ml-2"
+                        @click="resetDate"
+                    >
+                    </k-button>
 
-                <k-button
-                    color="success"
-                    icon="check"
-                    size="sm"
-                    title="Aceptar"
-                    class="ml-2"
-                    @click="selectDate"
-                >
-                </k-button>
+                    <k-button
+                        color="success"
+                        icon="check"
+                        size="sm"
+                        title="Aceptar"
+                        class="ml-2"
+                        @click="selectDate"
+                    >
+                    </k-button>
+                </div>
             </template>
         </Datepicker>
     </div>

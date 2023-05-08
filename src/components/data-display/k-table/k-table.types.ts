@@ -33,6 +33,10 @@ export type KTableColumn = {
     }
     makeup?: 'date' | 'price' | 'image' | 'status' | 'code'
     style?: Record<string, unknown>
+    url?: {
+        name: string
+        id: string
+    }
 }
 
 export type KTableProps = Readonly<ExtractPropTypes<typeof Props>>

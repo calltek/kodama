@@ -1,5 +1,6 @@
 import { createApp, App } from 'vue'
 import { createPinia } from 'pinia'
+import VueTippy from 'vue-tippy'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { RouteRecordRaw, NavigationGuardWithThis } from 'vue-router'
 
@@ -40,6 +41,26 @@ export function init(params: KodamaParams, app?: App<Element>) {
     pinia.use(piniaPluginPersistedstate)
     app.use(pinia)
 
+    // Tippy
+    app.use(
+        VueTippy,
+        // optional
+        {
+            directive: 'tooltip',
+            component: 'k-tooltip',
+            componentSingleton: 'k-tooltip-singleton',
+            defaultProps: {
+                placement: 'auto-end',
+                theme: 'kodama',
+                allowHTML: false,
+                animation: 'scale',
+                arrow: true,
+                hideOnClick: false,
+                appendTo: () => document.body
+            } // => Global default options * see all props
+        }
+    )
+
     // App Routes
     router(app, params.router.routes, params.router.beforeEach)
 
@@ -49,6 +70,7 @@ export function init(params: KodamaParams, app?: App<Element>) {
     // App Globals
     app.config.globalProperties.settings = params.settings
     app.config.globalProperties.$filters = filters
+    app.config.globalProperties.$dayjs = dayjs
 
     // App Provide/Inject
     app.provide('toast', toast)

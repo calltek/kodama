@@ -24,7 +24,7 @@ export const Template = (args) => ({
         return { props, selected };
     },
     template: `
-        <div class="w-full">
+        <div class="w-full h-full">
             <k-table v-bind="props" :selected="selected">
                 <template #client="{value}">
                     {{value}}
@@ -39,7 +39,7 @@ export const Template = (args) => ({
     `
 });
 
-<Meta title="Data Display/Table 🌟" component={KTable} argTypes={renderArgs(KTable)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
+<Meta title="Data Display/Table 🌟" component={KTable} argTypes={renderArgs(KTable)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10" style="height: 600px"><story /></div>' })]} />
 
 <SHead image="https://media0.giphy.com/media/sRFEa8lbeC7zbcIZZR/giphy.gif?cid=ecf05e47jh6eiz069xt4uoftz1vd8b3a7o84onzel84em9hf&rid=giphy.gif&ct=g">📋 KTable</SHead>
 

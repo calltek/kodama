@@ -5,7 +5,7 @@ import {
     QueryFilterFields
 } from '../../../../store/modules/query'
 import { KTableContext, KTableParams, KTableProps } from '../k-table.types'
-import cloneDeep from 'lodash.clonedeep'
+// import cloneDeep from 'lodash.clonedeep'
 
 export const params: KTableParams = reactive({
     page: 1,
@@ -118,7 +118,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         let filters = null
 
         if (props.requiredFilters) {
-            const requiredFilters = cloneDeep(props.requiredFilters)
+            const requiredFilters = structuredClone(props.requiredFilters)
 
             filters = mergeFilters(
                 requiredFilters,
@@ -192,7 +192,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         if (required && !custom) {
             return required
         } else if (!required && custom) {
-            return { [strict ? '$and' : '$or']: custom }
+            return { [strict ? '$and' : '$or']: [custom] }
         } else if (required && custom) {
             if (!['$and', '$or'].includes(Object.keys(required)[0])) {
                 required = { $and: [required] }

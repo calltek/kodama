@@ -18,6 +18,8 @@ export const Template = (args) => ({
 # KButton
 Con el componente `k-avatar` puedes formar el avatar de una persona de manera aleatoria. El avatar siempre será el mismo.
 
+Agradecimientos a [DiceBear](https://www.dicebear.com/styles/notionists-neutral) por la API y el trabajo realizado.
+
 <Story name="Default" parameters={renderParameters({showPanel: true})} args={{name:"Jon Doe"}}>
   {Template.bind({})}
 </Story>
@@ -37,6 +39,28 @@ Puedes definir el tamaño del avatar en `px`.
           <k-avatar :size="120" class="mr-4" name="Mery" />
           <k-avatar :size="160" class="mr-4" name="Adam" />
           <k-avatar :size="200" name="Luca" />
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Type**
+Puedes definir el tipo del avatar o dejarlo por defecto.
+
+<Canvas>
+  <Story name="Type" argTypes={renderArgs(KAvatar, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KAvatar },
+        template: `
+          <div class="flex flex-row gap-2">
+            <k-avatar :size="120" type="lorelei" class="mr-4" name="Jhon" bg-color="#f0f0f0" />
+            <k-avatar :size="120" type="notionists-neutral" class="mr-4" name="Jhon" bg-color="#f0f0f0" />
+            <k-avatar :size="120" type="notionists" class="mr-4" name="Jhon" bg-color="#f0f0f0" />
+            <k-avatar :size="120" type="micah" class="mr-4" name="Jhon" bg-color="#f0f0f0" />
+            <k-avatar :size="120" type="miniavs" name="Jhon" bg-color="#f0f0f0" />
+          </div>
         `,
       };
     }}
