@@ -102,7 +102,7 @@ export function renderArgs(
             }
 
             nprop.control = parseControl(prop, disabled)
-            nprop.type.name = parseControl(prop, disabled, true).type
+            nprop.type.name = parseControl(prop, disabled).type
 
             // Table types
             if (Array.isArray(prop.type)) {
