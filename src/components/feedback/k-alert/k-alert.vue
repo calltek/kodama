@@ -2,7 +2,7 @@
     <div v-show="!closed" :class="classes">
         <k-icon :icon="icon" :type="iconType" :size="iconSize" class="mr-2" />
 
-        <div>
+        <div class="w-full">
             <div v-if="title" class="font-bold">{{ title }}</div>
             <slot></slot>
         </div>

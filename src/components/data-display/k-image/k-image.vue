@@ -1,12 +1,6 @@
 <template>
     <div class="k-image" :style="style" :class="{ 'k-image-zoom': zoom }">
-        <img
-            ref="img"
-            :src="thumb"
-            data-zoom
-            :data-zoom-src="src"
-            :style="styleImg"
-        />
+        <img ref="img" :src="thumb" data-zoom :data-zoom-src="src" />
     </div>
 </template>
 
@@ -56,15 +50,6 @@
                 return s
             })
 
-            const styleImg = computed(() => {
-                const s: any = {}
-
-                s.maxHeight = `${props.size * 2}px`
-                s.maxWidth = `${props.size * 2}px`
-
-                return s
-            })
-
             onMounted(() => {
                 if (props.zoom)
                     mediumZoom(img.value, {
@@ -72,17 +57,17 @@
                     })
             })
 
-            return { img, style, styleImg, thumb }
+            return { img, style, thumb }
         }
     })
 </script>
 
 <style lang="scss">
     .k-image {
-        @apply overflow-hidden rounded-xl flex items-center justify-center transition-all aspect-square max-w-full;
+        @apply overflow-hidden rounded-xl flex items-center justify-center transition-all  max-w-full;
 
         img {
-            @apply h-full object-cover;
+            @apply object-cover aspect-square;
         }
 
         &.k-image-zoom:hover {

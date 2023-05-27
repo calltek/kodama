@@ -18,7 +18,7 @@
                 type: String as PropType<'fas' | 'fal' | 'fad' | 'far'>,
                 default: 'fad',
                 options: ['fas', 'fal', 'fad', 'far'],
-                control: 'inline-radio',
+                control: { type: 'inline-radio' },
                 description: 'Tipo de icono'
             },
             size: {

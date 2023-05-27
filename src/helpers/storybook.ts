@@ -39,24 +39,28 @@ type Control = {
     presetColors?: string[]
 }
 
-export function parseControl(props: any, disabled = false, onlyType = false) {
+export function parseControl(props: any, disabled = false) {
     const type = props.type
     const control = props.control || null
     const options = props.options || null
     const presetColors = props.presetColors || null
 
-    const data: Control = { type: 'text', disable: disabled }
+    let data: Control = { type: 'text', disable: disabled }
 
     if (type === Boolean) {
-        data.type = control || 'boolean'
+        data = control ? { type: control } : { type: 'boolean' }
     } else if (type === String) {
-        data.type = control || (options ? 'inline-radio' : 'text')
+        data = control
+            ? control
+            : options
+            ? { type: 'inline-radio' }
+            : { type: 'text' }
     } else if (type === Number) {
-        data.type = props.control || 'number'
+        data = control ? control : { type: 'number' }
     } else if (Array.isArray(type)) {
-        data.type = parseControl(type[0], disabled, true).toString()
+        data = parseControl(type[0], disabled)
     } else {
-        return 'text'
+        return { type: 'text' }
     }
 
     if (options) {
@@ -66,8 +70,6 @@ export function parseControl(props: any, disabled = false, onlyType = false) {
     if (presetColors) {
         data.presetColors = presetColors
     }
-
-    if (onlyType) return data.type
 
     return data
 }
@@ -100,7 +102,7 @@ export function renderArgs(
             }
 
             nprop.control = parseControl(prop, disabled)
-            nprop.type.name = parseControl(prop, disabled, true).toString()
+            nprop.type.name = parseControl(prop, disabled, true).type
 
             // Table types
             if (Array.isArray(prop.type)) {

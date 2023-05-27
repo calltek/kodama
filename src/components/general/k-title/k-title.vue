@@ -44,7 +44,7 @@
                 default: 1,
                 description: 'Define el tamaño del titulo.',
                 options: [1, 2, 3, 4, 5, 6],
-                control: 'inline-radio'
+                control: { type: 'inline-radio' }
             },
             uppercase: {
                 type: Boolean,

@@ -25,7 +25,7 @@ const Props = {
     },
     size: {
         type: String,
-        control: 'inline-radio',
+        control: { type: 'inline-radio' },
         options: ['xs', 'sm', 'md', 'lg', 'xl'],
         validator: (val: string) =>
             ['xs', 'sm', 'md', 'lg', 'xl'].includes(val),
@@ -35,7 +35,7 @@ const Props = {
     // Misc
     color: {
         type: String,
-        control: 'inline-radio',
+        control: { type: 'inline-radio' },
         options: colors,
         validator: (val: string) => colors.includes(val),
         default: 'primary',
@@ -74,7 +74,7 @@ const Props = {
     },
     iconType: {
         type: String,
-        control: 'inline-radio',
+        control: { type: 'inline-radio' },
         options: ['fas', 'far', 'fal', 'fad', 'fab'],
         validator: (val: string) =>
             ['fas', 'far', 'fal', 'fad', 'fab'].includes(val),

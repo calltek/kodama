@@ -32,7 +32,8 @@
             size: {
                 type: Number,
                 default: 120,
-                description: 'Tamaño del avatar'
+                description: 'Tamaño del avatar',
+                control: { type: 'range', min: 40, max: 200 }
             },
             square: {
                 type: Boolean,
@@ -48,7 +49,7 @@
                 default: '',
                 type: String,
                 description: 'Color de fondo del avatar',
-                control: 'color'
+                control: { type: 'color' }
             },
             tooltip: {
                 type: Boolean,
@@ -63,7 +64,27 @@
             type: {
                 type: String,
                 default: 'auto',
-                description: 'Define el tipo de avatar'
+                description: 'Define el tipo de avatar',
+                options: [
+                    'auto',
+                    'adventurer-neutral',
+                    'avataaars-neutral',
+                    'big-ears-neutral',
+                    'big-smile',
+                    'bottts-neutral',
+                    'croodles',
+                    'croodles-neutral',
+                    'initials',
+                    'lorelei',
+                    'lorelei-neutral',
+                    'micah',
+                    'miniavs',
+                    'notionists',
+                    'notionists-neutral',
+                    'open-peeps',
+                    'thumbs'
+                ],
+                control: { type: 'select' }
             }
         },
         setup(props) {

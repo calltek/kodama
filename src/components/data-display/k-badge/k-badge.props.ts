@@ -19,7 +19,7 @@ const Props = {
     },
     size: {
         type: String,
-        control: 'inline-radio',
+        control: { type: 'inline-radio' },
         options: ['xs', 'sm', 'md', 'lg'],
         validator: (val: string) => ['xs', 'sm', 'md', 'lg'].includes(val),
         default: 'md',
@@ -28,7 +28,7 @@ const Props = {
     // Misc
     color: {
         type: String,
-        control: 'inline-radio',
+        control: { type: 'select' },
         options: colors,
         validator: (val: string) => colors.includes(val),
         default: 'gray',

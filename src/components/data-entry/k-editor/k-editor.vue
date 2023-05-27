@@ -1,6 +1,13 @@
 <template>
-    <div v-if="editor" class="k-editor">
-        <div class="k-editor-content" :style="{ maxHeight: height }">
+    <div
+        v-if="editor"
+        class="k-editor"
+        :style="{
+            'max-height': `${maxHeight}px`,
+            'min-height': `${minHeight}px`
+        }"
+    >
+        <div class="k-editor-content">
             <editor-content :editor="editor" />
 
             <div
@@ -264,7 +271,11 @@
                 type: String,
                 default: 'Escribe algo...'
             },
-            height: {
+            maxHeight: {
+                type: Number,
+                default: 600
+            },
+            minHeight: {
                 type: Number,
                 default: 200
             }
@@ -364,7 +375,7 @@
 
 <style lang="scss">
     .k-editor {
-        @apply bg-white border border-gray-100 rounded-xl shadow-sm transition-all;
+        @apply bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 rounded-xl shadow-sm transition-all overflow-y-auto flex flex-col;
 
         &:focus-within {
             @apply border-primary;
@@ -375,7 +386,7 @@
         }
 
         .k-editor-content {
-            @apply p-5 overflow-y-auto;
+            @apply p-5 flex-1;
 
             * {
                 font-size: 14px;
@@ -441,18 +452,18 @@
             }
 
             .k-editor-mandatory {
-                @apply p-2 -mx-2 border border-transparent border-dashed hover:border-gray-300 rounded-xl mt-4 relative;
+                @apply p-2 -mx-2 border border-transparent border-dashed hover:border-gray-300 dark:hover:border-gray-700 rounded-xl mt-4 relative;
 
                 &:hover::before {
                     content: 'Contenido obligatorio';
 
-                    @apply text-gray-500 flex items-center justify-center font-bold absolute top-0 left-0 w-full h-full bg-white bg-opacity-90 rounded-xl cursor-not-allowed;
+                    @apply text-gray-500 flex items-center justify-center font-bold absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-900 bg-opacity-90 rounded-xl cursor-not-allowed;
                 }
             }
         }
 
         .k-editor-menu {
-            @apply flex flex-row border-t-2 border-gray-200 py-2 mx-5 gap-1;
+            @apply flex flex-row border-t-2 border-gray-200 py-2 mx-5 gap-1 sticky bottom-0 left-0 bg-white dark:bg-gray-900 dark:border-gray-700;
 
             .k-button.active {
                 @apply text-white bg-primary;

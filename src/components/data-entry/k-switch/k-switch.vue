@@ -55,7 +55,7 @@
             },
             color: {
                 type: String,
-                control: 'inline-radio',
+                control: { type: 'inline-radio' },
                 options: colors,
                 validator: (val: string) => colors.includes(val),
                 default: 'primary',
@@ -63,7 +63,7 @@
             },
             size: {
                 type: String,
-                control: 'inline-radio',
+                control: { type: 'inline-radio' },
                 options: ['xs', 'sm', 'md', 'lg', 'xl'],
                 validator: (val: string) =>
                     ['xs', 'sm', 'md', 'lg', 'xl'].includes(val),

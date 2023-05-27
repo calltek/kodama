@@ -50,7 +50,7 @@
             },
             color: {
                 type: String,
-                control: 'inline-radio',
+                control: { type: 'inline-radio' },
                 options: colors,
                 validator: (val: string) => colors.includes(val),
                 default: 'primary',
