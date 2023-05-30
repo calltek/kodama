@@ -2,6 +2,7 @@ const path = require('path')
 // const postcss = require('../postcss.config.js')
 // const { mergeConfig } = require('vite')
 const { VitePWA } = require('vite-plugin-pwa')
+const { viteStaticCopy } = require('vite-plugin-static-copy')
 
 const INVALID_CHAR_REGEX = /[\u0000-\u001F"#$&*+,:;<=>?[\]^`{|}\u007F_]/g
 const DRIVE_LETTER_REGEX = /^[a-z]:/i
@@ -73,6 +74,17 @@ module.exports = {
         }
 
         config.plugins.push(VitePWA({}))
+
+        config.plugins.push(
+            viteStaticCopy({
+                targets: [
+                    {
+                        src: './plugin.js',
+                        dest: './'
+                    }
+                ]
+            })
+        )
 
         // config.build.commonjsOptions = {
         //     ...config.build.commonjsOptions,

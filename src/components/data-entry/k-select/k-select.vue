@@ -1,91 +1,110 @@
 <template>
-    <div :class="classes">
-        <label v-if="hasLabel" :for="id">
-            <slot v-if="hasSlot('label')" name="label" />
+    <div :class="[classes]">
+        <label v-if="hasLabel" :for="uuid">
+            <slot v-if="hasSlot('default')" />
             <template v-else>{{ label }}</template>
 
             <span v-if="required" class="font-bold text-danger ml-1">*</span>
             <template v-if="firstError">
-                <k-tooltip hover :content="firstError">
+                <k-tooltip :content="firstError">
                     <k-icon icon="triangle-exclamation" class="ml-2" />
                 </k-tooltip>
             </template>
         </label>
 
-        <select
-            :id="id"
+        <multiselect
+            :id="uuid"
             v-model="model"
-            :required="required"
+            :options="options"
+            :close-on-select="fCloseOnSelect"
+            :placeholder="placeholder"
+            :label="labelBy"
+            :searchable="searchable"
+            :hide-selected="hideSelected"
+            :allow-empty="!required"
+            :show-labels="false"
+            :style="style"
             :disabled="disabled"
             :multiple="multiple"
-            :size="visibleOptions > 1 ? visibleOptions : undefined"
+            :track-by="trackBy"
+            :clear-on-select="clearOnSelect"
+            :max="max > 0 ? max : undefined"
+            :loading="loading"
+            :max-height="maxHeight > 0 ? maxHeight : undefined"
+            :show-no-results="show404"
+            :internal-search="!ajax"
+            :limit="limit > 0 ? limit : undefined"
+            tag-placeholder="Presiona enter para añadir"
+            :taggable="free"
+            @open="$emit('open')"
+            @close="$emit('close')"
+            @select="$emit('select', $event)"
+            @remove="$emit('remove', $event)"
+            @search-change="$emit('fetch', $event)"
+            @tag="addTag($event)"
         >
-            <k-select-option value="">{{ placeholder }}</k-select-option>
-            <slot></slot>
-        </select>
+            <template #singleLabel="{ option }">
+                <slot name="singleLabel" v-bind="{ option }"></slot>
+            </template>
+
+            <template #option="{ option, search }">
+                <slot name="option" v-bind="{ option, search }"></slot>
+            </template>
+
+            <template #maxElements>
+                Se alcanzó el nº máximo de elementos seleccionados
+            </template>
+
+            <template #noResult> Sin resultados </template>
+
+            <template #noOptions> No hay opciones disponibles </template>
+
+            <template #beforeList>
+                <slot name="beforeList"></slot>
+            </template>
+
+            <template #afterList>
+                <slot name="afterList"></slot>
+            </template>
+
+            <template #caret="{ toggle }">
+                <slot name="caret" v-bind="{ toggle }"></slot>
+            </template>
+
+            <template #placeholder>
+                <slot name="placeholder"></slot>
+            </template>
+
+            <template #tag="{ option, remove }">
+                <slot name="tag" v-bind="{ option, remove }"></slot>
+            </template>
+        </multiselect>
     </div>
 </template>
 
 <script lang="ts">
+    import { computed, defineComponent } from 'vue'
+    import Multiselect from 'vue-multiselect'
+    import 'vue-multiselect/dist/vue-multiselect.css'
+    import props from './k-select.props'
     import { uid } from '@/helpers/utils'
-    import { ErrorObject } from '@vuelidate/core'
-    import { computed, defineComponent, PropType } from 'vue'
 
     export default defineComponent({
         name: 'KSelect',
-        props: {
-            modelValue: {
-                type: [String, Number],
-                required: false,
-                default: '',
-                description: 'Valor del componente'
-            },
-            label: {
-                type: String,
-                default: ''
-            },
-            required: {
-                type: Boolean,
-                default: false
-            },
-            errors: {
-                type: Array as PropType<ErrorObject[]>,
-                required: false,
-                default: () => [],
-                description: 'Errores de validación'
-            },
-            size: {
-                type: String,
-                default: 'md',
-                options: ['xs', 'sm', 'md', 'lg']
-            },
-            placeholder: {
-                type: String,
-                required: false,
-                default: 'Selecciona una opción',
-                description: 'Texto explicativo'
-            },
-            disabled: {
-                type: Boolean,
-                default: false
-            },
-            multiple: {
-                type: Boolean,
-                default: false
-            },
-            autofocus: {
-                type: Boolean,
-                default: false
-            },
-            visibleOptions: {
-                type: Number,
-                default: 1
-            }
+        components: {
+            Multiselect
         },
-        emits: ['update:modelValue'],
+        props: props,
+        emits: [
+            'update:modelValue',
+            'open',
+            'close',
+            'select',
+            'remove',
+            'fetch'
+        ],
         setup(props, ctx) {
-            const id = uid()
-
+            const uuid = props.id || uid()
             const hasSlot = (name: string) => !!ctx.slots[name]
 
             const model = computed({
@@ -97,8 +116,36 @@
                 }
             })
 
+            const classes = computed(() => {
+                const classes = ['k-select', `k-select-${props.size}`]
+
+                if (props.errors.length > 0) {
+                    classes.push('k-select-danger')
+                } else if (props.status) {
+                    classes.push(`k-select-${props.status}`)
+                }
+
+                return classes
+            })
+
+            const fCloseOnSelect = computed(() => {
+                return props.closeOnSelect === 'auto'
+                    ? !props.multiple
+                    : props.closeOnSelect
+            })
+
+            const style = computed(() => {
+                const style: any = {}
+
+                if (props.width > 0) {
+                    style['width'] = props.width + 'px'
+                }
+
+                return style
+            })
+
             const hasLabel = computed(() => {
-                return props.label || hasSlot('label')
+                return props.label || hasSlot('default')
             })
 
             const firstError = computed(() => {
@@ -107,79 +154,34 @@
                 return error.toString()
             })
 
-            const classes = computed(() => {
-                const classes = ['k-select']
+            const addTag = (newTag: string) => {
+                const tag: any = {}
 
-                if (props.size) {
-                    classes.push(`k-select-${props.size}`)
+                tag[props.trackBy] = newTag
+                tag[props.labelBy] = newTag
+
+                if (Array.isArray(model.value)) {
+                    model.value.push(tag)
+                } else {
+                    model.value = tag
                 }
+            }
 
-                if (props.disabled) {
-                    classes.push('k-select-disabled')
-                }
-
-                return classes
-            })
-
-            return { id, hasLabel, hasSlot, firstError, classes, model }
+            return {
+                model,
+                classes,
+                hasLabel,
+                firstError,
+                uuid,
+                hasSlot,
+                style,
+                fCloseOnSelect,
+                addTag
+            }
         }
     })
 </script>
 
-<style scoped lang="scss">
-    .k-select {
-        label {
-            @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
-        }
-
-        select {
-            @apply bg-gray-50 border border-gray-300 text-gray-900 focus:ring-primary focus:border-primary block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary;
-        }
-
-        &.k-select-xs {
-            label {
-                @apply text-xs;
-            }
-
-            select {
-                @apply h-9 rounded-md pl-2 pr-6 py-1.5 text-xs;
-            }
-        }
-
-        &.k-select-sm {
-            label {
-                @apply text-sm;
-            }
-
-            select {
-                @apply h-10 rounded-md pl-2.5 pr-7 py-2 text-sm;
-            }
-        }
-
-        &.k-select-md {
-            label {
-                @apply text-base;
-            }
-
-            select {
-                @apply h-12 rounded-lg pl-3 pr-8 py-2.5 text-base;
-            }
-        }
-
-        &.k-select-lg {
-            label {
-                @apply text-lg;
-            }
-
-            select {
-                @apply h-14 rounded-xl pl-4 pr-9  py-3 text-lg;
-            }
-        }
-
-        &.k-select-disabled {
-            select {
-                @apply cursor-not-allowed;
-            }
-        }
-    }
+<style lang="scss">
+    @import './k-select.scss';
 </style>

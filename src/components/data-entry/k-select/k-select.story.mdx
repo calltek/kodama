@@ -7,15 +7,16 @@ import { ref } from 'vue'
 export const Template = (args) => ({
     components: { KSelect },
     setup() {
-      const model = ref(2);
-      return { args, model };
+      const model = ref();
+      const options = ref([
+        { value: 1, label: 'Opción 1' },
+        { value: 2, label: 'Opción 2' },
+        { value: 3, label: 'Opción 3' },
+      ]);
+      return { args, model, options };
     },
     template: `
-      <k-select v-model="model">
-        <k-select-option :value="1">Opción 1</k-select-option>
-        <k-select-option :value="2">Opción 2</k-select-option>
-        <k-select-option :value="3">Opción 3</k-select-option>
-      </k-select>
+      <k-card><k-select v-model="model" v-bind="args" :options="options" /></k-card>
     `
 });
 
@@ -24,9 +25,9 @@ export const Template = (args) => ({
 <SHead image="https://media2.giphy.com/media/SwImQhtiNA7io/giphy.gif?cid=ecf05e47z82yq5bzlbtacqrphv0r4tr1wtbmnhzeakchqa9a&rid=giphy.gif&ct=g">🐳 KSelect</SHead>
 
 # KInput
-Con el componente `k-select` dispondrás de un selector de toda la vida pero vitaminado.
+Con el componente `k-select` dispondrás de un selector de toda la vida pero vitaminado gracias al poder de (Vue Multiselect)[https://vue-multiselect.js.org/].
 
-<Story name="Default" parameters={renderParameters({showPanel: true})} args={{placeholder:'Placeholder'}}>
+<Story name="Default" parameters={renderParameters({showPanel: true})} args={{placeholder:'Selecciona una opción'}}>
   {Template.bind({})}
 </Story>
 
@@ -41,29 +42,120 @@ Puedes cambiar el tamaño del selector con la propiedad `size`
     {() => {
       return {
         components: { KSelect },
+        setup() {
+          const model = ref('');
+          const options = ref([
+            { value: 1, label: 'Opción 1' },
+            { value: 2, label: 'Opción 2' },
+            { value: 3, label: 'Opción 3' },
+          ]);
+          return { model, options };
+        },
         template: `
           <k-card>
-            <div class="flex flex-row gap-6">
-              <k-select size="xs">
-                <k-select-option value="1">Opción 1</k-select-option>
-                <k-select-option value="2">Opción 2</k-select-option>
-                <k-select-option value="3">Opción 3</k-select-option>
-              </k-select>
-              <k-select size="sm">
-                <k-select-option value="1">Opción 1</k-select-option>
-                <k-select-option value="2">Opción 2</k-select-option>
-                <k-select-option value="3">Opción 3</k-select-option>
-              </k-select>
-               <k-select size="md">
-                <k-select-option value="1">Opción 1</k-select-option>
-                <k-select-option value="2">Opción 2</k-select-option>
-                <k-select-option value="3">Opción 3</k-select-option>
-              </k-select>
-               <k-select size="lg">
-                <k-select-option value="1">Opción 1</k-select-option>
-                <k-select-option value="2">Opción 2</k-select-option>
-                <k-select-option value="3">Opción 3</k-select-option>
-              </k-select>
+            <div class="grid grid-cols-1 gap-6 w-96">
+              <k-select v-model="model" :options="options" size="xs" />
+              <k-select v-model="model" :options="options" size="sm" />
+              <k-select v-model="model" :options="options" size="md" />
+              <k-select v-model="model" :options="options" size="lg" />
+            </div>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Múltiple**
+Puedes cambiar el tamaño del selector con la propiedad `size`
+
+<Canvas>
+  <Story name="Multiple" argTypes={renderArgs(KSelect, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KSelect },
+        setup() {
+          const model = ref([]);
+          const options = ref([
+            { value: 1, label: 'Opción 1' },
+            { value: 2, label: 'Opción 2' },
+            { value: 3, label: 'Opción 3' },
+            { value: 4, label: 'Opción 4' },
+            { value: 5, label: 'Opción 5' },
+            { value: 6, label: 'Opción 6' },
+          ]);
+          return { model, options };
+        },
+        template: `
+          <k-card>
+            <div class="grid grid-cols-1 gap-6 w-96">
+              <k-select v-model="model" :options="options" multiple />
+            </div>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Libre**
+Puedes permitir que el usuario escriba sus propias etiquetas con la propiedad `free`
+
+<Canvas>
+  <Story name="Free" argTypes={renderArgs(KSelect, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KSelect },
+        setup() {
+          const model = ref([]);
+          const options = ref([
+            { value: 1, label: 'Opción 1' },
+            { value: 2, label: 'Opción 2' },
+            { value: 3, label: 'Opción 3' },
+            { value: 4, label: 'Opción 4' },
+            { value: 5, label: 'Opción 5' },
+            { value: 6, label: 'Opción 6' },
+          ]);
+          return { model, options };
+        },
+        template: `
+          <k-card>
+            <div class="grid grid-cols-1 gap-6 w-96">
+              <k-select v-model="model" :options="options" multiple free />
+            </div>
+          </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+
+
+## **Errores**
+Define una lista de errores del input. Se mostrará un icono de alerta con el primer error.
+
+<Canvas>
+  <Story name="Errors" argTypes={renderArgs(KSelect, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KSelect },
+        setup() {
+          const model = ref([]);
+          const options = ref([
+            { value: 1, label: 'Opción 1' },
+            { value: 2, label: 'Opción 2' },
+            { value: 3, label: 'Opción 3' },
+            { value: 4, label: 'Opción 4' },
+            { value: 5, label: 'Opción 5' },
+            { value: 6, label: 'Opción 6' },
+          ]);
+          return { model, options };
+        },
+        template: `
+          <k-card>
+            <div class="grid grid-cols-1 gap-6 w-96">
+              <k-select v-model="model" :options="options" :errors="errors" />
             </div>
           </k-card>
         `,

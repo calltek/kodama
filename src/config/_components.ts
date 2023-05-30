@@ -16,7 +16,7 @@ import KTextarea from '../components/data-entry/k-textarea/k-textarea.vue'
 import KCheckbox from '../components/data-entry/k-checkbox/k-checkbox.vue'
 import KDropzone from '../components/data-entry/k-dropzone/k-dropzone.vue'
 import KSelect from '../components/data-entry/k-select/k-select.vue'
-import KSelectOption from '../components/data-entry/k-select/k-select-option.vue'
+// import KSelectOption from '../components/data-entry/k-select/k-select-option.vue'
 import KInlineEditor from '../components/data-entry/k-inline-editor/k-inline-editor.vue'
 import KEditor from '../components/data-entry/k-editor/k-editor.vue'
 
@@ -79,7 +79,7 @@ export default (
     app.component('KCheckbox', KCheckbox)
     app.component('KDropzone', KDropzone)
     app.component('KSelect', KSelect)
-    app.component('KSelectOption', KSelectOption)
+    // app.component('KSelectOption', KSelectOption)
     app.component('KInlineEditor', KInlineEditor)
     app.component('KEditor', KEditor)
 
