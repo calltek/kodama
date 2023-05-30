@@ -1,2 +1,0 @@
-var a=Object.defineProperty;var t=(e,o)=>a(e,"name",{value:o,configurable:!0});import{d as r,o as s,a as c}from"./vue.esm-bundler.e9a14992.js";import{_ as p}from"./+plugin-vue+export-helper.ed6a1c48.js";const n=r({setup(){return{}}});function d(e,o,_,f,i,l){return s(),c("div",null,"ew3ee")}t(d,"_sfc_render");const x=p(n,[["render",d]]);n.__docgenInfo={exportName:"default",displayName:"changelog",description:"",tags:{}};export{x as default};
-//# sourceMappingURL=changelog.439eaa9b.js.map

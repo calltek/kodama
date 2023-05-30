@@ -1,0 +1,2 @@
+var s=Object.defineProperty;var r=(e,t)=>s(e,"name",{value:t,configurable:!0});import{d as n,m as a,l as c}from"./vue.esm-bundler.ad0aee8d.js";import{_ as p}from"./+plugin-vue+export-helper.ed6a1c48.js";const o=n({setup(){return{}}});function i(e,t,d,_,f,m){return c(),a("div")}r(i,"_sfc_render");const x=p(o,[["render",i]]);o.__docgenInfo={exportName:"default",displayName:"register",description:"",tags:{}};export{x as default};
+//# sourceMappingURL=register.398e164c.js.map
