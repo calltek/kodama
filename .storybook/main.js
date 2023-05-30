@@ -73,18 +73,18 @@ module.exports = {
             include: ['tailwind.config']
         }
 
-        config.plugins.push(VitePWA({}))
+        // config.plugins.push(VitePWA({}))
 
-        config.plugins.push(
-            viteStaticCopy({
-                targets: [
-                    {
-                        src: './plugin.js',
-                        dest: './'
-                    }
-                ]
-            })
-        )
+        // config.plugins.push(
+        //     viteStaticCopy({
+        //         targets: [
+        //             {
+        //                 src: './plugin.js',
+        //                 dest: './'
+        //             }
+        //         ]
+        //     })
+        // )
 
         // config.build.commonjsOptions = {
         //     ...config.build.commonjsOptions,
