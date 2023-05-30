@@ -5,8 +5,7 @@
         "moduleResolution": "Node",
         "allowSyntheticDefaultImports": true,
         "paths": {
-            "@/*": ["./src/*"],
-            "tailwind.config": ["./tailwind.config.js"],
+            "@/*": ["./src/*"]
         }
     },
     "include": ["vite.config.ts"],

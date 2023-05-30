@@ -14,8 +14,7 @@
         "skipLibCheck": true,
         "types": ["vite/client", "vite-plugin-pwa/client"],
         "paths": {
-            "@/*": ["./src/*"],
-            "tailwind.config": ["./tailwind.config.js"],
+            "@/*": ["./src/*"]
         }
     },
     "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

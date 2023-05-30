@@ -20,7 +20,8 @@
         "url": "git+https://github.com/50l3r/kodama-ui.git"
     },
     "files": [
-        "dist"
+        "dist",
+        "plugin.js"
     ],
     "main": "./dist/kodama.umd.js",
     "module": "./dist/kodama.es.js",
@@ -32,7 +33,7 @@
             "require": "./dist/kodama.umd.js"
         },
         "./style": "./dist/style.css",
-        "./plugin": "./dist/plugin.js"
+        "./plugin.js": "./plugin.js"
     },
     "scripts": {
         "build": "vue-tsc --noEmit && vite build",

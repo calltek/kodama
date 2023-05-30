@@ -1,4 +1,4 @@
-const KodamaPlugin = require('kodama-ui/plugin')
+const KodamaPlugin = require('kodama-ui/plugin.js')
 
 module.exports = {
     content: [
