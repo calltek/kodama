@@ -36,6 +36,7 @@
             :limit="limit > 0 ? limit : undefined"
             tag-placeholder="Presiona enter para añadir"
             :taggable="free"
+            :show-no-options="showNoOptions"
             @open="$emit('open')"
             @close="$emit('close')"
             @select="$emit('select', $event)"
@@ -101,7 +102,8 @@
             'close',
             'select',
             'remove',
-            'fetch'
+            'fetch',
+            'tag'
         ],
         setup(props, ctx) {
             const uuid = props.id || uid()
@@ -165,6 +167,8 @@
                 } else {
                     model.value = tag
                 }
+
+                ctx.emit('tag', newTag)
             }
 
             return {

@@ -1,3 +1,4 @@
+import { ErrorObject } from '@vuelidate/core'
 import { ExtractPropTypes, PropType } from 'vue'
 
 const Props = {
@@ -8,11 +9,13 @@ const Props = {
     },
     options: {
         type: Array,
-        default: () => []
+        default: () => [],
+        description: 'Array de opciones a seleccionar'
     },
     placeholder: {
         type: String,
-        default: 'Selecciona una opción'
+        default: 'Selecciona una opción',
+        description: 'Placeholder del input'
     },
     closeOnSelect: {
         type: [String, Boolean],
@@ -39,7 +42,7 @@ const Props = {
         default: 'label'
     },
     errors: {
-        type: Array as PropType<any>,
+        type: Array as PropType<ErrorObject[]>,
         required: false,
         default: () => [],
         description: 'Errores de validación'
@@ -111,6 +114,10 @@ const Props = {
     free: {
         type: Boolean,
         default: false
+    },
+    showNoOptions: {
+        type: Boolean,
+        default: true
     }
 }
 
