@@ -4,7 +4,7 @@
     }
 
     .multiselect__tags {
-        @apply min-h-0 bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:text-white;
+        @apply min-h-0 bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:text-white pr-10;
 
         // input {
         //     @apply w-full text-gray-500 outline-none pr-4 bg-transparent;
@@ -124,7 +124,7 @@
         }
 
         .multiselect__tags {
-            @apply rounded-md min-h-9 px-2 py-1.5 text-xs;
+            @apply rounded-md min-h-9 pl-2 py-1.5 text-xs;
 
             .multiselect__input {
                 @apply mt-0.5 text-xs;
@@ -163,7 +163,7 @@
         }
 
         .multiselect__tags {
-            @apply rounded-md min-h-10 px-2.5 py-2 text-sm;
+            @apply rounded-md min-h-10 pl-2.5 py-2 text-sm;
 
             .multiselect__input,
             .multiselect__single {
@@ -199,7 +199,7 @@
         }
 
         .multiselect__tags {
-            @apply rounded-lg min-h-12 px-3 py-2.5 text-base;
+            @apply rounded-lg min-h-12 pl-3 py-2.5 text-base;
 
             .multiselect__input,
             .multiselect__single {
@@ -235,7 +235,7 @@
         }
 
         .multiselect__tags {
-            @apply rounded-xl min-h-14 px-4 py-3 text-lg;
+            @apply rounded-xl min-h-14 pl-4 py-3 text-lg;
 
             .multiselect__input,
             .multiselect__single {

@@ -7,7 +7,7 @@ import { ref } from 'vue'
 export const Template = (args) => ({
     components: { KSelect },
     setup() {
-      const model = ref();
+      const model = ref(1);
       const options = ref([
         { value: 1, label: 'Opción 1' },
         { value: 2, label: 'Opción 2' },
@@ -150,14 +150,70 @@ Define una lista de errores del input. Se mostrará un icono de alerta con el pr
             { value: 5, label: 'Opción 5' },
             { value: 6, label: 'Opción 6' },
           ]);
-          return { model, options };
+          const errors = ref([{$message: 'Error 1'}]);
+          return { model, options, errors };
         },
         template: `
           <k-card>
             <div class="grid grid-cols-1 gap-6 w-96">
-              <k-select v-model="model" :options="options" :errors="errors" />
+              <k-select v-model="model" :options="options" :errors="errors" label="Selector" />
             </div>
           </k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+
+## **Tipos**
+
+<Canvas>
+  <Story name="Tipos" argTypes={renderArgs(KSelect, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KSelect },
+        setup() {
+          const model1 = ref(2);
+          const model2 = ref([3]);
+          const model3 = ref("test");
+          const model4 = ref(["test"]);
+          const options = ref([
+            { value: 1, label: 'Opción 1' },
+            { value: 2, label: 'Opción 2' },
+            { value: 3, label: 'Opción 3' },
+            { value: 4, label: 'Opción 4' },
+            { value: 5, label: 'Opción 5' },
+            { value: 6, label: 'Opción 6' },
+          ]);
+          return { model1, model2, model3, model4, options };
+        },
+        template: `
+          <div class="flex flex-col gap-8">
+          <k-card>
+            <div class="grid grid-cols-1 gap-6 w-96">
+              {{model1}}
+              <k-select v-model="model1" :options="options" label="Simple"  />
+            </div>
+          </k-card>
+          <k-card> 
+            <div class="grid grid-cols-1 gap-6 w-96">
+              {{model2}}
+              <k-select v-model="model2" :options="options" label="Multiple" multiple />
+            </div>
+          </k-card>
+          <k-card>
+            <div class="grid grid-cols-1 gap-6 w-96">
+              {{model3}}
+              <k-select v-model="model3" :options="options" label="Simple FREE"  free />
+            </div>
+          </k-card>
+          <k-card>
+            <div class="grid grid-cols-1 gap-6 w-96">
+              {{model4}}
+              <k-select v-model="model4" :options="options" label="Multiple FREE" multiple free />
+            </div>
+          </k-card>
+          </div>
         `,
       };
     }}

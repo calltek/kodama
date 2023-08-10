@@ -1,7 +1,7 @@
 import { ErrorObject } from '@vuelidate/core'
 import { ExtractPropTypes, PropType } from 'vue'
 
-export const modes = ['day', 'month', 'year']
+export const modes = ['day', 'month', 'year', 'auto']
 
 export type PresetRanges = {
     label: string
@@ -9,14 +9,34 @@ export type PresetRanges = {
     style?: Record<string, string>
 }
 
+type DateModelSingle = Date | string
+type DateModelRange = Date[] | string[]
+type DateModelMonth = { month: number | string; year: number | string }
+type DateModelMonthRange = DateModelMonth[]
+type DateModelTime = {
+    hours: number | string
+    minutes: number | string
+    seconds?: number | string
+}
+type DateModelTimeRange = DateModelTime[]
+type DateModelWeek = [Date, Date] | [string, string]
+export type DateModel =
+    | DateModelSingle
+    | DateModelRange
+    | DateModelMonth
+    | DateModelMonthRange
+    | DateModelTime
+    | DateModelTimeRange
+    | DateModelWeek
+
 const Props = {
     modelValue: {
-        type: [Array, String] as PropType<string[] | string>,
+        type: [Array, String, Object, Date] as PropType<DateModel>,
         required: false,
         description: 'Valor del componente'
     },
     value: {
-        type: [Array, String] as PropType<string[] | string>,
+        type: [Array, String, Object, Date] as PropType<DateModel>,
         required: false,
         description: 'Valor del componente'
     },
@@ -45,6 +65,11 @@ const Props = {
         required: false,
         default: () => [],
         description: 'Errores de validación'
+    },
+    format: {
+        type: String,
+        default: 'yyyy-MM-dd',
+        description: 'Formato de fecha'
     },
     /////////////////
     // MISC
@@ -81,6 +106,13 @@ const Props = {
         default: '',
         options: ['warning', 'success', 'danger'],
         description: 'Color de estado del input'
+    },
+    mode: {
+        type: String,
+        default: 'auto',
+        options: modes,
+        validator: (val: string) => modes.includes(val),
+        description: 'Modo de visualización del calendario'
     },
     /////////////////
     // INPUT STYLE

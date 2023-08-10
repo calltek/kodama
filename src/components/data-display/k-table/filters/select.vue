@@ -30,8 +30,15 @@
             </k-dropdown-menu>
         </template>
     </k-dropdown>
-    <k-select v-else size="sm">
-        <k-select-option
+    <k-select
+        v-else
+        size="sm"
+        :option="options"
+        :close-on-select="true"
+        track-by="value"
+        label-by="title"
+    >
+        <!-- <k-select-option
             v-for="(o, i) in options"
             :key="i"
             :value="o.value"
@@ -39,7 +46,14 @@
         >
             <k-icon v-if="o.icon" class="mr-2" :icon="o.icon" />
             {{ o.title }}
-        </k-select-option>
+        </k-select-option> -->
+
+        <template #option="{ option }">
+            <div @click="filter('$eq', option.value)">
+                <k-icon v-if="option.icon" class="mr-2" :icon="option.icon" />
+                {{ option.title }}asdasd
+            </div>
+        </template>
     </k-select>
 </template>
 

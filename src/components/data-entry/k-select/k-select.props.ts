@@ -3,7 +3,7 @@ import { ExtractPropTypes, PropType } from 'vue'
 
 const Props = {
     modelValue: {
-        type: [Object, Array, String, Number],
+        type: [Array, String, Number],
         default: () => [],
         description: 'Valor del componente'
     },

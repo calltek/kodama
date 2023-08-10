@@ -111,10 +111,100 @@
 
             const model = computed({
                 get() {
-                    return props.modelValue
+                    if (
+                        props.modelValue &&
+                        typeof props.modelValue === 'object'
+                    ) {
+                        //check if value is array
+                        if (Array.isArray(props.modelValue)) {
+                            return props.modelValue.map((item: any) => {
+                                if (item && typeof item === 'object') {
+                                    return {
+                                        label: item[props.labelBy],
+                                        value: item[props.trackBy]
+                                    }
+                                } else {
+                                    const option: any = props.options.find(
+                                        (option: any) =>
+                                            option[props.trackBy].toString() ===
+                                            item.toString()
+                                    )
+
+                                    if (option) {
+                                        return {
+                                            label: option[props.labelBy],
+                                            value: item
+                                        }
+                                    } else {
+                                        return {
+                                            label: item,
+                                            value: item
+                                        }
+                                    }
+                                }
+                            })
+                        } else {
+                            return {
+                                label: props.modelValue[props.labelBy],
+                                value: props.modelValue[props.trackBy]
+                            }
+                        }
+                    } else {
+                        //find label by value
+                        const option: any = props.options.find(
+                            (option: any) =>
+                                option[props.trackBy].toString() ===
+                                props.modelValue.toString()
+                        )
+
+                        if (option) {
+                            return {
+                                label: option[props.labelBy],
+                                value: props.modelValue
+                            }
+                        } else {
+                            return {
+                                label: props.modelValue,
+                                value: props.modelValue
+                            }
+                        }
+                    }
                 },
                 set(value) {
-                    ctx.emit('update:modelValue', value)
+                    //check if value is object
+                    if (value && typeof value === 'object') {
+                        //check if value is array
+                        if (Array.isArray(value)) {
+                            //check if value is empty
+                            if (value.length > 0) {
+                                return ctx.emit(
+                                    'update:modelValue',
+                                    value.map((item: any) => {
+                                        if (item && typeof item === 'object') {
+                                            return item[props.trackBy]
+                                        } else {
+                                            return item
+                                        }
+                                    })
+                                )
+                            } else {
+                                return []
+                            }
+                        } else {
+                            //check if value is empty
+                            if (Object.keys(value).length > 0) {
+                                return ctx.emit(
+                                    'update:modelValue',
+                                    value[props.trackBy as keyof typeof value]
+                                )
+                            } else {
+                                return ctx.emit('update:modelValue', null)
+                            }
+                        }
+                    } else {
+                        console.log('talle')
+                        ctx.emit('update:modelValue', value)
+                    }
                 }
             })
 
@@ -163,7 +253,7 @@
                 tag[props.labelBy] = newTag
 
                 if (Array.isArray(model.value)) {
-                    model.value.push(tag)
+                    model.value = [...model.value, tag]
                 } else {
                     model.value = tag
                 }

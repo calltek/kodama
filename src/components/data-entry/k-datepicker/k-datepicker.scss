@@ -220,4 +220,24 @@ $dp__time_font_size: 2rem !default; // font size in the time picker
         width: auto !important;
         @apply bg-gray-100 border-t border-t-gray-200;
     }
+
+    // MONTH MODE
+    .dp__month_year_row {
+        .dp__month_picker_header {
+            @apply font-bold text-xl;
+        }
+
+        .dp__overlay_cell,
+        .dp__overlay_cell_active {
+            @apply text-lg font-semibold uppercase;
+        }
+
+        .dp__overlay_cell {
+            @apply text-gray-700;
+        }
+
+        .dp__overlay_cell_active {
+            @apply text-white;
+        }
+    }
 }

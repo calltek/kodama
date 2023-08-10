@@ -17,7 +17,6 @@
             ref="dp"
             v-model="model"
             menu-class-name="k-datepicker-menu"
-            @update:modelValue="onChange"
         >
             <template #input-icon>
                 <k-icon icon="calendar" />
@@ -58,8 +57,14 @@
             </template>
 
             <template #action-preview="{ value }">
-                <k-date :value="value" />
-                <!-- {{ value }} -->
+                <slot
+                    v-if="hasSlot('action-preview')"
+                    name="action-preview"
+                    v-bind="value"
+                >
+                </slot>
+
+                <k-date v-else :value="value" />
             </template>
 
             <template #action-select>
@@ -95,7 +100,7 @@
     import { dayjs } from '../../../plugins'
     import Datepicker from '@vuepic/vue-datepicker'
 
-    import props from './k-datepicker.props'
+    import props, { DateModel } from './k-datepicker.props'
     import { parseWrapperClasses } from './k-datepicker.utils'
 
     export default defineComponent({
@@ -114,19 +119,12 @@
 
             const model = computed({
                 get() {
-                    const data: string | string[] =
+                    const data: DateModel =
                         props.modelValue || value.value || ''
                     return data
                 },
                 set(val) {
-                    if (props.modelValue) {
-                        ctx.emit('update:modelValue', val)
-                        value.value = val
-                    } else {
-                        value.value = val
-                    }
-
-                    ctx.emit('change', val)
+                    onChange(val)
                 }
             })
 
@@ -134,13 +132,10 @@
                 return props.label || hasSlot('default')
             })
 
-            const onChange = (newVal: string | string[]) => {
-                if (props.modelValue) {
-                    ctx.emit('update:modelValue', newVal)
-                } else {
-                    value.value = newVal
-                }
+            const onChange = (newVal: DateModel) => {
+                value.value = newVal
 
+                ctx.emit('update:modelValue', newVal)
                 ctx.emit('change', newVal)
             }
 
@@ -165,7 +160,7 @@
 
             const args = computed(() => {
                 const opts: Record<string, any> = {
-                    format: 'yyyy-MM-dd',
+                    format: props.format,
                     modelType: 'format',
                     modeHeight: props.height,
                     selectText: 'Aceptar',
@@ -267,18 +262,17 @@
                     opts.weekPicker = true
                 }
 
-                // if (props.mode === 'time') {
-                //     opts.presetRanges = []
-                //     opts.timePicker = true
-                // } else if (props.mode === 'month') {
-                //     opts.presetRanges = []
-                //     opts.monthPicker = true
-                //     opts.format = 'MM'
-                // } else if (props.mode === 'year') {
-                //     opts.presetRanges = []
-                //     opts.format = 'yyyy'
-                //     opts.yearPicker = true
-                // }
+                if (props.mode === 'time') {
+                    opts.presetRanges = []
+                    opts.timePicker = true
+                } else if (props.mode === 'month') {
+                    opts.presetRanges = []
+                    opts.monthPicker = true
+                } else if (props.mode === 'year') {
+                    opts.presetRanges = []
+
+                    opts.yearPicker = true
+                }
 
                 return opts
             })

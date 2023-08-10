@@ -1,40 +1,47 @@
 <template>
-    <div id="k-layout" class="flex bg-sidebar">
-        <div
-            class="py-4 px-4 flex flex-row items-center dark:bg-gray-800 bg-white w-full rounded-tl-3xl h-16 overflow-hidden text-gray-800 dark:text-gray-200"
-        >
-            <div class="flex justify-center flex-row">
-                <div id="k-layout-title">
-                    <k-title :size="5" class="" bolder uppercase>
-                        {{ pageTitle }}
-                    </k-title>
+    <k-loading
+        :active="loading"
+        :fullpage="loadingFullpage"
+        overlay-classes="rounded-tl-3xl"
+        class="flex-1 flex flex-col"
+    >
+        <div id="k-layout" class="flex bg-sidebar">
+            <div
+                class="py-4 px-4 flex flex-row items-center dark:bg-gray-800 bg-white w-full rounded-tl-3xl h-16 overflow-hidden text-gray-800 dark:text-gray-200"
+            >
+                <div class="flex justify-center flex-row">
+                    <div id="k-layout-title">
+                        <k-title :size="5" class="" bolder uppercase>
+                            {{ pageTitle }}
+                        </k-title>
+                    </div>
+                </div>
+
+                <div
+                    class="hidden lg:flex border-l flex-1 border-gray-100 dark:border-gray-700 ml-5 pl-5 font-semibold items-center"
+                >
+                    <slot name="topbar"> </slot>
+                </div>
+
+                <div
+                    class="flex lg:hidden border-l flex-1 border-gray-100 dark:border-gray-700 ml-5 pl-5 font-semibold items-center"
+                >
+                    <slot name="topbar-mobile"> </slot>
                 </div>
             </div>
+        </div>
 
-            <div
-                class="hidden lg:flex border-l flex-1 border-gray-100 dark:border-gray-700 ml-5 pl-5 font-semibold items-center"
-            >
-                <slot name="topbar"> </slot>
+        <div id="k-content" class="flex flex-1 flex-col p-5 overflow-x-auto">
+            <div class="flex flex-1">
+                <slot></slot>
             </div>
 
-            <div
-                class="flex lg:hidden border-l flex-1 border-gray-100 dark:border-gray-700 ml-5 pl-5 font-semibold items-center"
-            >
-                <slot name="topbar-mobile"> </slot>
+            <div class="mt-4 -mb-5 -mx-5">
+                <slot v-if="hasSlot('footer')" name="footer"></slot>
+                <k-footer v-else />
             </div>
         </div>
-    </div>
-
-    <div id="k-content" class="flex flex-1 flex-col p-5 overflow-x-auto">
-        <div class="flex flex-1">
-            <slot></slot>
-        </div>
-
-        <div class="mt-4 -mb-5 -mx-5">
-            <slot v-if="hasSlot('footer')" name="footer"></slot>
-            <k-footer v-else />
-        </div>
-    </div>
+    </k-loading>
 </template>
 
 <script lang="ts">
@@ -60,6 +67,14 @@
             },
             breads: {
                 type: [Array, Boolean] as PropType<Bread[] | boolean>,
+                default: false
+            },
+            loading: {
+                type: Boolean,
+                default: false
+            },
+            loadingFullpage: {
+                type: Boolean,
                 default: false
             }
         },

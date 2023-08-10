@@ -8,10 +8,13 @@
             <div
                 v-if="active"
                 class="flex z-50 top-0 left-0 w-full h-full items-center justify-center bg-white bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-80 cursor-progress"
-                :class="{
-                    fixed: fullpage,
-                    absolute: !fullpage
-                }"
+                :class="[
+                    {
+                        fixed: fullpage,
+                        absolute: !fullpage,
+                        [overlayClasses]: true
+                    }
+                ]"
             >
                 <k-icon
                     icon="spinner-third"
@@ -57,6 +60,10 @@
                 type: Boolean,
                 default: false,
                 description: 'Show the loader as full page'
+            },
+            overlayClasses: {
+                type: String,
+                default: ''
             }
         },
         setup() {
