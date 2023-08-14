@@ -266,7 +266,8 @@
         defineComponent,
         onBeforeUnmount,
         onMounted,
-        ref
+        ref,
+        watch
     } from 'vue'
 
     import { Editor, EditorContent, BubbleMenu } from '@tiptap/vue-3'
@@ -336,13 +337,6 @@
         setup(props, ctx) {
             const editor: any = ref()
             const html = ref(props.modelValue)
-
-            const model = computed({
-                get: () => props.modelValue,
-                set: (value) => {
-                    ctx.emit('update:modelValue', value)
-                }
-            })
 
             const mandatoryHtml = computed(() => {
                 if (props.mandatory) {
@@ -443,9 +437,18 @@
                 editor.value?.destroy()
             })
 
+            watch(
+                () => props.modelValue,
+                (value) => {
+                    if (value !== html.value) {
+                        html.value = value
+                        editor.value?.commands.setContent(value)
+                    }
+                }
+            )
+
             return {
                 editor,
-                model,
                 mandatoryHtml,
                 addImage,
                 firstError,

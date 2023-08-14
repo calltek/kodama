@@ -1,5 +1,5 @@
 <template>
-    <li>
+    <li :class="{ selected: selected }">
         <slot></slot>
     </li>
 </template>
@@ -9,6 +9,12 @@
 
     export default defineComponent({
         name: 'KDropdownMenu',
+        props: {
+            selected: {
+                type: Boolean,
+                default: false
+            }
+        },
         setup() {
             return {}
         }

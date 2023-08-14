@@ -128,10 +128,6 @@
                 @apply w-1.5 h-1.5;
             }
 
-            &::-webkit-scrollbar-thumb {
-                @apply rounded-lg;
-            }
-
             &::-webkit-scrollbar-corner {
                 background: rgba(0, 0, 0, 0);
             }

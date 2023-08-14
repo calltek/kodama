@@ -67,5 +67,13 @@ export default {
     cardClasses: {
         type: [String, Array],
         default: () => []
+    },
+    pagination: {
+        type: String as PropType<'infinite' | 'manual'>,
+        default: 'infinite'
+    },
+    show404: {
+        type: Boolean,
+        default: true
     }
 }

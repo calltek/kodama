@@ -23,6 +23,7 @@
             <k-dropdown-menu
                 v-for="(o, i) in options"
                 :key="i"
+                :selected="active === o.value"
                 @click="filter('$eq', o.value)"
             >
                 <k-icon v-if="o.icon" class="mr-2" :icon="o.icon" />

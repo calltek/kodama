@@ -1,5 +1,11 @@
 <template>
-    <div :id="id" class="k-table">
+    <div
+        :id="id"
+        class="k-table"
+        :class="{
+            'k-table-infinite': pagination === 'infinite'
+        }"
+    >
         <div
             v-if="header"
             class="k-table-header"
@@ -336,14 +342,34 @@
                     </tr>
                 </template>
             </div>
+
+            <div
+                v-if="enable404 && !loading && data.length <= 0"
+                class="k-table-404"
+            >
+                <k-icon icon="binary-slash" type="fad" class="mb-6 text-6xl" />
+
+                <k-title tag="h3" :size="4" bold center class="text-gray-600">
+                    Sin resultados
+                </k-title>
+
+                <k-title tag="h4" :size="6" center class="text-gray-600">
+                    Prueba con una consulta diferente
+                </k-title>
+            </div>
         </div>
 
         <div v-if="isMore" class="card-footer text-center border-0 mt-8">
             <k-table-limit
                 :loading="loading"
                 :value="params.limit"
+                :type="pagination"
+                :page="params.page"
+                :total="total"
                 @limit="limit"
-                @next-page="loadMore"
+                @load-more="loadMore(false)"
+                @next="loadMore(true)"
+                @prev="loadLess(true)"
             />
         </div>
 
@@ -520,10 +546,8 @@
                 populateChecks,
                 isCheckedAll
             } = useCheck(props)
-            const { isMore, loadMore, busy, data, refresh } = useFetch(
-                ctx,
-                props
-            )
+            const { isMore, loadMore, loadLess, busy, data, refresh } =
+                useFetch(ctx, props)
             const {
                 order,
                 loadStoreParams,
@@ -569,44 +593,9 @@
                 }
             }
 
-            // const setSize = () => {
-            //     var i = 0
-            //     var tb2 = document.querySelector(`#${id} table.k-table-content`)
-            //     var tb1 = document.querySelector(`#${id} table.k-table-head`)
-
-            //     if (tb2 && tb1) {
-            //         var tds =
-            //             tb2.querySelectorAll<HTMLElement>('tr:first-child td')
-            //         var ths =
-            //             tb1.querySelectorAll<HTMLElement>('tr:first-child th')
-
-            //         tds.forEach(function (td) {
-            //             const thWidth = ths[i].offsetWidth
-            //             const tdWidth = td.offsetWidth
-
-            //             if (thWidth > tdWidth) {
-            //                 console.log('pasa', thWidth, tdWidth)
-            //                 td.style.minWidth = thWidth + 'px'
-            //             } else {
-            //                 ths[i].style.minWidth = tdWidth + 'px'
-            //             }
-
-            //             // ths[i].style.width = td.offsetWidth + 'px'
-            //             i++
-            //         })
-            //     }
-            // }
-
             onMounted(() => {
                 enable404.value = true
                 ctx.emit('fetch', query.value)
-
-                // Sync th width with td
-                // window.addEventListener('resize', setSize)
-
-                // setTimeout(() => {
-                //     setSize()
-                // }, 1000)
             })
 
             return {
@@ -623,6 +612,7 @@
                 isCheckedAll,
                 isMore,
                 loadMore,
+                loadLess,
                 isRowOpen,
                 toggleRow,
                 params,
@@ -645,7 +635,7 @@
 
 <style lang="scss" scoped>
     .k-table {
-        @apply w-full h-full flex flex-col;
+        @apply w-full flex flex-col;
 
         .k-table-header {
             @apply px-4 py-2 mb-5 flex flex-row rounded-xl bg-white dark:bg-gray-800 select-none;
@@ -665,7 +655,7 @@
         }
 
         .k-table-body {
-            @apply rounded-xl bg-white dark:bg-gray-800 px-4 pb-2 pt-0 relative overflow-auto flex-auto h-0 min-h-0;
+            @apply rounded-xl bg-white dark:bg-gray-800 px-4 pb-2 pt-0 relative overflow-x-auto;
 
             // CLEAN MODE
             &.k-table-body-clean {
@@ -692,17 +682,26 @@
                 }
             }
 
-            &::-webkit-scrollbar {
-                @apply w-2 h-2;
+            .k-table-404 {
+                @apply flex w-full flex-col items-center justify-center p-8;
             }
 
-            &::-webkit-scrollbar-thumb {
-                @apply rounded-lg;
+            &::-webkit-scrollbar {
+                @apply w-2 h-2;
             }
 
             &::-webkit-scrollbar-corner {
                 background: rgba(0, 0, 0, 0);
             }
+        }
+    }
+
+    .k-table.k-table-infinite {
+        .k-table {
+            @apply h-full;
+        }
+        .k-table-body {
+            @apply overflow-auto h-0 min-h-0 flex-auto;
         }
     }
 </style>

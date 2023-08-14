@@ -13,10 +13,20 @@ export default function (ctx: KTableContext, props: KTableProps): any {
     })
 
     // Load more results
-    const loadMore = () => {
+    const loadMore = (reset: boolean) => {
         if (isMore.value) {
             params.page += 1
-            params.reset = false
+            params.reset = reset
+
+            ctx.emit('fetch', query.value)
+        }
+    }
+
+    // Load more results
+    const loadLess = (reset: boolean) => {
+        if (isMore.value && params.page > 1) {
+            params.page -= 1
+            params.reset = reset
 
             ctx.emit('fetch', query.value)
         }
@@ -43,5 +53,5 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         ctx.emit('fetch', query.value)
     }
 
-    return { isMore, loadMore, busy, data, refresh }
+    return { isMore, loadMore, loadLess, busy, data, refresh }
 }

@@ -24,6 +24,10 @@
 
             li {
                 @apply border-b border-gray-200 dark:border-gray-600 last:border-0  dark:bg-gray-700 bg-white block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer font-medium shadow select-none;
+
+                &.selected {
+                    @apply bg-gray-100 dark:bg-gray-600;
+                }
             }
 
             //first:rounded-t-lg last:rounded-b-lg
