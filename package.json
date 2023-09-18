@@ -1,6 +1,6 @@
 {
     "name": "kodama-ui",
-    "version": "0.14.0",
+    "version": "0.17.1",
     "description": "Kodama UI is a Vue 3 component library that provides a set of components & funcionality to build your application.",
     "homepage": "https://50l3r.github.io/kodama-ui",
     "keywords": [
@@ -37,8 +37,8 @@
     },
     "scripts": {
         "build": "vue-tsc --noEmit && vite build",
-        "storybook": "start-storybook -p 6006",
-        "build:storybook": "build-storybook",
+        "storybook": "SET NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
+        "build:storybook": "SET NODE_OPTIONS=--openssl-legacy-provider && build-storybook",
         "build:publish": "npm run build && npm publish"
     },
     "dependencies": {

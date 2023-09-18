@@ -1,121 +1,156 @@
 <template>
     <div class="k-dropzone">
-        <label
-            :for="id"
+        <div
+            class="k-dropzone-wrapper"
             :class="{
                 'k-dropzone--loading': loading,
                 'k-dropzone--error': errors.length > 0,
-                'k-dropzone--disabled': disabled
-            }"
-            :style="{
-                'background': isModelValueImage
-                    ? `url('${modelValue}') no-repeat center center`
-                    : '',
-                'background-size': 'cover'
+                'k-dropzone--disabled': disabled,
+                [`k-dropzone-${size}`]: true
             }"
         >
-            <div
-                v-if="modelValue || loading"
-                class="flex flex-col max-w-full items-center justify-center pt-5 pb-6"
-            >
-                <k-button
-                    v-if="!loading"
-                    size="xs"
-                    icon="times"
-                    color="gray"
-                    class="absolute top-0 right-0 m-2 z-20"
-                    @click="onFileReset(true)"
-                >
-                </k-button>
+            <label v-if="hasLabel">
+                <slot v-if="hasSlot('default')" />
+                <template v-else>{{ label }}</template>
 
-                <div
-                    v-if="loading"
-                    class="absolute top-0 left-0 h-full w-full bg-opacity-60 bg-gray-900 z-20 flex items-center justify-center text-white"
+                <span v-if="required" class="font-bold text-danger ml-1"
+                    >*</span
                 >
-                    <k-icon icon="spinner-third" type="fas" :size="30" spin />
-                </div>
+                <template v-if="errors.length > 0">
+                    <k-tooltip :content="errors[0]">
+                        <k-icon icon="triangle-exclamation" class="ml-2" />
+                    </k-tooltip>
+                </template>
+            </label>
+
+            <label
+                :for="!locked ? id : ''"
+                class="k-dropzone-input"
+                :class="{
+                    'k-dropzone--loading': loading,
+                    'k-dropzone--error': errors.length > 0,
+                    'k-dropzone--disabled': disabled
+                }"
+                :style="{
+                    'background': isModelValueImage
+                        ? `url('${modelValue}') no-repeat center center`
+                        : '',
+                    'background-size': 'cover'
+                }"
+            >
                 <div
-                    class="text-sm flex justify-center max-w-full flex-col font-semibold text-center uppercase z-10 absolute top-0 left-0 bg-gray-100 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 w-full h-full"
+                    v-if="modelValue || loading"
+                    class="flex flex-col max-w-full items-center justify-center pt-5 pb-6"
                 >
-                    <k-icon
-                        icon="file"
-                        type="far"
-                        :size="60"
-                        class="mb-3 text-gray-800 dark:text-gray-100"
-                    />
+                    <k-button
+                        v-if="!loading"
+                        size="xs"
+                        icon="times"
+                        color="gray"
+                        class="absolute top-0 right-0 m-2 z-20"
+                        @click="onFileReset(true, true)"
+                        @mouseover="locked = true"
+                        @mouseout="locked = false"
+                    >
+                    </k-button>
 
                     <div
-                        v-if="file.name"
-                        class="text-xs flex text-center flex-col px-5 whitespace-nowrap w-full"
+                        v-if="loading"
+                        class="absolute top-0 left-0 h-full w-full bg-opacity-60 bg-gray-900 z-20 flex items-center justify-center text-white"
                     >
-                        <span
-                            class="uppercase text-ellipsis overflow-hidden text-gray-800 dark:text-gray-100 px-3"
+                        <k-icon
+                            icon="spinner-third"
+                            type="fas"
+                            :size="30"
+                            spin
+                        />
+                    </div>
+                    <div
+                        class="text-sm flex justify-center max-w-full flex-col font-semibold text-center uppercase z-10 absolute top-0 left-0 bg-gray-100 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 w-full h-full"
+                    >
+                        <k-icon
+                            icon="file"
+                            type="far"
+                            :size="60"
+                            class="mb-3 text-gray-800 dark:text-gray-100"
+                        />
+
+                        <div
+                            v-if="file.name"
+                            class="text-xs flex text-center flex-col px-5 whitespace-nowrap w-full"
                         >
-                            {{ file.name }}
-                        </span>
-                        <span
-                            class="font-semibold text-gray-700 dark:text-gray-300"
-                        >
-                            {{ file.size }}MB
-                        </span>
+                            <span
+                                class="uppercase text-ellipsis overflow-hidden text-gray-800 dark:text-gray-100 px-3"
+                            >
+                                {{ file.name }}
+                            </span>
+                            <span
+                                class="font-semibold text-gray-700 dark:text-gray-300"
+                            >
+                                {{ file.size }}MB
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div
-                v-else
-                class="flex flex-col items-center justify-center pt-5 pb-6"
-            >
-                <k-tooltip v-if="errors.length > 0">
-                    <template #content>
-                        <div class="text-center">
-                            {{ errors[0] }}
-                        </div>
-                    </template>
+                <div
+                    v-else
+                    class="flex flex-col items-center justify-center pt-5 pb-6"
+                >
+                    <k-tooltip v-if="errors.length > 0">
+                        <template #content>
+                            <div class="text-center">
+                                {{ errors[0] }}
+                            </div>
+                        </template>
 
+                        <k-icon
+                            icon="triangle-exclamation"
+                            type="far"
+                            :size="30"
+                            class="text-danger mb-3"
+                        />
+                    </k-tooltip>
                     <k-icon
-                        icon="triangle-exclamation"
+                        v-else
+                        icon="upload"
                         type="far"
                         :size="30"
-                        class="text-danger mb-3"
+                        class="text-gray-400 mb-3"
                     />
-                </k-tooltip>
-                <k-icon
-                    v-else
-                    icon="upload"
-                    type="far"
-                    :size="30"
-                    class="text-gray-400 mb-3"
-                />
 
-                <p
-                    class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center"
-                >
-                    <span class="font-semibold">Haz click</span> o arrastra tus
-                    ficheros
-                </p>
-                <p class="text-xs text-gray-500 dark:text-gray-400">
-                    <slot v-if="hasSlot('default')"> {{ maxSize }} MB </slot>
-                    <template v-else>
-                        <div class="flex text-center flex-col">
-                            <div class="uppercase">
-                                {{ textensions }}
+                    <p
+                        class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center"
+                    >
+                        <span class="font-semibold">Haz click</span> o arrastra
+                        tus ficheros
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                        <slot v-if="hasSlot('maxSize')" name="maxSize">
+                            {{ maxSize }} MB
+                        </slot>
+                        <template v-else>
+                            <div class="flex text-center flex-col">
+                                <div class="uppercase">
+                                    {{ textensions }}
+                                </div>
+                                <div class="font-semibold">
+                                    ({{ maxSize }}MB MAX)
+                                </div>
                             </div>
-                            <div class="font-semibold">
-                                ({{ maxSize }}MB MAX)
-                            </div>
-                        </div>
-                    </template>
-                </p>
-            </div>
-            <input
-                :id="id"
-                type="file"
-                class="hidden"
-                :accept="validExtensions"
-                :disabled="disabled"
-                @change="onFileChange($event)"
-            />
-        </label>
+                        </template>
+                    </p>
+                </div>
+                <input
+                    :id="id"
+                    type="file"
+                    class="hidden"
+                    :accept="validExtensions"
+                    :disabled="disabled"
+                    onclick="this.value=null;"
+                    @change="onFileChange($event)"
+                />
+            </label>
+        </div>
     </div>
 </template>
 
@@ -149,6 +184,19 @@
             disabled: {
                 type: Boolean,
                 default: false
+            },
+            required: {
+                type: Boolean,
+                default: false
+            },
+            label: {
+                type: String,
+                default: ''
+            },
+            size: {
+                type: String,
+                default: 'md',
+                options: ['xs', 'sm', 'md', 'lg']
             }
         },
         emits: ['delete', 'upload', 'update:modelValue'],
@@ -166,6 +214,8 @@
                 isImage: false
             })
 
+            const locked = ref(false)
+
             const validExtensions = computed(() => {
                 return props.accept
                     .map((ext) => '.' + ext.toLowerCase())
@@ -179,21 +229,6 @@
             const isModelValueImage = computed(() => {
                 // tramp
                 return true
-
-                //check base64 file type
-                if (props.modelValue.includes('data:image')) {
-                    return true
-                }
-
-                // check url
-                const ext = props.modelValue.split('.').pop() || ''
-                if (
-                    ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'].includes(ext)
-                ) {
-                    return true
-                }
-
-                return false
             })
 
             const onFileChange = (e: any) => {
@@ -242,12 +277,12 @@
                             ctx.emit('upload', efile)
                         }
                     } else {
-                        onFileReset(false)
+                        onFileReset(false, false)
                     }
                 }
             }
 
-            const onFileReset = (clearErrors = false) => {
+            const onFileReset = (clearErrors = false, emitDelete = false) => {
                 file.value = {
                     name: '',
                     size: 0,
@@ -258,11 +293,16 @@
                 }
 
                 ctx.emit('update:modelValue', '')
-                ctx.emit('delete')
+
+                if (emitDelete) ctx.emit('delete')
 
                 if (clearErrors) {
                     errors.value = []
                 }
+
+                setTimeout(() => {
+                    locked.value = false
+                }, 300)
             }
 
             const isFileSizeValid = (fileSize: number) => {
@@ -274,7 +314,12 @@
             }
 
             const isFileTypeValid = (fileExtension: string) => {
-                if (!props.accept.includes(fileExtension)) {
+                console.log('extension', fileExtension)
+                if (
+                    !props.accept
+                        .map((a) => a.toLowerCase())
+                        .includes(fileExtension.toLowerCase())
+                ) {
                     errors.value.push(
                         `Extensión inválida. Los ficheros soportados son: ${props.accept}`
                     )
@@ -295,6 +340,10 @@
                 }
             }
 
+            const hasLabel = computed(() => {
+                return props.label || hasSlot('default')
+            })
+
             return {
                 id,
                 file,
@@ -304,7 +353,9 @@
                 onFileChange,
                 errors,
                 onFileReset,
-                isModelValueImage
+                isModelValueImage,
+                hasLabel,
+                locked
             }
         }
     })
@@ -312,22 +363,63 @@
 
 <style scoped lang="scss">
     .k-dropzone {
-        @apply flex items-center justify-center w-full;
+        @apply flex flex-col w-full;
 
-        > label {
-            @apply flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 relative select-none overflow-hidden p-4 aspect-square;
-        }
+        .k-dropzone-wrapper {
+            label {
+                @apply mb-2 block select-none text-sm text-gray-500 dark:text-white font-semibold;
+            }
 
-        > label.k-dropzone--loading {
-            @apply bg-gray-100 dark:bg-gray-700;
-        }
+            .k-dropzone-input {
+                @apply flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 relative select-none overflow-hidden p-4 aspect-square;
+            }
 
-        > label.k-dropzone--error {
-            @apply border-danger dark:border-danger;
-        }
+            &.k-dropzone--loading {
+                @apply bg-gray-100 dark:bg-gray-700;
+            }
 
-        > label.k-dropzone--disabled {
-            @apply opacity-40 cursor-not-allowed;
+            &.k-dropzone--error {
+                label {
+                    @apply text-danger dark:text-danger;
+                }
+                .k-dropzone-input {
+                    @apply border-danger dark:border-danger;
+                }
+            }
+
+            &.k-dropzone--disabled {
+                .k-dropzone-input {
+                    @apply opacity-40 cursor-not-allowed;
+                }
+            }
+
+            /// /////////////////
+            /// SIZES
+            /// /////////////////
+            ///
+            &.k-dropzone-xs {
+                label {
+                    @apply text-sm;
+                }
+            }
+
+            &.k-dropzone-sm {
+                label {
+                    @apply text-base;
+                }
+            }
+
+            &.k-dropzone-md {
+                label {
+                    @apply text-base;
+                }
+            }
+
+            &.k-dropzone-lg {
+                label {
+                    @apply text-lg;
+                }
+            }
         }
     }
 </style>

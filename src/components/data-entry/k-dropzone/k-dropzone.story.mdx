@@ -10,7 +10,7 @@ export const Template = (args) => ({
       const image = ref(null)
       return { args, image };
     },
-    template: '<k-card><k-dropzone v-bind="args" v-model="image" :accepts="[\'png\', \'jpg\', \'pdf\']"></k-dropzone></k-card>'
+    template: '<k-card><k-dropzone v-bind="args" v-model="image" :accept="[\'png\', \'jpg\', \'pdf\', \'fh11\']"></k-dropzone></k-card>'
 });
 
 <Meta title="Data Entry/Dropzone" component={KDropzone} argTypes={renderArgs(KDropzone)} decorators={[() => ({ template: '<div class="flex items-center justify-center p-10"><story /></div>' })]} />
@@ -39,9 +39,31 @@ Puedes deshabilitar el componente con la propiedad `disabled`.
           return { image };
         },
         template: `
-          <k-card><k-dropzone v-bind="args" v-model="image" :accepts="[\'png\', \'jpg\', \'pdf\']" :disabled="true"></k-dropzone></k-card>
+          <k-card><k-dropzone v-bind="args" v-model="image" :accept="[\'png\', \'jpg\', \'pdf\']" :disabled="true"></k-dropzone></k-card>
         `,
       };
     }}
   </Story>
 </Canvas>
+
+
+## **Label**
+Puedes añadir un label
+
+<Canvas>
+  <Story name="Label" argTypes={renderArgs(KDropzone, {}, true)} parameters={renderParameters({showPanel: false})}>
+    {() => {
+      return {
+        components: { KDropzone },
+        setup() {
+          const image = ref();
+          return { image };
+        },
+        template: `
+          <k-card><k-dropzone v-bind="args" v-model="image" :accepts="[\'png\', \'jpg\', \'pdf\']" label="Ejemplo de label"></k-dropzone></k-card>
+        `,
+      };
+    }}
+  </Story>
+</Canvas>
+

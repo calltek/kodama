@@ -696,12 +696,11 @@
         }
     }
 
-    .k-table.k-table-infinite {
-        .k-table {
-            @apply h-full;
-        }
-        .k-table-body {
-            @apply overflow-auto h-0 min-h-0 flex-auto;
-        }
-    }
+    // .k-table.k-table-infinite {
+    //     @apply h-full;
+
+    //     .k-table-body {
+    //         @apply overflow-auto h-0 min-h-0 flex-auto;
+    //     }
+    // }
 </style>

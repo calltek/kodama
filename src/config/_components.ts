@@ -17,8 +17,10 @@ import KCheckbox from '../components/data-entry/k-checkbox/k-checkbox.vue'
 import KDropzone from '../components/data-entry/k-dropzone/k-dropzone.vue'
 import KSelect from '../components/data-entry/k-select/k-select.vue'
 // import KSelectOption from '../components/data-entry/k-select/k-select-option.vue'
+import KInputInline from '../components/data-entry/k-input-inline/k-input-inline.vue'
 import KInlineEditor from '../components/data-entry/k-inline-editor/k-inline-editor.vue'
 import KEditor from '../components/data-entry/k-editor/k-editor.vue'
+import KRadio from '../components/data-entry/k-radio/k-radio.vue'
 
 // Data Display Components
 import KAvatar from '../components/data-display/k-avatar/k-avatar.vue'
@@ -80,8 +82,10 @@ export default (
     app.component('KDropzone', KDropzone)
     app.component('KSelect', KSelect)
     // app.component('KSelectOption', KSelectOption)
+    app.component('KInputInline', KInputInline)
     app.component('KInlineEditor', KInlineEditor)
     app.component('KEditor', KEditor)
+    app.component('KRadio', KRadio)
 
     // Data Display Components
     app.component('KAvatar', KAvatar)

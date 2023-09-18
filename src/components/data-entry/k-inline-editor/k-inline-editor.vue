@@ -1,27 +1,24 @@
 <template>
     <div class="inline-flex">
-        <k-tooltip v-if="!editMode" placement="top">
-            <template #content> ✏️ Editar </template>
+        <!-- <k-tooltip v-if="!editMode" placement="top">
+            <template v-if="tooltip" #content> ✏️ Editar </template>
             <div :class="textClasses" @click="toggleEdit">
                 {{ model || '???' }}
             </div>
-        </k-tooltip>
+        </k-tooltip> -->
 
-        <k-tooltip v-else placement="top">
-            <template #content> ✏️ Modo edición </template>
-            <div class="inline-flex">
-                <input
-                    ref="input"
-                    v-model="model"
-                    :placeholder="model"
-                    type="text"
-                    class="p-0 outline-none focus:ring-0 border-0 bg-transparent"
-                    :class="inputClasses"
-                    :size="model.length - 1"
-                    @blur="toggleEdit"
-                />
-            </div>
-        </k-tooltip>
+        <div class="inline-flex">
+            <input
+                ref="input"
+                v-model="model"
+                :placeholder="model"
+                type="text"
+                class="p-0 outline-none focus:ring-0 border-0 bg-transparent"
+                :class="inputClasses"
+                :size="model.length - 1"
+                @blur="toggleEdit"
+            />
+        </div>
     </div>
 </template>
 
@@ -40,6 +37,10 @@
                 default: 'sm',
                 options: ['sm', 'md', 'lg'],
                 validator: (value: string) => ['sm', 'md', 'lg'].includes(value)
+            },
+            tooltip: {
+                type: String,
+                default: ''
             }
         },
         emits: ['update:modelValue', 'input'],
