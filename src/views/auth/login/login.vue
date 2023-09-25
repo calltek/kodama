@@ -67,12 +67,11 @@
 <script lang="ts">
     import { computed, defineComponent, inject, reactive, ref } from 'vue'
     import { required } from '@vuelidate/validators'
-
-    import { useConfig } from '@/store'
-
-    import { useRouter } from 'vue-router'
     import useVuelidate from '@vuelidate/core'
+    import { useRouter } from 'vue-router'
+
     import { KodamaParams } from '@/config'
+    import { homepage } from '@/helpers/config'
 
     export default defineComponent({
         name: 'Login',
@@ -81,7 +80,6 @@
             const auth = inject('$auth') as KodamaParams['auth']
 
             const router = useRouter()
-            const config = useConfig()
 
             const signupEnabled = false
             const loading = ref(false)
@@ -108,8 +106,7 @@
 
                     auth.login(state.username, state.password)
                         .then(() => {
-                            const homepage = config.get('homepage')
-                            router.push({ name: homepage })
+                            router.push(homepage.value)
                         })
                         .finally(() => {
                             loading.value = false

@@ -1,7 +1,4 @@
-interface Fixed {
-    desktop: boolean
-    tabletAndMobile: boolean
-}
+import { RouteLocationRaw } from 'vue-router'
 
 export interface CustomConfig extends Partial<Config> {
     // General
@@ -11,7 +8,11 @@ export interface CustomConfig extends Partial<Config> {
     ///////////////
     // Router
     ///////////////
-    homepage: string
+    routes: {
+        homepage: RouteLocationRaw
+        profile: RouteLocationRaw
+        configuration: RouteLocationRaw
+    }
 }
 
 export enum AvatarType {
@@ -41,7 +42,11 @@ interface Config {
     ///////////////
     // Router
     ///////////////
-    homepage: string
+    routes: {
+        homepage: RouteLocationRaw
+        profile: RouteLocationRaw
+        configuration: RouteLocationRaw
+    }
 
     ///////////////
     // Branding
@@ -75,7 +80,6 @@ interface Config {
     // Views
     ///////////////
     changelog: boolean
-    search: boolean
 
     ///////////////
     // Responsive
@@ -144,7 +148,11 @@ const defaultSettings: Config = {
     ///////////////
     // Router
     ///////////////
-    homepage: 'dashboard',
+    routes: {
+        homepage: '/',
+        profile: '',
+        configuration: ''
+    },
 
     ///////////////
     // Auth
@@ -158,7 +166,6 @@ const defaultSettings: Config = {
     // Views
     ///////////////
     changelog: false,
-    search: false,
 
     ///////////////
     // Responsive

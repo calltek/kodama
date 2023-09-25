@@ -32,7 +32,7 @@
     }
 
     label {
-        @apply mb-2 block select-none text-sm text-gray-500 dark:text-white font-semibold;
+        @apply mb-2 flex flex-row select-none text-sm text-gray-500 dark:text-white font-semibold;
     }
 
     /// /////////////////

@@ -1,8 +1,5 @@
 <template>
-    <aside
-        class="k-aside h-screen bg-sidebar text-gray-100 flex flex-col"
-        :class="{ 'k-aside-collapsed': collapsed }"
-    >
+    <aside id="k-aside" :class="{ collapsed: collapsed }">
         <div
             class="px-3 pb-5 pt-5 flex relative"
             :class="collapsed ? 'justify-center' : 'justify-between'"
@@ -10,7 +7,7 @@
             <k-logo
                 dark
                 :side="!collapsed"
-                class="cursor-pointer"
+                class="cursor-pointer max-w-[14rem]"
                 @click="collapsed = false"
             />
 
@@ -21,15 +18,6 @@
                 color="primary"
                 class="-mr-2"
                 @click="collapsed = true"
-            ></k-button>
-
-            <k-button
-                v-else
-                icon="chevrons-right"
-                link
-                color="primary"
-                class="absolute top-0 right-0 -m-3 mt-5"
-                @click="collapsed = false"
             ></k-button>
         </div>
         <div class="overflow-y-auto py-5 px-3 h-full flex-1">
@@ -72,11 +60,11 @@
 </script>
 
 <style lang="scss" scoped>
-    .k-aside {
-        @apply w-80 transition-all fixed z-50 sm:z-0 sm:relative;
+    #k-aside {
+        @apply w-80 min-w-[18rem] transition-all fixed z-50 sm:z-0 sm:relative h-screen bg-sidebar text-gray-100 flex flex-col;
 
-        &-collapsed {
-            @apply w-20 hidden sm:flex;
+        &.collapsed {
+            @apply w-20 hidden sm:flex min-w-max;
         }
     }
 </style>

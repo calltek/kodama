@@ -16,3 +16,8 @@ declare module 'sanitize-html' {
     const sanitizeHtml: any
     export default sanitizeHtml
 }
+
+// declare module '*.mdx' {
+//     let mdx: any
+//     export default mdx
+// }

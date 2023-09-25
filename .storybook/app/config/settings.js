@@ -26,7 +26,11 @@ const defaultState = {
     ///////////////
     // Router
     ///////////////
-    homepage: 'dashboard',
+    routes: {
+        homepage: 'dashboard',
+        profile: 'profile',
+        configuration: 'configuration'
+    },
 
     ///////////////
     // Vendor

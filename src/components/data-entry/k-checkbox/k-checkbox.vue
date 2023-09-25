@@ -3,6 +3,7 @@
         <input
             :id="inputId"
             :checked="model === value"
+            :required="required"
             :value="value"
             type="checkbox"
             class="k-checkbox w-4 h-4 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
@@ -55,6 +56,10 @@
                 validator: (val: string) => colors.includes(val),
                 default: 'primary',
                 description: 'Color del botón'
+            },
+            required: {
+                type: Boolean,
+                default: false
             }
         },
         emits: ['update:modelValue'],

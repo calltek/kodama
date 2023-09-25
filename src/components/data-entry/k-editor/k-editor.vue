@@ -1,10 +1,11 @@
 <template>
     <div :class="[classes]">
         <label
-            v-if="label"
-            class="font-semibold text-gray-500 dark:text-white select-none mb-2 inline-block"
+            v-if="hasLabel"
+            class="font-semibold text-gray-500 dark:text-white select-none mb-2 flex flex-row"
         >
-            {{ label }}
+            <slot v-if="hasSlot('default')" />
+            <template v-else>{{ label }}</template>
 
             <span v-if="required" class="font-bold text-danger ml-1">*</span>
             <template v-if="firstError">
@@ -18,7 +19,7 @@
             v-if="editor"
             class="k-editor-wrapper"
             :style="{
-                'max-height': `${maxHeight}px`
+                maxHeight: !fullpage ? `${maxHeight}px` : undefined
             }"
         >
             <div class="k-editor-content">
@@ -254,6 +255,17 @@
                     icon="redo"
                     @click="editor.commands.redo"
                 />
+
+                <k-button
+                    v-tooltip="{ content: 'Modo zen', placement: 'bottom' }"
+                    color="primary"
+                    size="sm"
+                    icon="maximize"
+                    :class="{
+                        active: fullpage
+                    }"
+                    @click="fullpage = !fullpage"
+                />
             </div>
         </div>
     </div>
@@ -337,7 +349,9 @@
         setup(props, ctx) {
             const editor: any = ref()
             const html = ref(props.modelValue)
+            const hasSlot = (name: string) => !!ctx.slots[name]
 
+            const fullpage = ref(false)
             const mandatoryHtml = computed(() => {
                 if (props.mandatory) {
                     return sanitizeHtml(props.mandatory, {
@@ -390,7 +404,15 @@
                     classes.push(`k-editor-${props.status}`)
                 }
 
+                if (fullpage.value) {
+                    classes.push('k-editor-fullpage')
+                }
+
                 return classes
+            })
+
+            const hasLabel = computed(() => {
+                return props.label || hasSlot('default')
             })
 
             onMounted(() => {
@@ -452,7 +474,10 @@
                 mandatoryHtml,
                 addImage,
                 firstError,
-                classes
+                classes,
+                hasSlot,
+                hasLabel,
+                fullpage
             }
         }
     })
@@ -480,7 +505,7 @@
             }
 
             .k-editor-content {
-                @apply p-5 flex-1;
+                @apply p-5 flex-1 text-gray-700 dark:text-white;
 
                 * {
                     font-size: 14px;
@@ -530,8 +555,12 @@
                     font-size: 18px;
                 }
 
+                & > div {
+                    height: 100%;
+                }
+
                 .ProseMirror {
-                    @apply outline-none;
+                    @apply outline-none h-full;
 
                     p.is-editor-empty:first-child::before {
                         content: attr(data-placeholder);
@@ -557,7 +586,7 @@
             }
 
             .k-editor-menu {
-                @apply z-0 flex flex-row border-t-2 border-gray-200 border-dashed py-2 mx-5 gap-1 sticky bottom-0 left-0 select-none dark:border-gray-700;
+                @apply z-0 flex flex-row border-t-2 border-gray-200 border-dashed py-2 mx-5 gap-1 sticky bottom-0 left-0 select-none dark:border-gray-700 overflow-x-scroll;
 
                 .k-button.active {
                     @apply text-white bg-gray-700 border-gray-700 opacity-60;
@@ -621,6 +650,18 @@
             label {
                 @apply text-warning;
             }
+        }
+    }
+
+    /// /////////////////
+    /// FULLPAGE
+    /// /////////////////
+
+    .k-editor.k-editor-fullpage {
+        @apply fixed top-0 left-0 right-0 bottom-0 z-50 p-10 bg-black/50 backdrop-blur-xl text-white flex flex-col;
+
+        .k-editor-wrapper {
+            @apply w-full flex-1 shadow-2xl;
         }
     }
 </style>

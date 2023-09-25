@@ -12,17 +12,17 @@
                 </div>
 
                 <div class="hidden sm:flex justify-start items-center">
-                    <k-toolbar-search />
+                    <k-toolbar-left :collapsed="collapsed" />
                 </div>
 
                 <div class="ml-auto"></div>
 
-                <div class="flex flex-row gap-4">
+                <div class="flex flex-row gap-4 items-center">
                     <k-updater />
 
-                    <k-debug />
+                    <k-toolbar-right :collapsed="collapsed" />
 
-                    <k-theme />
+                    <k-debug />
 
                     <div class="flex items-center lg:order-2">
                         <k-dropdown>
@@ -51,25 +51,41 @@
                             </template>
 
                             <template #content>
-                                <k-dropdown-menu>
-                                    <router-link to="/pages/profile/overview">
-                                        <k-icon
-                                            icon="address-card"
-                                            type="fal"
-                                            class="mr-2"
-                                        />
-                                        Mi Perfil
-                                    </router-link>
+                                <k-dropdown-menu @click="toggleTheme">
+                                    <k-icon
+                                        :icon="darkMode ? 'sun' : 'moon'"
+                                        type="fal"
+                                        class="mr-2"
+                                    />
+                                    {{
+                                        darkMode ? 'Modo claro' : 'Modo oscuro'
+                                    }}
                                 </k-dropdown-menu>
-                                <k-dropdown-menu>
-                                    <router-link to="/pages/profile/overview">
-                                        <k-icon
-                                            icon="gear"
-                                            type="fal"
-                                            class="mr-2"
-                                        />
-                                        Configuración
-                                    </router-link>
+                                <k-dropdown-menu
+                                    v-if="defaultRoutes.profile"
+                                    @click="$router.push(defaultRoutes.profile)"
+                                >
+                                    <k-icon
+                                        icon="address-card"
+                                        type="fal"
+                                        class="mr-2"
+                                    />
+                                    Mi Perfil
+                                </k-dropdown-menu>
+                                <k-dropdown-menu
+                                    v-if="defaultRoutes.configuration"
+                                    @click="
+                                        $router.push(
+                                            defaultRoutes.configuration
+                                        )
+                                    "
+                                >
+                                    <k-icon
+                                        icon="gear"
+                                        type="fal"
+                                        class="mr-2"
+                                    />
+                                    Configuración
                                 </k-dropdown-menu>
                             </template>
 
@@ -96,11 +112,10 @@
 <script lang="ts">
     import { defineComponent, computed, inject } from 'vue'
 
-    // import GlobalSearch from './global-search/global-search.vue'
-    import KUpdater from './updater.vue'
-    import KTheme from './theme.vue'
-    import KDebug from './debug.vue'
-    import { searchEnabled } from '@/helpers/config'
+    import KUpdater from './_updater.vue'
+    import KDebug from './_debug.vue'
+
+    import { defaultRoutes } from '@/helpers/config'
     import { useConfig } from '@/store'
     import { KodamaParams } from '@/config'
 
@@ -108,7 +123,6 @@
         name: 'KTopbar',
         components: {
             KUpdater,
-            KTheme,
             KDebug
         },
         setup() {
@@ -139,7 +153,47 @@
                 }
             })
 
-            return { firstname, fullname, searchEnabled, logout, collapsed }
+            const darkMode = computed(() => {
+                const config = useConfig()
+                return config.get('darkMode')
+            })
+
+            const toggleTheme = () => {
+                const config = useConfig()
+
+                if (darkMode.value) {
+                    config.set('darkMode', false)
+
+                    document
+                        .getElementsByTagName('html')[0]
+                        .classList.remove('dark')
+                    document
+                        .getElementsByTagName('html')[0]
+                        .classList.add('light')
+                } else {
+                    config.set('darkMode', true)
+
+                    document
+                        .getElementsByTagName('html')[0]
+                        .classList.remove('light')
+                    document
+                        .getElementsByTagName('html')[0]
+                        .classList.add('dark')
+                }
+            }
+
+            return {
+                //Variables
+                firstname,
+                fullname,
+                collapsed,
+                darkMode,
+                defaultRoutes,
+
+                // Methods
+                logout,
+                toggleTheme
+            }
         }
     })
 </script>

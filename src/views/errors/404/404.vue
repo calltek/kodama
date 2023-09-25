@@ -5,7 +5,7 @@
         <div
             class="flex flex-col flex-1 flex-shrink-0 basis-auto justify-center items-center p-10 lg:py-14"
         >
-            <router-link :to="{ name: homepage }" class="mb-10 pt-lg-10">
+            <router-link :to="homepage" class="mb-10 pt-lg-10">
                 <k-logo side :height="50" class="mb-5"></k-logo>
             </router-link>
 
@@ -26,10 +26,7 @@
                 </k-title>
 
                 <div class="text-center">
-                    <router-link
-                        :to="{ name: homepage }"
-                        class="btn btn-primary btn-lg"
-                    >
+                    <router-link :to="homepage" class="btn btn-primary btn-lg">
                         <k-button icon="home">Inicio</k-button>
                     </router-link>
                 </div>
@@ -59,8 +56,8 @@
 
 <script lang="ts">
     import { defineComponent } from 'vue'
-    import { homepage } from '../../../helpers/config'
-    import KPublicFooter from '../../../layouts/auth/footer.vue'
+    import { homepage } from '@/helpers/config'
+    import KPublicFooter from '@/layouts/auth/footer.vue'
     import { bubbleColor } from '@/helpers/config'
 
     export default defineComponent({

@@ -41,7 +41,7 @@
             @close="$emit('close')"
             @select="$emit('select', $event)"
             @remove="$emit('remove', $event)"
-            @search-change="$emit('fetch', $event)"
+            @search-change="fetch"
             @tag="addTag($event)"
         >
             <template #singleLabel="{ option }">
@@ -84,11 +84,11 @@
 </template>
 
 <script lang="ts">
-    import { computed, defineComponent } from 'vue'
+    import { computed, defineComponent, ref } from 'vue'
     import Multiselect from 'vue-multiselect'
     import 'vue-multiselect/dist/vue-multiselect.css'
     import props from './k-select.props'
-    import { uid } from '@/helpers/utils'
+    import { uid, debounce } from '@/helpers/utils'
 
     export default defineComponent({
         name: 'KSelect',
@@ -108,6 +108,8 @@
         setup(props, ctx) {
             const uuid = props.id || uid()
             const hasSlot = (name: string) => !!ctx.slots[name]
+
+            const disableFetch = ref(false)
 
             const model = computed({
                 get() {
@@ -149,7 +151,7 @@
                                 value: props.modelValue[props.trackBy]
                             }
                         }
-                    } else {
+                    } else if (props.modelValue) {
                         //find label by value
                         const option: any = props.options.find(
                             (option: any) =>
@@ -168,6 +170,8 @@
                                 value: props.modelValue
                             }
                         }
+                    } else {
+                        return null
                     }
                 },
                 set(value) {
@@ -177,8 +181,7 @@
                         if (Array.isArray(value)) {
                             //check if value is empty
                             if (value.length > 0) {
-                                return ctx.emit(
-                                    'update:modelValue',
+                                updateModelValue(
                                     value.map((item: any) => {
                                         if (item && typeof item === 'object') {
                                             return item[props.trackBy]
@@ -188,25 +191,32 @@
                                     })
                                 )
                             } else {
-                                return []
+                                updateModelValue(null)
                             }
                         } else {
                             //check if value is empty
                             if (Object.keys(value).length > 0) {
-                                return ctx.emit(
-                                    'update:modelValue',
+                                updateModelValue(
                                     value[props.trackBy as keyof typeof value]
                                 )
                             } else {
-                                return ctx.emit('update:modelValue', null)
+                                updateModelValue(null)
                             }
                         }
                     } else {
-                        console.log('talle')
-                        ctx.emit('update:modelValue', value)
+                        updateModelValue(value)
                     }
                 }
             })
+
+            const updateModelValue = (value: any) => {
+                disableFetch.value = true
+                ctx.emit('update:modelValue', value)
+
+                setTimeout(() => {
+                    disableFetch.value = false
+                }, 1000)
+            }
 
             const classes = computed(() => {
                 const classes = ['k-select', `k-select-${props.size}`]
@@ -246,6 +256,11 @@
                 return error.toString()
             })
 
+            const fetch = debounce(($event: any) => {
+                if (disableFetch.value) return
+                ctx.emit('fetch', $event)
+            }, 500)
+
             const addTag = (newTag: string) => {
                 const tag: any = {}
 
@@ -270,7 +285,8 @@
                 hasSlot,
                 style,
                 fCloseOnSelect,
-                addTag
+                addTag,
+                fetch
             }
         }
     })

@@ -4,6 +4,7 @@
 
 <script lang="ts">
     import { defineComponent, computed, PropType, StyleValue } from 'vue'
+    import { colors } from '@/helpers/utils'
 
     export default defineComponent({
         name: 'KIcon',
@@ -30,22 +31,17 @@
                 type: Boolean,
                 default: false,
                 description: 'Animación de rotación'
+            },
+            color: {
+                type: String,
+                control: { type: 'inline-radio' },
+                options: colors,
+                validator: (val: string) => colors.includes(val) || val === '',
+                default: '',
+                description: 'Color del icono'
             }
         },
         setup(props) {
-            const classes = computed(() => {
-                const aclass: any[] = ['k-icon']
-
-                aclass.push(props.type)
-                aclass.push(`fa-${props.icon}`)
-
-                if (props.spin) {
-                    aclass.push('fa-spin')
-                }
-
-                return aclass
-            })
-
             const style = computed((): StyleValue => {
                 const style: StyleValue = {}
 
@@ -54,6 +50,39 @@
                 }
 
                 return style
+            })
+
+            const classes = computed(() => {
+                let classes: string[] = ['k-icon']
+
+                classes.push(props.type)
+                classes.push(`fa-${props.icon}`)
+
+                if (props.spin) {
+                    classes.push('fa-spin')
+                }
+
+                if (props.color === 'white') {
+                    classes.push('text-white')
+                } else if (props.color === 'black') {
+                    classes.push('text-black')
+                } else if (props.color === 'gray') {
+                    classes.push('text-gray-300 ')
+                } else if (props.color === 'primary') {
+                    classes.push('text-primary')
+                } else if (props.color === 'secondary') {
+                    classes.push('text-secondary')
+                } else if (props.color === 'success') {
+                    classes.push('text-success')
+                } else if (props.color === 'warning') {
+                    classes.push('text-warning ')
+                } else if (props.color === 'danger') {
+                    classes.push('text-danger ')
+                } else if (props.color === 'info') {
+                    classes.push('text-info')
+                }
+
+                return classes
             })
 
             return { classes, style }

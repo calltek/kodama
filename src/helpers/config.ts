@@ -25,9 +25,15 @@ export const version = computed((): Config['version'] => {
 })
 
 // Get homepage
-export const homepage = computed((): Config['homepage'] => {
+export const homepage = computed((): Config['routes']['homepage'] => {
     const config = useConfig()
-    return config.get('homepage')
+    return config.get('routes.homepage')
+})
+
+// Get default routes
+export const defaultRoutes = computed((): Config['routes'] => {
+    const config = useConfig()
+    return config.get('routes')
 })
 
 //////////////////////////////////////
@@ -80,12 +86,6 @@ export const signupEnabled = computed(() => {
 export const changelogEnabled = computed(() => {
     const config = useConfig()
     return config.get('changelog') === true
-})
-
-// Check if enabled global search
-export const searchEnabled = computed(() => {
-    const config = useConfig()
-    return config.get('search') === true
 })
 
 //////////////////////////////////////

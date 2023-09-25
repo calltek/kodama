@@ -1,6 +1,6 @@
 .k-select {
     label {
-        @apply mb-2 block select-none text-sm text-gray-500 dark:text-white font-semibold;
+        @apply mb-2 flex flex-row select-none text-sm text-gray-500 dark:text-white font-semibold;
     }
 
     .multiselect__tags {
@@ -39,6 +39,10 @@
     .multiselect__select {
         @apply z-10;
     }
+
+    // .multiselect__content-wrapper {
+    //     @apply overflow-x-hidden;
+    // }
 
     .multiselect--active {
         .multiselect__tags {

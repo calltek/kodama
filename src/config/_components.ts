@@ -16,11 +16,12 @@ import KTextarea from '../components/data-entry/k-textarea/k-textarea.vue'
 import KCheckbox from '../components/data-entry/k-checkbox/k-checkbox.vue'
 import KDropzone from '../components/data-entry/k-dropzone/k-dropzone.vue'
 import KSelect from '../components/data-entry/k-select/k-select.vue'
-// import KSelectOption from '../components/data-entry/k-select/k-select-option.vue'
 import KInputInline from '../components/data-entry/k-input-inline/k-input-inline.vue'
 import KInlineEditor from '../components/data-entry/k-inline-editor/k-inline-editor.vue'
 import KEditor from '../components/data-entry/k-editor/k-editor.vue'
 import KRadio from '../components/data-entry/k-radio/k-radio.vue'
+import KColor from '../components/data-entry/k-color/k-color.vue'
+import KInputColor from '../components/data-entry/k-input-color/k-input-color.vue'
 
 // Data Display Components
 import KAvatar from '../components/data-display/k-avatar/k-avatar.vue'
@@ -31,7 +32,6 @@ import KLogo from '../components/data-display/k-logo/k-logo.vue'
 import KTable from '../components/data-display/k-table/k-table.vue'
 import KDate from '../components/data-display/k-date/k-date.vue'
 import KCard from '../components/data-display/k-card/k-card.vue'
-// import KTooltip from '../components/data-display/k-tooltip/k-tooltip.vue'
 import KDrawer from '../components/data-display/k-drawer/k-drawer.vue'
 import KAccordion from '../components/data-display/k-accordion/k-accordion.vue'
 import KAccordionItem from '../components/data-display/k-accordion/k-accordion-item.vue'
@@ -81,11 +81,12 @@ export default (
     app.component('KCheckbox', KCheckbox)
     app.component('KDropzone', KDropzone)
     app.component('KSelect', KSelect)
-    // app.component('KSelectOption', KSelectOption)
     app.component('KInputInline', KInputInline)
     app.component('KInlineEditor', KInlineEditor)
     app.component('KEditor', KEditor)
     app.component('KRadio', KRadio)
+    app.component('KColor', KColor)
+    app.component('KInputColor', KInputColor)
 
     // Data Display Components
     app.component('KAvatar', KAvatar)
@@ -96,7 +97,6 @@ export default (
     app.component('KTable', KTable)
     app.component('KDate', KDate)
     app.component('KCard', KCard)
-    // app.component('KTooltip', KTooltip)
     app.component('KDrawer', KDrawer)
     app.component('KAccordion', KAccordion)
     app.component('KAccordionItem', KAccordionItem)

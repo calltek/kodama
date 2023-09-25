@@ -10,7 +10,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 // KODAMA
 import { createApp } from '../src/main'
-import '../src/config/_style.ts'
+import '../src/config/_style'
 
 // CUSTOM CONFIG
 import router from './app/config/router'

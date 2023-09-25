@@ -147,3 +147,56 @@ export function renderParameters({ showPanel } = { showPanel: true }) {
         options: { showPanel: showPanel }
     }
 }
+
+export function renderArgsV2(props: any) {
+    const args: any = {}
+
+    if (props) {
+        Object.keys(props).forEach((key: string) => {
+            const prop: any = props[key]
+
+            const description = prop.description || undefined
+            const options = prop.options || undefined
+            const control = parseControl(prop, false)
+
+            const type = Array.isArray(prop.type)
+                ? prop.type.map((t: any) => t.name).join(',')
+                : prop.type.name
+
+            args[key] = {
+                description: description,
+                control: control,
+                options: options,
+                table: {
+                    defaultValue:
+                        prop.default !== undefined
+                            ? { summary: prop.default }
+                            : undefined,
+                    type: {
+                        summary: type.toLowerCase(),
+                        required: prop.required || false
+                    },
+                    disable: false
+                }
+            }
+
+            console.log(args)
+
+            // args[prop.name].control = parseControl(prop, false)
+            // args[prop.name].type.name = parseControl(prop, false).type
+            // if (Array.isArray(prop.type)) {
+            //     const type = prop.type
+            //         .map((t: any) => {
+            //             return getReturnType(t)
+            //         })
+            //         .join(' | ')
+
+            //     args[prop.name].table.type.summary = type
+            // } else {
+            //     args[prop.name].table.type.summary = getReturnType(prop.type)
+            // }
+        })
+    }
+
+    return args
+}

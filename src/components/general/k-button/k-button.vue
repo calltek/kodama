@@ -37,7 +37,7 @@
         autoload: true,
         props: props,
         emits: ['click'],
-
+        summary: 'Botón',
         setup(props, ctx) {
             const hasSlot = (name: string) => !!ctx.slots[name]
 

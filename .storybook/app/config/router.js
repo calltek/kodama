@@ -17,7 +17,6 @@ function beforeEach(to, _from, next) {
     const auth = useAuth()
     const config = useConfig()
 
-    const homepage = config.get('homepage')
     const isPublic = to.meta.public ? to.meta.public : false
 
     // const roles: any = to.meta.auth
