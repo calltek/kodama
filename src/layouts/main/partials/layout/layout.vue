@@ -5,7 +5,7 @@
         overlay-classes="rounded-tl-3xl"
         class="flex-1 flex flex-col"
     >
-        <div id="k-layout">
+        <div id="k-layout-header" :class="{ 'k-layout-sticky ': sticky }">
             <div id="k-layout-wrapper">
                 <div id="k-layout-leftbar">
                     <div
@@ -96,6 +96,10 @@
             loadingFullpage: {
                 type: Boolean,
                 default: false
+            },
+            sticky: {
+                type: Boolean,
+                default: false
             }
         },
         setup(props, ctx) {
@@ -133,8 +137,12 @@
 </script>
 
 <style lang="scss" scoped>
-    #k-layout {
+    #k-layout-header {
         @apply flex bg-sidebar;
+
+        &.k-layout-sticky {
+            @apply sticky top-0 z-40 left-0 drop-shadow-lg;
+        }
 
         #k-layout-wrapper {
             @apply py-4 px-4 flex flex-row items-center dark:bg-gray-800 bg-white w-full rounded-tl-3xl h-16 overflow-hidden text-gray-800 dark:text-gray-200;
@@ -170,6 +178,6 @@
     }
 
     #k-layout-content {
-        @apply flex flex-1 flex-col p-5 overflow-x-auto;
+        @apply flex flex-1 flex-col p-5;
     }
 </style>

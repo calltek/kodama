@@ -161,7 +161,7 @@
     .k-tabs {
         @apply text-gray-700 dark:text-white;
         .k-tab-list {
-            @apply flex flex-row select-none border-b border-b-gray-200 dark:border-b-gray-700;
+            @apply flex flex-row select-none border-b border-b-gray-200 dark:border-b-gray-700 overflow-x-auto;
 
             .k-tab-item {
                 @apply bg-gray-200 dark:bg-gray-600 rounded-t-xl py-4 px-6 font-semibold whitespace-nowrap cursor-pointer border-t border-r border-gray-200 dark:border-gray-700;

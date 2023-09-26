@@ -1,6 +1,16 @@
 <template>
-    <div class="k-image" :style="style" :class="{ 'k-image-zoom': zoom }">
-        <img ref="img" :src="thumb" data-zoom :data-zoom-src="src" />
+    <div
+        class="k-image"
+        :style="style"
+        :class="{ 'k-image-zoom': zoom, 'k-image-circle': circle }"
+    >
+        <img
+            ref="img"
+            :src="thumb"
+            data-zoom
+            :data-zoom-src="src"
+            :style="style"
+        />
     </div>
 </template>
 
@@ -31,6 +41,16 @@
                 type: Boolean,
                 default: true,
                 description: 'Zoom'
+            },
+            square: {
+                type: Boolean,
+                default: true,
+                description: 'Define un estilo cuadrado'
+            },
+            circle: {
+                type: Boolean,
+                default: false,
+                description: 'Define un estilo circular'
             }
         },
         setup(props) {
@@ -51,10 +71,20 @@
             })
 
             onMounted(() => {
-                if (props.zoom)
-                    mediumZoom(img.value, {
+                if (props.zoom) {
+                    const zoom = mediumZoom(img.value, {
                         background: 'rgba(0, 0, 0, 0.8)'
                     })
+
+                    zoom.on('open', (event: any) => {
+                        event.target.style.height = 'auto'
+                        event.target.style.width = 'auto'
+                    })
+                    zoom.on('opened', (event: any) => {
+                        event.target.style.height = `${props.size}px`
+                        event.target.style.width = `${props.size}px`
+                    })
+                }
             })
 
             return { img, style, thumb }
@@ -66,12 +96,16 @@
     .k-image {
         @apply overflow-hidden rounded-xl flex items-center justify-center transition-all  max-w-full;
 
-        img {
-            @apply object-cover aspect-square;
-        }
+        // img {
+        //     @apply object-cover;
+        // }
 
         &.k-image-zoom:hover {
             transform: scale(1.1);
+        }
+
+        &.k-image-circle {
+            @apply rounded-full;
         }
     }
 

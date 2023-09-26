@@ -68,28 +68,33 @@
                     <div
                         class="text-sm flex justify-center max-w-full flex-col font-semibold text-center uppercase z-10 absolute top-0 left-0 bg-gray-100 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 w-full h-full"
                     >
-                        <k-icon
-                            icon="file"
-                            type="far"
-                            :size="60"
-                            class="mb-3 text-gray-800 dark:text-gray-100"
-                        />
-
-                        <div
-                            v-if="file.name"
-                            class="text-xs flex text-center flex-col px-5 whitespace-nowrap w-full"
+                        <slot
+                            name="selectedFile"
+                            v-bind="{ name: file.name, size: file.size }"
                         >
-                            <span
-                                class="uppercase text-ellipsis overflow-hidden text-gray-800 dark:text-gray-100 px-3"
+                            <k-icon
+                                icon="file"
+                                type="far"
+                                :size="60"
+                                class="mb-3 text-gray-800 dark:text-gray-100"
+                            />
+
+                            <div
+                                v-if="file.name"
+                                class="text-sm flex text-center flex-col px-5 whitespace-nowrap w-full"
                             >
-                                {{ file.name }}
-                            </span>
-                            <span
-                                class="font-semibold text-gray-700 dark:text-gray-300"
-                            >
-                                {{ file.size }}MB
-                            </span>
-                        </div>
+                                <span
+                                    class="uppercase text-ellipsis overflow-hidden text-gray-800 dark:text-gray-100 px-3"
+                                >
+                                    {{ file.name }}
+                                </span>
+                                <span
+                                    class="font-semibold text-gray-700 dark:text-gray-300"
+                                >
+                                    {{ file.size }}MB
+                                </span>
+                            </div>
+                        </slot>
                     </div>
                 </div>
                 <div
@@ -121,8 +126,10 @@
                     <p
                         class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center"
                     >
-                        <span class="font-semibold">Haz click</span> o arrastra
-                        tus ficheros
+                        <slot name="placeholder">
+                            <span class="font-semibold">Haz click</span> o
+                            arrastra tus ficheros
+                        </slot>
                     </p>
                     <p class="text-xs text-gray-500 dark:text-gray-400">
                         <slot v-if="hasSlot('maxSize')" name="maxSize">

@@ -110,7 +110,7 @@
 
 <style lang="scss">
     .k-alert {
-        @apply flex w-full p-4 mb-4 text-sm border rounded-lg text-white items-center;
+        @apply flex gap-2 w-full p-4 text-sm border rounded-lg text-white items-center;
 
         &-primary {
             @apply border-primary bg-primary;
