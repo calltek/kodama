@@ -14,7 +14,16 @@ const config: StorybookConfig = {
         '@storybook/addon-links',
         '@storybook/addon-essentials',
         '@storybook/addon-interactions',
-        'storybook-dark-mode'
+        'storybook-dark-mode',
+        '@storybook/addon-mdx-gfm',
+        {
+            name: '@storybook/addon-postcss',
+            options: {
+                postcssLoaderOptions: {
+                    implementation: require('postcss')
+                }
+            }
+        }
     ],
     framework: {
         name: '@storybook/vue3-vite',
@@ -23,48 +32,48 @@ const config: StorybookConfig = {
     docs: {
         autodocs: false,
         defaultName: 'Documentación'
+    },
+    async viteFinal(config, { configType }) {
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            '@': path.resolve(__dirname, '../src'),
+            'tailwind.config': path.resolve(__dirname, '../tailwind.config.js')
+        }
+
+        // config.build = {
+        //     ...config.build,
+        //     ...{
+        //         rollupOptions: {
+        //             output: { sanitizeFileName: sanitizeFileName }
+        //         }
+        //     }
+        // }
+
+        config.optimizeDeps = {
+            ...config.optimizeDeps,
+            include: ['tailwind.config', 'react']
+        }
+
+        config.plugins.push(VitePWA({}))
+
+        config.plugins.push(
+            viteStaticCopy({
+                targets: [
+                    {
+                        src: './plugin.js',
+                        dest: './'
+                    }
+                ]
+            })
+        )
+
+        // config.build.commonjsOptions = {
+        //     ...config.build.commonjsOptions,
+        //     include: ['../tailwind-config.js', '../node_modules/**'],
+        //     esmExternals: true
+        // }
+
+        return config
     }
-    // async viteFinal(config, { configType }) {
-    //     config.resolve.alias = {
-    //         ...config.resolve.alias,
-    //         '@': path.resolve(__dirname, '../src'),
-    //         'tailwind.config': path.resolve(__dirname, '../tailwind.config.js')
-    //     }
-
-    //     // config.build = {
-    //     //     ...config.build,
-    //     //     ...{
-    //     //         rollupOptions: {
-    //     //             output: { sanitizeFileName: sanitizeFileName }
-    //     //         }
-    //     //     }
-    //     // }
-
-    //     config.optimizeDeps = {
-    //         ...config.optimizeDeps,
-    //         include: ['tailwind.config', 'react']
-    //     }
-
-    //     config.plugins.push(VitePWA({}))
-
-    //     config.plugins.push(
-    //         viteStaticCopy({
-    //             targets: [
-    //                 {
-    //                     src: './plugin.js',
-    //                     dest: './'
-    //                 }
-    //             ]
-    //         })
-    //     )
-
-    //     // config.build.commonjsOptions = {
-    //     //     ...config.build.commonjsOptions,
-    //     //     include: ['../tailwind-config.js', '../node_modules/**'],
-    //     //     esmExternals: true
-    //     // }
-
-    //     return config
-    // }
 }
 export default config
