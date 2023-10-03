@@ -34,7 +34,6 @@
 
     export default defineComponent({
         name: 'KButton',
-        autoload: true,
         props: props,
         emits: ['click'],
         summary: 'Botón',
