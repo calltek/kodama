@@ -1,0 +1,25 @@
+import { Meta, Primary, Controls, Story, Canvas } from '@storybook/blocks';
+import {SHead} from '../../../../../.storybook/app/components/s-head'
+import * as ButtonStories from './k-button.stories';
+
+<Meta of={ButtonStories} />
+
+<SHead image="https://media0.giphy.com/media/hDSy8w6rGHeTe/giphy.gif?cid=ecf05e47d1yojdu59ttft3ykom3decoar5aubq8zin0w9sov&rid=giphy.gif&ct=g">🛎 KButton</SHead>
+
+# Button
+
+A button is ...
+
+<Primary />
+
+## Historias
+
+### Primary
+
+A button can be of secondary importance.
+
+<Canvas of={ButtonStories.Color} />
+
+## Propiedades
+
+<Controls />

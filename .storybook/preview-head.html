@@ -18,22 +18,52 @@
         overflow: auto;
     }
 
-    html.light .docs-story,
-    html.light .docblock-argstable tr td{
-        background-color: #F3F4F6;
-    }
-
     html.light .docblock-argstable,
     html.dark .docblock-argstable{
         background: transparent;
     }
 
+    h1>a[aria-hidden=true],
+    h2>a[aria-hidden=true],
+    h3>a[aria-hidden=true],
+    h4>a[aria-hidden=true],
+    h5>a[aria-hidden=true],
+    h6>a[aria-hidden=true]{
+        margin-left: -24px;
+    }
+
+    /* LIGHT */
+    html.light .docs-story,
+    html.light .docblock-argstable tr td{
+        background-color: #F3F4F6;
+    }
+
+    html.light{
+        background-color: #F3F4F6;
+    }
+
+    html.light .docblock-argstable-body tr[title] td,
+    html.light .docblock-argstable-head th{
+        background-color: #1A56DB !important;
+        color: white;
+    }
+
+
+    /* DARK */
     html.dark .docs-story,
     html.dark .docblock-argstable tr td{
         background-color: #1F2937;
     }
 
-    html.light .sidebar-item{
-        color: #F3F4F6;
+    html.dark{
+        background-color: #111827;
     }
+
+    html.dark .docblock-argstable-body tr[title] td,
+    html.dark .docblock-argstable-head th{
+        background-color: #1A56DB !important;
+        color: white;
+    }
+
+
 </style>

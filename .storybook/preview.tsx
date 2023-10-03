@@ -1,6 +1,8 @@
+import React from 'react'
 import type { Preview } from '@storybook/vue3'
 import { themes } from '@storybook/theming'
 import { setup } from '@storybook/vue3'
+
 
 // PINIA
 import { createPinia } from 'pinia'
@@ -8,13 +10,15 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 // KODAMA
 import { createApp } from '../src/main'
-import '../src/config/_style.ts'
+import '../src/config/_style'
 
 // CUSTOM CONFIG
 import router from './app/config/router'
 import menu from './app/config/menu'
 import settings from './app/config/settings'
 import { useAuth } from './app/modules/auth'
+import { useDarkMode } from 'storybook-dark-mode'
+import { DocsContainer } from '@storybook/blocks'
 
 setup((app) => {
     const components = import.meta.globEager('./app/components/**/*.vue')
@@ -67,7 +71,7 @@ const brand = {
     brandTitle: 'Kodama',
     brandUrl: 'https://calltek.es',
     brandImage: 'https://place-hold.it/350x150',
-    brandTarget: '_self'
+    brandTarget: '_blank'
 }
 
 const dark = {
@@ -80,12 +84,12 @@ const dark = {
     appBg: '#0b0f19',
 
     // Text colors
-    textColor: '#9CA3AF', // gray-400
+    textColor: '#9CA3AF', // gray-700
 
     // Toolbar default and active colors
     barTextColor: '#9CA3AF', // gray-400
     barSelectedColor: '#1A56DB', //primary
-    barBg: '#111827', //gray-900
+    barBg: '#1F2937', //gray-900
 
     // Form colors
     inputBg: '#374151', //gray-700
@@ -99,17 +103,17 @@ const light = {
     ...brand,
 
     // UI
-    appContentBg: '#F3F4F6', // gray-100
+    appContentBg: '#fff', // gray-100
     appBorderColor: '#D1D5DB', //gray-300
     appBg: '#0b0f19',
 
     // Text colors
-    textColor: '#9CA3AF',
+    textColor: '#374151',
 
     // Toolbar default and active colors
     barTextColor: '#4B5563', //gray-600
     barSelectedColor: '#1A56DB', //primary
-    barBg: '#fff',
+    barBg: '#f3f4f6',
 
     // Form colors
     inputBg: '#F9FAFB',
@@ -133,20 +137,18 @@ const preview: Preview = {
             stylePreview: true,
             dark: dark,
             light: light
-        }
-        // docs: {
-        //     container: (props) => {
-        //         const isDark = useDarkMode()
+        },
 
-        //         const { id: storyId, storyById } = props.context
-        //         const {
-        //             parameters: { docs = {} }
-        //         } = storyById(storyId)
-        //         docs.theme = isDark ? dark : light
-
-        //         return React.createElement(DocsContainer, props)
-        //     }
-        // }
+        docs: {
+            container: ({ children, context }) => {
+                return (
+                    <DocsContainer
+                        context={context}
+                        theme={useDarkMode() ? dark : light}
+                    >{children}</DocsContainer>
+                );
+            },
+        },
     }
 }
 
