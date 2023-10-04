@@ -1,0 +1,23 @@
+import { Meta, Primary, Controls, Story, Canvas } from '@storybook/blocks';
+import {SHead} from '../../../../../.storybook/app/components/s-head'
+import * as Stories from './k-editor.stories';
+
+<Meta of={Stories} />
+
+<SHead image="https://media2.giphy.com/media/SwImQhtiNA7io/giphy.gif?cid=ecf05e47z82yq5bzlbtacqrphv0r4tr1wtbmnhzeakchqa9a&rid=giphy.gif&ct=g">⌨️ KEditor</SHead>
+
+# Introducción
+
+Con el componente `k-editor` disponer de un editor de texto/html minimalista y bastante completo.
+
+<Primary />
+
+## Contenido obligatorio `mandatory`
+
+Se puede establecer un contenido obligatorio para el editor, de esta forma el usuario no podrá eliminarlo. Utiliza la propiedad `mandatory` para ello.
+
+<Canvas of={Stories.Mandatory} />
+
+## Propiedades
+
+<Controls />

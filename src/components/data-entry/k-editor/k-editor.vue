@@ -23,7 +23,20 @@
             }"
         >
             <div class="k-editor-content">
-                <editor-content :editor="editor" />
+                <editor-content v-if="!showCode" :editor="editor" />
+                <div v-else>
+                    <div
+                        class="tiptap ProseMirror"
+                        contenteditable="true"
+                        tabindex="0"
+                        translate="no"
+                        :style="{
+                            minHeight: `calc(${minHeight}px - 40px - 52px)`
+                        }"
+                    >
+                        {{ html }}
+                    </div>
+                </div>
 
                 <div
                     v-if="mandatory"
@@ -89,6 +102,7 @@
                 />
 
                 <k-button
+                    v-if="title"
                     v-tooltip="{ content: 'Título 1', placement: 'bottom' }"
                     color="primary"
                     size="sm"
@@ -103,6 +117,7 @@
                 </k-button>
 
                 <k-button
+                    v-if="title"
                     v-tooltip="{ content: 'Título 2', placement: 'bottom' }"
                     color="primary"
                     size="sm"
@@ -117,6 +132,7 @@
                 </k-button>
 
                 <k-button
+                    v-if="title"
                     v-tooltip="{ content: 'Título 3', placement: 'bottom' }"
                     color="primary"
                     size="sm"
@@ -131,6 +147,7 @@
                 </k-button>
 
                 <k-button
+                    v-if="list"
                     v-tooltip="{ content: 'Lista (ord)', placement: 'bottom' }"
                     color="primary"
                     size="sm"
@@ -140,6 +157,7 @@
                 />
 
                 <k-button
+                    v-if="list"
                     v-tooltip="{ content: 'Lista (num)', placement: 'bottom' }"
                     color="primary"
                     size="sm"
@@ -149,6 +167,7 @@
                 />
 
                 <k-button
+                    v-if="quote"
                     v-tooltip="{ content: 'Cita', placement: 'bottom' }"
                     color="primary"
                     size="sm"
@@ -158,6 +177,7 @@
                 />
 
                 <k-button
+                    v-if="code"
                     v-tooltip="{ content: 'Código', placement: 'bottom' }"
                     color="primary"
                     size="sm"
@@ -220,7 +240,7 @@
                     }"
                     color="primary"
                     size="sm"
-                    icon="align-center"
+                    icon="align-right"
                     :class="{ active: editor.isActive({ textAlign: 'right' }) }"
                     @click="editor.chain().focus().setTextAlign('right').run()"
                 />
@@ -241,6 +261,7 @@
                 <div class="ml-auto" />
 
                 <k-button
+                    v-if="history"
                     v-tooltip="{ content: 'Deshacer', placement: 'bottom' }"
                     color="primary"
                     size="sm"
@@ -249,6 +270,7 @@
                 />
 
                 <k-button
+                    v-if="history"
                     v-tooltip="{ content: 'Rehacer', placement: 'bottom' }"
                     color="primary"
                     size="sm"
@@ -257,6 +279,18 @@
                 />
 
                 <k-button
+                    v-tooltip="{
+                        content: 'Mostrar código',
+                        placement: 'bottom'
+                    }"
+                    color="primary"
+                    size="sm"
+                    icon="code"
+                    @click="toggleCode"
+                />
+
+                <k-button
+                    v-if="zenmode"
                     v-tooltip="{ content: 'Modo zen', placement: 'bottom' }"
                     color="primary"
                     size="sm"
@@ -273,7 +307,6 @@
 
 <script lang="ts">
     import {
-        PropType,
         computed,
         defineComponent,
         onBeforeUnmount,
@@ -281,17 +314,15 @@
         ref,
         watch
     } from 'vue'
-
+    import sanitizeHtml from 'sanitize-html'
     import { Editor, EditorContent, BubbleMenu } from '@tiptap/vue-3'
     import StarterKit from '@tiptap/starter-kit'
     import Link from '@tiptap/extension-link'
     import TextAlign from '@tiptap/extension-text-align'
-    // import Image from '@tiptap/extension-image'
     import Placeholder from '@tiptap/extension-placeholder'
-    import { ResizableMedia } from './resizableMedia'
 
-    import sanitizeHtml from 'sanitize-html'
-    import { ErrorObject } from '@vuelidate/core'
+    import props from './k-editor.props'
+    import { ResizableMedia } from './resizableMedia'
 
     export default defineComponent({
         name: 'AEditor',
@@ -299,57 +330,13 @@
             EditorContent,
             BubbleMenu
         },
-        props: {
-            modelValue: {
-                type: String,
-                default: ''
-            },
-            helpPosition: {
-                type: String,
-                default: 'bottom'
-            },
-            mandatory: {
-                type: String,
-                default: ''
-            },
-            placeholder: {
-                type: String,
-                default: 'Escribe algo...'
-            },
-            maxHeight: {
-                type: Number,
-                default: 600
-            },
-            minHeight: {
-                type: Number,
-                default: 200
-            },
-            label: {
-                type: String,
-                default: ''
-            },
-            required: {
-                type: Boolean,
-                default: false
-            },
-            errors: {
-                type: Array as PropType<ErrorObject[]>,
-                required: false,
-                default: () => [],
-                description: 'Errores de validación'
-            },
-            status: {
-                type: String,
-                default: '',
-                options: ['warning', 'success', 'danger'],
-                description: 'Color de estado del input'
-            }
-        },
+        props,
         emits: ['update:modelValue'],
         setup(props, ctx) {
             const editor: any = ref()
             const html = ref(props.modelValue)
             const hasSlot = (name: string) => !!ctx.slots[name]
+            const showCode = ref(false)
 
             const fullpage = ref(false)
             const mandatoryHtml = computed(() => {
@@ -415,6 +402,10 @@
                 return props.label || hasSlot('default')
             })
 
+            const toggleCode = () => {
+                showCode.value = !showCode.value
+            }
+
             onMounted(() => {
                 editor.value = new Editor({
                     content: html.value,
@@ -470,198 +461,25 @@
             )
 
             return {
+                //Variables
                 editor,
                 mandatoryHtml,
-                addImage,
                 firstError,
                 classes,
-                hasSlot,
                 hasLabel,
-                fullpage
+                fullpage,
+                showCode,
+                html,
+
+                // Methods
+                addImage,
+                hasSlot,
+                toggleCode
             }
         }
     })
 </script>
 
 <style lang="scss">
-    .k-editor {
-        .k-editor-wrapper {
-            @apply bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm transition-all overflow-y-auto flex flex-col;
-
-            &:focus-within {
-                @apply ring-2 ring-inset ring-primary bg-white dark:bg-gray-800;
-
-                .k-editor-menu {
-                    @apply border-gray-700 bg-transparent dark:bg-transparent;
-
-                    .k-button.active {
-                        @apply text-white bg-gray-700 opacity-100;
-                    }
-
-                    .k-button:not(.active) {
-                        @apply text-gray-700 dark:text-white;
-                    }
-                }
-            }
-
-            .k-editor-content {
-                @apply p-5 flex-1 text-gray-700 dark:text-white;
-
-                * {
-                    font-size: 14px;
-                }
-
-                p,
-                div,
-                span {
-                    font-family: 'Montserrat', sans-serif;
-                    font-size: 14px;
-                }
-
-                p {
-                    margin-bottom: 0.5rem;
-                }
-
-                h1,
-                h2,
-                h3,
-                h4,
-                h5,
-                h6 {
-                    font-weight: bold;
-                }
-
-                h1 {
-                    font-size: 32px;
-                }
-
-                h2 {
-                    font-size: 30px;
-                }
-
-                h3 {
-                    font-size: 26px;
-                }
-
-                h4 {
-                    font-size: 24px;
-                }
-
-                h5 {
-                    font-size: 20px;
-                }
-
-                h6 {
-                    font-size: 18px;
-                }
-
-                & > div {
-                    height: 100%;
-                }
-
-                .ProseMirror {
-                    @apply outline-none h-full;
-
-                    p.is-editor-empty:first-child::before {
-                        content: attr(data-placeholder);
-                        @apply text-gray-200 float-left h-0 pointer-events-none;
-                    }
-
-                    img {
-                        display: inline-block;
-                        max-width: 100%;
-                        max-height: 100%;
-                    }
-                }
-
-                .k-editor-mandatory {
-                    @apply p-2 -mx-2 border border-transparent border-dashed hover:border-gray-300 dark:hover:border-gray-700 rounded-xl mt-4 relative;
-
-                    &:hover::before {
-                        content: 'Contenido obligatorio';
-
-                        @apply text-gray-500 flex items-center justify-center font-bold absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-900 bg-opacity-90 rounded-xl cursor-not-allowed;
-                    }
-                }
-            }
-
-            .k-editor-menu {
-                @apply z-0 flex flex-row border-t-2 border-gray-200 border-dashed py-2 mx-5 gap-1 sticky bottom-0 left-0 select-none dark:border-gray-700 overflow-x-scroll;
-
-                .k-button.active {
-                    @apply text-white bg-gray-700 border-gray-700 opacity-60;
-                }
-
-                .k-button:not(.active) {
-                    @apply bg-transparent text-gray-400 border-gray-400 border-transparent;
-                }
-            }
-
-            .k-editor-bubble {
-                @apply flex flex-row gap-1;
-
-                .k-button.active {
-                    @apply text-white bg-primary;
-                }
-
-                .k-button:not(.active) {
-                    @apply bg-transparent text-white hover:text-primary border-transparent;
-                }
-            }
-
-            .tippy-box {
-                @apply bg-gray-900 dark:text-white;
-
-                .tippy-arrow:before {
-                    @apply text-gray-900;
-                }
-            }
-        }
-
-        /// /////////////////
-        /// ERROR
-        /// /////////////////
-
-        &.k-editor-danger {
-            .k-editor-wrapper {
-                @apply ring-2 ring-danger focus:ring-danger ring-inset;
-            }
-
-            label {
-                @apply text-danger;
-            }
-        }
-
-        &.k-editor-success {
-            .k-editor-wrapper {
-                @apply ring-2 ring-success focus:ring-success ring-inset;
-            }
-
-            label {
-                @apply text-success;
-            }
-        }
-
-        &.k-editor-warning {
-            .k-editor-wrapper {
-                @apply ring-2 ring-warning focus:ring-warning ring-inset;
-            }
-
-            label {
-                @apply text-warning;
-            }
-        }
-    }
-
-    /// /////////////////
-    /// FULLPAGE
-    /// /////////////////
-
-    .k-editor.k-editor-fullpage {
-        @apply fixed top-0 left-0 right-0 bottom-0 z-50 p-10 bg-black/50 backdrop-blur-xl text-white flex flex-col;
-
-        .k-editor-wrapper {
-            @apply w-full flex-1 shadow-2xl;
-        }
-    }
+    @import './k-editor.scss';
 </style>
