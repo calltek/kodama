@@ -11,7 +11,8 @@
                 </div>
 
                 <div class="px-4 py-2">
-                    {{ text }}
+                    <slot v-if="hasSlot('default')"></slot>
+                    <template v-else>{{ text }}</template>
                 </div>
             </div>
         </template>
@@ -35,6 +36,11 @@
                 default: 'seal-question',
                 description: 'Icono'
             }
+        },
+        setup(_props, { slots }) {
+            const hasSlot = (name: string) => !!slots[name]
+
+            return { hasSlot }
         }
     })
 </script>

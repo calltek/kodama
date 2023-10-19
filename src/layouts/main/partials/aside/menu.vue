@@ -229,7 +229,7 @@
             }
 
             const checkRoles = (menu: any) => {
-                if (menu.auth) return menu.auth
+                if (menu.auth !== undefined) return !!menu.auth
                 return true
             }
 
