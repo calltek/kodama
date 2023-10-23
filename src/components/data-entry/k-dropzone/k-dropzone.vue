@@ -27,7 +27,7 @@
                 :for="!locked ? id : ''"
                 class="k-dropzone-input"
                 :class="{
-                    'k-dropzone--loading': loading,
+                    'k-dropzone--loading': isLoading,
                     'k-dropzone--error': errors.length > 0,
                     'k-dropzone--disabled': disabled
                 }"
@@ -39,11 +39,11 @@
                 }"
             >
                 <div
-                    v-if="modelValue || loading"
+                    v-if="modelValue || isLoading"
                     class="flex flex-col max-w-full items-center justify-center pt-5 pb-6"
                 >
                     <k-button
-                        v-if="!loading"
+                        v-if="!isLoading"
                         size="xs"
                         icon="times"
                         color="gray"
@@ -55,7 +55,7 @@
                     </k-button>
 
                     <div
-                        v-if="loading"
+                        v-if="isLoading"
                         class="absolute top-0 left-0 h-full w-full bg-opacity-60 bg-gray-900 z-20 flex items-center justify-center text-white"
                     >
                         <k-icon
@@ -66,7 +66,12 @@
                         />
                     </div>
                     <div
-                        class="text-sm flex justify-center max-w-full flex-col font-semibold text-center uppercase z-10 absolute top-0 left-0 bg-gray-100 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-50 w-full h-full"
+                        class="text-sm flex justify-center max-w-full flex-col font-semibold text-center uppercase z-10 absolute top-0 left-0 w-full h-full transition-all"
+                        :class="{
+                            'opacity-0 hover:opacity-100 hover:bg-opacity-50 hover:dark:bg-opacity-50 hover:bg-gray-100 hover:dark:bg-gray-900':
+                                isModelValueImage,
+                            'bg-gray-200 dark:bg-gray-700 ': !isModelValueImage
+                        }"
                     >
                         <slot
                             name="selectedFile"
@@ -164,53 +169,17 @@
 <script lang="ts">
     import { uid } from '@/helpers/utils'
     import { computed, defineComponent, ref } from 'vue'
+    import props from './k-dropzone.props'
 
     export default defineComponent({
         name: 'KDropzone',
-        props: {
-            modelValue: {
-                type: String,
-                default: ''
-            },
-            maxSize: {
-                type: Number,
-                default: 5
-            },
-            accept: {
-                type: Array as () => string[],
-                default: () => ['jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf']
-            },
-            removable: {
-                type: Boolean,
-                default: true
-            },
-            loading: {
-                type: Boolean,
-                default: false
-            },
-            disabled: {
-                type: Boolean,
-                default: false
-            },
-            required: {
-                type: Boolean,
-                default: false
-            },
-            label: {
-                type: String,
-                default: ''
-            },
-            size: {
-                type: String,
-                default: 'md',
-                options: ['xs', 'sm', 'md', 'lg']
-            }
-        },
+        props,
         emits: ['delete', 'upload', 'update:modelValue'],
         setup(props, ctx) {
             const id = uid()
             const hasSlot = (name: string) => !!ctx.slots[name]
             const errors = ref<string[]>([])
+            const internalLoading = ref(false)
 
             const file = ref({
                 name: '',
@@ -234,8 +203,26 @@
             })
 
             const isModelValueImage = computed(() => {
-                // tramp
-                return true
+                const extension = (
+                    props.modelValue.split('.').pop() || ''
+                ).split('?')[0]
+
+                const imageExtension = [
+                    'jpg',
+                    'jpeg',
+                    'png',
+                    'gif',
+                    'webp',
+                    'svg'
+                ]
+
+                const isImageFile = imageExtension.includes(
+                    file.value.fileExtention
+                )
+
+                const modelImageFile = imageExtension.includes(extension)
+
+                return isImageFile || modelImageFile
             })
 
             const onFileChange = (e: any) => {
@@ -245,6 +232,8 @@
                     const efile = e.target.files[0]
 
                     if (isFileValid(efile)) {
+                        internalLoading.value = true
+
                         // Get file size
                         const fileSize =
                             Math.round((efile.size / 1024 / 1024) * 100) / 100
@@ -282,6 +271,8 @@
 
                             ctx.emit('update:modelValue', file.value.url)
                             ctx.emit('upload', efile)
+
+                            internalLoading.value = false
                         }
                     } else {
                         onFileReset(false, false)
@@ -321,7 +312,6 @@
             }
 
             const isFileTypeValid = (fileExtension: string) => {
-                console.log('extension', fileExtension)
                 if (
                     !props.accept
                         .map((a) => a.toLowerCase())
@@ -347,6 +337,10 @@
                 }
             }
 
+            const isLoading = computed(() => {
+                return internalLoading.value || props.loading
+            })
+
             const hasLabel = computed(() => {
                 return props.label || hasSlot('default')
             })
@@ -362,7 +356,8 @@
                 onFileReset,
                 isModelValueImage,
                 hasLabel,
-                locked
+                locked,
+                isLoading
             }
         }
     })

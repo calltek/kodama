@@ -1,0 +1,28 @@
+import { Meta, Primary, Controls, Story, Canvas } from '@storybook/blocks';
+import {SHead} from '../../../../../.storybook/app/components/s-head'
+import * as KDropzoneStories from './k-dropzone.stories';
+
+<Meta of={KDropzoneStories} />
+
+<SHead image="https://media2.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif?cid=ecf05e47k3mnhrb7yc36brvbtq2tz34x1c5odz3ckvei9tmc&rid=giphy.gif&ct=g">🗂️ KDropzone</SHead>
+
+# KDropzone
+
+Con el componente `k-dropzone` puedes tratar la subida de un fichero.
+
+<Primary />
+
+## Historias
+
+## **Deshabilitado**
+Puedes deshabilitar el componente con la propiedad `disabled`.
+
+<Canvas of={KDropzoneStories.Disabled} />
+
+## **Label**
+Puedes añadir un label
+
+<Canvas of={KDropzoneStories.Label} />
+
+
+<Controls />

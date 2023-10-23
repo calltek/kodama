@@ -3,7 +3,7 @@ import type { StorybookConfig } from '@storybook/vue3-vite'
 const config: StorybookConfig = {
     stories: [
         '../src/components/**/*.stories.@(ts|tsx)',
-        '../src/components/**/*.test.@(mdx)'
+        '../src/components/**/*.doc.@(mdx)'
         // '../src/plugins/**/*.stories.@(mdx|js|jsx|mjs|ts|tsx)',
         // '../src/views/**/*.stories.@(mdx|js|jsx|mjs|ts|tsx)'
     ],
