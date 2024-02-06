@@ -9,7 +9,7 @@
                 [`k-dropzone-${size}`]: true
             }"
         >
-            <label v-if="hasLabel">
+            <label v-if="hasLabel" class="k-dropzone-label">
                 <slot v-if="hasSlot('default')" />
                 <template v-else>{{ label }}</template>
 
@@ -168,7 +168,7 @@
 
 <script lang="ts">
     import { uid } from '@/helpers/utils'
-    import { computed, defineComponent, ref } from 'vue'
+    import { computed, defineComponent, ref, watch } from 'vue'
     import props from './k-dropzone.props'
 
     export default defineComponent({
@@ -203,6 +203,8 @@
             })
 
             const isModelValueImage = computed(() => {
+                if (!props.modelValue) return false
+
                 const extension = (
                     props.modelValue.split('.').pop() || ''
                 ).split('?')[0]
@@ -345,6 +347,13 @@
                 return props.label || hasSlot('default')
             })
 
+            watch(
+                () => props.id,
+                () => {
+                    file.value.name = ''
+                }
+            )
+
             return {
                 id,
                 file,
@@ -369,7 +378,11 @@
 
         .k-dropzone-wrapper {
             label {
-                @apply mb-2 block select-none text-sm text-gray-500 dark:text-white font-semibold;
+                @apply block select-none text-sm text-gray-500 dark:text-white font-semibold;
+            }
+
+            label.k-dropzone-label {
+                @apply mb-2;
             }
 
             .k-dropzone-input {

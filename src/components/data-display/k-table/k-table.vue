@@ -484,7 +484,15 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, watch, onMounted, computed, ref } from 'vue'
+    import {
+        defineComponent,
+        watch,
+        onMounted,
+        computed,
+        ref,
+        onUnmounted
+    } from 'vue'
+    import { emitter } from '@/plugins'
 
     import props from './k-table.props'
     import useColumn from './lib/columns'
@@ -596,6 +604,15 @@
             onMounted(() => {
                 enable404.value = true
                 ctx.emit('fetch', query.value)
+
+                emitter.on(`ktable_${props.store}_fetch`, () => {
+                    console.log('emite')
+                    ctx.emit('fetch', query.value)
+                })
+            })
+
+            onUnmounted(() => {
+                emitter.off(`ktable_${props.store}_fetch`)
             })
 
             return {

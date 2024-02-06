@@ -106,7 +106,8 @@
 
                     auth.login(state.username, state.password)
                         .then(() => {
-                            router.push(homepage.value)
+                            // router.push(homepage.value)
+                            window.location.reload()
                         })
                         .finally(() => {
                             loading.value = false

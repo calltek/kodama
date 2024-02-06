@@ -100,7 +100,7 @@
         }
 
         .k-editor-menu {
-            @apply z-0 flex flex-row border-t-2 border-gray-200 border-dashed py-2 mx-5 gap-1 sticky bottom-0 left-0 select-none dark:border-gray-700 overflow-x-scroll;
+            @apply z-0 flex flex-row border-t-2 border-gray-200 border-dashed py-2 mx-5 gap-1 sticky bottom-0 left-0 select-none dark:border-gray-700 overflow-x-scroll bg-gray-100 min-h-[56px] dark:bg-gray-900;
 
             .k-button.active {
                 @apply text-white bg-gray-700 border-gray-700 opacity-60;

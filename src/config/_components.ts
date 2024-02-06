@@ -22,6 +22,7 @@ import KEditor from '../components/data-entry/k-editor/k-editor.vue'
 import KRadio from '../components/data-entry/k-radio/k-radio.vue'
 import KColor from '../components/data-entry/k-color/k-color.vue'
 import KInputColor from '../components/data-entry/k-input-color/k-input-color.vue'
+import KFile from '../components/data-entry/k-file/k-file.vue'
 
 // Data Display Components
 import KAvatar from '../components/data-display/k-avatar/k-avatar.vue'
@@ -39,6 +40,7 @@ import KPrice from '../components/data-display/k-price/k-price.vue'
 import KSimpleTable from '../components/data-display/k-simple-table/k-simple-table.vue'
 import KTabs from '../components/data-display/k-tabs/k-tabs.vue'
 import KTab from '../components/data-display/k-tabs/k-tab.vue'
+import KDrag from '../components/data-display/k-drag/k-drag.vue'
 
 // Feedback
 import KModal from '../components/feedback/k-modal/k-modal.vue'
@@ -87,6 +89,7 @@ export default (
     app.component('KRadio', KRadio)
     app.component('KColor', KColor)
     app.component('KInputColor', KInputColor)
+    app.component('KFile', KFile)
 
     // Data Display Components
     app.component('KAvatar', KAvatar)
@@ -104,6 +107,7 @@ export default (
     app.component('KSimpleTable', KSimpleTable)
     app.component('KTabs', KTabs)
     app.component('KTab', KTab)
+    app.component('KDrag', KDrag)
 
     // Feedback
     app.component('KModal', KModal)

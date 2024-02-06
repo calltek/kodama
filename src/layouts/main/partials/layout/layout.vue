@@ -8,36 +8,38 @@
         <div id="k-layout-header" :class="{ 'k-layout-sticky ': sticky }">
             <div id="k-layout-wrapper">
                 <div id="k-layout-leftbar">
-                    <div
-                        v-if="breads || parsedBreads.length > 0"
-                        id="k-layout-breads"
-                    >
-                        <router-link :to="homepage">
-                            <k-title :size="5" class="k-layout-bread">
-                                <k-icon icon="home" />
-                            </k-title>
-                        </router-link>
-
-                        <div class="k-layout-separator">
-                            <k-icon icon="chevron-right" />
-                        </div>
-
-                        <template v-for="(b, i) in parsedBreads" :key="i">
-                            <router-link :to="b.route">
+                    <slot name="title">
+                        <div
+                            v-if="breads || parsedBreads.length > 0"
+                            id="k-layout-breads"
+                        >
+                            <router-link :to="homepage">
                                 <k-title :size="5" class="k-layout-bread">
-                                    {{ b.title }}
+                                    <k-icon icon="home" />
                                 </k-title>
                             </router-link>
 
                             <div class="k-layout-separator">
                                 <k-icon icon="chevron-right" />
                             </div>
-                        </template>
-                    </div>
 
-                    <k-title :size="5" class="k-layout-title">
-                        {{ pageTitle }}
-                    </k-title>
+                            <template v-for="(b, i) in parsedBreads" :key="i">
+                                <router-link :to="b.route">
+                                    <k-title :size="5" class="k-layout-bread">
+                                        {{ b.title }}
+                                    </k-title>
+                                </router-link>
+
+                                <div class="k-layout-separator">
+                                    <k-icon icon="chevron-right" />
+                                </div>
+                            </template>
+                        </div>
+
+                        <k-title :size="5" class="k-layout-title">
+                            {{ pageTitle }}
+                        </k-title>
+                    </slot>
                 </div>
 
                 <div id="k-layout-topbar">
@@ -145,7 +147,7 @@
         }
 
         #k-layout-wrapper {
-            @apply py-4 px-4 flex flex-row items-center dark:bg-gray-800 bg-white w-full rounded-tl-3xl h-16 overflow-hidden text-gray-800 dark:text-gray-200;
+            @apply py-4 px-4 flex flex-row items-center dark:bg-gray-800 bg-white w-full rounded-tl-3xl h-16  text-gray-800 dark:text-gray-200;
 
             #k-layout-leftbar {
                 @apply flex justify-center flex-row select-none;

@@ -24,6 +24,7 @@
             :style="style"
             :autofocus="autofocus"
             :disabled="disabled"
+            :autocomplete="autocomplete"
             @input="change"
             @blur="validate"
         />
@@ -161,6 +162,11 @@
                 type: Boolean,
                 default: false,
                 description: 'Indica si el input está deshabilitado'
+            },
+            autocomplete: {
+                type: String,
+                default: 'off',
+                description: 'Indica si el input tiene autocompletado'
             }
         },
         emits: ['update:modelValue'],

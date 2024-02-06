@@ -16,13 +16,11 @@ import { AvatarType, CustomConfig as Config } from './config/_settings'
 
 // System store
 import { useConfig, useQuery } from './store'
-import { toast, dayjs, useRoute, useRouter } from './plugins'
+import { toast, dayjs, useRoute, useRouter, emitter } from './plugins'
 
 // EventBus
-import mitt from 'mitt'
 import { Filters } from './config/_filters'
 import { KSimpleTableColumn } from './components/data-display/k-simple-table/k-simple-table.types'
-const emitter = mitt()
 
 export {
     // App

@@ -10,6 +10,7 @@
             data-zoom
             :data-zoom-src="src"
             :style="style"
+            class="object-cover"
         />
     </div>
 </template>

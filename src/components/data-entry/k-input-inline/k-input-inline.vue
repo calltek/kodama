@@ -8,9 +8,9 @@
             :disabled="disabled"
             :readonly="readonly"
             :maxlength="maxlength > 0 ? maxlength : undefined"
-            :style="{ width: width }"
+            :style="{ width: parsedWidth }"
         />
-        <span ref="span" :style="{ minWidth: `${width}px` }">
+        <span ref="span" :style="{ minWidth: parsedWidth }">
             {{ model || placeholder }}
         </span>
     </div>
@@ -45,6 +45,10 @@
             width: {
                 type: Number,
                 default: 40
+            },
+            fluid: {
+                type: Boolean,
+                default: false
             },
             size: {
                 type: String,
@@ -81,6 +85,11 @@
                 return classes
             })
 
+            const parsedWidth = computed(() => {
+                if (props.fluid) return '100%'
+                return `${props.width}px`
+            })
+
             const syncWidth = () => {
                 if (input.value && span.value) {
                     input.value.style.width = span.value.offsetWidth + 'px'
@@ -88,7 +97,9 @@
             }
 
             onMounted(() => {
-                new ResizeObserver(syncWidth).observe(span.value)
+                if (!props.fluid) {
+                    new ResizeObserver(syncWidth).observe(span.value)
+                }
             })
 
             return {
@@ -97,7 +108,7 @@
                 span,
                 model,
                 classes,
-                syncWidth
+                parsedWidth
             }
         }
     })

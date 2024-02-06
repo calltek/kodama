@@ -5,6 +5,10 @@ const Props = {
         type: String,
         default: ''
     },
+    id: {
+        type: [Number, String],
+        default: ''
+    },
     maxSize: {
         type: Number,
         default: 5

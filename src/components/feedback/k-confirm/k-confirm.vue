@@ -66,6 +66,10 @@
             disabled: {
                 type: Boolean,
                 default: false
+            },
+            unlocked: {
+                type: Boolean,
+                default: false
             }
         },
         emits: ['ok', 'ko'],
@@ -94,7 +98,11 @@
 
             const open = () => {
                 if (props.disabled) return
-                showModal.value = true
+                if (props.unlocked) {
+                    ok()
+                } else {
+                    showModal.value = true
+                }
             }
 
             return { showModal, ok, ko, open, model }

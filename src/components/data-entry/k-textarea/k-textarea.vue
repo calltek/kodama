@@ -19,6 +19,7 @@
             :placeholder="placeholder"
             :required="required"
             :style="style"
+            :autocomplete="autocomplete"
         >
         </textarea>
     </div>
@@ -98,6 +99,11 @@
                 type: Number,
                 default: 0,
                 description: 'Altura mínima del control'
+            },
+            autocomplete: {
+                type: String,
+                default: 'off',
+                description: 'Indica si el input tiene autocompletado'
             }
         },
         emits: ['update:modelValue'],
