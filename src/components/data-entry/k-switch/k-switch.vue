@@ -71,12 +71,13 @@
                 description: 'Tamaño del switch'
             }
         },
-        emits: ['update:modelValue'],
+        emits: ['update:modelValue', 'change'],
         setup(props, ctx) {
             const hasSlot = (name: string) => !!ctx.slots[name]
 
             const onChange = (val: any) => {
                 ctx.emit('update:modelValue', val.target.checked)
+                ctx.emit('change', val.target.checked)
             }
 
             const model = computed({
@@ -85,6 +86,7 @@
                 },
                 set(val) {
                     ctx.emit('update:modelValue', val)
+                    ctx.emit('change', val)
                 }
             })
 

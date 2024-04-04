@@ -8,7 +8,7 @@
                 :size="3"
                 bolder
                 uppercase
-                class="text-gray-900"
+                class="text-gray-900 dark:text-white"
             >
                 {{ title }}
                 <template v-if="subtitle" #subtitle>

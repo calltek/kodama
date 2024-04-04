@@ -201,7 +201,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, inject, onMounted } from 'vue'
+    import { computed, defineComponent, inject, onMounted } from 'vue'
     import { RouteLocationRaw, useRoute } from 'vue-router'
     import { Accordion } from 'flowbite'
 
@@ -221,24 +221,27 @@
             const $menu: () => Menu[] = inject('$menu') || (() => [])
 
             const SeparatorMenu: Menu[] = [{ separator: true }]
-            const FrontMenu: Menu[] = $menu()
-            const menu: Menu[] = [...FrontMenu, ...SeparatorMenu, ...SysMenu]
+
+            const menu = computed(() => {
+                const FrontMenu: Menu[] = $menu()
+                return [...FrontMenu, ...SeparatorMenu, ...SysMenu]
+            })
 
             const hasActiveChildren = (match: RouteLocationRaw) => {
                 return route.path.indexOf(match.toString()) !== -1
             }
 
-            const checkRoles = (menu: any) => {
-                if (menu.auth !== undefined) return !!menu.auth
+            const checkRoles = (item: any) => {
+                if (item.auth !== undefined) return !!item.auth
                 return true
             }
 
-            const hasOneAccess = (menu: any) => {
-                if (menu.auth) return menu.auth
+            const hasOneAccess = (item: any) => {
+                if (item.auth) return item.auth
 
-                if (menu.pages) {
-                    for (let i = 0; i < menu.pages.length; i++) {
-                        const page = menu.pages[i]
+                if (item.pages) {
+                    for (let i = 0; i < item.pages.length; i++) {
+                        const page = item.pages[i]
 
                         if (page.auth) return page.auth
 
@@ -260,7 +263,7 @@
                 // create an array of objects with the id, trigger element (eg. button), and the content element
                 let accordionItems: any[] = []
                 let i = 0
-                menu.forEach((item) => {
+                menu.value.forEach((item) => {
                     if (item.pages) {
                         item.pages.forEach((page) => {
                             if (page.pages) {
