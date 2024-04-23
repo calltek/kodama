@@ -68,7 +68,7 @@
             const hasSlot = (name: string) => !!ctx.slots[name]
 
             const classes = computed(() => {
-                let classes = []
+                let classes: string[] = []
 
                 if (props.color === 'white' || props.color === 'black') {
                     classes.push(

@@ -68,7 +68,7 @@
             })
 
             const inputClasses = computed(() => {
-                const classes = []
+                const classes: string[] = []
 
                 if (props.size === 'sm') classes.push('text-sm')
                 if (props.size === 'md') classes.push('text-base')

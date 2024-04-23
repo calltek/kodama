@@ -1,11 +1,11 @@
 import { ExtractPropTypes, SetupContext } from 'vue'
-import { QueryFilterFields, QueryParams } from '../../../store/modules/query'
+import { QueryParams } from '../../../store/modules/query'
 import Props from './k-table.props'
 
 export type KTableParams = {
     page: number
     order: QueryParams['order']
-    filter: QueryFilterFields | null
+    filter: QueryParams['filter']
     limit: QueryParams['limit']
     reset: boolean
     strict: QueryParams['strict']

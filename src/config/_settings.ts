@@ -13,6 +13,8 @@ export interface CustomConfig extends Partial<Config> {
         profile: RouteLocationRaw
         configuration: RouteLocationRaw
     }
+
+    [x: string | number]: unknown
 }
 
 export enum AvatarType {

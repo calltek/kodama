@@ -85,7 +85,7 @@
             const tooltip = ref()
 
             const filter = (
-                operator: QueryFilterOperator,
+                operator: string,
                 value: KTableColumnFilter['value']
             ) => {
                 ctx.emit('filter', { [operator]: value })

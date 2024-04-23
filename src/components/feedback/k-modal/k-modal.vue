@@ -212,7 +212,7 @@
             })
 
             const defaultBackdropClasses = computed(() => {
-                const classes = [
+                const classes: string[] = [
                     'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0'
                 ]
 
@@ -234,7 +234,7 @@
             })
 
             const contentClasses = computed(() => {
-                const classes = []
+                const classes: string[] = []
 
                 if (props.size === 'xs') {
                     classes.push('max-w-md')

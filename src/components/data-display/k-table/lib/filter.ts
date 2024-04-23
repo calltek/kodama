@@ -1,9 +1,6 @@
 import { computed, reactive } from 'vue'
 import { useQuery } from '../../../../store'
-import {
-    QueryFilterField,
-    QueryFilterFields
-} from '../../../../store/modules/query'
+import { QueryFilter } from '../../../../store/modules/query'
 import { KTableContext, KTableParams, KTableProps } from '../k-table.types'
 // import cloneDeep from 'lodash.clonedeep'
 
@@ -59,7 +56,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         ctx.emit('fetch', query.value)
     }
 
-    const filter = (field: string, filter: QueryFilterField | null) => {
+    const filter = (field: string, filter: QueryFilter | null) => {
         const queryStore = useQuery()
 
         if (props.store) {
@@ -184,7 +181,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
 
     const mergeFilters = (
         required: any = null,
-        custom: QueryFilterFields | null = null,
+        custom: QueryFilter | null = null,
         strict = true
     ) => {
         if (!required && !custom) return null
@@ -200,7 +197,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
 
             const requiredFields = getFieldFilters(required)
 
-            const customFilters: QueryFilterFields[] = []
+            const customFilters: QueryFilter[] = []
 
             Object.keys(custom).forEach((field) => {
                 const find = requiredFields.find((f) => f.field === field)

@@ -1,46 +1,34 @@
 import { defineStore } from 'pinia'
 
-export type QueryFilterOperator =
-    | '$eq'
-    | '$neq'
-    | '$gt'
-    | '$lt'
-    | '$gte'
-    | '$lte'
-    | '$in'
-    | '$nin'
-    | '$like'
-    | '$from'
-    | '$to'
+export type QueryFilterOperator = {
+    $eq?: string | number
+    $neq?: string | number
+    $gt?: number
+    $lt?: number
+    $gte?: number
+    $lte?: number
+    $in?: (string | number)[]
+    $nin?: (string | number)[]
+    $like?: string
+    $from?: string | Date
+    $to?: string | Date
+}
 
-type QueryCondition = '$and' | '$or'
+export type QueryCondition = {
+    [key: string]: QueryFilterOperator
+}
 
-export type QueryFilterCondition = Partial<
-    Record<
-        QueryCondition,
-        Array<
-            | QueryFilterFields[]
-            | Partial<
-                  Record<
-                      QueryCondition,
-                      QueryFilterFields[] | QueryFilterCondition[]
-                  >
-              >
-        >
-    >
->
-export type QueryFilterFields = Record<string, QueryFilterField>
-export type QueryFilterField = Partial<Record<QueryFilterOperator, any>>
+export type QueryLogicalOperator = {
+    $and?: QueryFilter[]
+    $or?: QueryFilter[]
+}
 
-export type QueryFilter = Partial<
-    Record<QueryCondition, Array<QueryFilterFields | QueryFilterCondition>>
->
-
+export type QueryFilter = QueryCondition | QueryLogicalOperator
 export type QueryOrder = Record<string, 'asc' | 'desc'>
 
 export type QueryParams = {
     order: QueryOrder | null
-    filter: QueryFilterFields | null
+    filter: QueryFilter | null
     limit: number
     strict: boolean
 }

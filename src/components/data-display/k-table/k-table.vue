@@ -606,7 +606,6 @@
                 ctx.emit('fetch', query.value)
 
                 emitter.on(`ktable_${props.store}_fetch`, () => {
-                    console.log('emite')
                     ctx.emit('fetch', query.value)
                 })
             })
