@@ -21,6 +21,7 @@
             :value="model"
             :min="min"
             :max="max"
+            :step="step"
             :style="style"
             :autofocus="autofocus"
             :disabled="disabled"
@@ -167,6 +168,11 @@
                 type: String,
                 default: 'off',
                 description: 'Indica si el input tiene autocompletado'
+            },
+            step: {
+                type: [String, Number],
+                default: 1,
+                description: 'Incremento o decremento del input'
             }
         },
         emits: ['update:modelValue'],
