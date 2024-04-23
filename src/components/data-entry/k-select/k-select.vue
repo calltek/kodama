@@ -34,7 +34,7 @@
             :show-no-results="show404"
             :internal-search="!ajax"
             :limit="limit > 0 ? limit : undefined"
-            tag-placeholder="Presiona enter para añadir"
+            :tag-placeholder="tagPlaceholder"
             :taggable="free"
             :show-no-options="showNoOptions"
             @open="$emit('open')"

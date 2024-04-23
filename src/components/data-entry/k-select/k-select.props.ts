@@ -118,6 +118,10 @@ const Props = {
     showNoOptions: {
         type: Boolean,
         default: true
+    },
+    tagPlaceholder: {
+        type: String,
+        default: 'Presiona ENTER para añadir'
     }
 }
 
