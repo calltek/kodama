@@ -283,6 +283,8 @@
             }
 
             const onFileReset = (clearErrors = false, emitDelete = false) => {
+                const currentUrl = structuredClone(props.modelValue)
+
                 file.value = {
                     name: '',
                     size: 0,
@@ -294,7 +296,7 @@
 
                 ctx.emit('update:modelValue', '')
 
-                if (emitDelete) ctx.emit('delete')
+                if (emitDelete) ctx.emit('delete', currentUrl)
 
                 if (clearErrors) {
                     errors.value = []
