@@ -7,6 +7,7 @@
             class="hidden"
             :accept="accept"
             :multiple="multiple"
+            :disabled="disabled"
             @change="onFilePicked"
         />
     </div>
@@ -21,6 +22,10 @@
             default: '*'
         },
         multiple: {
+            type: Boolean,
+            default: false
+        },
+        disabled: {
             type: Boolean,
             default: false
         }
@@ -39,6 +44,7 @@
 
         if (files.length) {
             emit('upload', [...files])
+            event.target.value = null
         }
     }
 </script>
