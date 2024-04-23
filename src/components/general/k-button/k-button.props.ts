@@ -1,5 +1,6 @@
 import { ExtractPropTypes, PropType } from 'vue'
 import { uid, colors } from '@/helpers/utils'
+import { RouteLocationRaw } from 'vue-router'
 
 const Props = {
     id: {
@@ -80,6 +81,11 @@ const Props = {
             ['fas', 'far', 'fal', 'fad', 'fab'].includes(val),
         default: 'fad',
         description: 'Tipo de icono'
+    },
+    to: {
+        type: Object as PropType<RouteLocationRaw>,
+        default: '',
+        description: 'Ruta de redirección'
     }
 }
 

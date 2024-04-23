@@ -31,6 +31,7 @@
 
     import props from './k-button.props'
     import { parseButtonClasses } from './k-button.utils'
+    import { useRouter } from 'vue-router'
 
     export default defineComponent({
         name: 'KButton',
@@ -45,6 +46,8 @@
                 parseButtonClasses(props, ctx.slots)
             )
 
+            const router = useRouter()
+
             const type = computed(() => {
                 if (props.submit) return 'submit'
                 return 'button'
@@ -52,6 +55,11 @@
 
             const click = (event: any) => {
                 if (props.disabled === false && props.loading === false) {
+                    if (props.to) {
+                        router.push(props.to)
+                        return
+                    }
+
                     ctx.emit('click')
                 } else {
                     event.preventDefault()
