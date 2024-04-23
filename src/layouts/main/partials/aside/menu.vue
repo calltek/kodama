@@ -201,7 +201,7 @@
 </template>
 
 <script lang="ts">
-    import { computed, defineComponent, inject, onMounted } from 'vue'
+    import { computed, defineComponent, inject, onMounted, watch } from 'vue'
     import { RouteLocationRaw, useRoute } from 'vue-router'
     import { Accordion } from 'flowbite'
 
@@ -301,6 +301,16 @@
             onMounted(() => {
                 initCollapse()
             })
+
+            watch(
+                menu,
+                () => {
+                    setTimeout(() => {
+                        initCollapse()
+                    }, 500)
+                },
+                { deep: true }
+            )
 
             return {
                 hasActiveChildren,
