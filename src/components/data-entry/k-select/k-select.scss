@@ -29,7 +29,7 @@
 
     .multiselect__input,
     .multiselect__single {
-        @apply bg-gray-100 dark:bg-gray-900 dark:text-white pl-0 mb-0 text-gray-500 pr-6;
+        @apply bg-gray-100 dark:bg-gray-900 dark:text-white pl-0 mb-0 text-gray-500 pr-6 whitespace-nowrap text-ellipsis overflow-hidden;
     }
 
     .multiselect__placeholder {
@@ -38,6 +38,10 @@
 
     .multiselect__select {
         @apply z-10;
+    }
+
+    .multiselect--disabled {
+        @apply bg-transparent;
     }
 
     // .multiselect__content-wrapper {

@@ -1,6 +1,6 @@
 <template>
     <div :class="[classes]">
-        <label v-if="hasLabel" :for="uuid">
+        <label v-if="hasLabel">
             <slot v-if="hasSlot('default')" />
             <template v-else>{{ label }}</template>
 

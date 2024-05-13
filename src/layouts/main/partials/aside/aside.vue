@@ -5,9 +5,17 @@
             :class="collapsed ? 'justify-center' : 'justify-between'"
         >
             <k-logo
+                v-if="!collapsed"
                 dark
-                :side="!collapsed"
+                side
                 class="cursor-pointer max-w-[14rem]"
+                @click="collapsed = false"
+            />
+            <k-logo
+                v-else
+                dark
+                :side="false"
+                class="cursor-pointer max-w-[54px]"
                 @click="collapsed = false"
             />
 
