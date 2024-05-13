@@ -83,7 +83,7 @@ const Props = {
         description: 'Tipo de icono'
     },
     to: {
-        type: Object as PropType<RouteLocationRaw>,
+        type: [Object, String] as PropType<RouteLocationRaw | string>,
         default: '',
         description: 'Ruta de redirección'
     }

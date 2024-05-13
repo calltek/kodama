@@ -40,7 +40,8 @@ module.exports = plugin(
             },
             fontFamily: {
                 sans: ['Montserrat', 'ui-sans-serif'],
-                title: ['Rubik', 'ui-sans-serif']
+                title: ['Rubik', 'ui-sans-serif'],
+                consola: ['Consolas', 'ui-monospace']
             },
 
             extend: {
