@@ -18,7 +18,7 @@
                 <k-button
                     color="success"
                     class="mr-2 cursor-pointer"
-                    @click="ok"
+                    @click.stop="ok"
                 >
                     {{ okText }}
                 </k-button>
@@ -27,7 +27,7 @@
                     color="danger"
                     class="cursor-pointer"
                     outline
-                    @click="ko"
+                    @click.stop="ko"
                 >
                     {{ koText }}
                 </k-button>
@@ -35,7 +35,7 @@
         </div>
     </k-modal>
 
-    <span @click="open()">
+    <span @click.stop="open()">
         <slot></slot>
     </span>
 </template>
