@@ -18,7 +18,7 @@
                 <k-button
                     color="success"
                     class="mr-2 cursor-pointer"
-                    @click.stop="ok"
+                    @click="ok"
                 >
                     {{ okText }}
                 </k-button>
@@ -27,7 +27,7 @@
                     color="danger"
                     class="cursor-pointer"
                     outline
-                    @click.stop="ko"
+                    @click="ko"
                 >
                     {{ koText }}
                 </k-button>
