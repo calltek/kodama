@@ -22,6 +22,7 @@ export type MenuItem = {
     disabled?: boolean
     route: RouteLocationRaw
     icon: string
+    iconType?: 'fas' | 'far' | 'fab' | 'fad'
     auth?: boolean
     pages?: MenuItem[]
 }

@@ -42,7 +42,9 @@
                                         >
                                             <k-icon
                                                 :icon="menuItem.icon"
-                                                type="fal"
+                                                :type="
+                                                    menuItem.iconType || 'fal'
+                                                "
                                             />
                                         </span>
 
@@ -86,7 +88,7 @@
                                     >
                                         <k-icon
                                             :icon="menuItem.icon"
-                                            type="fal"
+                                            :type="menuItem.iconType || 'fal'"
                                         />
                                     </span>
                                     <span
@@ -148,11 +150,13 @@
                                                     <span
                                                         v-if="item2.icon"
                                                         class="k-menu-icon"
-                                                        type="fal"
                                                     >
                                                         <k-icon
                                                             :icon="item2.icon"
-                                                            type="fal"
+                                                            :type="
+                                                                item2.iconType ||
+                                                                'fal'
+                                                            "
                                                         />
                                                     </span>
 
@@ -162,33 +166,9 @@
                                                     >
                                                         {{ item2.title }}
                                                     </span>
-
-                                                    <!-- <k-icon
-                                                        v-if="item2.pages"
-                                                        icon="chevron-down"
-                                                        class="k-menu-chevron"
-                                                    /> -->
                                                 </button>
                                             </router-link>
                                         </k-tooltip>
-
-                                        <!-- <div
-                                            class="menu-sub menu-sub-accordion"
-                                        >
-                                            <template
-                                                v-for="(
-                                                    item3, k
-                                                ) in item2.pages"
-                                                :key="k"
-                                            >
-                                                <div
-                                                    v-if="checkRoles(item3)"
-                                                    class="menu-item"
-                                                >
-                                                    <menu-item :item="item3" />
-                                                </div>
-                                            </template>
-                                        </div> -->
                                     </li>
                                 </template>
                             </ul>
