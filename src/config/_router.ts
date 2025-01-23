@@ -3,13 +3,16 @@ import {
     createRouter,
     createWebHashHistory,
     RouteRecordRaw,
-    NavigationGuardWithThis
+    NavigationGuardWithThis,
+    createWebHistory
 } from 'vue-router'
 
 export default (
     app: App<Element>,
     frontendRoutes: Array<RouteRecordRaw>,
-    beforeEach?: NavigationGuardWithThis<undefined>
+    beforeEach?: NavigationGuardWithThis<undefined>,
+    historyMode: 'hash' | 'web' = 'hash',
+    on404 = '/404'
 ) => {
     const systemRoutes = [
         {
@@ -92,15 +95,21 @@ export default (
                 title: 'Error interno',
                 public: true
             }
-        },
-        {
-            path: '/:pathMatch(.*)*',
-            redirect: '/404'
         }
     ]
 
+    if (on404) {
+        routes.push({
+            path: '/:pathMatch(.*)*',
+            redirect: on404
+        })
+    }
+
     const router = createRouter({
-        history: createWebHashHistory(),
+        history:
+            historyMode === 'hash'
+                ? createWebHashHistory()
+                : createWebHistory(),
         routes
     })
 

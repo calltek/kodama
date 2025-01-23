@@ -19,6 +19,8 @@ export type KodamaParams = {
     router: {
         routes: Array<RouteRecordRaw>
         beforeEach?: NavigationGuardWithThis<undefined>
+        mode?: 'hash' | 'web'
+        route404?: string
     }
     components: Record<string, { [key: string]: any }>
     menu: () => Menu[]
@@ -62,7 +64,13 @@ export function init(params: KodamaParams, app?: App<Element>) {
     )
 
     // App Routes
-    router(app, params.router.routes, params.router.beforeEach)
+    router(
+        app,
+        params.router.routes,
+        params.router.beforeEach,
+        params.router.mode,
+        params.router.route404
+    )
 
     // App Components
     components(app, params.components)
