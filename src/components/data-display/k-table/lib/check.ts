@@ -36,17 +36,53 @@ export default function (props: KTableProps): any {
         })
     })
 
+    const isRowDisabled = computed(() => {
+        const key = props.index || 'id'
+
+        return props.data.map((data) => {
+            if (props.disabledRows) {
+                const isDisabled = props.disabledRows.includes(data[key])
+                if (isDisabled) return true
+            }
+
+            return false
+        })
+    })
+
     const toggleGlobalCheck = () => {
         if (props.selected) {
             const checked = props.selected
+            const allPosibleData = props.data.filter((c) => {
+                const key = props.index || 'id'
+                const isDisabled = props.disabledRows.includes(c[key])
 
-            if (checked.length >= props.data.length) {
+                return !isDisabled
+            })
+
+            if (checked.length >= allPosibleData.length) {
                 props.selected.splice(0, props.selected.length)
             } else {
                 props.selected.splice(0, props.selected.length)
 
                 for (let i = 0; i < props.data.length; i++) {
-                    props.selected.push(props.data[i])
+                    const isDisabled = isRowDisabled.value[i]
+                    if (!isDisabled) props.selected.push(props.data[i])
+                }
+            }
+        }
+    }
+
+    const uncheckDisabledRows = () => {
+        if (props.selected) {
+            for (let i = 0; i < props.selected.length; i++) {
+                const selected = props.selected[i]
+
+                const findIndex = props.disabledRows.findIndex(
+                    (d) => d === selected[props.index || 'id']
+                )
+
+                if (findIndex > -1) {
+                    props.selected.splice(i, 1)
                 }
             }
         }
@@ -87,7 +123,14 @@ export default function (props: KTableProps): any {
     const isCheckedAll = computed(() => {
         if (props.selected) {
             const checked = props.selected
-            if (checked.length >= props.data.length) {
+            const allPosibleData = props.data.filter((c) => {
+                const key = props.index || 'id'
+                const isDisabled = props.disabledRows.includes(c[key])
+
+                return !isDisabled
+            })
+
+            if (checked.length >= allPosibleData.length) {
                 return true
             }
         }
@@ -98,8 +141,10 @@ export default function (props: KTableProps): any {
     return {
         toggleCheck,
         isRowChecked,
+        isRowDisabled,
         toggleGlobalCheck,
         populateChecks,
-        isCheckedAll
+        isCheckedAll,
+        uncheckDisabledRows
     }
 }

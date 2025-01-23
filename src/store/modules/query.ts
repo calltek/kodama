@@ -12,6 +12,7 @@ export type QueryFilterOperator = {
     $like?: string
     $from?: string | Date
     $to?: string | Date
+    $null?: boolean
 }
 
 export type QueryCondition = {

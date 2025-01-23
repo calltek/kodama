@@ -225,17 +225,12 @@
                 <template v-for="(item, itemKey) in data" :key="itemKey">
                     <div class="k-table-tr">
                         <div v-if="selected" class="k-table-td w-6">
-                            <!-- <input
-                                            :checked="isRowChecked[itemKey]"
-                                            class="form-check-input widget-13-check"
-                                            type="checkbox"
-                                            @change="toggleCheck(itemKey)"
-                                        /> -->
                             <div>
                                 <input
                                     type="checkbox"
                                     class="k-checkbox w-4 h-4 -mt-1 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 text-primary focus:ring-primary dark:focus:ring-primary"
                                     :checked="isRowChecked[itemKey]"
+                                    :disabled="isRowDisabled[itemKey]"
                                     @change="toggleCheck(itemKey)"
                                 />
                             </div>
@@ -550,8 +545,10 @@
             const {
                 toggleCheck,
                 isRowChecked,
+                isRowDisabled,
                 toggleGlobalCheck,
                 populateChecks,
+                uncheckDisabledRows,
                 isCheckedAll
             } = useCheck(props)
             const { isMore, loadMore, loadLess, busy, data, refresh } =
@@ -568,6 +565,9 @@
 
             // Create checks when data its modified
             watch(data, populateChecks, { deep: true })
+
+            // Remove selected checks id disabledRows changes
+            watch(isRowDisabled, uncheckDisabledRows, { deep: true })
 
             populateChecks()
             loadStoreParams()
@@ -622,6 +622,7 @@
                 colLength,
                 toggleCheck,
                 isRowChecked,
+                isRowDisabled,
                 toggleGlobalCheck,
                 busy,
                 enable404,

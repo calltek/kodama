@@ -75,5 +75,9 @@ export default {
     show404: {
         type: Boolean,
         default: true
+    },
+    disabledRows: {
+        type: Array as () => any[],
+        default: () => []
     }
 }

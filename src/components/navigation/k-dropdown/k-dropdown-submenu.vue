@@ -7,7 +7,6 @@
         theme="dropdown"
         tag="li"
         :placement="placement"
-        @state="onStateChange"
     >
         <template #default>
             <div class="flex flex-row items-center">
@@ -72,9 +71,9 @@
             }
         },
         setup(props) {
-            const onStateChange = (state: boolean) => {
-                console.log('state', state)
-            }
+            // const onStateChange = (state: boolean) => {
+            //     console.log('state', state)
+            // }
 
             const ulStyle = computed((): Record<string, any> => {
                 return {
@@ -85,7 +84,7 @@
                 }
             })
 
-            return { onStateChange, ulStyle }
+            return { ulStyle }
         }
     })
 </script>

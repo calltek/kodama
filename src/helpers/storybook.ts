@@ -180,8 +180,6 @@ export function renderArgsV2(props: any) {
                 }
             }
 
-            console.log(args)
-
             // args[prop.name].control = parseControl(prop, false)
             // args[prop.name].type.name = parseControl(prop, false).type
             // if (Array.isArray(prop.type)) {
