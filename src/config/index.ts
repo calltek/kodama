@@ -19,8 +19,8 @@ export type KodamaParams = {
     router: {
         routes: Array<RouteRecordRaw>
         beforeEach?: NavigationGuardWithThis<undefined>
-        mode?: 'hash' | 'web'
-        route404?: string
+        mode?: 'hash' | 'web' | 'memory'
+        route404?: string | boolean
     }
     components: Record<string, { [key: string]: any }>
     menu: () => Menu[]

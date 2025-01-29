@@ -4,15 +4,16 @@ import {
     createWebHashHistory,
     RouteRecordRaw,
     NavigationGuardWithThis,
-    createWebHistory
+    createWebHistory,
+    createMemoryHistory
 } from 'vue-router'
 
 export default (
     app: App<Element>,
     frontendRoutes: Array<RouteRecordRaw>,
     beforeEach?: NavigationGuardWithThis<undefined>,
-    historyMode: 'hash' | 'web' = 'hash',
-    on404 = '/404'
+    historyMode: 'hash' | 'web' | 'memory' = 'hash',
+    on404: string | boolean = '/404'
 ) => {
     const systemRoutes = [
         {
@@ -98,7 +99,7 @@ export default (
         }
     ]
 
-    if (on404) {
+    if (typeof on404 === 'string') {
         routes.push({
             path: '/:pathMatch(.*)*',
             redirect: on404
@@ -109,6 +110,8 @@ export default (
         history:
             historyMode === 'hash'
                 ? createWebHashHistory()
+                : historyMode === 'memory'
+                ? createMemoryHistory()
                 : createWebHistory(),
         routes
     })
