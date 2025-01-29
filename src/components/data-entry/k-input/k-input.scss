@@ -16,6 +16,14 @@
         }
     }
 
+    .k-input-control.disabled {
+        @apply opacity-20;
+
+        & > div {
+            @apply cursor-not-allowed;
+        }
+    }
+
     label {
         @apply font-semibold;
     }

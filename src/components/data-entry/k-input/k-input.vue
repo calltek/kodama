@@ -30,7 +30,11 @@
             @blur="validate"
         />
 
-        <div v-if="type === 'number'" class="k-input-control">
+        <div
+            v-if="type === 'number'"
+            class="k-input-control"
+            :class="disabled ? 'disabled' : ''"
+        >
             <div @click="sum()">
                 <k-icon
                     icon="plus"
@@ -267,6 +271,8 @@
             })
 
             const sum = () => {
+                if (props.disabled) return
+
                 const value = parseInt(props.modelValue.toString()) || 0
                 const newValue = value + 1
 
@@ -280,6 +286,8 @@
             }
 
             const subtract = () => {
+                if (props.disabled) return
+
                 const value = parseInt(props.modelValue.toString()) || 0
                 const newValue = value - 1
 
