@@ -206,7 +206,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
                 }
             })
 
-            if (required) {
+            if (required && customFilters.length > 0) {
                 if (required.$and) {
                     if (strict) {
                         required.$and.push({ $and: customFilters })
