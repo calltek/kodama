@@ -82,13 +82,17 @@
             })
 
             const filter = (value: string[]) => {
-                const data = {
-                    $gte: `${value[0]} 00:00:00`,
-                    $lte: `${value[1]} 23:59:59`
-                }
+                if (!value || !value[0] || !value[1]) {
+                    ctx.emit('filter', null)
+                } else {
+                    const data = {
+                        $gte: `${value[0]} 00:00:00`,
+                        $lte: `${value[1]} 23:59:59`
+                    }
 
-                ctx.emit('filter', data)
-                tooltip.value?.hide()
+                    ctx.emit('filter', data)
+                    tooltip.value?.hide()
+                }
             }
 
             return { filter, defaultValue, tooltip }
