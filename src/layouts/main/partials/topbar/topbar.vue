@@ -122,7 +122,7 @@
                                         </li>
                                     </ul>
                                 </k-dropdown-menu>
-                                <k-dropdown-menus
+                                <k-dropdown-menu
                                     v-if="defaultRoutes.profile"
                                     @click="$router.push(defaultRoutes.profile)"
                                 >
@@ -132,7 +132,7 @@
                                         class="mr-2"
                                     />
                                     Mi Perfil
-                                </k-dropdown-menus>
+                                </k-dropdown-menu>
                                 <k-dropdown-menu
                                     v-if="defaultRoutes.configuration"
                                     @click="
