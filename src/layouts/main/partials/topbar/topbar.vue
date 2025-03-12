@@ -62,6 +62,67 @@
                                     }}
                                 </k-dropdown-menu>
                                 <k-dropdown-menu
+                                    class="size-config"
+                                    @click="cycleFontSize"
+                                >
+                                    <k-icon
+                                        icon="text-size"
+                                        type="fal"
+                                        class="mr-2"
+                                    />
+                                    Tamaño
+                                    <ul class="size-list">
+                                        <li>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    name="size"
+                                                    value="small"
+                                                    :checked="
+                                                        fontSize === 'small'
+                                                    "
+                                                    @change="
+                                                        setFontSize('small')
+                                                    "
+                                                />
+                                                SM
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    name="size"
+                                                    value="medium"
+                                                    :checked="
+                                                        fontSize === 'medium'
+                                                    "
+                                                    @change="
+                                                        setFontSize('medium')
+                                                    "
+                                                />
+                                                MD
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    name="size"
+                                                    value="large"
+                                                    :checked="
+                                                        fontSize === 'large'
+                                                    "
+                                                    @change="
+                                                        setFontSize('large')
+                                                    "
+                                                />
+                                                LG
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </k-dropdown-menu>
+                                <k-dropdown-menus
                                     v-if="defaultRoutes.profile"
                                     @click="$router.push(defaultRoutes.profile)"
                                 >
@@ -71,7 +132,7 @@
                                         class="mr-2"
                                     />
                                     Mi Perfil
-                                </k-dropdown-menu>
+                                </k-dropdown-menus>
                                 <k-dropdown-menu
                                     v-if="defaultRoutes.configuration"
                                     @click="
@@ -182,6 +243,38 @@
                 }
             }
 
+            const fontSize = computed(() => {
+                const config = useConfig()
+                return config.get('fontSize') || 'medium'
+            })
+
+            const setFontSize = (size: 'small' | 'medium' | 'large') => {
+                const config = useConfig()
+                config.set('fontSize', size)
+
+                const root = document.documentElement
+                const sizes = {
+                    small: '.8rem',
+                    medium: '.9rem',
+                    large: '1rem'
+                }
+
+                root.style.setProperty('--font-size-base', sizes[size])
+            }
+
+            const cycleFontSize = (event: Event) => {
+                if ((event.target as HTMLElement).closest('label')) {
+                    return
+                }
+
+                const sizes = ['small', 'medium', 'large'] as const
+                const currentIndex = sizes.indexOf(
+                    fontSize.value as 'small' | 'medium' | 'large'
+                )
+                const nextIndex = (currentIndex + 1) % sizes.length
+                setFontSize(sizes[nextIndex])
+            }
+
             return {
                 //Variables
                 firstname,
@@ -189,11 +282,41 @@
                 collapsed,
                 darkMode,
                 defaultRoutes,
+                fontSize,
 
                 // Methods
                 logout,
-                toggleTheme
+                toggleTheme,
+                setFontSize,
+                cycleFontSize
             }
         }
     })
 </script>
+
+<style lang="scss">
+    .size-config {
+        @apply items-center;
+        display: flex !important;
+
+        .size-list {
+            @apply flex gap-2 items-center pl-8;
+            li {
+                @apply h-full w-fit;
+                padding: 0 !important;
+                background: transparent;
+                box-shadow: none !important;
+                border: 0;
+                label {
+                    @apply h-full w-full flex rounded-md items-center justify-center px-2 py-0.5 border border-gray-300 text-xs;
+                    &:has(input:checked) {
+                        @apply bg-primary text-white;
+                    }
+                    input {
+                        @apply absolute opacity-0 w-0 h-0;
+                    }
+                }
+            }
+        }
+    }
+</style>
