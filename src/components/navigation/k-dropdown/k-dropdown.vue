@@ -16,7 +16,7 @@
 
         <template #content="{ hide }">
             <ul
-                class="k-dropdown-items text-base text-gray-700 dark:text-gray-200 text-left"
+                class="k-dropdown-items text-base text-gray-700 dark:text-gray-200 text-left bg-white dark:bg-gray-800"
                 :style="ulStyle"
                 @click="hide"
             >
