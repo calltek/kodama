@@ -124,8 +124,8 @@ const Props = {
     },
     size: {
         type: String,
-        options: ['sm', 'md', 'lg'],
-        validator: (val: string) => ['sm', 'md', 'lg'].includes(val),
+        options: ['xs', 'sm', 'md', 'lg'],
+        validator: (val: string) => ['xs', 'sm', 'md', 'lg'].includes(val),
         default: 'md',
         description: 'Tamaño del input'
     },
