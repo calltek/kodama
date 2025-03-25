@@ -608,10 +608,28 @@
                 emitter.on(`ktable_${props.store}_fetch`, () => {
                     ctx.emit('fetch', query.value)
                 })
+
+                emitter.on(`ktable_${props.store}_next`, () => {
+                    if (props.pagination === 'infinite') {
+                        loadMore(false)
+                    } else {
+                        loadMore(true)
+                    }
+                })
+
+                emitter.on(`ktable_${props.store}_prev`, () => {
+                    if (props.pagination === 'infinite') {
+                        loadLess(false)
+                    } else {
+                        loadLess(true)
+                    }
+                })
             })
 
             onUnmounted(() => {
                 emitter.off(`ktable_${props.store}_fetch`)
+                emitter.off(`ktable_${props.store}_next`)
+                emitter.off(`ktable_${props.store}_prev`)
             })
 
             return {
