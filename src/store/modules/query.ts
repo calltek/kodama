@@ -7,8 +7,8 @@ export type QueryFilterOperator = {
     $lt?: number
     $gte?: number
     $lte?: number
-    $in?: (string | number)[]
-    $nin?: (string | number)[]
+    $in?: string | number | (string | number)[]
+    $nin?: string | number | (string | number)[]
     $like?: string
     $from?: string | Date
     $to?: string | Date
