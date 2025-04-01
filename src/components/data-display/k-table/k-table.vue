@@ -132,12 +132,23 @@
             <div class="k-table-content">
                 <div class="k-table-tr k-table-head">
                     <div v-if="selected" class="k-table-td">
-                        <input
+                        <label class="k-checkbox-label">
+                            <input
+                                type="checkbox"
+                                class="k-checkbox"
+                                :checked="isCheckedAll"
+                                @change="toggleGlobalCheck"
+                            />
+                            <div class="check">
+                                <div class="inside"></div>
+                            </div>
+                        </label>
+                        <!-- <input
                             type="checkbox"
                             class="k-checkbox w-4 h-4 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 text-primary focus:ring-primary dark:focus:ring-primary"
                             :checked="isCheckedAll"
                             @change="toggleGlobalCheck"
-                        />
+                        /> -->
                     </div>
 
                     <div
@@ -225,15 +236,25 @@
                 <template v-for="(item, itemKey) in data" :key="itemKey">
                     <div class="k-table-tr">
                         <div v-if="selected" class="k-table-td w-6">
-                            <div>
+                            <!-- <input
+                                type="checkbox"
+                                class="k-checkbox w-4 h-4 -mt-1 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 text-primary focus:ring-primary dark:focus:ring-primary"
+                                :checked="isRowChecked[itemKey]"
+                                :disabled="isRowDisabled[itemKey]"
+                                @change="toggleCheck(itemKey)"
+                            /> -->
+                            <label class="k-checkbox-label">
                                 <input
                                     type="checkbox"
-                                    class="k-checkbox w-4 h-4 -mt-1 border-gray-300 rounded dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 text-primary focus:ring-primary dark:focus:ring-primary"
+                                    class="k-checkbox"
                                     :checked="isRowChecked[itemKey]"
                                     :disabled="isRowDisabled[itemKey]"
                                     @change="toggleCheck(itemKey)"
                                 />
-                            </div>
+                                <div class="check">
+                                    <div class="inside"></div>
+                                </div>
+                            </label>
                         </div>
 
                         <div
@@ -727,6 +748,48 @@
 
             &::-webkit-scrollbar-corner {
                 background: rgba(0, 0, 0, 0);
+            }
+        }
+
+        .k-checkbox-label {
+            width: fit-content;
+            height: fit-content;
+            @apply flex justify-center items-center cursor-pointer gap-2;
+
+            &:has(input:disabled) {
+                @apply cursor-default;
+            }
+            .check {
+                @apply w-5 h-5 rounded-md border border-gray-400 dark:border-gray-600 flex items-center justify-center;
+
+                .inside {
+                    @apply w-3 h-3 rounded-sm flex justify-center items-center;
+                }
+            }
+            input {
+                @apply absolute opacity-0 cursor-pointer;
+                &:focus + .check {
+                    @apply outline outline-[0.1rem] outline-primary;
+                }
+                &:disabled {
+                    @apply cursor-default;
+                    + .check {
+                        @apply overflow-hidden border border-gray-400 dark:border-gray-600;
+                        .inside {
+                            @apply w-6 h-6 rounded-md bg-gray-200  dark:bg-gray-500;
+                            div {
+                                .icon {
+                                    @apply text-gray-200;
+                                }
+                            }
+                        }
+                    }
+                }
+                &:checked + .check {
+                    .inside {
+                        @apply bg-primary;
+                    }
+                }
             }
         }
     }
