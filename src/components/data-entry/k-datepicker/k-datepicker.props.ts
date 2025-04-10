@@ -45,6 +45,12 @@ const Props = {
         default: false,
         description: 'Desactiva el componente'
     },
+    disabledDates: {
+        type: Array as PropType<string[]>,
+        required: false,
+        default: () => [],
+        description: 'Desactiva las fechas que se pasan como argumento'
+    },
     readonly: {
         type: Boolean,
         default: false,

@@ -17,6 +17,7 @@
             ref="dp"
             v-model="model"
             menu-class-name="k-datepicker-menu"
+            :disabled-dates="disabledDates"
         >
             <template #input-icon>
                 <k-icon icon="calendar" />
