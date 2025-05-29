@@ -37,7 +37,7 @@
     },
     "scripts": {
         "build": "vue-tsc --noEmit && vite build",
-        "storybook": "SET NODE_OPTIONS=--openssl-legacy-provider && storybook dev -p 6006",
+        "storybook": "NODE_OPTIONS=--openssl-legacy-provider && storybook dev -p 6006",
         "build:storybook": "SET NODE_OPTIONS=--openssl-legacy-provider && storybook build",
         "build:publish": "npm run build && npm publish"
     },

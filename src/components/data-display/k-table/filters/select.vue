@@ -87,10 +87,10 @@
             }
 
             const active = computed(() => {
-                if (props.value && props.value.$eq !== undefined) {
-                    return Array.isArray(props.value.$eq)
-                        ? props.value.$eq
-                        : [props.value.$eq]
+                if (props.value && props.value.$in !== undefined) {
+                    return Array.isArray(props.value.$in)
+                        ? props.value.$in
+                        : [props.value.$in]
                 }
                 return []
             })
@@ -105,7 +105,7 @@
                     newActive.splice(index, 1)
                 }
 
-                filter('$eq', newActive)
+                filter('$in', newActive)
             }
 
             return { tooltip, filter, reset, active, toggleFilter }
