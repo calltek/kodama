@@ -12,7 +12,7 @@
                 size="sm"
                 icon="filter"
                 link
-                :color="active !== null ? 'primary' : 'gray'"
+                :color="active && active.length > 0 ? 'primary' : 'gray'"
             />
         </div>
 
@@ -23,8 +23,8 @@
             <k-dropdown-menu
                 v-for="(o, i) in options"
                 :key="i"
-                :selected="active === o.value"
-                @click="filter('$eq', o.value)"
+                :selected="active && active.includes(o.value)"
+                @click.stop="toggleFilter(o.value)"
             >
                 <k-icon v-if="o.icon" class="mr-2" :icon="o.icon" />
                 {{ o.title }}
@@ -35,24 +35,14 @@
         v-else
         size="sm"
         :option="options"
-        :close-on-select="true"
+        :close-on-select="false"
         track-by="value"
         label-by="title"
     >
-        <!-- <k-select-option
-            v-for="(o, i) in options"
-            :key="i"
-            :value="o.value"
-            click="filter('$eq', o.value)"
-        >
-            <k-icon v-if="o.icon" class="mr-2" :icon="o.icon" />
-            {{ o.title }}
-        </k-select-option> -->
-
         <template #option="{ option }">
-            <div @click="filter('$eq', option.value)">
+            <div @click.stop="toggleFilter(option.value)">
                 <k-icon v-if="option.icon" class="mr-2" :icon="option.icon" />
-                {{ option.title }}asdasd
+                {{ option.title }}
             </div>
         </template>
     </k-select>
@@ -60,7 +50,6 @@
 
 <script lang="ts">
     import { computed, defineComponent, PropType, ref } from 'vue'
-    import { QueryFilterOperator } from '../../../../store/modules/query'
     import { KTableColumnFilter } from '../k-table.types'
 
     export default defineComponent({
@@ -86,10 +75,10 @@
 
             const filter = (
                 operator: string,
-                value: KTableColumnFilter['value']
+                values: KTableColumnFilter['value'][]
             ) => {
-                ctx.emit('filter', { [operator]: value })
-                tooltip.value?.hide()
+                ctx.emit('filter', { [operator]: values })
+                // tooltip.value?.hide()
             }
 
             const reset = () => {
@@ -99,13 +88,27 @@
 
             const active = computed(() => {
                 if (props.value && props.value.$eq !== undefined) {
-                    return props.value.$eq
+                    return Array.isArray(props.value.$eq)
+                        ? props.value.$eq
+                        : [props.value.$eq]
                 }
-
-                return null
+                return []
             })
 
-            return { tooltip, filter, reset, active }
+            const toggleFilter = (value: KTableColumnFilter['value']) => {
+                let newActive = [...active.value]
+                const index = newActive.indexOf(value)
+
+                if (index === -1) {
+                    newActive.push(value)
+                } else {
+                    newActive.splice(index, 1)
+                }
+
+                filter('$eq', newActive)
+            }
+
+            return { tooltip, filter, reset, active, toggleFilter }
         }
     })
 </script>
