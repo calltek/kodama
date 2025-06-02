@@ -1,5 +1,6 @@
 import KTableFilterSelect from './select.vue'
 import { ref } from 'vue'
+import type { StoryFn } from '@storybook/vue3'
 
 export default {
     title: 'KTable/Filtros/Select',
@@ -36,7 +37,7 @@ const Template = (args) => ({
 `
 })
 
-export const Default = Template.bind({})
+export const Default: StoryFn = Template.bind({})
 Default.args = {
     modal: false,
     options: [
