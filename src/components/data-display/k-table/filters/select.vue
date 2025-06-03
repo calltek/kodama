@@ -75,7 +75,7 @@
 
             const filter = (
                 operator: string,
-                values: KTableColumnFilter['value'][]
+                values: KTableColumnFilter['value']
             ) => {
                 ctx.emit('filter', { [operator]: values })
                 // tooltip.value?.hide()
@@ -85,27 +85,37 @@
                 ctx.emit('filter', null)
                 tooltip.value?.hide()
             }
+            const parseValue = (rawVal: string) => {
+                const found = props.options.find(
+                    (opt) => String(opt.value) === rawVal.trim()
+                )
+                return found?.value ?? rawVal.trim()
+            }
 
             const active = computed(() => {
-                if (props.value && props.value.$in !== undefined) {
-                    return Array.isArray(props.value.$in)
-                        ? props.value.$in
-                        : [props.value.$in]
+                const raw = props.value?.$in
+                if (typeof raw === 'string') {
+                    return raw
+                        .split(',')
+                        .map((v) => v.trim())
+                        .filter((v) => v !== '')
+                        .map(parseValue)
                 }
                 return []
             })
 
             const toggleFilter = (value: KTableColumnFilter['value']) => {
-                let newActive = [...active.value]
-                const index = newActive.indexOf(value)
+                const current = [...active.value]
+                const index = current.indexOf(value)
 
                 if (index === -1) {
-                    newActive.push(value)
+                    current.push(value)
                 } else {
-                    newActive.splice(index, 1)
+                    current.splice(index, 1)
                 }
 
-                filter('$in', newActive)
+                const result = current.map((v) => String(v)).join(',')
+                filter('$in', result)
             }
 
             return { tooltip, filter, reset, active, toggleFilter }
