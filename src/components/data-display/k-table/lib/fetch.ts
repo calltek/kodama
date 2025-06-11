@@ -32,6 +32,20 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         }
     }
 
+    const loadFirst = () => {
+        params.page = 1
+        params.reset = true
+
+        ctx.emit('fetch', query.value)
+    }
+
+    const loadLast = () => {
+        params.page = Math.ceil(props.total / props.data.length)
+        params.reset = true
+
+        ctx.emit('fetch', query.value)
+    }
+
     // Check if table is busy
     const busy = computed(() => {
         if (props.loading || props.data.length >= props.total) {
@@ -53,5 +67,14 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         ctx.emit('fetch', query.value)
     }
 
-    return { isMore, loadMore, loadLess, busy, data, refresh }
+    return {
+        isMore,
+        loadMore,
+        loadLess,
+        busy,
+        data,
+        refresh,
+        loadFirst,
+        loadLast
+    }
 }

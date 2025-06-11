@@ -572,8 +572,16 @@
                 uncheckDisabledRows,
                 isCheckedAll
             } = useCheck(props)
-            const { isMore, loadMore, loadLess, busy, data, refresh } =
-                useFetch(ctx, props)
+            const {
+                isMore,
+                loadMore,
+                loadLess,
+                loadFirst,
+                loadLast,
+                busy,
+                data,
+                refresh
+            } = useFetch(ctx, props)
             const {
                 order,
                 loadStoreParams,
@@ -645,12 +653,20 @@
                         loadLess(true)
                     }
                 })
+                emitter.on(`ktable_${props.store}_first`, () => {
+                    loadFirst()
+                })
+                emitter.on(`ktable_${props.store}_last`, () => {
+                    loadLast()
+                })
             })
 
             onUnmounted(() => {
                 emitter.off(`ktable_${props.store}_fetch`)
                 emitter.off(`ktable_${props.store}_next`)
                 emitter.off(`ktable_${props.store}_prev`)
+                emitter.off(`ktable_${props.store}_first`)
+                emitter.off(`ktable_${props.store}_last`)
             })
 
             return {
