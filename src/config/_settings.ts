@@ -96,6 +96,8 @@ interface Config {
         collapsed: boolean
     }
 
+    menuType: string
+
     ///////////////
     // Vendor
     ///////////////
@@ -181,6 +183,8 @@ const defaultSettings: Config = {
     aside: {
         collapsed: true
     },
+
+    menuType: 'default',
 
     ///////////////
     // Vendor

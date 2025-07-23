@@ -3,7 +3,16 @@
         <nav class="px-4 lg:px-6 py-2.5 bg-sidebar text-gray-200 select-none">
             <div class="flex flex-wrap items-center">
                 <div class="flex sm:hidden">
+                    <div
+                        v-if="menuType === 'simple'"
+                        class="flex items-center cursor-pointer"
+                        @click="collapsed = false"
+                    >
+                        <k-icon icon="bars" type="far" class="text-lg mx-2" />
+                        <k-title :size="5">MENU</k-title>
+                    </div>
                     <k-button
+                        v-else
                         icon="chevrons-right"
                         link
                         color="primary"
@@ -22,7 +31,7 @@
 
                     <k-toolbar-right :collapsed="collapsed" />
 
-                    <k-debug />
+                    <k-debug v-if="menuType !== 'simple'" />
 
                     <div class="flex items-center lg:order-2">
                         <k-dropdown>
@@ -171,7 +180,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, computed, inject } from 'vue'
+    import { defineComponent, computed, inject, reactive } from 'vue'
 
     import KUpdater from './_updater.vue'
     import KDebug from './_debug.vue'
@@ -179,6 +188,7 @@
     import { defaultRoutes } from '@/helpers/config'
     import { useConfig } from '@/store'
     import { KodamaParams } from '@/config'
+    import { Config } from '@/config/_settings'
 
     export default defineComponent({
         name: 'KTopbar',
@@ -275,6 +285,12 @@
                 setFontSize(sizes[nextIndex])
             }
 
+            const settings = reactive(inject('$settings') as Config)
+
+            const menuType = computed(() => {
+                return settings?.menuType || 'default'
+            })
+
             return {
                 //Variables
                 firstname,
@@ -283,6 +299,7 @@
                 darkMode,
                 defaultRoutes,
                 fontSize,
+                menuType,
 
                 // Methods
                 logout,
