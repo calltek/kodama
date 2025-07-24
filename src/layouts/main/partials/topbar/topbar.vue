@@ -180,7 +180,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, computed, inject, reactive } from 'vue'
+    import { defineComponent, computed, inject } from 'vue'
 
     import KUpdater from './_updater.vue'
     import KDebug from './_debug.vue'
@@ -188,7 +188,6 @@
     import { defaultRoutes } from '@/helpers/config'
     import { useConfig } from '@/store'
     import { KodamaParams } from '@/config'
-    import { Config } from '@/config/_settings'
 
     export default defineComponent({
         name: 'KTopbar',
@@ -285,10 +284,9 @@
                 setFontSize(sizes[nextIndex])
             }
 
-            const settings = reactive(inject('$settings') as Config)
-
             const menuType = computed(() => {
-                return settings?.menuType || 'default'
+                const config = useConfig()
+                return config.get('menuType') || 'default'
             })
 
             return {

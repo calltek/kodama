@@ -51,12 +51,9 @@
     import {
         computed,
         defineComponent,
-        inject,
-        reactive,
         resolveDynamicComponent
     } from 'vue'
     import KMenu from './menu.vue'
-    import { Config } from '@/config/_settings'
 
     export default defineComponent({
         name: 'KAside',
@@ -77,15 +74,15 @@
                     config.set('aside.collapsed', value)
                 }
             })
+
             const isMobile = computed(() => {
                 const config = useConfig()
                 return config.get('isMobileView') || false
             })
 
-            const settings = reactive(inject('$settings') as Config)
-
             const menuType = computed(() => {
-                return settings?.menuType || 'default'
+                const config = useConfig()
+                return config.get('menuType') || 'default'
             })
 
             const handlerColapsed = (value?: boolean) => {
@@ -107,6 +104,7 @@
                 collapsed,
                 menuType,
                 isMobile,
+
                 isComponent,
                 handlerColapsed
             }
