@@ -59,7 +59,7 @@
                     title="Limpiar filtros"
                     :loading="loading"
                     class="mr-2"
-                    @click="resetFilters"
+                    @click="resetTheFilters"
                 />
 
                 <k-button
@@ -553,7 +553,7 @@
             KTableFilterNumber
         },
         props: props,
-        emits: ['fetch', 'filter'],
+        emits: ['fetch', 'filter', 'cleanFilters'],
         setup(props, ctx) {
             const hasSlot = (name: string) => !!ctx.slots[name]
             const id = uid()
@@ -631,6 +631,11 @@
                 }
             }
 
+            const resetTheFilters = () => {
+                ctx.emit('cleanFilters')
+                resetFilters()
+            }
+
             onMounted(() => {
                 enable404.value = true
                 ctx.emit('fetch', query.value)
@@ -703,7 +708,8 @@
                 modalOpened,
                 cardMode,
                 resetAndClose,
-                goToUrl
+                goToUrl,
+                resetTheFilters
             }
         }
     })
