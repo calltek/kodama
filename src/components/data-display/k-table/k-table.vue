@@ -589,7 +589,8 @@
                 filter,
                 query,
                 resetFilters,
-                strict
+                strict,
+                cleanTableFilters
             } = useFilter(ctx, props)
 
             // Create checks when data its modified
@@ -658,6 +659,9 @@
                 })
                 emitter.on(`ktable_${props.store}_last`, () => {
                     loadLast()
+                })
+                 emitter.on(`ktable_${props.store}_clean`, () => {
+                    cleanTableFilters()
                 })
             })
 

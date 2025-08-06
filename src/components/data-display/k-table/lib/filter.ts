@@ -111,6 +111,20 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         ctx.emit('fetch', query.value)
     }
 
+    const cleanTableFilters = () => {
+        const queryStore = useQuery()
+
+        if (props.store) {
+            queryStore.filter(props.store).reset()
+        }
+
+        params.page = 1
+        params.order = null
+        params.filter = null
+        params.reset = true
+        params.strict = true
+    }
+
     const query = computed(() => {
         let filters = null
 
@@ -233,6 +247,7 @@ export default function (ctx: KTableContext, props: KTableProps): any {
         filter,
         query,
         resetFilters,
-        strict
+        strict,
+        cleanTableFilters
     }
 }
