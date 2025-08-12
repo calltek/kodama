@@ -77,6 +77,7 @@
             }
 
             const replaceFavicon = () => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 var link: any = document.querySelector('link[rel~="icon"]')
                 if (!link) {
                     link = document.createElement('link')
@@ -112,6 +113,16 @@
                 document.querySelector('html')?.classList.add('dark')
             }
 
+            // Apply saved fontSize on page load
+            const savedFontSize = config.get('fontSize') || 'medium'
+            const root = document.documentElement
+            const sizes = {
+                small: '.8rem',
+                medium: '.9rem',
+                large: '1rem'
+            }
+            root.style.setProperty('--font-size-base', sizes[savedFontSize])
+
             onMounted(() => {
                 config.init()
 
@@ -131,6 +142,7 @@
                     const observer: MutationObserver = new MutationObserver(
                         (mutations) => {
                             for (const m of mutations) {
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                 const n: any = m
                                 const newValue = n.target.getAttribute(
                                     m.attributeName
