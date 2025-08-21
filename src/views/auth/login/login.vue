@@ -105,10 +105,8 @@
                     loading.value = true
 
                     auth.login(state.username, state.password)
-                        .then(() => {
-                            // router.push(homepage.value)
-                            window.location.reload()
-                        })
+                        .then(() => window.location.reload())
+                        .catch((err) => Promise.reject(err))
                         .finally(() => {
                             loading.value = false
                         })
