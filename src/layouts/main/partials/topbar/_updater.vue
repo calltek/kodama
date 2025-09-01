@@ -35,9 +35,9 @@
                         },
                         onRegistered(r: any) {
                             r &&
-                                // setInterval(() => {
-                                r.update()
-                            // }, 60000)
+                                setInterval(() => {
+                                    r.update()
+                                }, 5000) // Actualizar cada 5 segundos
                         }
                     })
                 }
