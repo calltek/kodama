@@ -65,13 +65,19 @@
 </template>
 
 <script lang="ts">
-    import { computed, defineComponent, inject, reactive, ref } from 'vue'
+    import {
+        computed,
+        defineComponent,
+        inject,
+        onMounted,
+        reactive,
+        ref
+    } from 'vue'
     import { required } from '@vuelidate/validators'
     import useVuelidate from '@vuelidate/core'
-    import { useRouter } from 'vue-router'
 
     import { KodamaParams } from '@/config'
-    import { homepage } from '@/helpers/config'
+    import { registerSW } from 'virtual:pwa-register'
 
     export default defineComponent({
         name: 'Login',
@@ -79,10 +85,9 @@
         setup() {
             const auth = inject('$auth') as KodamaParams['auth']
 
-            const router = useRouter()
-
             const signupEnabled = false
             const loading = ref(false)
+            let updateSW: any = null
 
             const state = reactive({
                 username: '',
@@ -106,7 +111,6 @@
 
                     auth.login(state.username, state.password)
                         .then(() => {
-                            // router.push(homepage.value)
                             window.location.reload()
                         })
                         .finally(() => {
@@ -114,6 +118,22 @@
                         })
                 }
             }
+
+            onMounted(() => {
+                if ('serviceWorker' in navigator) {
+                    updateSW = registerSW({
+                        onNeedRefresh() {
+                            if (updateSW) updateSW(true)
+                        },
+                        onRegistered(r: any) {
+                            r &&
+                                setInterval(() => {
+                                    r.update()
+                                }, 60000)
+                        }
+                    })
+                }
+            })
 
             return {
                 loading,
