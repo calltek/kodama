@@ -9,7 +9,9 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 export default defineConfig({
     plugins: [
         vue(),
-        VitePWA({}),
+        VitePWA({
+            registerType: 'prompt'
+        }),
         dts({
             insertTypesEntry: true
         }),

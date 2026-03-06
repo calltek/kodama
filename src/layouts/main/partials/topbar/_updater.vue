@@ -28,26 +28,44 @@
                 window.location.reload()
             }
 
-            onMounted(() => {
-                if ('serviceWorker' in navigator) {
-                    updateSW = registerSW({
-                        onNeedRefresh() {
-                            updateAvailable.value = true
-                        },
-                        onRegistered(r: any) {
-                            if (!r) return
+            onMounted(async () => {
+                if (!('serviceWorker' in navigator)) return
 
-                            // Check if there's already a SW waiting (e.g. user opens app after deploy)
-                            if (r.waiting) {
-                                updateAvailable.value = true
-                            }
-
-                            setInterval(() => {
-                                r.update()
-                            }, 60000)
-                        }
-                    })
+                // Check if there's already a SW waiting right now (e.g. page opened after deploy)
+                const reg = await navigator.serviceWorker.getRegistration()
+                if (reg?.waiting) {
+                    updateAvailable.value = true
+                    return
                 }
+
+                updateSW = registerSW({
+                    onNeedRefresh() {
+                        updateAvailable.value = true
+                    },
+                    onRegistered(r: any) {
+                        if (!r) return
+
+                        // Also check waiting after registration in case it raced
+                        if (r.waiting) {
+                            updateAvailable.value = true
+                        }
+
+                        // Listen for new SW installing while page is open
+                        r.addEventListener('updatefound', () => {
+                            const newSW = r.installing
+                            if (!newSW) return
+                            newSW.addEventListener('statechange', () => {
+                                if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+                                    updateAvailable.value = true
+                                }
+                            })
+                        })
+
+                        setInterval(() => {
+                            r.update()
+                        }, 60000)
+                    }
+                })
             })
 
             return { update, updateAvailable }
