@@ -23,8 +23,9 @@
             let updateAvailable = ref(false)
             let updateSW: any = null
 
-            const update = () => {
-                if (updateSW) updateSW(true)
+            const update = async () => {
+                if (updateSW) await updateSW(true)
+                window.location.reload()
             }
 
             onMounted(() => {
@@ -34,10 +35,16 @@
                             updateAvailable.value = true
                         },
                         onRegistered(r: any) {
-                            r &&
-                                setInterval(() => {
-                                    r.update()
-                                }, 5000) // Actualizar cada 5 segundos
+                            if (!r) return
+
+                            // Check if there's already a SW waiting (e.g. user opens app after deploy)
+                            if (r.waiting) {
+                                updateAvailable.value = true
+                            }
+
+                            setInterval(() => {
+                                r.update()
+                            }, 60000)
                         }
                     })
                 }
