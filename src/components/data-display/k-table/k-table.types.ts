@@ -13,7 +13,7 @@ export type KTableParams = {
 
 export type KTableColumnFilter = {
     title: string
-    value: string | number
+    value: string | number | boolean
     icon?: string
 }
 
