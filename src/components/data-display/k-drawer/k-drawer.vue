@@ -68,7 +68,14 @@
     import { uid } from '@/helpers/utils'
     import { computed } from '@vue/reactivity'
     import { Drawer, DrawerOptions } from 'flowbite'
-    import { defineComponent, onMounted, Ref, ref, watch } from 'vue'
+    import {
+        defineComponent,
+        onBeforeUnmount,
+        onMounted,
+        Ref,
+        ref,
+        watch
+    } from 'vue'
 
     export default defineComponent({
         name: 'KDrawer',
@@ -181,6 +188,12 @@
                     ctx.emit('update:modelValue', value)
                 }
             )
+
+            onBeforeUnmount(() => {
+                drawer.value?.hide()
+                drawer.value = null
+                document.getElementById(drawerId)?.remove()
+            })
 
             return { drawerId, hide, hasSlot, classes, styles }
         }

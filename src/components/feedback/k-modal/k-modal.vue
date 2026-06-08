@@ -47,7 +47,15 @@
 </template>
 
 <script lang="ts">
-    import { computed, defineComponent, onMounted, ref, Ref, watch } from 'vue'
+    import {
+        computed,
+        defineComponent,
+        onBeforeUnmount,
+        onMounted,
+        ref,
+        Ref,
+        watch
+    } from 'vue'
     import { Modal, ModalOptions } from 'flowbite'
     import { uid } from '../../../helpers/utils'
 
@@ -253,6 +261,12 @@
 
             onMounted(() => {
                 init()
+            })
+
+            onBeforeUnmount(() => {
+                modal.value?.hide()
+                modal.value = null
+                document.getElementById(modalId)?.remove()
             })
 
             return {
