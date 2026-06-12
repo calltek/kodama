@@ -111,6 +111,8 @@
         setup(props, ctx) {
             const drawerId = uid()
             const drawer: Ref<Drawer | null> = ref(null)
+            let escKeydownHandler: EventListenerOrEventListenerObject | null =
+                null
             const hasSlot = (name: string) => !!ctx.slots[name]
 
             // options with default values
@@ -167,7 +169,24 @@
                             .getElementsByTagName('body')[0]
                             .appendChild($targetEl)
 
+                        // Flowbite Drawer registers an anonymous `keydown`
+                        // listener on document inside its constructor and never
+                        // removes it, leaking the instance and its whole Vue
+                        // tree. Capture the handler so we can remove it on unmount.
+                        const origAdd = document.addEventListener
+                        document.addEventListener = function (
+                            this: Document,
+                            type: string,
+                            fn: EventListenerOrEventListenerObject,
+                            opts?: boolean | AddEventListenerOptions
+                        ) {
+                            if (type === 'keydown') escKeydownHandler = fn
+                            return origAdd.call(this, type, fn, opts)
+                        } as typeof document.addEventListener
+
                         drawer.value = new Drawer($targetEl, options)
+
+                        document.addEventListener = origAdd
 
                         if (props.modelValue) {
                             drawer.value?.show()
@@ -191,6 +210,10 @@
 
             onBeforeUnmount(() => {
                 drawer.value?.hide()
+                if (escKeydownHandler) {
+                    document.removeEventListener('keydown', escKeydownHandler)
+                    escKeydownHandler = null
+                }
                 drawer.value = null
                 document.getElementById(drawerId)?.remove()
             })

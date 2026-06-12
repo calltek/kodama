@@ -676,6 +676,7 @@
                 emitter.off(`ktable_${props.store}_prev`)
                 emitter.off(`ktable_${props.store}_first`)
                 emitter.off(`ktable_${props.store}_last`)
+                emitter.off(`ktable_${props.store}_clean`)
             })
 
             return {
